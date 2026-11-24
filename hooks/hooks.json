@@ -1,0 +1,17 @@
+{
+  "description": "cupertino-forge: enforce the Apple design system in projects that contain .apple-design.json",
+  "hooks": {
+    "SessionStart": [
+      { "hooks": [ { "type": "command", "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/scripts/lint.mjs\" --hook session", "timeout": 10 } ] }
+    ],
+    "UserPromptSubmit": [
+      { "hooks": [ { "type": "command", "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/scripts/lint.mjs\" --hook prompt", "timeout": 10 } ] }
+    ],
+    "PostToolUse": [
+      { "matcher": "Write|Edit|MultiEdit", "hooks": [ { "type": "command", "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/scripts/lint.mjs\" --hook post", "timeout": 20 } ] }
+    ],
+    "Stop": [
+      { "hooks": [ { "type": "command", "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/scripts/lint.mjs\" --hook stop", "timeout": 60 } ] }
+    ]
+  }
+}

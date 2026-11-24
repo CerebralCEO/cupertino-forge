@@ -1,0 +1,334 @@
+{
+ "$meta": {
+  "description": "Material recipes. Liquid Glass and standard materials for iOS 27 and macOS 27.",
+  "sources": {
+   "kit": "fills and shadow stacks exported from Apple iOS 27 and macOS 27 Sketch kits",
+   "hig": "Materials page rules",
+   "estimate": "background blur, saturation and refraction: the Sketch token export does not carry background blur, values below are tuned to match kit renders and must be verified visually"
+  },
+  "shadowNote": "Sketch's token export drops the inner versus outer flag. In boxShadowCss every negative spread or hairline edge layer was converted to inset (edge lighting and rim highlights); large blur layers with spread 0 or more stay outer (drop shadow). kitShadowsRaw keeps Apple's exact numbers for reference.",
+  "blendModeNote": "Apple builds glass layers with blend modes (plus-lighter, plus-darker) that the token export drops. Rendering kitShadowsRaw literally makes glass look dirty. Platform code MUST use the tuned recipes below, which reproduce the kit look with plain alpha compositing."
+ },
+ "rules": [
+  "Liquid Glass lives ONLY in the functional layer: nav bars, toolbars, tab bars, sidebars (macOS 27 sidebars are edge to edge, not floating), floating buttons, menus, popovers, alerts, sheets at partial height, sliders and toggles while being dragged.",
+  "NEVER put Liquid Glass in the content layer (cards, list rows, backgrounds). Use standard materials there.",
+  "NEVER stack glass on glass. A control inside a glass toolbar is drawn with overGlass fills, not another glass layer.",
+  "Use the regular variant by default. Use clear only above photos, video or rich media, and add a 35 percent black dimming layer under it when the media is bright.",
+  "Text and symbols on glass use labelOnGlassIOS (iOS) or labelVibrantMacOS (macOS) colors, monochrome. Color goes on the glass background of ONE primary action only (tinted glass).",
+  "Reduce Transparency (prefers-reduced-transparency or OS setting): glass becomes opaque using the fallbackOpaque color. Increase Contrast (prefers-contrast more): add a 1px border with labelPrimary at 0.35 alpha and remove blur.",
+  "iOS 27 and macOS 27 expose a user intensity slider from fully clear to fully tinted. Implement --cf-glass-intensity (0 clear .. 1 tinted, default 0.5) that scales tint alpha and blur.",
+  "Small glass elements (bars, buttons) switch between light and dark appearance based on the luminance of the content behind them. Large ones (sidebars, sheets) stay more opaque."
+ ],
+ "liquidGlass": {
+  "engine": {
+   "$source": "estimate",
+   "blurPx": {
+    "small": 8,
+    "medium": 12,
+    "large": 20
+   },
+   "saturate": 1.8,
+   "brightnessLight": 1.05,
+   "brightnessDark": 0.9,
+   "refractionPx": {
+    "edge": 12,
+    "$usage": "displacement strength at the rim for the lens effect, fades to 0 at 30 percent inset"
+   },
+   "specularAngleDeg": -45,
+   "fallbackOpaque": {
+    "light": "#F6F6F6",
+    "dark": "#262626"
+   }
+  },
+  "ios": {
+   "regularLarge": {
+    "light": {
+     "fills": [
+      "#FFFFFF@0.7",
+      "#BFBFBF@0.1"
+     ],
+     "boxShadowCss": "inset 0px -4px 2px -4px #272727, inset 0px 4px 8px -4px #272727, inset 0px -1px 1.5px -0.5px #272727, inset 0px 1px 1.5px -0.5px #272727, inset 0px 2px 0.25px -1.2px #FFFFFF, 0px 18px 46px 0px rgba(0,0,0,0.25), inset 0px 0px 0.3px 0.3px #DBDBDB, inset -1.25px 0px 0px -0.75px #BFBFBF, inset 1.25px 0px 0px -0.75px #BFBFBF",
+     "kitShadowsRaw": "[0 -4 2 -4 #272727] [0 4 8 -4 #272727] [0 -1 1.5 -0.5 #272727] [0 1 1.5 -0.5 #272727] [0 2 0.25 -1.2 #FFFFFF] [0 18 46 0 #000000@0.25] [0 0 0.3 0.3 #DBDBDB] [-1.25 0 0 -0.75 #BFBFBF] [1.25 0 0 -0.75 #BFBFBF]"
+    },
+    "dark": {
+     "fills": [
+      "#1A1A1A@0.5",
+      "#1A1A1A@0.9",
+      "#1A1A1A"
+     ],
+     "boxShadowCss": "inset 0px -4px 8px -4px #222222, inset 0px 4px 8px -4px #222222, inset 0px -1px 1.5px -0.5px #404040, inset 0px 1px 1.5px -0.5px #404040, inset 0px 2px 0.2px -1.2px rgba(255,255,255,0.2), 0px 18px 48px 0px rgba(0,0,0,0.45), inset 0px 0px 0.3px 0.3px rgba(0,0,0,0.5), inset -1.25px 0px 0px -0.75px #BFBFBF, inset 1.25px 0px 0px -0.75px #BFBFBF",
+     "kitShadowsRaw": "[0 -4 8 -4 #222222] [0 4 8 -4 #222222] [0 -1 1.5 -0.5 #404040] [0 1 1.5 -0.5 #404040] [0 2 0.2 -1.2 #FFFFFF@0.2] [0 18 48 0 #000000@0.45] [0 0 0.3 0.3 #000000@0.5] [-1.25 0 0 -0.75 #BFBFBF] [1.25 0 0 -0.75 #BFBFBF]"
+    }
+   },
+   "regularMedium": {
+    "light": {
+     "fills": [
+      "#CCCCCC@0.7",
+      "#BFBFBF@0.1"
+     ],
+     "boxShadowCss": "inset 0px -4px 2px -4px #272727, inset 0px 4px 8px -4px #272727, inset 0px -1px 1.5px -0.5px #272727, inset 0px 1px 1.5px -0.5px #272727, inset 0px 2px 0.25px -1.2px #FFFFFF, 0px 18px 46px 0px rgba(0,0,0,0.25), inset 0px 0px 0.3px 0.3px #DBDBDB, inset -1.25px 0px 0px -0.75px #DBDBDB, inset 1.25px 0px 0px -0.75px #DBDBDB",
+     "kitShadowsRaw": "[0 -4 2 -4 #272727] [0 4 8 -4 #272727] [0 -1 1.5 -0.5 #272727] [0 1 1.5 -0.5 #272727] [0 2 0.25 -1.2 #FFFFFF] [0 18 46 0 #000000@0.25] [0 0 0.3 0.3 #DBDBDB] [-1.25 0 0 -0.75 #DBDBDB] [1.25 0 0 -0.75 #DBDBDB]"
+    },
+    "dark": {
+     "fills": [
+      "#1A1A1A@0.3",
+      "#1A1A1A@0.3",
+      "#1A1A1A"
+     ],
+     "boxShadowCss": "inset 0px -4px 8px -4px #222222, inset 0px 4px 8px -4px #222222, inset 0px -1px 1.5px -0.5px #404040, inset 0px 1px 1.5px -0.5px #404040, inset 0px 2px 0.2px -1.2px rgba(255,255,255,0.2), 0px 18px 48px 0px rgba(0,0,0,0.45), inset 0px 0px 0.3px 0.3px #A6A6A6, inset -1.25px 0px 0px -0.75px #A6A6A6, inset 1.25px 0px 0px -0.75px #A6A6A6",
+     "kitShadowsRaw": "[0 -4 8 -4 #222222] [0 4 8 -4 #222222] [0 -1 1.5 -0.5 #404040] [0 1 1.5 -0.5 #404040] [0 2 0.2 -1.2 #FFFFFF@0.2] [0 18 48 0 #000000@0.45] [0 0 0.3 0.3 #A6A6A6] [-1.25 0 0 -0.75 #A6A6A6] [1.25 0 0 -0.75 #A6A6A6]"
+    }
+   },
+   "regularSmall": {
+    "light": {
+     "fills": [
+      "#F8F8F8@0.2",
+      "#000000@0.25",
+      "#FFFFFF@0.25",
+      "#444444@0.6"
+     ],
+     "boxShadowCss": "0px 8px 15px 0px rgba(0,0,0,0.02), inset 0px 0px 0px 0.5px #DBDBDB, inset -1.25px 0px 0px -0.75px #DBDBDB, inset 1.25px 0px 0px -0.75px #DBDBDB, inset -20px 0px 20px -30px #D9D9D9, inset 20px 0px 20px -30px #D9D9D9, inset 0px -4px 0.5px -4px #666666, inset 0px 4px 0.5px -4px #666666, inset 0px -1px 0px 0px #171717, inset 0px 1px 0px 0px #171717, inset 0px 40px 30px -40px #E6E6E6, inset 0px -40px 10px -40px #282828, inset 0px 40px 10px -40px #282828",
+     "kitShadowsRaw": "[0 8 15 0 #000000@0.02] [0 0 0 0.5 #DBDBDB] [-1.25 0 0 -0.75 #DBDBDB] [1.25 0 0 -0.75 #DBDBDB] [-20 0 20 -30 #D9D9D9] [20 0 20 -30 #D9D9D9] [0 -4 0.5 -4 #666666] [0 4 0.5 -4 #666666] [0 -1 0 0 #171717] [0 1 0 0 #171717] [0 40 30 -40 #E6E6E6] [0 -40 10 -40 #282828] [0 40 10 -40 #282828]"
+    },
+    "dark": {
+     "fills": [
+      "#000000",
+      "#999999@0.17"
+     ],
+     "boxShadowCss": "inset 20px 0px 20px -30px #B2B2B2, inset -20px 0px 20px -30px #B2B2B2, inset 0px -4px 0.5px -4px #666666, inset 0px 4px 0.5px -4px #666666, inset 0px -1px 0px 0px #171717, inset 0px 1px 0px 0px #171717, inset 0px -40px 10px -40px #1A1A1A, inset 0px 40px 10px -40px #1A1A1A, 0px 8px 15px 0px rgba(0,0,0,0.04), inset 0px 0px 0px 0.5px #BFBFBF, inset -1.25px 0px 0px -0.75px #BFBFBF, inset 1.25px 0px 0px -0.75px #BFBFBF",
+     "kitShadowsRaw": "[20 0 20 -30 #B2B2B2] [-20 0 20 -30 #B2B2B2] [0 -4 0.5 -4 #666666] [0 4 0.5 -4 #666666] [0 -1 0 0 #171717] [0 1 0 0 #171717] [0 -40 10 -40 #1A1A1A] [0 40 10 -40 #1A1A1A] [0 8 15 0 #000000@0.04] [0 0 0 0.5 #BFBFBF] [-1.25 0 0 -0.75 #BFBFBF] [1.25 0 0 -0.75 #BFBFBF]"
+    }
+   },
+   "clear": {
+    "any": {
+     "fills": [
+      "#F8F8F8@0.12"
+     ],
+     "boxShadowCss": "0px 8px 15px 0px rgba(0,0,0,0.02), inset 0px 0px 0px 0.5px #D9D9D9, inset -1.25px 0px 0px -0.75px #CCCCCC, inset 1.25px 0px 0px -0.75px #CCCCCC, inset -20px 0px 20px -30px #D9D9D9, inset 20px 0px 20px -30px #D9D9D9, inset 0px -4px 0.5px -4px #666666, inset 0px 4px 0.5px -4px #666666, inset 0px 40px 30px -40px #E6E6E6, inset 0px -1px 0px 0px #333333, inset 0px 1px 0px 0px #333333, inset 0px -40px 20px -40px #404040, inset 0px 40px 20px -40px #404040",
+     "kitShadowsRaw": "[0 8 15 0 #000000@0.02] [0 0 0 0.5 #D9D9D9] [-1.25 0 0 -0.75 #CCCCCC] [1.25 0 0 -0.75 #CCCCCC] [-20 0 20 -30 #D9D9D9] [20 0 20 -30 #D9D9D9] [0 -4 0.5 -4 #666666] [0 4 0.5 -4 #666666] [0 40 30 -40 #E6E6E6] [0 -1 0 0 #333333] [0 1 0 0 #333333] [0 -40 20 -40 #404040] [0 40 20 -40 #404040]"
+    }
+   },
+   "dock": {
+    "light": {
+     "fills": [
+      "#999999@0.33"
+     ]
+    },
+    "dark": {
+     "fills": [
+      "#333333@0.33"
+     ]
+    }
+   },
+   "keyboard": {
+    "light": {
+     "fills": [
+      "#D4D4D4@0.74",
+      "#E6E9ED"
+     ]
+    },
+    "dark": {
+     "fills": [
+      "#000000@0.25",
+      "#262626@0.9"
+     ]
+    }
+   }
+  },
+  "macos": {
+   "menus": {
+    "light": {
+     "fills": [
+      "#E6E6E6@0.55"
+     ],
+     "boxShadowCss": "0px 4px 24px 0px rgba(0,0,0,0.3), inset 0px 0px 0px 0.5px rgba(0,0,0,0.2), inset 0px -4px 8px -4px #0D0D0D, inset 0px 4px 8px -4px #0D0D0D, inset 0px -0.5px 0px 0px #262626, inset 0px 0.5px 0px 0px #262626, inset 0px 0px 0px 1px rgba(102,102,102,0.15)",
+     "kitShadowsRaw": "[0 4 24 0 #000000@0.3] [0 0 0 0.5 #000000@0.2] [0 -4 8 -4 #0D0D0D] [0 4 8 -4 #0D0D0D] [0 -0.5 0 0 #262626] [0 0.5 0 0 #262626] [0 0 0 1 #666666@0.15]"
+    },
+    "dark": {
+     "fills": [
+      "#5A5A5A@0.5"
+     ],
+     "boxShadowCss": "0px 4px 24px 0px rgba(0,0,0,0.3), inset 0px 0px 0px 0.5px rgba(0,0,0,0.8), inset 0px -4px 8px -4px #0D0D0D, inset 0px 4px 8px -4px #0D0D0D, inset 0px -0.5px 0px 0px #262626, inset 0px 0.5px 0px 0px #262626, inset 0px 0px 0px 1px rgba(102,102,102,0.4)",
+     "kitShadowsRaw": "[0 4 24 0 #000000@0.3] [0 0 0 0.5 #000000@0.8] [0 -4 8 -4 #0D0D0D] [0 4 8 -4 #0D0D0D] [0 -0.5 0 0 #262626] [0 0.5 0 0 #262626] [0 0 0 1 #666666@0.4]"
+    }
+   },
+   "notification": {
+    "light": {
+     "fills": [
+      "#BFBFBF@0.25"
+     ],
+     "boxShadowCss": "0px 4px 16px 0px rgba(0,0,0,0.1), inset 0px 0px 0.3px 0.3px #ABABAB, inset 0px -6px 4px -6px #222222, inset 0px 6px 4px -6px #222222, inset 0px -1px 1.5px -1px #676767, inset 0px 1px 1.5px -1px #676767, inset 0px 2px 0.2px -1.2px rgba(255,255,255,0.2)",
+     "kitShadowsRaw": "[0 4 16 0 #000000@0.1] [0 0 0.3 0.3 #ABABAB] [0 -6 4 -6 #222222] [0 6 4 -6 #222222] [0 -1 1.5 -1 #676767] [0 1 1.5 -1 #676767] [0 2 0.2 -1.2 #FFFFFF@0.2]"
+    },
+    "dark": {
+     "fills": [
+      "#666666@0.1"
+     ],
+     "boxShadowCss": "0px 4px 16px 0px rgba(0,0,0,0.1), inset 0px 0px 0.3px 0.3px #ABABAB, inset 0px -6px 4px -6px #222222, inset 0px 6px 4px -6px #222222, inset 0px -1px 1.5px -1px #676767, inset 0px 1px 1.5px -1px #676767, inset 0px 2px 0.2px -1.2px rgba(255,255,255,0.2)",
+     "kitShadowsRaw": "[0 4 16 0 #000000@0.1] [0 0 0.3 0.3 #ABABAB] [0 -6 4 -6 #222222] [0 6 4 -6 #222222] [0 -1 1.5 -1 #676767] [0 1 1.5 -1 #676767] [0 2 0.2 -1.2 #FFFFFF@0.2]"
+    }
+   },
+   "dock": {
+    "light": {
+     "fills": [
+      "#4D4D4D@0.3",
+      "#1A1A1A@0.1",
+      "#FFFFFF@0.08"
+     ]
+    },
+    "dark": {
+     "fills": [
+      "#454545@0.5",
+      "#1A1A1A@0.1",
+      "#FFFFFF@0.08"
+     ]
+    }
+   },
+   "regularLarge": {
+    "light": {
+     "fills": [
+      "#FFFFFF@0.7",
+      "#BFBFBF@0.1"
+     ]
+    },
+    "dark": {
+     "fills": [
+      "#1A1A1A@0.5",
+      "#1A1A1A@0.5",
+      "#1A1A1A"
+     ]
+    }
+   }
+  },
+  "pressBehavior": {
+   "$source": "WWDC25 Liquid Glass behavior, estimate values",
+   "onTouchDown": "glass element scales to 1.08 to 1.12 with a spring (response 0.3, damping 0.7) and its highlight brightens; content below shows a soft glow",
+   "onRelease": "springs back to 1.0",
+   "trackpadOrMouse": "subdued: scale 1.02, no glow"
+  },
+  "tuned": {
+   "$source": "tuned from kit renders, verify against kit screenshots with the reviewer agent",
+   "regular": {
+    "light": {
+     "background": "rgba(255,255,255,0.58)",
+     "backdrop": "blur(12px) saturate(1.8) brightness(1.05)",
+     "boxShadow": "inset 0 1px 0 0 rgba(255,255,255,0.9), inset 0 -0.5px 0 0 rgba(255,255,255,0.45), inset 0 0 0 0.5px rgba(0,0,0,0.06), 0 8px 24px -4px rgba(0,0,0,0.14), 0 1px 3px rgba(0,0,0,0.06)"
+    },
+    "dark": {
+     "background": "rgba(30,30,32,0.58)",
+     "backdrop": "blur(12px) saturate(1.6) brightness(0.9)",
+     "boxShadow": "inset 0 1px 0 0 rgba(255,255,255,0.16), inset 0 -0.5px 0 0 rgba(255,255,255,0.06), inset 0 0 0 0.5px rgba(255,255,255,0.10), 0 10px 30px -4px rgba(0,0,0,0.5), 0 1px 3px rgba(0,0,0,0.3)"
+    }
+   },
+   "clear": {
+    "light": {
+     "background": "rgba(255,255,255,0.12)",
+     "backdrop": "blur(4px) saturate(1.4)",
+     "boxShadow": "inset 0 1px 0 0 rgba(255,255,255,0.7), inset 0 0 0 0.5px rgba(255,255,255,0.35), 0 6px 16px -4px rgba(0,0,0,0.12)"
+    },
+    "dark": {
+     "background": "rgba(255,255,255,0.06)",
+     "backdrop": "blur(4px) saturate(1.3)",
+     "boxShadow": "inset 0 1px 0 0 rgba(255,255,255,0.28), inset 0 0 0 0.5px rgba(255,255,255,0.18), 0 6px 16px -4px rgba(0,0,0,0.3)"
+    }
+   },
+   "tinted": {
+    "$usage": "Primary action only. Background is accent at 0.85 alpha over the regular glass recipe, label white. Pressed adds white 0.1 overlay (kit: prominent clicked overlay).",
+    "alpha": 0.85
+   },
+   "large": {
+    "$usage": "Sidebars, sheets, popovers, alerts. More opaque for legibility.",
+    "light": {
+     "background": "rgba(255,255,255,0.78)",
+     "backdrop": "blur(24px) saturate(1.8)"
+    },
+    "dark": {
+     "background": "rgba(36,36,38,0.78)",
+     "backdrop": "blur(24px) saturate(1.5)"
+    }
+   },
+   "menuMacOS": {
+    "light": {
+     "background": "rgba(236,236,236,0.72)",
+     "backdrop": "blur(20px) saturate(1.8)",
+     "boxShadow": "0 4px 24px rgba(0,0,0,0.25), 0 0 0 0.5px rgba(0,0,0,0.2), inset 0 0.5px 0 rgba(255,255,255,0.6)"
+    },
+    "dark": {
+     "background": "rgba(64,64,64,0.6)",
+     "backdrop": "blur(20px) saturate(1.6)",
+     "boxShadow": "0 4px 24px rgba(0,0,0,0.3), 0 0 0 0.5px rgba(0,0,0,0.8), inset 0 0 0 1px rgba(102,102,102,0.4)"
+    }
+   }
+  }
+ },
+ "standardMaterials": {
+  "ios": {
+   "$source": "kit-ios27",
+   "light": {
+    "ultraThin": [
+     "#FFFFFF@0.07",
+     "#FFFFFF@0.03"
+    ],
+    "thin": [
+     "#FFFFFF@0.05",
+     "#FFFFFF@0.4"
+    ],
+    "regular": [
+     "#FFFFFF@0.25",
+     "#FFFFFF@0.6"
+    ],
+    "thick": [
+     "#FFFFFF@0.34",
+     "#FFFFFF@0.84"
+    ]
+   },
+   "dark": {
+    "ultraThin": [
+     "#000000@0"
+    ],
+    "thin": [
+     "#000000@0.26"
+    ],
+    "regular": [
+     "#000000@0.41"
+    ],
+    "thick": [
+     "#000000@0.6"
+    ]
+   },
+   "blurPx": {
+    "ultraThin": 20,
+    "thin": 24,
+    "regular": 30,
+    "thick": 30,
+    "$source": "estimate"
+   }
+  },
+  "macos": {
+   "$source": "kit-macos27",
+   "light": {
+    "ultraThin": "#ECECEC@0.38",
+    "thin": "#ECECEC@0.5",
+    "regular": "#ECECEC@0.63",
+    "thick": "#ECECEC@0.76",
+    "ultraThick": "#ECECEC@0.88"
+   },
+   "dark": {
+    "ultraThin": "#292929@0.4",
+    "thin": "#292929@0.49",
+    "regular": "#2C2C2C@0.61",
+    "thick": "#2C2C2C@0.71",
+    "ultraThick": "#2C2C2C@0.82"
+   },
+   "blurPx": {
+    "ultraThin": 20,
+    "thin": 24,
+    "regular": 30,
+    "thick": 30,
+    "ultraThick": 30,
+    "$source": "estimate"
+   }
+  },
+  "$usage": "Standard materials go in the content layer: background panels, cards over imagery, grouped areas. Pair with vibrant label colors."
+ }
+}

@@ -1,0 +1,13 @@
+{
+  "$schema": "cupertino-forge project config. Place at the project root as .apple-design.json",
+  "platform": "web",
+  "style": "adaptive",
+  "accent": null,
+  "appearance": "system",
+  "glassIntensity": 0.5,
+  "sounds": false,
+  "haptics": true,
+  "windowsChrome": "mac",
+  "tokensOut": "src/styles/cupertino",
+  "appleRelease": "iOS 27 / macOS 27"
+}

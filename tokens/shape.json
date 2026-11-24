@@ -1,0 +1,103 @@
+{
+  "$meta": {
+    "description": "Corner geometry, radii and the concentric rule. Apple corners are continuous (superellipse), never plain circular arcs.",
+    "sources": {
+      "wwdc25": "WWDC25 Liquid Glass and design system sessions: concentric shapes",
+      "estimate": "measured from kit components, verify in kit Inspect",
+      "macrumors": "macOS 27 uniform window radius"
+    }
+  },
+  "continuousCorner": {
+    "$usage": "Every rounded rectangle uses a continuous corner. CSS: border-radius R plus corner-shape: squircle where supported, else the SVG squircle path generator. Flutter: ContinuousRectangleBorder is NOT equal, use the plugin's SquircleBorder. Figma equivalent: corner smoothing 60 percent.",
+    "smoothing": 0.6,
+    "cssCornerShape": "squircle",
+    "cssSuperellipseK": 2,
+    "note": "A continuous corner of radius R visually reads smaller than a circular corner of radius R. Do not shrink R to compensate."
+  },
+  "shapes": {
+    "capsule": {
+      "radius": "height / 2",
+      "usage": "Buttons with text, search fields, segmented controls, toggles, tab bar, toolbar groups, badges, tags"
+    },
+    "circle": {
+      "usage": "Icon-only buttons (close, more, back on iOS 26+), avatars"
+    },
+    "roundedRect": {
+      "usage": "Cards, sheets, list sections, alerts, popovers, windows, text fields on macOS"
+    }
+  },
+  "concentric": {
+    "$usage": "MANDATORY. A shape nested inside another shape uses innerRadius = max(outerRadius - padding, minimumInner). This is what makes Liquid Glass layouts look Apple-made.",
+    "formula": "inner = outer - inset",
+    "minimumInner": 4,
+    "example": "Window radius 12, toolbar button inset 6 from window edge: button radius 6 if rect, or capsule when height allows. Sheet radius 38 with 16 padding: inner card 22."
+  },
+  "radiusIOS": {
+    "$source": "estimate from iOS 27 kit, verify",
+    "deviceDisplay": {
+      "iPhone17Pro": 55,
+      "iPhone17": 55,
+      "iPhoneAir": 62,
+      "iPhoneSE": 0,
+      "iPadPro": 30
+    },
+    "sheet": "device display radius when full height at the bottom edge; 38 when floating at medium detent with 8 inset",
+    "alert": 34,
+    "actionSheet": 34,
+    "popover": 26,
+    "menu": 26,
+    "contextMenuPreview": 22,
+    "listSectionInsetGrouped": 26,
+    "card": 22,
+    "textFieldRounded": 12,
+    "searchField": "capsule",
+    "button": "capsule (all sizes)",
+    "iconButton": "circle",
+    "segmentedControl": "capsule",
+    "toggleTrack": "capsule",
+    "sliderTrack": "capsule",
+    "tabBar": "capsule",
+    "toolbarGroup": "capsule",
+    "keyboard": 26,
+    "widgetSmall": 22,
+    "appIconMask": "superellipse, 22.37 percent of icon size",
+    "thumbnailSmall": 8,
+    "thumbnailMedium": 12,
+    "settingsIcon": 7,
+    "badge": "capsule"
+  },
+  "radiusMacOS": {
+    "$source": "estimate from macOS 27 kit and reports, verify",
+    "window": 12,
+    "windowNote": "macOS 27 uses one uniform window radius for all apps. Tahoe used 16 to 26 depending on toolbar. Verify exact value against the kit Windows page before shipping.",
+    "sheet": 12,
+    "alert": 16,
+    "popover": 16,
+    "menu": 12,
+    "menuItemHighlight": 6,
+    "tooltip": 6,
+    "sidebarRowSelection": 8,
+    "pushButtonRegular": "capsule on Liquid Glass toolbars; 6 in content area",
+    "pushButtonLarge": 8,
+    "textField": 6,
+    "searchField": "capsule",
+    "popupButton": 6,
+    "checkbox": 4,
+    "radio": "circle",
+    "segmentedControl": "capsule",
+    "toggle": "capsule",
+    "tableRowSelection": 6,
+    "card": 10,
+    "dockGlass": 24
+  },
+  "borders": {
+    "hairline": {
+      "px": 0.5,
+      "usage": "Separators and glass rims on 2x and 3x screens. On 1x Windows screens render 1px at half alpha instead."
+    },
+    "control": {
+      "px": 1
+    },
+    "rule": "Apple almost never draws visible borders around content. Separation comes from material, background level, and spacing. Never add a 1px gray border to cards or inputs on iOS."
+  }
+}

@@ -1,0 +1,143 @@
+/* cupertino-forge base layer. Import after cupertino.tokens.css and cupertino.theme.css. */
+
+/* ---------- shadcn variable remap: shadcn components inherit Apple semantics ---------- */
+:root {
+  --background: var(--cf-bg);
+  --foreground: var(--cf-label);
+  --card: var(--cf-bg-2);
+  --card-foreground: var(--cf-label);
+  --popover: var(--cf-glass-large-bg);
+  --popover-foreground: var(--cf-label);
+  --primary: var(--cf-accent);
+  --primary-foreground: var(--cf-accent-contrast);
+  --secondary: var(--cf-fill-3);
+  --secondary-foreground: var(--cf-label);
+  --muted: var(--cf-fill-4);
+  --muted-foreground: var(--cf-label-2);
+  --accent-foreground: var(--cf-label);
+  --destructive: var(--cf-red);
+  --destructive-foreground: #fff;
+  --border: var(--cf-separator);
+  --input: var(--cf-fill-3);
+  --ring: var(--cf-accent);
+  --radius: var(--cf-radius-text-field-rounded, 12px);
+  --sidebar: var(--cf-sidebar);
+  --sidebar-foreground: var(--cf-label);
+  --sidebar-primary: var(--cf-accent);
+  --sidebar-border: var(--cf-separator);
+}
+
+/* ---------- base ---------- */
+@layer base {
+  html {
+    font-family: var(--cf-font);
+    font-size: 100%;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-optical-sizing: auto;
+    background: var(--cf-bg);
+    color: var(--cf-label);
+    -webkit-tap-highlight-color: transparent;
+  }
+  /* Inter compensation when SF is not available (non Apple OS). CupertinoRoot sets data-cf-font="inter". */
+  html[data-cf-font="inter"] {
+    font-feature-settings: 'cv11', 'ss01', 'ss03';
+  }
+  html[data-cf-font="inter"] body { letter-spacing: -0.01em; }
+
+  body {
+    margin: 0;
+    font-size: var(--cf-text-body-size);
+    line-height: var(--cf-text-body-line);
+    letter-spacing: var(--cf-text-body-tracking);
+    min-height: 100dvh;
+    overscroll-behavior-y: none;
+  }
+  :root[data-cf-platform="macos"] body { overscroll-behavior: none; cursor: default; }
+
+  button, [role="button"], [role="switch"], [role="tab"], [role="menuitem"], label {
+    -webkit-user-select: none; user-select: none;
+    touch-action: manipulation;
+    cursor: default;
+  }
+  a { color: var(--cf-link); text-decoration: none; cursor: pointer; }
+  ::selection { background: color-mix(in srgb, var(--cf-accent) 28%, transparent); }
+  :focus { outline: none; }
+  :focus-visible { box-shadow: var(--cf-focus-ring); border-radius: inherit; }
+  hr { border: 0; height: 0.5px; background: var(--cf-separator); }
+  input, textarea, select { font: inherit; color: inherit; letter-spacing: inherit; }
+  ::placeholder { color: var(--cf-placeholder); opacity: 1; }
+
+  /* Overlay scrollbars like macOS */
+  :root[data-cf-platform="macos"] * { scrollbar-width: thin; scrollbar-color: color-mix(in srgb, var(--cf-label) 25%, transparent) transparent; }
+}
+
+/* ---------- squircle fallback: CupertinoRoot sets data-cf-squircle="mask" when corner-shape is unsupported ---------- */
+/* The Squircle component then applies an SVG mask; utility class squircle stays harmless. */
+
+/* Component classes live in @layer components so Tailwind utilities (fixed, absolute, rounded-*) always win. */
+@layer components {
+/* ---------- glass details ---------- */
+.cf-glass {
+  position: relative;
+  isolation: isolate;
+  background: var(--cf-glass-bg);
+  -webkit-backdrop-filter: var(--cf-glass-filter);
+  backdrop-filter: var(--cf-glass-filter);
+  box-shadow: var(--cf-glass-shadow);
+  transform: translateZ(0);
+}
+.cf-glass[data-variant="clear"] { background: var(--cf-glass-clear-bg); -webkit-backdrop-filter: var(--cf-glass-clear-filter); backdrop-filter: var(--cf-glass-clear-filter); box-shadow: var(--cf-glass-clear-shadow); }
+.cf-glass[data-variant="large"] { background: var(--cf-glass-large-bg); -webkit-backdrop-filter: var(--cf-glass-large-filter); backdrop-filter: var(--cf-glass-large-filter); box-shadow: var(--cf-glass-shadow); }
+.cf-glass[data-variant="menu"] { background: var(--cf-glass-menu-bg); -webkit-backdrop-filter: var(--cf-glass-menu-filter); backdrop-filter: var(--cf-glass-menu-filter); box-shadow: var(--cf-glass-menu-shadow); }
+.cf-glass[data-variant="tinted"] {
+  background: color-mix(in srgb, var(--cf-accent) 85%, transparent);
+  color: var(--cf-accent-contrast);
+}
+/* Specular sheen: a soft diagonal highlight that sells the glass */
+.cf-glass::before {
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(135deg, rgb(255 255 255 / calc(0.22 * var(--cf-glass-intensity) + 0.06)) 0%, rgb(255 255 255 / 0) 42%);
+  mix-blend-mode: plus-lighter;
+  z-index: -1;
+}
+:root[data-theme="dark"] .cf-glass::before { background: linear-gradient(135deg, rgb(255 255 255 / 0.10) 0%, rgb(255 255 255 / 0) 40%); }
+/* Chromium only lens refraction, enabled per element with data-lens */
+@supports (backdrop-filter: url(#cf-lens)) {
+  .cf-glass[data-lens="true"] {
+    -webkit-backdrop-filter: url(#cf-lens) var(--cf-glass-filter);
+    backdrop-filter: url(#cf-lens) var(--cf-glass-filter);
+  }
+}
+.cf-glass[data-pressable="true"] { transition: transform var(--cf-dur-release) var(--cf-ease-release), filter var(--cf-dur-release) var(--cf-ease-release); }
+.cf-glass[data-pressable="true"]:active { transform: scale(1.1); filter: brightness(1.08); transition: transform var(--cf-dur-press) var(--cf-ease-press), filter var(--cf-dur-press) var(--cf-ease-press); }
+@media (hover: hover) and (pointer: fine) {
+  .cf-glass[data-pressable="true"]:active { transform: scale(1.02); filter: none; }
+}
+
+/* ---------- scroll edge effect ---------- */
+.cf-scroll-edge-top, .cf-scroll-edge-bottom {
+  position: fixed; left: 0; right: 0; height: 64px; pointer-events: none; z-index: 15;
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+}
+.cf-scroll-edge-top { top: 0; height: calc(64px + env(safe-area-inset-top)); background: linear-gradient(to bottom, color-mix(in srgb, var(--cf-bg) 70%, transparent), transparent); mask-image: linear-gradient(to bottom, #000 40%, transparent); }
+.cf-scroll-edge-bottom { bottom: 0; height: calc(64px + env(safe-area-inset-bottom)); background: linear-gradient(to top, color-mix(in srgb, var(--cf-bg) 70%, transparent), transparent); mask-image: linear-gradient(to top, #000 40%, transparent); }
+
+/* ---------- press states for non glass elements ---------- */
+.cf-press { transition: transform var(--cf-dur-release) var(--cf-ease-release), opacity 200ms; }
+.cf-press:active { transform: scale(0.97); transition: transform var(--cf-dur-press) var(--cf-ease-press); }
+.cf-press-plain:active { opacity: 0.35; transition: none; }
+.cf-press-plain { transition: opacity 200ms; }
+.cf-press-card:active { transform: scale(0.98); }
+
+}
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .cf-glass[data-pressable="true"]:active, .cf-press:active, .cf-press-card:active { transform: none; }
+}

@@ -1,0 +1,5 @@
+# Merge into src-tauri/Cargo.toml
+[dependencies]
+tauri = { version = "2", features = ["macos-private-api"] }
+window-vibrancy = "0.7"
+tauri-plugin-window-state = "2"

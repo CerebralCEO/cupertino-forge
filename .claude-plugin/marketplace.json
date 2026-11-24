@@ -1,0 +1,14 @@
+{
+  "name": "zerofounder-local",
+  "description": "ZeroFounder local plugins",
+  "owner": {
+    "name": "ZeroFounder"
+  },
+  "plugins": [
+    {
+      "name": "cupertino-forge",
+      "source": "./",
+      "description": "Apple iOS 27 and macOS 27 design system for Claude Code (tokens, rules, primitives, lint hooks, reviewer agent)."
+    }
+  ]
+}

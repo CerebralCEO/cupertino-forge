@@ -1,0 +1,8 @@
+{
+  "name": "cupertino-forge",
+  "version": "1.0.0",
+  "description": "Apple iOS 27 and macOS 27 (Liquid Glass) design system for Claude Code: official kit tokens, enforceable rules, ready primitives for Next.js + shadcn, Flutter and Tauri 2, lint hooks that block off-spec UI, a visual reviewer agent, and spring motion, haptics and original UI sounds.",
+  "author": { "name": "ZeroFounder" },
+  "keywords": ["apple", "ios", "macos", "liquid-glass", "design-system", "nextjs", "shadcn", "flutter", "tauri"],
+  "license": "MIT"
+}

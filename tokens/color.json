@@ -1,0 +1,227 @@
+{
+  "$meta": {
+    "description": "Apple iOS 27 and macOS 27 color tokens. Single source of truth. Never hardcode these values in app code; generate platform files with scripts/build-tokens.mjs and reference the generated variables.",
+    "sources": {
+      "kit-ios27": "Apple iOS 27 UI Kit (Sketch), Export Design Tokens, Nov 2026",
+      "kit-macos27": "Apple macOS 27 UI Kit (Sketch), Export Design Tokens, Nov 2026",
+      "hig": "Apple HIG Color page, increased contrast values"
+    },
+    "format": "Hex is sRGB. A value written #RRGGBB@a means that color at alpha a (0..1).",
+    "modes": ["light", "dark", "lightHC", "darkHC"]
+  },
+
+  "system": {
+    "$source": "kit-ios27 + kit-macos27 (identical) + hig for HC",
+    "red":    { "light": "#FF383C", "dark": "#FF4245", "lightHC": "#E9152D", "darkHC": "#FF6165" },
+    "orange": { "light": "#FF8D28", "dark": "#FF9230", "lightHC": "#C55300", "darkHC": "#FFA056" },
+    "yellow": { "light": "#FFCC00", "dark": "#FFD600", "lightHC": "#A16A00", "darkHC": "#FEDF43" },
+    "green":  { "light": "#34C759", "dark": "#30D158", "lightHC": "#008932", "darkHC": "#4AD968" },
+    "mint":   { "light": "#00C8B3", "dark": "#00DAC3", "lightHC": "#008575", "darkHC": "#54DFCB" },
+    "teal":   { "light": "#00C3D0", "dark": "#00D2E0", "lightHC": "#008198", "darkHC": "#3BDDEC" },
+    "cyan":   { "light": "#00C0E8", "dark": "#3CD3FE", "lightHC": "#007EAE", "darkHC": "#6DD9FF" },
+    "blue":   { "light": "#0088FF", "dark": "#0091FF", "lightHC": "#1E6EF4", "darkHC": "#5CB8FF" },
+    "indigo": { "light": "#6155F5", "dark": "#6D7CFF", "lightHC": "#564ADE", "darkHC": "#A7AAFF" },
+    "purple": { "light": "#CB30E0", "dark": "#DB34F2", "lightHC": "#B02FC2", "darkHC": "#EA8DFF" },
+    "pink":   { "light": "#FF2D55", "dark": "#FF375F", "lightHC": "#E7124D", "darkHC": "#FF8AC4" },
+    "brown":  { "light": "#AC7F5E", "dark": "#B78A66", "lightHC": "#956D51", "darkHC": "#DBA679" }
+  },
+
+  "systemVibrantMacOS": {
+    "$source": "kit-macos27",
+    "$usage": "macOS only. Use on top of materials and sidebars. Light values pair with mix-blend-mode plus-darker, dark values with plus-lighter.",
+    "red":    { "light": "#F52F32", "dark": "#FF4747" },
+    "orange": { "light": "#F58625", "dark": "#FF9E33" },
+    "yellow": { "light": "#F5C200", "dark": "#FFE014" },
+    "green":  { "light": "#26BF4D", "dark": "#3BDB63" },
+    "mint":   { "light": "#00BDA9", "dark": "#2DE0CD" },
+    "teal":   { "light": "#00B3BF", "dark": "#2DD7E0" },
+    "cyan":   { "light": "#00ABCF", "dark": "#47D8FC" },
+    "blue":   { "light": "#0078F0", "dark": "#0A99FF" },
+    "indigo": { "light": "#5C50E6", "dark": "#7163FF" },
+    "purple": { "light": "#B72BC9", "dark": "#E647FC" },
+    "pink":   { "light": "#F5234B", "dark": "#FF4169" },
+    "brown":  { "light": "#9E7354", "dark": "#C29672" }
+  },
+
+  "grayIOS": {
+    "$source": "kit-ios27 + hig for HC",
+    "gray":  { "light": "#8E8E93", "dark": "#8E8E93", "lightHC": "#6C6C70", "darkHC": "#AEAEB2" },
+    "gray2": { "light": "#AEAEB2", "dark": "#636366", "lightHC": "#8E8E93", "darkHC": "#7C7C80" },
+    "gray3": { "light": "#C7C7CC", "dark": "#48484A", "lightHC": "#AEAEB2", "darkHC": "#545456" },
+    "gray4": { "light": "#D1D1D6", "dark": "#3A3A3C", "lightHC": "#BCBCC0", "darkHC": "#444446" },
+    "gray5": { "light": "#E5E5EA", "dark": "#2C2C2E", "lightHC": "#D8D8DC", "darkHC": "#363638" },
+    "gray6": { "light": "#F2F2F7", "dark": "#1C1C1E", "lightHC": "#EBEBF0", "darkHC": "#242426" }
+  },
+
+  "grayMacOS": {
+    "$source": "kit-macos27",
+    "gray":        { "light": "#8E8E93", "dark": "#98989D" },
+    "grayVibrant": { "light": "#848489", "dark": "#A2A2A7" }
+  },
+
+  "labelIOS": {
+    "$source": "kit-ios27",
+    "primary":    { "light": "#000000",    "dark": "#FFFFFF" },
+    "secondary":  { "light": "#3C3C43@0.6",  "dark": "#EBEBF5@0.6" },
+    "tertiary":   { "light": "#3C3C43@0.3",  "dark": "#EBEBF5@0.3" },
+    "quaternary": { "light": "#3C3C43@0.18", "dark": "#EBEBF5@0.16" },
+    "quinary":    { "light": "#3C3C43@0.09", "dark": "#EBEBF5@0.09" },
+    "placeholder":{ "light": "#3C3C43@0.3",  "dark": "#EBEBF5@0.3" },
+    "link":       { "light": "#0088FF",      "dark": "#0091FF" }
+  },
+
+  "labelVibrantIOS": {
+    "$source": "kit-ios27",
+    "$usage": "Text and symbols placed on standard materials (not Liquid Glass).",
+    "primary":    { "light": "#000000", "dark": "#FFFFFF" },
+    "secondary":  { "light": "#999999", "dark": "#999999" },
+    "tertiary":   { "light": "#BFBFBF", "dark": "#404040" },
+    "quaternary": { "light": "#D9D9D9", "dark": "#262626" }
+  },
+
+  "labelOnGlassIOS": {
+    "$source": "kit-ios27 (Labels - Liquid Glass)",
+    "$usage": "Text and symbols placed on Liquid Glass controls and bars. Monochrome by default; glass adapts light or dark from content below.",
+    "primary":    { "light": "#1A1A1A", "dark": "#EDEDED" },
+    "secondary":  { "light": "#727272", "dark": "#8A8A8A" },
+    "tertiary":   { "light": "#BFBFBF", "dark": "#404040" },
+    "quaternary": { "light": "#D9D9D9", "dark": "#262626" }
+  },
+
+  "labelMacOS": {
+    "$source": "kit-macos27",
+    "primary":    { "light": "#000000@0.85", "dark": "#FFFFFF" },
+    "secondary":  { "light": "#000000@0.5",  "dark": "#FFFFFF@0.55" },
+    "tertiary":   { "light": "#000000@0.25", "dark": "#FFFFFF@0.25" },
+    "quaternary": { "light": "#000000@0.1",  "dark": "#FFFFFF@0.1" },
+    "quinary":    { "light": "#000000@0.05", "dark": "#FFFFFF@0.05" },
+    "seximal":    { "light": "#000000@0.03", "dark": "#FFFFFF@0.03" }
+  },
+
+  "labelVibrantMacOS": {
+    "$source": "kit-macos27",
+    "$usage": "Light values need mix-blend-mode plus-darker, dark values plus-lighter. Use in sidebars, menus, popovers, glass.",
+    "primary":    { "light": "#363636", "dark": "#FFFFFF@0.96" },
+    "secondary":  { "light": "#737373", "dark": "#8A8A8A" },
+    "tertiary":   { "light": "#B3B3B3", "dark": "#4D4D4D" },
+    "quaternary": { "light": "#D9D9D9", "dark": "#262626" },
+    "quinary":    { "light": "#E6E6E6", "dark": "#121212" }
+  },
+
+  "fillIOS": {
+    "$source": "kit-ios27",
+    "primary":    { "light": "#787878@0.2",  "dark": "#787880@0.36" },
+    "secondary":  { "light": "#787880@0.16", "dark": "#787880@0.32" },
+    "tertiary":   { "light": "#767680@0.12", "dark": "#767680@0.24" },
+    "quaternary": { "light": "#747480@0.08", "dark": "#767680@0.18" },
+    "quinary":    { "light": "#000000@0.02", "dark": "#767680@0.02" }
+  },
+
+  "fillVibrantIOS": {
+    "$source": "kit-ios27",
+    "primary":   { "light": "#CCCCCC", "dark": "#333333" },
+    "secondary": { "light": "#E0E0E0", "dark": "#1F1F1F" },
+    "tertiary":  { "light": "#EDEDED", "dark": "#121212" }
+  },
+
+  "fillMacOS": {
+    "$source": "kit-macos27",
+    "primary":    { "light": "#000000@0.1",  "dark": "#FFFFFF@0.1" },
+    "secondary":  { "light": "#000000@0.08", "dark": "#FFFFFF@0.08" },
+    "tertiary":   { "light": "#000000@0.05", "dark": "#FFFFFF@0.05" },
+    "quaternary": { "light": "#000000@0.03", "dark": "#FFFFFF@0.03" },
+    "quinary":    { "light": "#000000@0.02", "dark": "#FFFFFF@0.02" }
+  },
+
+  "fillVibrantMacOS": {
+    "$source": "kit-macos27",
+    "primary":    { "light": "#000000@0.15", "dark": "#FFFFFF@0.14" },
+    "secondary":  { "light": "#000000@0.07", "dark": "#FFFFFF@0.08" },
+    "tertiary":   { "light": "#000000@0.05", "dark": "#FFFFFF@0.05" },
+    "quaternary": { "light": "#000000@0.03", "dark": "#FFFFFF@0.04" },
+    "quinary":    { "light": "#000000@0.02", "dark": "#FFFFFF@0.03" }
+  },
+
+  "backgroundIOS": {
+    "$source": "kit-ios27",
+    "$usage": "Dark mode has two levels: base (full screen) and elevated (sheets, popovers, anything presented above). Always switch to elevated for presented surfaces in dark mode.",
+    "primary":           { "light": "#FFFFFF", "dark": "#000000", "darkElevated": "#1C1C1E" },
+    "secondary":         { "light": "#F2F2F7", "dark": "#1C1C1E", "darkElevated": "#2C2C2E" },
+    "tertiary":          { "light": "#FFFFFF", "dark": "#2C2C2E", "darkElevated": "#3A3A3C" },
+    "groupedPrimary":    { "light": "#F2F2F7", "dark": "#000000", "darkElevated": "#1C1C1E" },
+    "groupedSecondary":  { "light": "#FFFFFF", "dark": "#1C1C1E", "darkElevated": "#2C2C2E" },
+    "groupedTertiary":   { "light": "#F2F2F7", "dark": "#2C2C2E", "darkElevated": "#3A3A3C" }
+  },
+
+  "separatorIOS": {
+    "$source": "kit-ios27",
+    "nonOpaque": { "light": "#000000@0.12", "dark": "#FFFFFF@0.12" },
+    "opaque":    { "light": "#C6C6C8",      "dark": "#38383A" },
+    "vibrant":   { "light": "#E6E6E6",      "dark": "#1A1A1A" }
+  },
+
+  "macOSSurfaces": {
+    "$source": "kit-macos27",
+    "windowBackground":       { "light": "#FFFFFF", "dark": "#1E1E1E" },
+    "sidebarActive":          { "light": "#FAFAFA@0.8", "dark": "#0C0C0C@0.85" },
+    "sidebarInactive":        { "light": "#F4F4F4",     "dark": "#2E2E2E@0.85" },
+    "separator":              { "light": "#3C3C43@0.29", "dark": "#FFFFFF@0.1" },
+    "inputFieldIdle":         { "light": "#FFFFFF",      "dark": "#1E1E1E" },
+    "inputFieldBorder":       { "light": "#000000@0.05", "dark": "#FFFFFF@0.04" },
+    "inputFieldDisabled":     { "light": "#FFFFFF@0.5",  "dark": "#1E1E1E@0.5" },
+    "inputFieldDisabledBorder": { "light": "#000000@0.04", "dark": "#000000@0.04" },
+    "colorAreaOutline":       { "light": "#000000@0.1",  "dark": "#FFFFFF@0.1" },
+    "glyphNeutral":           { "light": "#000000@0.7",  "dark": "#FFFFFF@0.7" },
+    "glyphNeutralDisabled":   { "light": "#000000@0.22", "dark": "#FFFFFF@0.22" }
+  },
+
+  "macOSControlFills": {
+    "$source": "kit-macos27 (Content Area and Over-Glass)",
+    "$usage": "Bordered button and control backgrounds. contentArea = control sits on window content. overGlass = control sits on Liquid Glass (toolbar, popover).",
+    "contentArea": {
+      "bordered":        { "light": "#000000@0.08", "dark": "#FFFFFF@0.07" },
+      "borderedPressed": { "light": "#000000@0.16", "dark": "#FFFFFF@0.16" },
+      "borderedDisabled":{ "light": "#000000@0.04", "dark": "#FFFFFF@0.04" },
+      "prominentPressedOverlay": { "light": "#000000@0.1", "dark": "#FFFFFF@0.1" },
+      "controlOffPressed": { "light": "#000000@0.19", "dark": "#FFFFFF@0.19" },
+      "trackUnfilledPressed": { "light": "#000000@0.19", "dark": "#FFFFFF@0.19" },
+      "tickMark":        { "light": "#000000@0.25", "dark": "#000000@0.25" },
+      "tickMarkCenter":  { "light": "#000000@0.85", "dark": "#000000@0.85" }
+    },
+    "overGlass": {
+      "bordered":        { "light": ["#000000@0.12", "#000000@0.07"], "dark": ["#FFFFFF@0.12", "#FFFFFF@0.05"] },
+      "borderedPressed": { "light": ["#000000@0.12", "#000000@0.13"], "dark": ["#FFFFFF@0.12", "#FFFFFF@0.13"] },
+      "borderedDisabled":{ "light": ["#000000@0.06", "#000000@0.025"], "dark": ["#FFFFFF@0.06", "#FFFFFF@0.025"] },
+      "destructivePressedOverlay": { "light": "#000000@0.15", "dark": "#FFFFFF@0.15" },
+      "trackUnfilled":   { "light": ["#000000@0.2", "#000000@0.07"], "dark": ["#FFFFFF@0.04", "#FFFFFF@0.03"] },
+      "tickMark":        { "light": "#000000@0.25", "dark": "#404040" },
+      "tickMarkCenter":  { "light": "#000000@0.85", "dark": "#D9D9D9" },
+      "tickMarkDisabled":{ "light": "#000000@0.1",  "dark": "#1A1A1A" }
+    }
+  },
+
+  "focusRing": {
+    "$source": "kit-macos27 (Global/Focus Ring)",
+    "$usage": "Two stacked outlines around the focused control, following its exact shape: outer 3.5px accent@0.25, inner 1px accent@0.15. Tint follows the accent color.",
+    "outer": { "width": 3.5, "color": "accent@0.25" },
+    "inner": { "width": 1, "color": "accent@0.15" }
+  },
+
+  "selection": {
+    "$source": "kit-macos27 (Fills/Selected) + hig",
+    "$usage": "Selected rows use accent background with white label. Unfocused window selection uses unemphasized gray.",
+    "selectedContentText": { "light": "#FFFFFF", "dark": "#FFFFFF" },
+    "unemphasizedSelectedBackground": { "light": "#DCDCDC", "dark": "#464646", "$source": "estimate, verify in kit Lists page" }
+  },
+
+  "dimming": {
+    "$source": "hig materials",
+    "clearGlassOverBrightContent": "#000000@0.35",
+    "sheetScrim": { "light": "#000000@0.2", "dark": "#000000@0.48", "$source": "estimate" }
+  },
+
+  "accent": {
+    "$usage": "Default accent is system blue. A brand accent may replace it but must define light, dark, lightHC, darkHC and pass 4.5:1 for text on background, 3:1 for glyphs.",
+    "default": "system.blue"
+  }
+}

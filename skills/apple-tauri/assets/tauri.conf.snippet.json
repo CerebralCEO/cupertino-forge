@@ -1,0 +1,23 @@
+{
+  "$comment": "Merge into src-tauri/tauri.conf.json. macOS: overlay titlebar keeps native corners, shadow and traffic lights. Windows and Linux: apple_window.rs turns decorations off at runtime when windowsChrome is mac.",
+  "app": {
+    "macOSPrivateApi": true,
+    "windows": [
+      {
+        "label": "main",
+        "title": "",
+        "width": 1100,
+        "height": 720,
+        "minWidth": 480,
+        "minHeight": 320,
+        "transparent": true,
+        "decorations": true,
+        "titleBarStyle": "Overlay",
+        "hiddenTitle": true,
+        "trafficLightPosition": { "x": 16, "y": 26 },
+        "theme": null,
+        "center": true
+      }
+    ]
+  }
+}
