@@ -312,6 +312,20 @@ function buildCSS() {
   L.push('}');
   block(':root[data-transparency="reduce"]', rt);
 
+  // WebKit/Safari fallback: -webkit-backdrop-filter drops var() values when unprefixed backdrop-filter is unsupported
+  const gWk = mat.liquidGlass.tuned;
+  L.push('@supports (-webkit-hyphens: none) {');
+  L.push(`  .cf-glass { -webkit-backdrop-filter: ${gWk.regular.light.backdrop}; }`);
+  L.push(`  .cf-glass[data-variant="clear"] { -webkit-backdrop-filter: ${gWk.clear.light.backdrop}; }`);
+  L.push(`  .cf-glass[data-variant="large"] { -webkit-backdrop-filter: ${gWk.large.light.backdrop}; }`);
+  L.push(`  .cf-glass[data-variant="menu"] { -webkit-backdrop-filter: ${gWk.menuMacOS.light.backdrop}; }`);
+  L.push(`  :root[data-theme="dark"] .cf-glass { -webkit-backdrop-filter: ${gWk.regular.dark.backdrop}; }`);
+  L.push(`  :root[data-theme="dark"] .cf-glass[data-variant="clear"] { -webkit-backdrop-filter: ${gWk.clear.dark.backdrop}; }`);
+  L.push(`  :root[data-theme="dark"] .cf-glass[data-variant="large"] { -webkit-backdrop-filter: ${gWk.large.dark.backdrop}; }`);
+  L.push(`  :root[data-theme="dark"] .cf-glass[data-variant="menu"] { -webkit-backdrop-filter: ${gWk.menuMacOS.dark.backdrop}; }`);
+  L.push('  :root[data-transparency="reduce"] .cf-glass, :root[data-contrast="more"] .cf-glass { -webkit-backdrop-filter: none; }');
+  L.push('}');
+
   // Reduce motion: collapse springs to fades
   const rmVars = () => { for (const [k] of entries(motion.springs)) { put(`ease-${kebab(k)}`, 'linear(0, 1)'); put(`dur-${kebab(k)}`, '200ms'); } };
   L.push('@media (prefers-reduced-motion: reduce) {');

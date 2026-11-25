@@ -37,13 +37,14 @@
 | কমান্ড / স্যুইট | ফলাফল | যাচাইকৃত ক্ষেত্র |
 |---|---|---|
 | `node --test tests/*.test.mjs` | **11 / 11 PASS** (0 fail) | বিদ্যমান ৮টি রেগ্রেশন টেস্ট + ৩টি নতুন স্যুইট (`web-primitives-regression.test.mjs`, `web-browser-regression.test.mjs`, `run-web-browser-checks.py`)। |
-| Playwright Headless Chromium (`tests/helpers/run-web-browser-checks.py`) | **8 / 8 PASS** | ১) `CF_THEME_INIT_SCRIPT` প্রি-হাইড্রেশন, ২) `data-transparency="reduce"` ৪টি গ্লাস সারফেসে (`light` ও `dark`), ৩) নিঃশর্ত `translateZ(0)` নেই + `position: fixed` ডিসেন্ড্যান্ট ট্র্যাপ হয়নি, ৪) SVG squircle `mask-image` ও আউটার `box-shadow` সংরক্ষণ, ৫) `bg-white` বনাম `cf-glass` গ্লাস নব কম্পিউটেড ট্রান্সলুসেন্সি, ৬) `prefers-reduced-motion: reduce` (`200ms`, `linear(0, 1)`, সক্রিয় ট্রান্সফর্ম `none`), ৭) Inter ফন্টে `bn`/`ar` `letter-spacing` শূন্য সুরক্ষা, ৮) RTL-সচেতন রোভিং `tabIndex` কীবোর্ড ন্যাভিগেশন। |
+| Playwright Headless Chromium (`tests/helpers/run-web-browser-checks.py` — **HTML/CSS Fixture**) | **8 / 8 PASS** *(HTML/CSS ফিক্সচার; React `.tsx` মাউন্ট নয়)* | এই স্ক্রিপ্ট আসল React কম্পোনেন্ট মাউন্ট না করে একটি স্ট্যাটিক HTML/CSS/JS ফিক্সচারে আসল জেনারেটেড `cupertino.tokens.css`, `cupertino.base.css`, `CF_THEME_INIT_SCRIPT` ও `squircleMaskDataUrl` চালিয়ে যাচাই করে: ১) `CF_THEME_INIT_SCRIPT` প্রি-হাইড্রেশন, ২) `data-transparency="reduce"` ৪টি গ্লাস সারফেসে (`light`/`dark`), ৩) নিঃশর্ত `translateZ(0)` নেই + `position: fixed` ডিসেন্ড্যান্ট ট্র্যাপ হয়নি, ৪) SVG squircle `mask-image` ও আউটার `box-shadow` সংরক্ষণ, ৫) `bg-white` বনাম `cf-glass` ক্লাস কম্পিউটেড ট্রান্সলুসেন্সি, ৬) `prefers-reduced-motion: reduce`, ৭) Inter ফন্টে `bn`/`ar` `letter-spacing` শূন্য সুরক্ষা, ৮) RTL-সচেতন রোভিং `tabIndex` JS হ্যান্ডলার। |
 | `node scripts/verify-plugin.mjs` | **8 PASS, 0 NOT RUN, 0 FAIL** | প্লাগিন ম্যানিফেস্ট, ১৮/১৮ রানটাইম ফাইল, ৯ JSON স্কিমা, ৩২ পাথ, ৯ WAV ফাইল, lint হুক স্মোক টেস্ট, `build-tokens` স্মোক ও `python + playwright` ইম্পোর্ট। |
 | `node scripts/contrast-check.mjs --accent "#0088FF"` | **0 blocking failures** | `#0088FF` / `#0091FF` জোড়া ও WCAG ২.২ `3:1` / `4.5:1` থ্রেশহোল্ড পাস (৩টি অনুমোদিত small-text advisory warning সহ)। |
 
-### ৩.২ না চালানো অংশ (`NOT RUN`)
+### ৩.২ রিয়েল TSX টাইপ-চেক ও মাউন্টেড React যাচাই (পরবর্তী ধাপে সম্পন্ন)
 
-- **পূর্ণ Next.js / React `tsc --noEmit` ও React JSX কম্পোনেন্ট মাউন্ট**: **NOT RUN (`no package.json / node_modules / Next.js app installed in this plugin repository`)**। Web `.tsx` প্রিমিটিভগুলো স্ট্যাটিক রেগ্রেশন টেস্ট (`tests/web-primitives-regression.test.mjs`), JS স্প্রিং/প্রি-হাইড্রেশন এক্সিকিউশন ও CSS/DOM/Squircle আচরণের বাস্তব Playwright হেডলেস Chromium পরীক্ষার মাধ্যমে যাচাই করা হয়েছে; পূর্ণ Next.js প্রজেক্টে কপি করার পরই অ্যাপ-লেভেল `tsc` ও React মাউন্ট চলে।
+- মূল প্লাগিন রিপোজিটরিতে `package.json` / `node_modules` না থাকায় প্রাথমিক ধাপে app-level `tsc` / React মাউন্ট **NOT RUN** ছিল। পরবর্তীতে আলাদা অস্থায়ী প্রজেক্ট `_upgrade/scratch/tsx-check/` (Vite + React 19 + Motion 12 + Radix + TypeScript strict)-এ আসল `.tsx` কম্পোনেন্টগুলোর `tsc --noEmit` এবং Playwright **Chromium (7/7 PASS)** ও **WebKit (7/7 PASS)** মাউন্টেড যাচাই সম্পন্ন হয়েছে — বিস্তারিত ফলাফল দেখুন [`PHASE-2A-VERIFICATION.md`](file:///D:/Claude-Plugins/cupertino-forge/_upgrade/03-merge/PHASE-2A-VERIFICATION.md)-এ।
+- **Next.js App Router SSR / Full Next.js Build**: এখনো **NOT RUN** (`no next package / Next.js app in plugin repo`; Vite + React 19 client bundle ও HTML `<head>` script injection যাচাই হয়েছে)।
 
 ---
 

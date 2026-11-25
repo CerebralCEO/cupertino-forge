@@ -28,8 +28,8 @@ const DETENT_VH: Record<Detent, number> = { medium: 52, large: 94 };
 const DETENT_Y: Record<Detent, string> = { medium: '42dvh', large: '0%' };
 
 /**
- * iOS sheet with detents. Animates transform only (no layout height animation).
- * Medium floats inset with large glass and sheet-floating radius; large is solid elevated bg with device radius.
+ * iOS sheet with detents. Outer container animates detent/present y transform only (no height layout animation);
+ * inner draggable surface stays anchored at y=0 so drags work consistently across detent switches.
  * Supports scroll-top handoff to drag-to-dismiss (velocity 600 or 40 percent). Content behind does not shrink (iOS 26+).
  */
 export function Sheet({ open, onOpenChange, title, leading, trailing, detents = ['large'], initialDetent, modal = true, children }: SheetProps) {
@@ -92,45 +92,53 @@ export function Sheet({ open, onOpenChange, title, leading, trailing, detents = 
             <Dialog.Content asChild forceMount aria-describedby={undefined}>
               <motion.div
                 data-cf-elevated
-                drag={reducedMotion ? false : 'y'}
-                dragControls={drag}
-                dragListener={false}
-                dragConstraints={{ top: 0, bottom: 0 }}
-                dragElastic={{ top: 0.05, bottom: 0.6 }}
-                onDragEnd={onDragEnd}
                 initial={reducedMotion ? { y: DETENT_Y[detent], opacity: 0 } : { y: '100%' }}
-                animate={reducedMotion ? { y: DETENT_Y[detent], opacity: 1 } : { y: DETENT_Y[detent], opacity: 1 }}
+                animate={{ y: DETENT_Y[detent], opacity: 1 }}
                 exit={reducedMotion ? { y: DETENT_Y[detent], opacity: 0 } : { y: '100%' }}
                 transition={reducedMotion ? { duration: 0.2 } : spring('sheet')}
                 className={cn(
-                  'fixed z-50 flex h-[94dvh] max-h-[94dvh] flex-col overflow-hidden outline-none squircle',
-                  medium ? 'cf-glass inset-x-2 bottom-2 rounded-sheet-floating' : 'inset-x-0 bottom-0 rounded-t-device-display bg-bg shadow-sheet'
+                  'pointer-events-none fixed z-50 h-[94dvh] max-h-[94dvh] outline-none',
+                  medium ? 'inset-x-2 bottom-2' : 'inset-x-0 bottom-0'
                 )}
-                data-variant={medium ? 'large' : undefined}
               >
-                <div onPointerDown={(e) => drag.start(e)} className="flex shrink-0 cursor-grab touch-none flex-col">
-                  <span aria-hidden className="mx-auto mt-[var(--cf-grabber-mt)] h-[var(--cf-grabber-h)] w-[var(--cf-grabber-w)] rounded-capsule bg-fill" />
-                  {(title || leading || trailing) && (
-                    <div className="relative flex h-[var(--cf-bar-height)] items-center justify-between px-lg">
-                      <div className="min-w-11">{leading}</div>
-                      <Dialog.Title className="absolute left-1/2 -translate-x-1/2 text-headline text-label">{title}</Dialog.Title>
-                      <div className="flex min-w-11 justify-end">{trailing}</div>
-                    </div>
-                  )}
-                </div>
-                <div
-                  ref={scrollRef}
-                  onPointerDown={handleBodyPointerDown}
-                  onPointerMove={handleBodyPointerMove}
-                  onPointerUp={resetBodyPointer}
-                  onPointerCancel={resetBodyPointer}
+                <motion.div
+                  drag={reducedMotion ? false : 'y'}
+                  dragControls={drag}
+                  dragListener={false}
+                  dragSnapToOrigin
+                  dragConstraints={{ top: 0, bottom: 900 }}
+                  dragElastic={{ top: 0.05, bottom: 0.25 }}
+                  onDragEnd={onDragEnd}
                   className={cn(
-                    'min-h-0 flex-1 overflow-y-auto overscroll-contain',
-                    medium ? 'pb-[calc(42dvh+env(safe-area-inset-bottom))]' : 'pb-[env(safe-area-inset-bottom)]'
+                    'pointer-events-auto flex h-full w-full flex-col overflow-hidden squircle',
+                    medium ? 'cf-glass rounded-sheet-floating' : 'rounded-t-device-display bg-bg shadow-sheet'
                   )}
+                  data-variant={medium ? 'large' : undefined}
                 >
-                  {children}
-                </div>
+                  <div onPointerDown={(e) => drag.start(e)} className="flex shrink-0 cursor-grab touch-none flex-col">
+                    <span aria-hidden className="mx-auto mt-[var(--cf-grabber-mt)] h-[var(--cf-grabber-h)] w-[var(--cf-grabber-w)] rounded-capsule bg-fill" />
+                    {(title || leading || trailing) && (
+                      <div className="relative flex h-[var(--cf-bar-height)] items-center justify-between px-lg">
+                        <div className="min-w-11">{leading}</div>
+                        <Dialog.Title className="absolute left-1/2 -translate-x-1/2 text-headline text-label">{title}</Dialog.Title>
+                        <div className="flex min-w-11 justify-end">{trailing}</div>
+                      </div>
+                    )}
+                  </div>
+                  <div
+                    ref={scrollRef}
+                    onPointerDown={handleBodyPointerDown}
+                    onPointerMove={handleBodyPointerMove}
+                    onPointerUp={resetBodyPointer}
+                    onPointerCancel={resetBodyPointer}
+                    className={cn(
+                      'min-h-0 flex-1 overflow-y-auto overscroll-contain',
+                      medium ? 'pb-[calc(42dvh+env(safe-area-inset-bottom))]' : 'pb-[env(safe-area-inset-bottom)]'
+                    )}
+                  >
+                    {children}
+                  </div>
+                </motion.div>
               </motion.div>
             </Dialog.Content>
           </Dialog.Portal>
