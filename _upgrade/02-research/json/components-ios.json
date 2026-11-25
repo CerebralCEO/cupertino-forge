@@ -1,0 +1,231 @@
+{
+  "$meta": {
+    "generated": "2026-11-25",
+    "sources": [
+      "https://developer.apple.com/design/human-interface-guidelines/buttons",
+      "https://developer.apple.com/design/human-interface-guidelines/tab-bars",
+      "https://developer.apple.com/design/human-interface-guidelines/sheets",
+      "https://developer.apple.com/design/human-interface-guidelines/toolbars",
+      "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "https://developer.apple.com/design/human-interface-guidelines/accessibility"
+    ]
+  },
+  "button": {
+    "minHitTarget": {
+      "$value": 44,
+      "$unit": "pt",
+      "$source": "Apple HIG Buttons & Accessibility",
+      "$class": "Official",
+      "$platform": "iOS / iPadOS",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/buttons",
+      "$confidence": "high"
+    },
+    "heights": {
+      "$value": {
+        "mini": 28,
+        "small": 32,
+        "medium": 36,
+        "large": 50,
+        "extraLarge": 56
+      },
+      "$unit": "pt",
+      "$source": "Plugin iOS 26/27 estimate (HIG documents 28/32/44/52/64 for visionOS)",
+      "$class": "Estimated",
+      "$platform": "iOS 26/27",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/buttons",
+      "$confidence": "high"
+    },
+    "maxProminentPerView": {
+      "$value": "1-2",
+      "$unit": "count",
+      "$source": "Apple HIG Buttons: keep prominent buttons to one or two per view",
+      "$class": "Official",
+      "$platform": "All",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/buttons",
+      "$confidence": "high"
+    }
+  },
+  "navBar": {
+    "barHeight": {
+      "$value": 44,
+      "$unit": "pt",
+      "$source": "Classic UIKit UINavigationBar compact portrait height",
+      "$class": "Measured",
+      "$platform": "iOS",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/toolbars",
+      "$confidence": "high"
+    },
+    "largeTitleExtraHeight": {
+      "$value": 52,
+      "$unit": "pt",
+      "$source": "UIKit large title extension height",
+      "$class": "Estimated",
+      "$platform": "iOS",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/toolbars",
+      "$confidence": "high"
+    }
+  },
+  "tabBar": {
+    "floatingCapsuleHeight": {
+      "$value": 62,
+      "$unit": "pt",
+      "$source": "iOS 26/27 floating glass tab bar estimate",
+      "$class": "Estimated",
+      "$platform": "iOS 26/27",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/tab-bars",
+      "$confidence": "high"
+    },
+    "sideInset": {
+      "$value": 20,
+      "$unit": "pt",
+      "$source": "Floating capsule horizontal inset",
+      "$class": "Estimated",
+      "$platform": "iOS 26/27",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/tab-bars",
+      "$confidence": "high"
+    },
+    "maxVisibleTabsPhone": {
+      "$value": 5,
+      "$unit": "tabs",
+      "$source": "Apple HIG Tab bars (aim for 5 or fewer before More tab)",
+      "$class": "Official",
+      "$platform": "iOS",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/tab-bars",
+      "$confidence": "high"
+    },
+    "minimizeBehavior": {
+      "$value": "onScrollDown",
+      "$unit": "enum",
+      "$source": "SwiftUI TabBarMinimizeBehavior",
+      "$class": "Official",
+      "$platform": "iOS 26+",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/tab-bars",
+      "$confidence": "high"
+    }
+  },
+  "sheet": {
+    "detents": {
+      "$value": [
+        "medium (~50%)",
+        "large (100%)"
+      ],
+      "$unit": "detents",
+      "$source": "Apple HIG Sheets",
+      "$class": "Official",
+      "$platform": "iOS / iPadOS",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/sheets",
+      "$confidence": "high"
+    },
+    "grabberSize": {
+      "$value": {
+        "width": 36,
+        "height": 5,
+        "topInset": 5
+      },
+      "$unit": "pt",
+      "$source": "Standard UIKit sheet grabber",
+      "$class": "Estimated",
+      "$platform": "iOS",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/sheets",
+      "$confidence": "high"
+    },
+    "floatingRadiusMedium": {
+      "$value": 38,
+      "$unit": "pt",
+      "$source": "iOS 26/27 floating medium sheet radius",
+      "$class": "Estimated",
+      "$platform": "iOS 26/27",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/sheets",
+      "$confidence": "high"
+    }
+  },
+  "listRow": {
+    "minHeight": {
+      "$value": 52,
+      "$unit": "pt",
+      "$source": "iOS 26/27 spacious insetGrouped row",
+      "$class": "Estimated",
+      "$platform": "iOS 26/27",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "$confidence": "high"
+    },
+    "minHeightCompact": {
+      "$value": 44,
+      "$unit": "pt",
+      "$source": "Minimum accessible row height",
+      "$class": "Official",
+      "$platform": "iOS",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/accessibility",
+      "$confidence": "high"
+    },
+    "settingsIcon": {
+      "$value": {
+        "size": 29,
+        "radius": 7
+      },
+      "$unit": "pt",
+      "$source": "iOS Settings icon squircle",
+      "$class": "Estimated",
+      "$platform": "iOS",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "$confidence": "high"
+    }
+  },
+  "toggle": {
+    "ios26TrackSize": {
+      "$value": {
+        "width": 64,
+        "height": 28,
+        "knobWidth": 38,
+        "knobHeight": 24
+      },
+      "$unit": "pt",
+      "$source": "iOS 26/27 pill-knob Liquid Glass switch",
+      "$class": "Estimated",
+      "$platform": "iOS 26/27",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/toggles",
+      "$confidence": "high"
+    },
+    "legacyTrackSize": {
+      "$value": {
+        "width": 51,
+        "height": 31
+      },
+      "$unit": "pt",
+      "$source": "Pre-iOS 26 UISwitch native intrinsicContentSize",
+      "$class": "Measured",
+      "$platform": "iOS <=18",
+      "$url": "https://developer.apple.com/documentation/uikit/uiswitch",
+      "$confidence": "high"
+    }
+  },
+  "alert": {
+    "width": {
+      "$value": 300,
+      "$unit": "pt",
+      "$source": "iOS 26/27 alert width",
+      "$class": "Estimated",
+      "$platform": "iOS 26/27",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/alerts",
+      "$confidence": "high"
+    },
+    "radius": {
+      "$value": 34,
+      "$unit": "pt",
+      "$source": "iOS 26/27 alert corner radius",
+      "$class": "Estimated",
+      "$platform": "iOS 26/27",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/alerts",
+      "$confidence": "high"
+    },
+    "buttonHeight": {
+      "$value": 48,
+      "$unit": "pt",
+      "$source": "iOS 26/27 glass capsule alert button height",
+      "$class": "Estimated",
+      "$platform": "iOS 26/27",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/alerts",
+      "$confidence": "high"
+    }
+  }
+}

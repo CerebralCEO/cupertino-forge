@@ -1,0 +1,5537 @@
+{
+  "$meta": {
+    "generated": "2026-11-25",
+    "sources": [
+      "https://developer.apple.com/design/human-interface-guidelines/typography",
+      "https://developer.apple.com/design/human-interface-guidelines/accessibility",
+      "tokens/source/apple-ios-27-ui-kit.tokens.json",
+      "tokens/source/apple-macos-27-ui-kit.tokens.json"
+    ]
+  },
+  "defaults": {
+    "iosDefaultBody": {
+      "$value": 17,
+      "$unit": "pt",
+      "$source": "Apple HIG Typography & Accessibility",
+      "$class": "Official",
+      "$platform": "iOS / iPadOS",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+      "$confidence": "high"
+    },
+    "iosMinimumSize": {
+      "$value": 11,
+      "$unit": "pt",
+      "$source": "Apple HIG Typography & Accessibility",
+      "$class": "Official",
+      "$platform": "iOS / iPadOS",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+      "$confidence": "high"
+    },
+    "macosDefaultBody": {
+      "$value": 13,
+      "$unit": "pt",
+      "$source": "Apple HIG Typography & Accessibility",
+      "$class": "Official",
+      "$platform": "macOS",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+      "$confidence": "high"
+    },
+    "macosMinimumSize": {
+      "$value": 10,
+      "$unit": "pt",
+      "$source": "Apple HIG Typography & Accessibility",
+      "$class": "Official",
+      "$platform": "macOS",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+      "$confidence": "high"
+    },
+    "opticalBoundaryTextToDisplay": {
+      "$value": 20,
+      "$unit": "pt",
+      "$source": "Apple SF Pro optical size boundary (Text <=19pt, Display >=20pt)",
+      "$class": "Official",
+      "$platform": "iOS / macOS",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+      "$confidence": "high"
+    }
+  },
+  "nonLatinRules": {
+    "banglaSystemFont": {
+      "$value": "Kohinoor Bangla",
+      "$unit": "fontFamily",
+      "$source": "Apple iOS/macOS bundled Bengali system font",
+      "$class": "Platform-dependent",
+      "$platform": "iOS / macOS",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+      "$confidence": "high",
+      "$notes": "Web fallback: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif"
+    },
+    "banglaTracking": {
+      "$value": 0,
+      "$unit": "em",
+      "$source": "Indic/matra shaping requires zero letter-spacing (never apply -0.026em)",
+      "$class": "Inferred",
+      "$platform": "All",
+      "$url": "https://developer.apple.com/fonts/",
+      "$confidence": "high"
+    },
+    "banglaExpansionBudget": {
+      "$value": "20-30%",
+      "$unit": "percent width",
+      "$source": "Typical Bangla UI string length vs English",
+      "$class": "Estimated",
+      "$platform": "All",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/localization",
+      "$confidence": "high"
+    },
+    "arabicSystemFont": {
+      "$value": "SF Arabic",
+      "$unit": "fontFamily",
+      "$source": "Apple SF Arabic system typeface",
+      "$class": "Official",
+      "$platform": "iOS / macOS",
+      "$url": "https://developer.apple.com/fonts/",
+      "$confidence": "high"
+    },
+    "arabicTracking": {
+      "$value": 0,
+      "$unit": "em",
+      "$source": "Cursive Arabic joining breaks under non-zero letter-spacing",
+      "$class": "Official",
+      "$platform": "All",
+      "$url": "https://www.w3.org/TR/alreq/",
+      "$confidence": "high"
+    }
+  },
+  "iosDynamicType": {
+    "xSmall": {
+      "largeTitle": {
+        "$value": {
+          "size": 31.0,
+          "lineHeight": 38.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.013
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "title1": {
+        "$value": {
+          "size": 25.0,
+          "lineHeight": 31.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.006
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "title2": {
+        "$value": {
+          "size": 19.0,
+          "lineHeight": 24.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": -0.024
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "title3": {
+        "$value": {
+          "size": 17.0,
+          "lineHeight": 22.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.026
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "headline": {
+        "$value": {
+          "size": 14.0,
+          "lineHeight": 19.0,
+          "weight": 600,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.011
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "body": {
+        "$value": {
+          "size": 14.0,
+          "lineHeight": 19.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.011
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "callout": {
+        "$value": {
+          "size": 13.0,
+          "lineHeight": 18.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.006
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "subheadline": {
+        "$value": {
+          "size": 12.0,
+          "lineHeight": 16.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.0
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "footnote": {
+        "$value": {
+          "size": 12.0,
+          "lineHeight": 16.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.0
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "caption1": {
+        "$value": {
+          "size": 11.0,
+          "lineHeight": 13.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.006
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "caption2": {
+        "$value": {
+          "size": 11.0,
+          "lineHeight": 13.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.006
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      }
+    },
+    "Small": {
+      "largeTitle": {
+        "$value": {
+          "size": 32.0,
+          "lineHeight": 39.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.013
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "title1": {
+        "$value": {
+          "size": 26.0,
+          "lineHeight": 32.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.008
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "title2": {
+        "$value": {
+          "size": 20.0,
+          "lineHeight": 25.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": -0.023
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "title3": {
+        "$value": {
+          "size": 18.0,
+          "lineHeight": 23.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.025
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "headline": {
+        "$value": {
+          "size": 15.0,
+          "lineHeight": 20.0,
+          "weight": 600,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.016
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "body": {
+        "$value": {
+          "size": 15.0,
+          "lineHeight": 20.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.016
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "callout": {
+        "$value": {
+          "size": 14.0,
+          "lineHeight": 19.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.011
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "subheadline": {
+        "$value": {
+          "size": 13.0,
+          "lineHeight": 18.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.006
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "footnote": {
+        "$value": {
+          "size": 12.0,
+          "lineHeight": 16.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.0
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "caption1": {
+        "$value": {
+          "size": 11.0,
+          "lineHeight": 13.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.006
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "caption2": {
+        "$value": {
+          "size": 11.0,
+          "lineHeight": 13.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.006
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      }
+    },
+    "Medium": {
+      "largeTitle": {
+        "$value": {
+          "size": 33.0,
+          "lineHeight": 40.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.012
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "title1": {
+        "$value": {
+          "size": 27.0,
+          "lineHeight": 33.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.011
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "title2": {
+        "$value": {
+          "size": 21.0,
+          "lineHeight": 26.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": -0.018
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "title3": {
+        "$value": {
+          "size": 19.0,
+          "lineHeight": 24.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.024
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "headline": {
+        "$value": {
+          "size": 16.0,
+          "lineHeight": 21.0,
+          "weight": 600,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.02
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "body": {
+        "$value": {
+          "size": 16.0,
+          "lineHeight": 21.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.02
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "callout": {
+        "$value": {
+          "size": 15.0,
+          "lineHeight": 20.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.016
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "subheadline": {
+        "$value": {
+          "size": 14.0,
+          "lineHeight": 19.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.011
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "footnote": {
+        "$value": {
+          "size": 12.0,
+          "lineHeight": 16.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.0
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "caption1": {
+        "$value": {
+          "size": 11.0,
+          "lineHeight": 13.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.006
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "caption2": {
+        "$value": {
+          "size": 11.0,
+          "lineHeight": 13.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.006
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      }
+    },
+    "Large": {
+      "largeTitle": {
+        "$value": {
+          "size": 34.0,
+          "lineHeight": 41.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.012
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "title1": {
+        "$value": {
+          "size": 28.0,
+          "lineHeight": 34.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.014
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "title2": {
+        "$value": {
+          "size": 22.0,
+          "lineHeight": 28.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": -0.012
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "title3": {
+        "$value": {
+          "size": 20.0,
+          "lineHeight": 25.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.023
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "headline": {
+        "$value": {
+          "size": 17.0,
+          "lineHeight": 22.0,
+          "weight": 600,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.026
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "body": {
+        "$value": {
+          "size": 17.0,
+          "lineHeight": 22.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.026
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "callout": {
+        "$value": {
+          "size": 16.0,
+          "lineHeight": 21.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.02
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "subheadline": {
+        "$value": {
+          "size": 15.0,
+          "lineHeight": 20.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.016
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "footnote": {
+        "$value": {
+          "size": 13.0,
+          "lineHeight": 18.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.006
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "caption1": {
+        "$value": {
+          "size": 12.0,
+          "lineHeight": 16.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.0
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "caption2": {
+        "$value": {
+          "size": 11.0,
+          "lineHeight": 13.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.006
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      }
+    },
+    "xLarge": {
+      "largeTitle": {
+        "$value": {
+          "size": 36.0,
+          "lineHeight": 43.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.01
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "title1": {
+        "$value": {
+          "size": 30.0,
+          "lineHeight": 37.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.014
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "title2": {
+        "$value": {
+          "size": 24.0,
+          "lineHeight": 30.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.003
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "title3": {
+        "$value": {
+          "size": 22.0,
+          "lineHeight": 28.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.012
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "headline": {
+        "$value": {
+          "size": 19.0,
+          "lineHeight": 24.0,
+          "weight": 600,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.024
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "body": {
+        "$value": {
+          "size": 19.0,
+          "lineHeight": 24.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.024
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "callout": {
+        "$value": {
+          "size": 18.0,
+          "lineHeight": 23.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.025
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "subheadline": {
+        "$value": {
+          "size": 17.0,
+          "lineHeight": 22.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.026
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "footnote": {
+        "$value": {
+          "size": 15.0,
+          "lineHeight": 20.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.016
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "caption1": {
+        "$value": {
+          "size": 14.0,
+          "lineHeight": 19.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.011
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "caption2": {
+        "$value": {
+          "size": 13.0,
+          "lineHeight": 18.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.006
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      }
+    },
+    "xxLarge": {
+      "largeTitle": {
+        "$value": {
+          "size": 38.0,
+          "lineHeight": 46.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.01
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "title1": {
+        "$value": {
+          "size": 32.0,
+          "lineHeight": 39.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.013
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "title2": {
+        "$value": {
+          "size": 26.0,
+          "lineHeight": 32.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.008
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "title3": {
+        "$value": {
+          "size": 24.0,
+          "lineHeight": 30.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.003
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "headline": {
+        "$value": {
+          "size": 21.0,
+          "lineHeight": 26.0,
+          "weight": 600,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.018
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "body": {
+        "$value": {
+          "size": 21.0,
+          "lineHeight": 26.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.018
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "callout": {
+        "$value": {
+          "size": 20.0,
+          "lineHeight": 25.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.023
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "subheadline": {
+        "$value": {
+          "size": 19.0,
+          "lineHeight": 24.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.024
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "footnote": {
+        "$value": {
+          "size": 17.0,
+          "lineHeight": 22.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.026
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "caption1": {
+        "$value": {
+          "size": 16.0,
+          "lineHeight": 21.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.02
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "caption2": {
+        "$value": {
+          "size": 15.0,
+          "lineHeight": 20.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.016
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      }
+    },
+    "xxxLarge": {
+      "largeTitle": {
+        "$value": {
+          "size": 40.0,
+          "lineHeight": 48.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.01
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "title1": {
+        "$value": {
+          "size": 34.0,
+          "lineHeight": 41.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.012
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "title2": {
+        "$value": {
+          "size": 28.0,
+          "lineHeight": 34.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.014
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "title3": {
+        "$value": {
+          "size": 26.0,
+          "lineHeight": 32.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.008
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "headline": {
+        "$value": {
+          "size": 23.0,
+          "lineHeight": 29.0,
+          "weight": 600,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.004
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "body": {
+        "$value": {
+          "size": 23.0,
+          "lineHeight": 29.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.004
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "callout": {
+        "$value": {
+          "size": 22.0,
+          "lineHeight": 28.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.012
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "subheadline": {
+        "$value": {
+          "size": 21.0,
+          "lineHeight": 28.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.018
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "footnote": {
+        "$value": {
+          "size": 19.0,
+          "lineHeight": 24.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.024
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "caption1": {
+        "$value": {
+          "size": 18.0,
+          "lineHeight": 23.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.025
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "caption2": {
+        "$value": {
+          "size": 17.0,
+          "lineHeight": 22.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.026
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      }
+    },
+    "AX1": {
+      "largeTitle": {
+        "$value": {
+          "size": 44.0,
+          "lineHeight": 52.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.008
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "title1": {
+        "$value": {
+          "size": 38.0,
+          "lineHeight": 46.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.01
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "title2": {
+        "$value": {
+          "size": 34.0,
+          "lineHeight": 41.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.012
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "title3": {
+        "$value": {
+          "size": 31.0,
+          "lineHeight": 38.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.013
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "headline": {
+        "$value": {
+          "size": 28.0,
+          "lineHeight": 34.0,
+          "weight": 600,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.014
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "body": {
+        "$value": {
+          "size": 28.0,
+          "lineHeight": 34.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.014
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "callout": {
+        "$value": {
+          "size": 26.0,
+          "lineHeight": 32.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.008
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "subheadline": {
+        "$value": {
+          "size": 25.0,
+          "lineHeight": 31.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.006
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "footnote": {
+        "$value": {
+          "size": 23.0,
+          "lineHeight": 29.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.004
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "caption1": {
+        "$value": {
+          "size": 22.0,
+          "lineHeight": 28.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.012
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "caption2": {
+        "$value": {
+          "size": 20.0,
+          "lineHeight": 25.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.023
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      }
+    },
+    "AX2": {
+      "largeTitle": {
+        "$value": {
+          "size": 48.0,
+          "lineHeight": 57.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.008
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "title1": {
+        "$value": {
+          "size": 43.0,
+          "lineHeight": 51.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.009
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "title2": {
+        "$value": {
+          "size": 39.0,
+          "lineHeight": 47.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.01
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "title3": {
+        "$value": {
+          "size": 37.0,
+          "lineHeight": 44.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.01
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "headline": {
+        "$value": {
+          "size": 33.0,
+          "lineHeight": 40.0,
+          "weight": 600,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.012
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "body": {
+        "$value": {
+          "size": 33.0,
+          "lineHeight": 40.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.012
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "callout": {
+        "$value": {
+          "size": 32.0,
+          "lineHeight": 39.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.013
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "subheadline": {
+        "$value": {
+          "size": 30.0,
+          "lineHeight": 37.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.014
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "footnote": {
+        "$value": {
+          "size": 27.0,
+          "lineHeight": 33.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.011
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "caption1": {
+        "$value": {
+          "size": 26.0,
+          "lineHeight": 32.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.008
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "caption2": {
+        "$value": {
+          "size": 24.0,
+          "lineHeight": 30.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.003
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      }
+    },
+    "AX3": {
+      "largeTitle": {
+        "$value": {
+          "size": 52.0,
+          "lineHeight": 61.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.006
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "title1": {
+        "$value": {
+          "size": 48.0,
+          "lineHeight": 57.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.008
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "title2": {
+        "$value": {
+          "size": 44.0,
+          "lineHeight": 52.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.008
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "title3": {
+        "$value": {
+          "size": 43.0,
+          "lineHeight": 51.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.009
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "headline": {
+        "$value": {
+          "size": 40.0,
+          "lineHeight": 48.0,
+          "weight": 600,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.01
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "body": {
+        "$value": {
+          "size": 40.0,
+          "lineHeight": 48.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.01
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "callout": {
+        "$value": {
+          "size": 38.0,
+          "lineHeight": 46.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.01
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "subheadline": {
+        "$value": {
+          "size": 36.0,
+          "lineHeight": 43.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.01
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "footnote": {
+        "$value": {
+          "size": 33.0,
+          "lineHeight": 40.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.012
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "caption1": {
+        "$value": {
+          "size": 32.0,
+          "lineHeight": 39.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.013
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "caption2": {
+        "$value": {
+          "size": 29.0,
+          "lineHeight": 35.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.014
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      }
+    },
+    "AX4": {
+      "largeTitle": {
+        "$value": {
+          "size": 56.0,
+          "lineHeight": 66.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.006
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "title1": {
+        "$value": {
+          "size": 53.0,
+          "lineHeight": 62.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.006
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "title2": {
+        "$value": {
+          "size": 50.0,
+          "lineHeight": 59.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.007
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "title3": {
+        "$value": {
+          "size": 49.0,
+          "lineHeight": 58.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.007
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "headline": {
+        "$value": {
+          "size": 47.0,
+          "lineHeight": 56.0,
+          "weight": 600,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.008
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "body": {
+        "$value": {
+          "size": 47.0,
+          "lineHeight": 56.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.008
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "callout": {
+        "$value": {
+          "size": 44.0,
+          "lineHeight": 52.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.008
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "subheadline": {
+        "$value": {
+          "size": 42.0,
+          "lineHeight": 50.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.009
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "footnote": {
+        "$value": {
+          "size": 38.0,
+          "lineHeight": 46.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.01
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "caption1": {
+        "$value": {
+          "size": 37.0,
+          "lineHeight": 44.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.01
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "caption2": {
+        "$value": {
+          "size": 34.0,
+          "lineHeight": 41.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.012
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      }
+    },
+    "AX5": {
+      "largeTitle": {
+        "$value": {
+          "size": 60.0,
+          "lineHeight": 70.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.004
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "title1": {
+        "$value": {
+          "size": 58.0,
+          "lineHeight": 68.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.005
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "title2": {
+        "$value": {
+          "size": 56.0,
+          "lineHeight": 66.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.006
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "title3": {
+        "$value": {
+          "size": 55.0,
+          "lineHeight": 65.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.0
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "headline": {
+        "$value": {
+          "size": 53.0,
+          "lineHeight": 62.0,
+          "weight": 600,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.006
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "body": {
+        "$value": {
+          "size": 53.0,
+          "lineHeight": 62.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.006
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "callout": {
+        "$value": {
+          "size": 51.0,
+          "lineHeight": 60.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.007
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "subheadline": {
+        "$value": {
+          "size": 49.0,
+          "lineHeight": 58.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.007
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "footnote": {
+        "$value": {
+          "size": 44.0,
+          "lineHeight": 52.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.008
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "caption1": {
+        "$value": {
+          "size": 43.0,
+          "lineHeight": 51.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.009
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "caption2": {
+        "$value": {
+          "size": 40.0,
+          "lineHeight": 48.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.01
+        },
+        "$unit": "pt / CSS weight / em",
+        "$source": "Apple HIG Typography Dynamic Type + Tracking table",
+        "$class": "Official",
+        "$platform": "iOS / iPadOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      }
+    }
+  },
+  "macosTextStyles": {
+    "largeTitle": {
+      "$value": {
+        "size": 26.0,
+        "lineHeight": 32.0,
+        "weight": 400,
+        "emphasizedWeight": 700,
+        "trackingEm": 0.008
+      },
+      "$unit": "pt / CSS weight / em",
+      "$source": "Apple HIG Typography macOS built-in text styles",
+      "$class": "Official",
+      "$platform": "macOS",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+      "$confidence": "high",
+      "$notes": "Note: macOS 27 Sketch kit has Caption1 emW=600, Caption2 w=400, Headline emW=900; HIG says 500, 500, 800."
+    },
+    "title1": {
+      "$value": {
+        "size": 22.0,
+        "lineHeight": 26.0,
+        "weight": 400,
+        "emphasizedWeight": 700,
+        "trackingEm": -0.012
+      },
+      "$unit": "pt / CSS weight / em",
+      "$source": "Apple HIG Typography macOS built-in text styles",
+      "$class": "Official",
+      "$platform": "macOS",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+      "$confidence": "high",
+      "$notes": "Note: macOS 27 Sketch kit has Caption1 emW=600, Caption2 w=400, Headline emW=900; HIG says 500, 500, 800."
+    },
+    "title2": {
+      "$value": {
+        "size": 17.0,
+        "lineHeight": 22.0,
+        "weight": 400,
+        "emphasizedWeight": 700,
+        "trackingEm": -0.026
+      },
+      "$unit": "pt / CSS weight / em",
+      "$source": "Apple HIG Typography macOS built-in text styles",
+      "$class": "Official",
+      "$platform": "macOS",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+      "$confidence": "high",
+      "$notes": "Note: macOS 27 Sketch kit has Caption1 emW=600, Caption2 w=400, Headline emW=900; HIG says 500, 500, 800."
+    },
+    "title3": {
+      "$value": {
+        "size": 15.0,
+        "lineHeight": 20.0,
+        "weight": 400,
+        "emphasizedWeight": 600,
+        "trackingEm": -0.016
+      },
+      "$unit": "pt / CSS weight / em",
+      "$source": "Apple HIG Typography macOS built-in text styles",
+      "$class": "Official",
+      "$platform": "macOS",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+      "$confidence": "high",
+      "$notes": "Note: macOS 27 Sketch kit has Caption1 emW=600, Caption2 w=400, Headline emW=900; HIG says 500, 500, 800."
+    },
+    "headline": {
+      "$value": {
+        "size": 13.0,
+        "lineHeight": 16.0,
+        "weight": 700,
+        "emphasizedWeight": 800,
+        "trackingEm": -0.006
+      },
+      "$unit": "pt / CSS weight / em",
+      "$source": "Apple HIG Typography macOS built-in text styles",
+      "$class": "Official",
+      "$platform": "macOS",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+      "$confidence": "high",
+      "$notes": "Note: macOS 27 Sketch kit has Caption1 emW=600, Caption2 w=400, Headline emW=900; HIG says 500, 500, 800."
+    },
+    "body": {
+      "$value": {
+        "size": 13.0,
+        "lineHeight": 16.0,
+        "weight": 400,
+        "emphasizedWeight": 600,
+        "trackingEm": -0.006
+      },
+      "$unit": "pt / CSS weight / em",
+      "$source": "Apple HIG Typography macOS built-in text styles",
+      "$class": "Official",
+      "$platform": "macOS",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+      "$confidence": "high",
+      "$notes": "Note: macOS 27 Sketch kit has Caption1 emW=600, Caption2 w=400, Headline emW=900; HIG says 500, 500, 800."
+    },
+    "callout": {
+      "$value": {
+        "size": 12.0,
+        "lineHeight": 15.0,
+        "weight": 400,
+        "emphasizedWeight": 600,
+        "trackingEm": 0.0
+      },
+      "$unit": "pt / CSS weight / em",
+      "$source": "Apple HIG Typography macOS built-in text styles",
+      "$class": "Official",
+      "$platform": "macOS",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+      "$confidence": "high",
+      "$notes": "Note: macOS 27 Sketch kit has Caption1 emW=600, Caption2 w=400, Headline emW=900; HIG says 500, 500, 800."
+    },
+    "subheadline": {
+      "$value": {
+        "size": 11.0,
+        "lineHeight": 14.0,
+        "weight": 400,
+        "emphasizedWeight": 600,
+        "trackingEm": 0.006
+      },
+      "$unit": "pt / CSS weight / em",
+      "$source": "Apple HIG Typography macOS built-in text styles",
+      "$class": "Official",
+      "$platform": "macOS",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+      "$confidence": "high",
+      "$notes": "Note: macOS 27 Sketch kit has Caption1 emW=600, Caption2 w=400, Headline emW=900; HIG says 500, 500, 800."
+    },
+    "footnote": {
+      "$value": {
+        "size": 10.0,
+        "lineHeight": 13.0,
+        "weight": 400,
+        "emphasizedWeight": 600,
+        "trackingEm": 0.012
+      },
+      "$unit": "pt / CSS weight / em",
+      "$source": "Apple HIG Typography macOS built-in text styles",
+      "$class": "Official",
+      "$platform": "macOS",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+      "$confidence": "high",
+      "$notes": "Note: macOS 27 Sketch kit has Caption1 emW=600, Caption2 w=400, Headline emW=900; HIG says 500, 500, 800."
+    },
+    "caption1": {
+      "$value": {
+        "size": 10.0,
+        "lineHeight": 13.0,
+        "weight": 400,
+        "emphasizedWeight": 500,
+        "trackingEm": 0.012
+      },
+      "$unit": "pt / CSS weight / em",
+      "$source": "Apple HIG Typography macOS built-in text styles",
+      "$class": "Official",
+      "$platform": "macOS",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+      "$confidence": "high",
+      "$notes": "Note: macOS 27 Sketch kit has Caption1 emW=600, Caption2 w=400, Headline emW=900; HIG says 500, 500, 800."
+    },
+    "caption2": {
+      "$value": {
+        "size": 10.0,
+        "lineHeight": 13.0,
+        "weight": 500,
+        "emphasizedWeight": 600,
+        "trackingEm": 0.012
+      },
+      "$unit": "pt / CSS weight / em",
+      "$source": "Apple HIG Typography macOS built-in text styles",
+      "$class": "Official",
+      "$platform": "macOS",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+      "$confidence": "high",
+      "$notes": "Note: macOS 27 Sketch kit has Caption1 emW=600, Caption2 w=400, Headline emW=900; HIG says 500, 500, 800."
+    }
+  },
+  "trackingTables": {
+    "sfProIOS": {
+      "6": {
+        "$value": {
+          "1000em": 41,
+          "em": 0.041,
+          "pt": 0.24
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "7": {
+        "$value": {
+          "1000em": 34,
+          "em": 0.034,
+          "pt": 0.23
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "8": {
+        "$value": {
+          "1000em": 26,
+          "em": 0.026,
+          "pt": 0.21
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "9": {
+        "$value": {
+          "1000em": 19,
+          "em": 0.019,
+          "pt": 0.17
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "10": {
+        "$value": {
+          "1000em": 12,
+          "em": 0.012,
+          "pt": 0.12
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "11": {
+        "$value": {
+          "1000em": 6,
+          "em": 0.006,
+          "pt": 0.06
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "12": {
+        "$value": {
+          "1000em": 0,
+          "em": 0.0,
+          "pt": 0.0
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "13": {
+        "$value": {
+          "1000em": -6,
+          "em": -0.006,
+          "pt": -0.08
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "14": {
+        "$value": {
+          "1000em": -11,
+          "em": -0.011,
+          "pt": -0.15
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "15": {
+        "$value": {
+          "1000em": -16,
+          "em": -0.016,
+          "pt": -0.23
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "16": {
+        "$value": {
+          "1000em": -20,
+          "em": -0.02,
+          "pt": -0.31
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "17": {
+        "$value": {
+          "1000em": -26,
+          "em": -0.026,
+          "pt": -0.43
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "18": {
+        "$value": {
+          "1000em": -25,
+          "em": -0.025,
+          "pt": -0.44
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "19": {
+        "$value": {
+          "1000em": -24,
+          "em": -0.024,
+          "pt": -0.45
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "20": {
+        "$value": {
+          "1000em": -23,
+          "em": -0.023,
+          "pt": -0.45
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "21": {
+        "$value": {
+          "1000em": -18,
+          "em": -0.018,
+          "pt": -0.36
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "22": {
+        "$value": {
+          "1000em": -12,
+          "em": -0.012,
+          "pt": -0.26
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "23": {
+        "$value": {
+          "1000em": -4,
+          "em": -0.004,
+          "pt": -0.1
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "24": {
+        "$value": {
+          "1000em": 3,
+          "em": 0.003,
+          "pt": 0.07
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "25": {
+        "$value": {
+          "1000em": 6,
+          "em": 0.006,
+          "pt": 0.15
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "26": {
+        "$value": {
+          "1000em": 8,
+          "em": 0.008,
+          "pt": 0.22
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "27": {
+        "$value": {
+          "1000em": 11,
+          "em": 0.011,
+          "pt": 0.29
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "28": {
+        "$value": {
+          "1000em": 14,
+          "em": 0.014,
+          "pt": 0.38
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "29": {
+        "$value": {
+          "1000em": 14,
+          "em": 0.014,
+          "pt": 0.4
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "30": {
+        "$value": {
+          "1000em": 14,
+          "em": 0.014,
+          "pt": 0.4
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "31": {
+        "$value": {
+          "1000em": 13,
+          "em": 0.013,
+          "pt": 0.39
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "32": {
+        "$value": {
+          "1000em": 13,
+          "em": 0.013,
+          "pt": 0.41
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "33": {
+        "$value": {
+          "1000em": 12,
+          "em": 0.012,
+          "pt": 0.4
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "34": {
+        "$value": {
+          "1000em": 12,
+          "em": 0.012,
+          "pt": 0.4
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "35": {
+        "$value": {
+          "1000em": 11,
+          "em": 0.011,
+          "pt": 0.38
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "36": {
+        "$value": {
+          "1000em": 10,
+          "em": 0.01,
+          "pt": 0.37
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "37": {
+        "$value": {
+          "1000em": 10,
+          "em": 0.01,
+          "pt": 0.36
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "38": {
+        "$value": {
+          "1000em": 10,
+          "em": 0.01,
+          "pt": 0.37
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "39": {
+        "$value": {
+          "1000em": 10,
+          "em": 0.01,
+          "pt": 0.38
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "40": {
+        "$value": {
+          "1000em": 10,
+          "em": 0.01,
+          "pt": 0.37
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "41": {
+        "$value": {
+          "1000em": 9,
+          "em": 0.009,
+          "pt": 0.36
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "42": {
+        "$value": {
+          "1000em": 9,
+          "em": 0.009,
+          "pt": 0.37
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "43": {
+        "$value": {
+          "1000em": 9,
+          "em": 0.009,
+          "pt": 0.38
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "44": {
+        "$value": {
+          "1000em": 8,
+          "em": 0.008,
+          "pt": 0.37
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "45": {
+        "$value": {
+          "1000em": 8,
+          "em": 0.008,
+          "pt": 0.35
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "46": {
+        "$value": {
+          "1000em": 8,
+          "em": 0.008,
+          "pt": 0.36
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "47": {
+        "$value": {
+          "1000em": 8,
+          "em": 0.008,
+          "pt": 0.37
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "48": {
+        "$value": {
+          "1000em": 8,
+          "em": 0.008,
+          "pt": 0.35
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "49": {
+        "$value": {
+          "1000em": 7,
+          "em": 0.007,
+          "pt": 0.33
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "50": {
+        "$value": {
+          "1000em": 7,
+          "em": 0.007,
+          "pt": 0.34
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "51": {
+        "$value": {
+          "1000em": 7,
+          "em": 0.007,
+          "pt": 0.35
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "52": {
+        "$value": {
+          "1000em": 6,
+          "em": 0.006,
+          "pt": 0.33
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "53": {
+        "$value": {
+          "1000em": 6,
+          "em": 0.006,
+          "pt": 0.31
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "54": {
+        "$value": {
+          "1000em": 6,
+          "em": 0.006,
+          "pt": 0.32
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "56": {
+        "$value": {
+          "1000em": 6,
+          "em": 0.006,
+          "pt": 0.3
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "58": {
+        "$value": {
+          "1000em": 5,
+          "em": 0.005,
+          "pt": 0.28
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "60": {
+        "$value": {
+          "1000em": 4,
+          "em": 0.004,
+          "pt": 0.26
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "62": {
+        "$value": {
+          "1000em": 4,
+          "em": 0.004,
+          "pt": 0.24
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "64": {
+        "$value": {
+          "1000em": 4,
+          "em": 0.004,
+          "pt": 0.22
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "66": {
+        "$value": {
+          "1000em": 3,
+          "em": 0.003,
+          "pt": 0.19
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "68": {
+        "$value": {
+          "1000em": 2,
+          "em": 0.002,
+          "pt": 0.17
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "70": {
+        "$value": {
+          "1000em": 2,
+          "em": 0.002,
+          "pt": 0.14
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "72": {
+        "$value": {
+          "1000em": 2,
+          "em": 0.002,
+          "pt": 0.14
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "76": {
+        "$value": {
+          "1000em": 1,
+          "em": 0.001,
+          "pt": 0.07
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "80": {
+        "$value": {
+          "1000em": 0,
+          "em": 0.0,
+          "pt": 0.0
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "84": {
+        "$value": {
+          "1000em": 0,
+          "em": 0.0,
+          "pt": 0.0
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "88": {
+        "$value": {
+          "1000em": 0,
+          "em": 0.0,
+          "pt": 0.0
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "92": {
+        "$value": {
+          "1000em": 0,
+          "em": 0.0,
+          "pt": 0.0
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "96": {
+        "$value": {
+          "1000em": 0,
+          "em": 0.0,
+          "pt": 0.0
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      }
+    },
+    "sfProRounded": {
+      "6": {
+        "$value": {
+          "1000em": 87,
+          "em": 0.087,
+          "pt": 0.51
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "7": {
+        "$value": {
+          "1000em": 80,
+          "em": 0.08,
+          "pt": 0.54
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "8": {
+        "$value": {
+          "1000em": 72,
+          "em": 0.072,
+          "pt": 0.57
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "9": {
+        "$value": {
+          "1000em": 65,
+          "em": 0.065,
+          "pt": 0.57
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "10": {
+        "$value": {
+          "1000em": 58,
+          "em": 0.058,
+          "pt": 0.57
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "11": {
+        "$value": {
+          "1000em": 52,
+          "em": 0.052,
+          "pt": 0.56
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "12": {
+        "$value": {
+          "1000em": 46,
+          "em": 0.046,
+          "pt": 0.54
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "13": {
+        "$value": {
+          "1000em": 40,
+          "em": 0.04,
+          "pt": 0.51
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "14": {
+        "$value": {
+          "1000em": 35,
+          "em": 0.035,
+          "pt": 0.48
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "15": {
+        "$value": {
+          "1000em": 30,
+          "em": 0.03,
+          "pt": 0.44
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "16": {
+        "$value": {
+          "1000em": 26,
+          "em": 0.026,
+          "pt": 0.41
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "17": {
+        "$value": {
+          "1000em": 22,
+          "em": 0.022,
+          "pt": 0.37
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "18": {
+        "$value": {
+          "1000em": 21,
+          "em": 0.021,
+          "pt": 0.37
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "19": {
+        "$value": {
+          "1000em": 20,
+          "em": 0.02,
+          "pt": 0.37
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "20": {
+        "$value": {
+          "1000em": 18,
+          "em": 0.018,
+          "pt": 0.36
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "21": {
+        "$value": {
+          "1000em": 17,
+          "em": 0.017,
+          "pt": 0.35
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "22": {
+        "$value": {
+          "1000em": 16,
+          "em": 0.016,
+          "pt": 0.34
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "23": {
+        "$value": {
+          "1000em": 16,
+          "em": 0.016,
+          "pt": 0.35
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "24": {
+        "$value": {
+          "1000em": 15,
+          "em": 0.015,
+          "pt": 0.35
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "25": {
+        "$value": {
+          "1000em": 14,
+          "em": 0.014,
+          "pt": 0.35
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "26": {
+        "$value": {
+          "1000em": 14,
+          "em": 0.014,
+          "pt": 0.36
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "27": {
+        "$value": {
+          "1000em": 14,
+          "em": 0.014,
+          "pt": 0.36
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "28": {
+        "$value": {
+          "1000em": 13,
+          "em": 0.013,
+          "pt": 0.36
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "29": {
+        "$value": {
+          "1000em": 13,
+          "em": 0.013,
+          "pt": 0.37
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "30": {
+        "$value": {
+          "1000em": 12,
+          "em": 0.012,
+          "pt": 0.37
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "31": {
+        "$value": {
+          "1000em": 12,
+          "em": 0.012,
+          "pt": 0.36
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "32": {
+        "$value": {
+          "1000em": 12,
+          "em": 0.012,
+          "pt": 0.38
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "33": {
+        "$value": {
+          "1000em": 12,
+          "em": 0.012,
+          "pt": 0.39
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "34": {
+        "$value": {
+          "1000em": 12,
+          "em": 0.012,
+          "pt": 0.38
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "35": {
+        "$value": {
+          "1000em": 11,
+          "em": 0.011,
+          "pt": 0.38
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "36": {
+        "$value": {
+          "1000em": 11,
+          "em": 0.011,
+          "pt": 0.39
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "37": {
+        "$value": {
+          "1000em": 10,
+          "em": 0.01,
+          "pt": 0.38
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "38": {
+        "$value": {
+          "1000em": 10,
+          "em": 0.01,
+          "pt": 0.39
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "39": {
+        "$value": {
+          "1000em": 10,
+          "em": 0.01,
+          "pt": 0.38
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "40": {
+        "$value": {
+          "1000em": 10,
+          "em": 0.01,
+          "pt": 0.39
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "41": {
+        "$value": {
+          "1000em": 10,
+          "em": 0.01,
+          "pt": 0.38
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "42": {
+        "$value": {
+          "1000em": 10,
+          "em": 0.01,
+          "pt": 0.39
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "43": {
+        "$value": {
+          "1000em": 9,
+          "em": 0.009,
+          "pt": 0.38
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "44": {
+        "$value": {
+          "1000em": 8,
+          "em": 0.008,
+          "pt": 0.37
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "45": {
+        "$value": {
+          "1000em": 8,
+          "em": 0.008,
+          "pt": 0.37
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "46": {
+        "$value": {
+          "1000em": 8,
+          "em": 0.008,
+          "pt": 0.36
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "47": {
+        "$value": {
+          "1000em": 8,
+          "em": 0.008,
+          "pt": 0.37
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "48": {
+        "$value": {
+          "1000em": 8,
+          "em": 0.008,
+          "pt": 0.35
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "49": {
+        "$value": {
+          "1000em": 8,
+          "em": 0.008,
+          "pt": 0.36
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "50": {
+        "$value": {
+          "1000em": 7,
+          "em": 0.007,
+          "pt": 0.34
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "51": {
+        "$value": {
+          "1000em": 6,
+          "em": 0.006,
+          "pt": 0.32
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "52": {
+        "$value": {
+          "1000em": 6,
+          "em": 0.006,
+          "pt": 0.33
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "53": {
+        "$value": {
+          "1000em": 6,
+          "em": 0.006,
+          "pt": 0.31
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "54": {
+        "$value": {
+          "1000em": 6,
+          "em": 0.006,
+          "pt": 0.32
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "56": {
+        "$value": {
+          "1000em": 6,
+          "em": 0.006,
+          "pt": 0.3
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "58": {
+        "$value": {
+          "1000em": 4,
+          "em": 0.004,
+          "pt": 0.25
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "60": {
+        "$value": {
+          "1000em": 4,
+          "em": 0.004,
+          "pt": 0.23
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "62": {
+        "$value": {
+          "1000em": 4,
+          "em": 0.004,
+          "pt": 0.21
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "64": {
+        "$value": {
+          "1000em": 3,
+          "em": 0.003,
+          "pt": 0.19
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "66": {
+        "$value": {
+          "1000em": 2,
+          "em": 0.002,
+          "pt": 0.16
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "68": {
+        "$value": {
+          "1000em": 2,
+          "em": 0.002,
+          "pt": 0.13
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "70": {
+        "$value": {
+          "1000em": 2,
+          "em": 0.002,
+          "pt": 0.14
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "72": {
+        "$value": {
+          "1000em": 2,
+          "em": 0.002,
+          "pt": 0.11
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "76": {
+        "$value": {
+          "1000em": 1,
+          "em": 0.001,
+          "pt": 0.07
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "80": {
+        "$value": {
+          "1000em": 0,
+          "em": 0.0,
+          "pt": 0.0
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "84": {
+        "$value": {
+          "1000em": 0,
+          "em": 0.0,
+          "pt": 0.0
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "88": {
+        "$value": {
+          "1000em": 0,
+          "em": 0.0,
+          "pt": 0.0
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "92": {
+        "$value": {
+          "1000em": 0,
+          "em": 0.0,
+          "pt": 0.0
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "96": {
+        "$value": {
+          "1000em": 0,
+          "em": 0.0,
+          "pt": 0.0
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (SF Pro Rounded)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      }
+    },
+    "newYorkIOS": {
+      "6": {
+        "$value": {
+          "1000em": 40,
+          "em": 0.04,
+          "pt": 0.23
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "7": {
+        "$value": {
+          "1000em": 32,
+          "em": 0.032,
+          "pt": 0.22
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "8": {
+        "$value": {
+          "1000em": 25,
+          "em": 0.025,
+          "pt": 0.2
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "9": {
+        "$value": {
+          "1000em": 20,
+          "em": 0.02,
+          "pt": 0.18
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "10": {
+        "$value": {
+          "1000em": 16,
+          "em": 0.016,
+          "pt": 0.15
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "11": {
+        "$value": {
+          "1000em": 11,
+          "em": 0.011,
+          "pt": 0.12
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "12": {
+        "$value": {
+          "1000em": 6,
+          "em": 0.006,
+          "pt": 0.07
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "13": {
+        "$value": {
+          "1000em": 4,
+          "em": 0.004,
+          "pt": 0.05
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "14": {
+        "$value": {
+          "1000em": 2,
+          "em": 0.002,
+          "pt": 0.03
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "15": {
+        "$value": {
+          "1000em": 0,
+          "em": 0.0,
+          "pt": 0.0
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "16": {
+        "$value": {
+          "1000em": -2,
+          "em": -0.002,
+          "pt": -0.03
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "17": {
+        "$value": {
+          "1000em": -4,
+          "em": -0.004,
+          "pt": -0.07
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "18": {
+        "$value": {
+          "1000em": -6,
+          "em": -0.006,
+          "pt": -0.11
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "19": {
+        "$value": {
+          "1000em": -8,
+          "em": -0.008,
+          "pt": -0.15
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "20": {
+        "$value": {
+          "1000em": -10,
+          "em": -0.01,
+          "pt": -0.2
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "21": {
+        "$value": {
+          "1000em": -10,
+          "em": -0.01,
+          "pt": -0.21
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "22": {
+        "$value": {
+          "1000em": -10,
+          "em": -0.01,
+          "pt": -0.23
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "23": {
+        "$value": {
+          "1000em": -11,
+          "em": -0.011,
+          "pt": -0.25
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "24": {
+        "$value": {
+          "1000em": -11,
+          "em": -0.011,
+          "pt": -0.26
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "25": {
+        "$value": {
+          "1000em": -11,
+          "em": -0.011,
+          "pt": -0.27
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "26": {
+        "$value": {
+          "1000em": -12,
+          "em": -0.012,
+          "pt": -0.29
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "27": {
+        "$value": {
+          "1000em": -12,
+          "em": -0.012,
+          "pt": -0.32
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "28": {
+        "$value": {
+          "1000em": -12,
+          "em": -0.012,
+          "pt": -0.33
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "29": {
+        "$value": {
+          "1000em": -12,
+          "em": -0.012,
+          "pt": -0.34
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "30": {
+        "$value": {
+          "1000em": -12,
+          "em": -0.012,
+          "pt": -0.37
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "31": {
+        "$value": {
+          "1000em": -13,
+          "em": -0.013,
+          "pt": -0.39
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "32": {
+        "$value": {
+          "1000em": -13,
+          "em": -0.013,
+          "pt": -0.41
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "33": {
+        "$value": {
+          "1000em": -13,
+          "em": -0.013,
+          "pt": -0.42
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "34": {
+        "$value": {
+          "1000em": -14,
+          "em": -0.014,
+          "pt": -0.45
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "35": {
+        "$value": {
+          "1000em": -14,
+          "em": -0.014,
+          "pt": -0.48
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "36": {
+        "$value": {
+          "1000em": -14,
+          "em": -0.014,
+          "pt": -0.49
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "38": {
+        "$value": {
+          "1000em": -14,
+          "em": -0.014,
+          "pt": -0.52
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "40": {
+        "$value": {
+          "1000em": -14,
+          "em": -0.014,
+          "pt": -0.55
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "42": {
+        "$value": {
+          "1000em": -14,
+          "em": -0.014,
+          "pt": -0.57
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "44": {
+        "$value": {
+          "1000em": -14,
+          "em": -0.014,
+          "pt": -0.62
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "46": {
+        "$value": {
+          "1000em": -14,
+          "em": -0.014,
+          "pt": -0.65
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "48": {
+        "$value": {
+          "1000em": -14,
+          "em": -0.014,
+          "pt": -0.68
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "50": {
+        "$value": {
+          "1000em": -14,
+          "em": -0.014,
+          "pt": -0.71
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "52": {
+        "$value": {
+          "1000em": -14,
+          "em": -0.014,
+          "pt": -0.74
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "54": {
+        "$value": {
+          "1000em": -15,
+          "em": -0.015,
+          "pt": -0.79
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "58": {
+        "$value": {
+          "1000em": -15,
+          "em": -0.015,
+          "pt": -0.85
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "62": {
+        "$value": {
+          "1000em": -15,
+          "em": -0.015,
+          "pt": -0.91
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "66": {
+        "$value": {
+          "1000em": -15,
+          "em": -0.015,
+          "pt": -0.97
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "70": {
+        "$value": {
+          "1000em": -16,
+          "em": -0.016,
+          "pt": -1.06
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "72": {
+        "$value": {
+          "1000em": -16,
+          "em": -0.016,
+          "pt": -1.09
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "80": {
+        "$value": {
+          "1000em": -16,
+          "em": -0.016,
+          "pt": -1.21
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "88": {
+        "$value": {
+          "1000em": -16,
+          "em": -0.016,
+          "pt": -1.33
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "96": {
+        "$value": {
+          "1000em": -16,
+          "em": -0.016,
+          "pt": -1.5
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "100": {
+        "$value": {
+          "1000em": -16,
+          "em": -0.016,
+          "pt": -1.56
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "120": {
+        "$value": {
+          "1000em": -16,
+          "em": -0.016,
+          "pt": -1.88
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "140": {
+        "$value": {
+          "1000em": -16,
+          "em": -0.016,
+          "pt": -2.26
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "160": {
+        "$value": {
+          "1000em": -16,
+          "em": -0.016,
+          "pt": -2.58
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "180": {
+        "$value": {
+          "1000em": -17,
+          "em": -0.017,
+          "pt": -2.99
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "200": {
+        "$value": {
+          "1000em": -17,
+          "em": -0.017,
+          "pt": -3.32
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "220": {
+        "$value": {
+          "1000em": -18,
+          "em": -0.018,
+          "pt": -3.76
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "240": {
+        "$value": {
+          "1000em": -18,
+          "em": -0.018,
+          "pt": -4.22
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "260": {
+        "$value": {
+          "1000em": -18,
+          "em": -0.018,
+          "pt": -4.57
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (New York)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      }
+    },
+    "sfProMacOS": {
+      "6": {
+        "$value": {
+          "1000em": 41,
+          "em": 0.041,
+          "pt": 0.24
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "7": {
+        "$value": {
+          "1000em": 34,
+          "em": 0.034,
+          "pt": 0.23
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "8": {
+        "$value": {
+          "1000em": 26,
+          "em": 0.026,
+          "pt": 0.21
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "9": {
+        "$value": {
+          "1000em": 19,
+          "em": 0.019,
+          "pt": 0.17
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "10": {
+        "$value": {
+          "1000em": 12,
+          "em": 0.012,
+          "pt": 0.12
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "11": {
+        "$value": {
+          "1000em": 6,
+          "em": 0.006,
+          "pt": 0.06
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "12": {
+        "$value": {
+          "1000em": 0,
+          "em": 0.0,
+          "pt": 0.0
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "13": {
+        "$value": {
+          "1000em": -6,
+          "em": -0.006,
+          "pt": -0.08
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "14": {
+        "$value": {
+          "1000em": -11,
+          "em": -0.011,
+          "pt": -0.15
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "15": {
+        "$value": {
+          "1000em": -16,
+          "em": -0.016,
+          "pt": -0.23
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "16": {
+        "$value": {
+          "1000em": -20,
+          "em": -0.02,
+          "pt": -0.31
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "17": {
+        "$value": {
+          "1000em": -26,
+          "em": -0.026,
+          "pt": -0.43
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "18": {
+        "$value": {
+          "1000em": -25,
+          "em": -0.025,
+          "pt": -0.44
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "19": {
+        "$value": {
+          "1000em": -24,
+          "em": -0.024,
+          "pt": -0.45
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "20": {
+        "$value": {
+          "1000em": -23,
+          "em": -0.023,
+          "pt": -0.45
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "21": {
+        "$value": {
+          "1000em": -18,
+          "em": -0.018,
+          "pt": -0.36
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "22": {
+        "$value": {
+          "1000em": -12,
+          "em": -0.012,
+          "pt": -0.26
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "23": {
+        "$value": {
+          "1000em": -4,
+          "em": -0.004,
+          "pt": -0.1
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "24": {
+        "$value": {
+          "1000em": 3,
+          "em": 0.003,
+          "pt": 0.07
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "25": {
+        "$value": {
+          "1000em": 6,
+          "em": 0.006,
+          "pt": 0.15
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "26": {
+        "$value": {
+          "1000em": 8,
+          "em": 0.008,
+          "pt": 0.22
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "27": {
+        "$value": {
+          "1000em": 11,
+          "em": 0.011,
+          "pt": 0.29
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "28": {
+        "$value": {
+          "1000em": 14,
+          "em": 0.014,
+          "pt": 0.38
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "29": {
+        "$value": {
+          "1000em": 14,
+          "em": 0.014,
+          "pt": 0.4
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "30": {
+        "$value": {
+          "1000em": 14,
+          "em": 0.014,
+          "pt": 0.4
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "31": {
+        "$value": {
+          "1000em": 13,
+          "em": 0.013,
+          "pt": 0.39
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "32": {
+        "$value": {
+          "1000em": 13,
+          "em": 0.013,
+          "pt": 0.41
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "33": {
+        "$value": {
+          "1000em": 12,
+          "em": 0.012,
+          "pt": 0.4
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "34": {
+        "$value": {
+          "1000em": 12,
+          "em": 0.012,
+          "pt": 0.4
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "35": {
+        "$value": {
+          "1000em": 11,
+          "em": 0.011,
+          "pt": 0.38
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "36": {
+        "$value": {
+          "1000em": 10,
+          "em": 0.01,
+          "pt": 0.37
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "37": {
+        "$value": {
+          "1000em": 10,
+          "em": 0.01,
+          "pt": 0.36
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "38": {
+        "$value": {
+          "1000em": 10,
+          "em": 0.01,
+          "pt": 0.37
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "39": {
+        "$value": {
+          "1000em": 10,
+          "em": 0.01,
+          "pt": 0.38
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "40": {
+        "$value": {
+          "1000em": 10,
+          "em": 0.01,
+          "pt": 0.37
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "41": {
+        "$value": {
+          "1000em": 9,
+          "em": 0.009,
+          "pt": 0.36
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "42": {
+        "$value": {
+          "1000em": 9,
+          "em": 0.009,
+          "pt": 0.37
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "43": {
+        "$value": {
+          "1000em": 9,
+          "em": 0.009,
+          "pt": 0.38
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "44": {
+        "$value": {
+          "1000em": 8,
+          "em": 0.008,
+          "pt": 0.37
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "45": {
+        "$value": {
+          "1000em": 8,
+          "em": 0.008,
+          "pt": 0.35
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "46": {
+        "$value": {
+          "1000em": 8,
+          "em": 0.008,
+          "pt": 0.36
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "47": {
+        "$value": {
+          "1000em": 8,
+          "em": 0.008,
+          "pt": 0.37
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "48": {
+        "$value": {
+          "1000em": 8,
+          "em": 0.008,
+          "pt": 0.35
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "49": {
+        "$value": {
+          "1000em": 7,
+          "em": 0.007,
+          "pt": 0.33
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "50": {
+        "$value": {
+          "1000em": 7,
+          "em": 0.007,
+          "pt": 0.34
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "51": {
+        "$value": {
+          "1000em": 7,
+          "em": 0.007,
+          "pt": 0.35
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "52": {
+        "$value": {
+          "1000em": 6,
+          "em": 0.006,
+          "pt": 0.31
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "53": {
+        "$value": {
+          "1000em": 6,
+          "em": 0.006,
+          "pt": 0.33
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "54": {
+        "$value": {
+          "1000em": 6,
+          "em": 0.006,
+          "pt": 0.32
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "56": {
+        "$value": {
+          "1000em": 6,
+          "em": 0.006,
+          "pt": 0.3
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "58": {
+        "$value": {
+          "1000em": 5,
+          "em": 0.005,
+          "pt": 0.28
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "60": {
+        "$value": {
+          "1000em": 4,
+          "em": 0.004,
+          "pt": 0.26
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "62": {
+        "$value": {
+          "1000em": 4,
+          "em": 0.004,
+          "pt": 0.24
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "64": {
+        "$value": {
+          "1000em": 4,
+          "em": 0.004,
+          "pt": 0.22
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "66": {
+        "$value": {
+          "1000em": 3,
+          "em": 0.003,
+          "pt": 0.19
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "68": {
+        "$value": {
+          "1000em": 2,
+          "em": 0.002,
+          "pt": 0.17
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "70": {
+        "$value": {
+          "1000em": 2,
+          "em": 0.002,
+          "pt": 0.14
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "72": {
+        "$value": {
+          "1000em": 2,
+          "em": 0.002,
+          "pt": 0.14
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "76": {
+        "$value": {
+          "1000em": 1,
+          "em": 0.001,
+          "pt": 0.07
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "80": {
+        "$value": {
+          "1000em": 0,
+          "em": 0.0,
+          "pt": 0.0
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "84": {
+        "$value": {
+          "1000em": 0,
+          "em": 0.0,
+          "pt": 0.0
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "88": {
+        "$value": {
+          "1000em": 0,
+          "em": 0.0,
+          "pt": 0.0
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "92": {
+        "$value": {
+          "1000em": 0,
+          "em": 0.0,
+          "pt": 0.0
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      },
+      "96": {
+        "$value": {
+          "1000em": 0,
+          "em": 0.0,
+          "pt": 0.0
+        },
+        "$unit": "1/1000 em & pt",
+        "$source": "Apple HIG Typography (macOS tracking values)",
+        "$class": "Official",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+        "$confidence": "high"
+      }
+    }
+  }
+}

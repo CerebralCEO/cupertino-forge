@@ -1,0 +1,224 @@
+=== hig__onboarding.txt (42L) ===
+TITLE: Onboarding
+URL: https://developer.apple.com/design/human-interface-guidelines/onboarding
+
+ABSTRACT: Onboarding can help people get a quick start using your app or game.
+## Best practices
+## Additional content
+Avoid displaying licensing details within your onboarding flow. Let the App Store display agreements and disclaimers so people can read them before downloading your app or game. If you must include these items within the onboarding flow, integrate them in a balanced way that doesn’t disrupt the experience.
+## Additional requests
+Postpone nonessential setup flows or customization steps. Provide reasonable default settings so most people can immediately start interacting with your app or game without performing additional configuration.
+Prefer letting people experience your app or game before prompting them for ratings or purchases. People can be more likely to respond positively to such requests when they’ve had a chance to become engaged with your app or game.
+## Platform considerations
+No additional considerations for iOS, iPadOS, macOS, tvOS, visionOS, or watchOS.
+## Resources
+#### Related
+#### Videos
+## Change log
+[TABLE #1]
+--- | ---
+=== hig__keyboards.txt (196L) ===
+TITLE: Keyboards
+URL: https://developer.apple.com/design/human-interface-guidelines/keyboards
+
+ABSTRACT: A physical keyboard can be an essential input device for entering text, playing games, controlling apps, and more.
+People can connect a physical keyboard to any device except Apple Watch. Mac users tend to use a physical keyboard all the time and iPad users often do. Many games work well with a physical keyboard, and people can prefer using one instead of a virtual keyboard when entering a lot of text.
+## Best practices
+Support Full Keyboard Access when possible. Available in iOS, iPadOS, macOS, and visionOS, Full Keyboard Access lets people navigate and activate windows, menus, controls, and system features using only the keyboard. To test Full Keyboard Access in your app or game, turn it on in the Accessibility area of the system-supplied Settings app. For developer guidance, see  and isFullKeyboardAccessEnabled.
+Although iPadOS supports keyboard navigation in text fields, text views, and sidebars, and provides APIs you can use to support it in collection views and other custom views, avoid supporting keyboard navigation for controls, such as buttons, segmented controls, and switches. Instead, let people use Full Keyboard Access to activate controls, navigate to all onscreen components, and perform gesture-based interactions like drag and drop. For guidance, see focus-and-selection#iPadOS; for developer guidance, see focus-based_navigation.
+Respect standard keyboard shortcuts. While using most apps, people generally expect to rely on the standard keyboard shortcuts that work in other apps and throughout the system. If your app offers a unique action that people perform frequently, prefer creating a custom shortcut for it instead of repurposing a standard one that people associate with a different action. While playing a game, people may expect to use certain standard keyboard shortcuts — such as Command–Q to quit the game — but they also expect to be able to modify each game’s key bindings to fit their personal play style. For guidance, see Game controls.
+## Standard keyboard shortcuts
+[TABLE #1]
+--- | --- | ---
+Esc | Esc | Cancel the current action or process.
+Period (.) | Command-Period | Cancel an operation.
+[TABLE #2]
+--- | ---
+## Custom keyboard shortcuts
+[TABLE #3]
+--- | --- | ---
+Command |  | Prefer the Command key as the main modifier key in a custom keyboard shortcut.
+Shift |  | Prefer the Shift key as a secondary modifier that complements a related shortcut.
+Control |  | Avoid using the Control key as a modifier. The system uses Control in many systemwide features and shortcuts, like moving focus or capturing screenshots.
+Some languages require modifier keys to generate certain characters. For example, on a French keyboard, Option-5 generates the “{“ character. It’s usually safe to use the Command key as a modifier, but avoid using an additional modifier with characters that aren’t available on all keyboards. If you must use a modifier other than Command, prefer using it only with the alphabetic characters.
+Avoid adding Shift to a shortcut that uses the upper character of a two-character key. People already understand that they must hold the Shift key to type the upper character of a two-character key, so it’s clearer to simply list the upper character in the shortcut. For example, the keyboard shortcut for Hide Status Bar is Command-Slash, whereas the keyboard shortcut for Help is Command-Question mark, not Shift-Command-Slash.
+Avoid creating a new shortcut by adding a modifier to an existing shortcut for an unrelated command. For example, because people are accustomed to using Command-Z for undoing an action, it would be confusing to use Shift-Command-Z as the shortcut for a command that’s unrelated to undo and redo.
+## Platform considerations
+No additional considerations for iOS, iPadOS, macOS, or tvOS. Not supported in watchOS.
+### visionOS
+## Resources
+#### Related
+#### Developer documentation
+## Change log
+[TABLE #4]
+--- | ---
+June 9, 2025 | Moved game-specific key bindings guidance to the Game controls page.
+=== hig__gestures.txt (146L) ===
+TITLE: Gestures
+URL: https://developer.apple.com/design/human-interface-guidelines/gestures
+
+ABSTRACT: A gesture is a physical motion that a person uses to directly affect an object in an app or game on their device.
+## Best practices
+Give people more than one way to interact with your app. People commonly prefer or need to use other inputs — such as their voice, keyboard, or Switch Control — to interact with their devices. Don’t assume that people can use a specific gesture to perform a given task. For guidance, see accessibility.
+In general, respond to gestures in ways that are consistent with people’s expectations. People expect most gestures to work the same regardless of their current context. For example, people expect tap to activate or select an object. Avoid using a familiar gesture like tap or swipe to perform an action that’s unique to your app; similarly, avoid creating a unique gesture to perform a standard action like activating a button or scrolling a long view.
+## Custom gestures
+Avoid conflicting with gestures that access system UI. Several platforms offer gestures for accessing system behaviors, like edge swiping in watchOS or rolling your hand over to access system overlays in visionOS. It’s important to avoid defining custom gestures that might conflict with these interactions, as people expect these controls to work consistently. In specific circumstances within games or immersive experiences, developers can work around this area by deferring the system gesture. For more information, see the platform considerations for iOS, iPadOS, watchOS, and visionOS.
+## Platform considerations
+### iOS, iPadOS
+In addition to the standard gestures supported in all platforms, iOS and iPadOS support a few other gestures that people expect.
+[TABLE #1]
+--- | ---
+Four-finger swipe (iPadOS only) | Switch between apps.
+Consider allowing simultaneous recognition of multiple gestures if it enhances the experience. Although simultaneous gestures are unlikely to be useful in nongame apps, a game might include multiple onscreen controls — such as a joystick and firing buttons — that people can operate at the same time. For guidance on integrating touchscreen input with Apple Pencil input in your iPadOS app, see apple-pencil-and-scribble.
+### macOS
+People primarily interact with macOS using a keyboard and a pointing device, like a mouse or a trackpad. In addition, people can make standard gestures on a Magic Trackpad, Magic Mouse, or a game controller with a touch surface. On a Mac with a touch display, or on an iPad connected with Sidecar, people can also interact directly using touch gestures as a secondary input mode. For developer guidance, see adopting-gesture-recognizers-in-your-app and handling-appkit-gestures.
+Keep the layout and size of interface elements the same when you support touch. In macOS, touch is secondary to keyboard and pointing device input. People switch between inputs frequently, and it’s essential to keep the interface stable and predictable regardless of how someone interacts with it.
+Don’t use touch as the only way to access controls or features. Make sure all of your app’s functions are available through input from a keyboard and pointing device. Conversely, aim to provide touch equivalents for actions otherwise performed exclusively with a pointing device, like using a keyboard modifier to shift-drag or displaying a menu when the pointer moves over an element. For guidance, see Pointing devices > macOS.
+Where possible, align with gestures people already know. Preserve gestures that may already exist for your app on iPhone or iPad, or on Mac with a trackpad or Magic Mouse. Test to ensure they don’t conflict with macOS system gestures.
+### tvOS
+### visionOS
+[TABLE #2]
+--- | ---
+Offer both indirect and direct interactions when possible. Prefer indirect gestures for UI and common components like buttons. Reserve direct gestures and custom gestures for objects that invite close-up interaction or specific motions in a game or interactive experience.
+Avoid requiring specific body movements or positions for input. Not all people can perform specific body movements or position themselves in certain ways at all times, whether due to disability, spatial constraints, or other environmental factors. If your experience requires movement, consider supporting alternative inputs to let people choose the interaction method that works best for them.
+#### Designing custom gestures in visionOS
+Avoid custom gestures that require using a specific hand. It can increase someone’s cognitive load if they need to remember which hand to use to trigger a custom gesture. It may also make your experience less welcoming to people with strong hand-dominance or limb differences.
+#### Working with system overlays in visionOS
+The system overlay is the default method of accessing Control Center in visionOS 2 and later. The visionOS 1 behavior (looking upward) remains available as an accessibility setting.
+Reserve the area around a person’s hand for system overlays and their related gestures. If possible, don’t anchor content to a person’s hands or wrists. If you’re designing a game that involves hand-anchored content, place it outside of the immediate area of someone’s hand to avoid colliding with the Home indicator.
+Apps and games that you built for visionOS 1 defer the system overlay behavior by default. When a person looks at their palm with your app running in a Full Space, the Home indicator won’t appear unless they tap first.
+### watchOS
+#### Double tap
+Avoid setting a primary action in views with lists, scroll views, or vertical tabs. This conflicts with the default navigation behaviors that people expect when they double-tap.
+## Specifications
+### Standard gestures
+[TABLE #3]
+--- | --- | ---
+Tap | iOS, iPadOS, macOS, tvOS, visionOS, watchOS | Activate a control; select an item.
+Swipe | iOS, iPadOS, macOS, tvOS, visionOS, watchOS | Reveal actions and controls; dismiss views; scroll.
+Drag | iOS, iPadOS, macOS, tvOS, visionOS, watchOS | Move a UI element.
+Touch (or pinch) and hold | iOS, iPadOS, macOS, tvOS, visionOS, watchOS | Reveal additional controls or functionality.
+Double tap | iOS, iPadOS, macOS, tvOS, visionOS, watchOS | Zoom in; zoom out if already zoomed in; open an item on a Mac with a touch display; perform a primary action on Apple Watch Series 9 and later and Apple Watch Ultra 2 and later.
+Zoom | iOS, iPadOS, macOS, tvOS, visionOS | Zoom a view; magnify content.
+Rotate | iOS, iPadOS, macOS, tvOS, visionOS | Rotate a selected item.
+### macOS trackpad and touch display gestures
+[TABLE #4]
+--- | --- | ---
+## Resources
+#### Related
+#### Developer documentation
+#### Videos
+## Change log
+[TABLE #5]
+--- | ---
+October 28, 2026 | Added guidance for gestures and touch input in macOS.
+=== hig__undo-and-redo.txt (35L) ===
+TITLE: Undo and redo
+URL: https://developer.apple.com/design/human-interface-guidelines/undo-and-redo
+
+ABSTRACT: Undo and redo gives people easy ways to reverse many types of actions, which can also help people explore and experiment safely as they learn a new interface or task.
+## Best practices
+Let people undo multiple times. Avoid placing unnecessary limits on the number of times people can undo or redo. People generally expect to undo every action they’ve performed since taking a logical step like opening a document or saving their work.
+Provide undo and redo buttons only when necessary. People generally expect to initiate undo and redo in system-supported ways, such as choosing the items in a macOS app’s Edit menu, using keyboard shortcuts on a Mac or iPad, or shaking their iPhone. If it’s important to provide dedicated undo and redo buttons in your app, use the standard system-provided symbols and put the buttons in a toolbar.
+## Platform considerations
+### iOS, iPadOS
+Avoid redefining standard gestures for undo and redo. For example, people can use a three-finger swipe to initiate an undo or redo, or shake their iPhone. As with all standard gestures, redefining them in your interface runs the risk of confusing people and making your experience unpredictable.
+### macOS
+## Resources
+#### Related
+#### Developer documentation
+#### Videos
+=== hig__privacy.txt (116L) ===
+TITLE: Privacy
+URL: https://developer.apple.com/design/human-interface-guidelines/privacy
+
+ABSTRACT: Privacy is paramount: it’s critical to be transparent about the privacy-related data and resources you require and essential to protect the data people allow you to access.
+## Best practices
+Process data on the device where possible. In iOS, for example, you can take advantage of the Apple Neural Engine and custom CreateML models to process the data right on the device, helping you avoid lengthy and potentially risky round trips to a remote server.
+Adopt system-defined privacy protections and follow security best practices. For example, in iOS 15 and later, you can rely on CloudKit to provide encryption and key management for additional data types, like strings, numbers, and dates.
+## Requesting permission
+Avoid requesting permission at launch unless the data or resource is required for your app to function. People are less likely to be bothered by a launch-time request when it’s obvious why you’re making it. For example, people understand that a navigation app needs access to their location before they can benefit from it. Similarly, before people can play a visionOS game that lets them bounce virtual objects off walls in their surroundings, they need to permit the game to access information about their surroundings.
+Write copy that clearly describes how your app uses the ability, data, or resource you’re requesting. The standard alert displays your copy (called a purpose string or usage description string) after your app name and before the buttons people use to grant or deny their permission. Aim for a brief, complete sentence that’s straightforward, specific, and easy to understand. Use sentence case, avoid passive voice, and include a period at the end. For developer guidance, see requesting-access-to-protected-resources and AppTrackingTransparency.
+[TABLE #1]
+--- | --- | ---
+[TAB: Example 1]
+[TAB: Example 2]
+[TAB: Example 3]
+### Pre-alert screens, windows, or views
+Don’t include additional actions in your custom screen or window, unless needed to obtain a legal consent. For example, don’t provide a way for people to leave the screen or window without viewing the system alert — like offering an option to close or cancel.
+### Tracking requests
+Never precede the system-provided alert with a custom screen or window that could confuse or mislead people. People sometimes tap quickly to dismiss alerts without reading them. A custom messaging screen, window, or view that takes advantage of such behaviors to influence choices will lead to rejection by App Store review.
+[TAB: Incentive]
+[TAB: Imitation request]
+[TAB: Alert image]
+[TAB: Alert annotation]
+## Location button
+In iOS, iPadOS, and watchOS, Core Location provides a button so people can grant your app temporary authorization to access their location at the moment a task needs it. A location button’s appearance can vary to match your app’s UI and it always communicates the action of location sharing in a way that’s instantly recognizable.
+## Protecting data
+Avoid relying solely on passwords for authentication. Where possible, use  to replace passwords. If you need to continue using passwords for authentication, augment security by requiring two-factor authentication (for developer guidance, see securing-logins-with-icloud-keychain-verification-codes). To further protect access to apps that people keep logged in on their device, use biometric identification like Face ID, Optic ID, or Touch ID. For developer guidance, see LocalAuthentication.
+Never store passwords or other secure content in plain-text files. Even if you restrict access using file permissions, sensitive information is much safer in an encrypted keychain.
+Avoid inventing custom authentication schemes. If your app requires authentication, prefer system-provided features like passkeys, sign-in-with-apple or password-autofill. For related guidance, see managing-accounts.
+## Platform considerations
+No additional considerations for iOS, iPadOS, tvOS, or watchOS.
+### macOS
+Sign your app with a valid Developer ID. If you choose to distribute your app outside the store, signing your app with Developer ID identifies you as an Apple developer and confirms that your app is safe to use. For developer guidance, see ?id=ios-app-distribution-guide.
+Protect people’s data with app sandboxing. Sandboxing provides your app with access to system resources and user data while protecting it from malware. All apps submitted to the Mac App Store require sandboxing. For developer guidance, see configuring-the-macos-app-sandbox.
+Avoid making assumptions about who is signed in. Because of fast user switching, multiple people may be active on the same system.
+### visionOS
+By default, visionOS uses ARKit algorithms to handle features like persistence, world mapping, segmentation, matting, and environment lighting. These algorithms are always running, allowing apps and games to automatically benefit from ARKit while in the Shared Space.
+Developer access to device cameras works differently in visionOS than it does in other platforms. Specifically, the back camera provides blank input and is only available as a compatibility convenience; the front camera provides input for spatial Personas, but only after people grant their permission. If the iOS or iPadOS app you’re bringing to visionOS includes a feature that needs camera access, remove it or replace it with an option for people to import content instead. For developer guidance, see making-your-app-compatible-with-visionos.
+## Resources
+#### Related
+#### Developer documentation
+#### Videos
+## Change log
+[TABLE #2]
+--- | ---
+=== hig__designing-for-ios.txt (31L) ===
+TITLE: Designing for iOS
+URL: https://developer.apple.com/design/human-interface-guidelines/designing-for-ios
+
+ABSTRACT: People depend on their iPhone to help them stay connected, play games, view media, accomplish tasks, and track personal data in any location and while on the go.
+As you begin designing your app or game for iOS, start by understanding the following fundamental device characteristics and patterns that distinguish the iOS experience. Using these characteristics and patterns to inform your design decisions can help you provide an app or game that iPhone users appreciate.
+System features. iOS provides several features that help people interact with the system and their apps in familiar, consistent ways.
+## Best practices
+Great iPhone experiences integrate the platform and device capabilities that people value most. To help your design feel at home in iOS, prioritize the following ways to incorporate these features and capabilities.
+## Resources
+#### Related
+#ios-apps
+#### Developer documentation
+#### Videos
+=== hig__designing-for-ipados.txt (29L) ===
+TITLE: Designing for iPadOS
+URL: https://developer.apple.com/design/human-interface-guidelines/designing-for-ipados
+
+ABSTRACT: People value the power, mobility, and flexibility of iPad as they enjoy media, play games, perform detailed productivity tasks, and bring their creations to life.
+As you begin designing your app or game for iPad, start by understanding the following fundamental device characteristics and patterns that distinguish the iPadOS experience. Using these characteristics and patterns to inform your design decisions can help you provide an app or game that iPad users appreciate.
+System features. iPadOS provides several features that help people interact with the system and their apps in familiar, consistent ways.
+## Best practices
+Great iPad experiences integrate the platform and device capabilities that people value most. To help your experience feel at home in iPadOS, prioritize the following ways to incorporate these features and capabilities.
+- Adapt seamlessly to appearance changes — like device orientation, multitasking modes, Dark Mode, and Dynamic Type — and transition effortlessly to running in macOS, letting people choose the configurations that work best for them.
+## Resources
+#### Related
+#ios-apps
+#### Developer documentation
+#### Videos
+=== hig__designing-for-macos.txt (40L) ===
+TITLE: Designing for macOS
+URL: https://developer.apple.com/design/human-interface-guidelines/designing-for-macos
+
+ABSTRACT: People rely on the power, spaciousness, and flexibility of a Mac as they perform in-depth productivity tasks, view media or content, and play games, often using several apps at once.
+As you begin designing your app or game for macOS, start by understanding the fundamental device characteristics and patterns that distinguish the macOS experience. Using these characteristics and patterns to inform your design decisions can help you provide an app or game that Mac users appreciate.
+Inputs. People primarily interact with macOS using a keyboard and a pointing device. They also enter data and control the interface using other inputs, like gestures on a trackpad or a Mac with a touch display, siri, Voice Control, or a connected game controller.
+System features. macOS provides several features that help people interact with the system and their apps in familiar, consistent ways.
+## Best practices
+Great Mac experiences integrate the platform and device capabilities that people value most. To help your design feel at home in macOS, prioritize the following ways to incorporate these features and capabilities.
+## Resources
+#### Related
+#macos-apps
+#### Developer documentation
+#### Videos
+## Change log
+[TABLE #1]
+--- | ---
+October 28, 2026 | Added guidance for touch input.

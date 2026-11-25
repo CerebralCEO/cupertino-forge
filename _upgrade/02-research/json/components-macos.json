@@ -1,0 +1,194 @@
+{
+  "$meta": {
+    "generated": "2026-11-25",
+    "sources": [
+      "tokens/source/apple-macos-27-ui-kit.tokens.json",
+      "https://developer.apple.com/design/human-interface-guidelines/toolbars",
+      "https://developer.apple.com/design/human-interface-guidelines/sidebars",
+      "https://developer.apple.com/design/human-interface-guidelines/buttons",
+      "https://developer.apple.com/design/human-interface-guidelines/windows"
+    ]
+  },
+  "window": {
+    "minSize": {
+      "$value": {
+        "width": 480,
+        "height": 320
+      },
+      "$unit": "pt",
+      "$source": "Plugin macOS window min size",
+      "$class": "Estimated",
+      "$platform": "macOS",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/windows",
+      "$confidence": "high"
+    },
+    "uniformCornerRadius": {
+      "$value": 12,
+      "$unit": "pt",
+      "$source": "macOS 27 uniform window corner radius report",
+      "$class": "Estimated",
+      "$platform": "macOS 27",
+      "$url": "https://www.macrumors.com/",
+      "$confidence": "high"
+    },
+    "toolbarHeight": {
+      "$value": 52,
+      "$unit": "pt",
+      "$source": "Unified toolbar height",
+      "$class": "Estimated",
+      "$platform": "macOS 26/27",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/toolbars",
+      "$confidence": "high"
+    },
+    "trafficLights": {
+      "$value": {
+        "diameter": 14,
+        "gap": 9,
+        "leadingInset": 16,
+        "centerY": 26
+      },
+      "$unit": "pt",
+      "$source": "Traffic light button geometry",
+      "$class": "Estimated",
+      "$platform": "macOS 26/27",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/windows",
+      "$confidence": "high"
+    }
+  },
+  "sidebar": {
+    "edgeToEdge": {
+      "$value": true,
+      "$unit": "boolean",
+      "$source": "macOS 27 sidebar style + HIG backgroundExtensionEffect",
+      "$class": "Inferred",
+      "$platform": "macOS 27",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/sidebars",
+      "$confidence": "high"
+    },
+    "coloredIconsDefault": {
+      "$value": true,
+      "$unit": "boolean",
+      "$source": "HIG Sidebars (June 8, 2026): sidebar icons use app/system accent color by default",
+      "$class": "Official",
+      "$platform": "macOS 27",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/sidebars",
+      "$confidence": "high"
+    },
+    "defaultWidth": {
+      "$value": 220,
+      "$unit": "pt",
+      "$source": "Default sidebar width (range 180-320)",
+      "$class": "Estimated",
+      "$platform": "macOS",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/sidebars",
+      "$confidence": "high"
+    },
+    "rowHeight": {
+      "$value": 32,
+      "$unit": "pt",
+      "$source": "Medium sidebar row height",
+      "$class": "Estimated",
+      "$platform": "macOS",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/sidebars",
+      "$confidence": "high"
+    }
+  },
+  "controls": {
+    "sizes": {
+      "$value": {
+        "mini": 16,
+        "small": 20,
+        "regular": 24,
+        "large": 28,
+        "extraLarge": 36
+      },
+      "$unit": "pt",
+      "$source": "macOS ControlSize heights",
+      "$class": "Estimated",
+      "$platform": "macOS 26/27",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/buttons",
+      "$confidence": "high"
+    },
+    "borderedFillLight": {
+      "$value": "#000000@0.08",
+      "$unit": "sRGB hex/alpha",
+      "$source": "macOS 27 Sketch Kit",
+      "$class": "Measured",
+      "$platform": "macOS 27",
+      "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+      "$confidence": "high"
+    },
+    "switchSize": {
+      "$value": {
+        "width": 38,
+        "height": 22
+      },
+      "$unit": "pt",
+      "$source": "macOS regular switch",
+      "$class": "Estimated",
+      "$platform": "macOS 26/27",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/toggles",
+      "$confidence": "high"
+    },
+    "inputBorderLight": {
+      "$value": "#000000@0.05",
+      "$unit": "sRGB hex/alpha",
+      "$source": "macOS 27 Sketch Kit",
+      "$class": "Measured",
+      "$platform": "macOS 27",
+      "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+      "$confidence": "high"
+    }
+  },
+  "menu": {
+    "itemHeight": {
+      "$value": 24,
+      "$unit": "pt",
+      "$source": "macOS menu item height",
+      "$class": "Estimated",
+      "$platform": "macOS 26/27",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/menus",
+      "$confidence": "high"
+    },
+    "glassFillLight": {
+      "$value": "#E6E6E6@0.55",
+      "$unit": "sRGB hex/alpha",
+      "$source": "macOS 27 Sketch Kit",
+      "$class": "Measured",
+      "$platform": "macOS 27",
+      "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+      "$confidence": "high"
+    },
+    "glassFillDark": {
+      "$value": "#5A5A5A@0.5",
+      "$unit": "sRGB hex/alpha",
+      "$source": "macOS 27 Sketch Kit",
+      "$class": "Measured",
+      "$platform": "macOS 27",
+      "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+      "$confidence": "high"
+    }
+  },
+  "tooltip": {
+    "hoverDelayMs": {
+      "$value": 1000,
+      "$unit": "ms",
+      "$source": "Standard macOS tooltip hover delay (~1s)",
+      "$class": "Estimated",
+      "$platform": "macOS",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/buttons",
+      "$confidence": "high"
+    }
+  },
+  "settingsWindow": {
+    "width": {
+      "$value": 715,
+      "$unit": "pt",
+      "$source": "macOS System Settings / standard settings pane width",
+      "$class": "Estimated",
+      "$platform": "macOS",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/settings",
+      "$confidence": "high"
+    }
+  }
+}

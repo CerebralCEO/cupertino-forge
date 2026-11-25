@@ -1,0 +1,1784 @@
+{
+  "$meta": {
+    "generated": "2026-11-25",
+    "sources": [
+      "https://developer.apple.com/design/human-interface-guidelines/color",
+      "tokens/source/apple-ios-27-ui-kit.tokens.json",
+      "tokens/source/apple-macos-27-ui-kit.tokens.json"
+    ]
+  },
+  "system": {
+    "red": {
+      "light": {
+        "$value": "#FF383C",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 & macOS 27 Sketch Kits",
+        "$class": "Measured",
+        "$platform": "iOS 27 / macOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#FF4245",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 & macOS 27 Sketch Kits",
+        "$class": "Measured",
+        "$platform": "iOS 27 / macOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "lightHC": {
+        "$value": "#E9152D",
+        "$unit": "sRGB hex",
+        "$source": "Apple HIG Color (image swatch in HIG, carried from plugin)",
+        "$class": "Inferred",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/color",
+        "$confidence": "med",
+        "$notes": "HIG JSON uses PNG swatches; unverified against Xcode asset catalog"
+      },
+      "darkHC": {
+        "$value": "#FF6165",
+        "$unit": "sRGB hex",
+        "$source": "Apple HIG Color (image swatch in HIG, carried from plugin)",
+        "$class": "Inferred",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/color",
+        "$confidence": "med",
+        "$notes": "HIG JSON uses PNG swatches; unverified against Xcode asset catalog"
+      }
+    },
+    "orange": {
+      "light": {
+        "$value": "#FF8D28",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 & macOS 27 Sketch Kits",
+        "$class": "Measured",
+        "$platform": "iOS 27 / macOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#FF9230",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 & macOS 27 Sketch Kits",
+        "$class": "Measured",
+        "$platform": "iOS 27 / macOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "lightHC": {
+        "$value": "#C55300",
+        "$unit": "sRGB hex",
+        "$source": "Apple HIG Color (image swatch in HIG, carried from plugin)",
+        "$class": "Inferred",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/color",
+        "$confidence": "med",
+        "$notes": "HIG JSON uses PNG swatches; unverified against Xcode asset catalog"
+      },
+      "darkHC": {
+        "$value": "#FFA056",
+        "$unit": "sRGB hex",
+        "$source": "Apple HIG Color (image swatch in HIG, carried from plugin)",
+        "$class": "Inferred",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/color",
+        "$confidence": "med",
+        "$notes": "HIG JSON uses PNG swatches; unverified against Xcode asset catalog"
+      }
+    },
+    "yellow": {
+      "light": {
+        "$value": "#FFCC00",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 & macOS 27 Sketch Kits",
+        "$class": "Measured",
+        "$platform": "iOS 27 / macOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#FFD600",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 & macOS 27 Sketch Kits",
+        "$class": "Measured",
+        "$platform": "iOS 27 / macOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "lightHC": {
+        "$value": "#A16A00",
+        "$unit": "sRGB hex",
+        "$source": "Apple HIG Color (image swatch in HIG, carried from plugin)",
+        "$class": "Inferred",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/color",
+        "$confidence": "med",
+        "$notes": "HIG JSON uses PNG swatches; unverified against Xcode asset catalog"
+      },
+      "darkHC": {
+        "$value": "#FEDF43",
+        "$unit": "sRGB hex",
+        "$source": "Apple HIG Color (image swatch in HIG, carried from plugin)",
+        "$class": "Inferred",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/color",
+        "$confidence": "med",
+        "$notes": "HIG JSON uses PNG swatches; unverified against Xcode asset catalog"
+      }
+    },
+    "green": {
+      "light": {
+        "$value": "#34C759",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 & macOS 27 Sketch Kits",
+        "$class": "Measured",
+        "$platform": "iOS 27 / macOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#30D158",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 & macOS 27 Sketch Kits",
+        "$class": "Measured",
+        "$platform": "iOS 27 / macOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "lightHC": {
+        "$value": "#008932",
+        "$unit": "sRGB hex",
+        "$source": "Apple HIG Color (image swatch in HIG, carried from plugin)",
+        "$class": "Inferred",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/color",
+        "$confidence": "med",
+        "$notes": "HIG JSON uses PNG swatches; unverified against Xcode asset catalog"
+      },
+      "darkHC": {
+        "$value": "#4AD968",
+        "$unit": "sRGB hex",
+        "$source": "Apple HIG Color (image swatch in HIG, carried from plugin)",
+        "$class": "Inferred",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/color",
+        "$confidence": "med",
+        "$notes": "HIG JSON uses PNG swatches; unverified against Xcode asset catalog"
+      }
+    },
+    "mint": {
+      "light": {
+        "$value": "#00C8B3",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 & macOS 27 Sketch Kits",
+        "$class": "Measured",
+        "$platform": "iOS 27 / macOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#00DAC3",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 & macOS 27 Sketch Kits",
+        "$class": "Measured",
+        "$platform": "iOS 27 / macOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "lightHC": {
+        "$value": "#008575",
+        "$unit": "sRGB hex",
+        "$source": "Apple HIG Color (image swatch in HIG, carried from plugin)",
+        "$class": "Inferred",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/color",
+        "$confidence": "med",
+        "$notes": "HIG JSON uses PNG swatches; unverified against Xcode asset catalog"
+      },
+      "darkHC": {
+        "$value": "#54DFCB",
+        "$unit": "sRGB hex",
+        "$source": "Apple HIG Color (image swatch in HIG, carried from plugin)",
+        "$class": "Inferred",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/color",
+        "$confidence": "med",
+        "$notes": "HIG JSON uses PNG swatches; unverified against Xcode asset catalog"
+      }
+    },
+    "teal": {
+      "light": {
+        "$value": "#00C3D0",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 & macOS 27 Sketch Kits",
+        "$class": "Measured",
+        "$platform": "iOS 27 / macOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#00D2E0",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 & macOS 27 Sketch Kits",
+        "$class": "Measured",
+        "$platform": "iOS 27 / macOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "lightHC": {
+        "$value": "#008198",
+        "$unit": "sRGB hex",
+        "$source": "Apple HIG Color (image swatch in HIG, carried from plugin)",
+        "$class": "Inferred",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/color",
+        "$confidence": "med",
+        "$notes": "HIG JSON uses PNG swatches; unverified against Xcode asset catalog"
+      },
+      "darkHC": {
+        "$value": "#3BDDEC",
+        "$unit": "sRGB hex",
+        "$source": "Apple HIG Color (image swatch in HIG, carried from plugin)",
+        "$class": "Inferred",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/color",
+        "$confidence": "med",
+        "$notes": "HIG JSON uses PNG swatches; unverified against Xcode asset catalog"
+      }
+    },
+    "cyan": {
+      "light": {
+        "$value": "#00C0E8",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 & macOS 27 Sketch Kits",
+        "$class": "Measured",
+        "$platform": "iOS 27 / macOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#3CD3FE",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 & macOS 27 Sketch Kits",
+        "$class": "Measured",
+        "$platform": "iOS 27 / macOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "lightHC": {
+        "$value": "#007EAE",
+        "$unit": "sRGB hex",
+        "$source": "Apple HIG Color (image swatch in HIG, carried from plugin)",
+        "$class": "Inferred",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/color",
+        "$confidence": "med",
+        "$notes": "HIG JSON uses PNG swatches; unverified against Xcode asset catalog"
+      },
+      "darkHC": {
+        "$value": "#6DD9FF",
+        "$unit": "sRGB hex",
+        "$source": "Apple HIG Color (image swatch in HIG, carried from plugin)",
+        "$class": "Inferred",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/color",
+        "$confidence": "med",
+        "$notes": "HIG JSON uses PNG swatches; unverified against Xcode asset catalog"
+      }
+    },
+    "blue": {
+      "light": {
+        "$value": "#0088FF",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 & macOS 27 Sketch Kits",
+        "$class": "Measured",
+        "$platform": "iOS 27 / macOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#0091FF",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 & macOS 27 Sketch Kits",
+        "$class": "Measured",
+        "$platform": "iOS 27 / macOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "lightHC": {
+        "$value": "#1E6EF4",
+        "$unit": "sRGB hex",
+        "$source": "Apple HIG Color (image swatch in HIG, carried from plugin)",
+        "$class": "Inferred",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/color",
+        "$confidence": "med",
+        "$notes": "HIG JSON uses PNG swatches; unverified against Xcode asset catalog"
+      },
+      "darkHC": {
+        "$value": "#5CB8FF",
+        "$unit": "sRGB hex",
+        "$source": "Apple HIG Color (image swatch in HIG, carried from plugin)",
+        "$class": "Inferred",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/color",
+        "$confidence": "med",
+        "$notes": "HIG JSON uses PNG swatches; unverified against Xcode asset catalog"
+      }
+    },
+    "indigo": {
+      "light": {
+        "$value": "#6155F5",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 & macOS 27 Sketch Kits",
+        "$class": "Measured",
+        "$platform": "iOS 27 / macOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#6D7CFF",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 & macOS 27 Sketch Kits",
+        "$class": "Measured",
+        "$platform": "iOS 27 / macOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "lightHC": {
+        "$value": "#564ADE",
+        "$unit": "sRGB hex",
+        "$source": "Apple HIG Color (image swatch in HIG, carried from plugin)",
+        "$class": "Inferred",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/color",
+        "$confidence": "med",
+        "$notes": "HIG JSON uses PNG swatches; unverified against Xcode asset catalog"
+      },
+      "darkHC": {
+        "$value": "#A7AAFF",
+        "$unit": "sRGB hex",
+        "$source": "Apple HIG Color (image swatch in HIG, carried from plugin)",
+        "$class": "Inferred",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/color",
+        "$confidence": "med",
+        "$notes": "HIG JSON uses PNG swatches; unverified against Xcode asset catalog"
+      }
+    },
+    "purple": {
+      "light": {
+        "$value": "#CB30E0",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 & macOS 27 Sketch Kits",
+        "$class": "Measured",
+        "$platform": "iOS 27 / macOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#DB34F2",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 & macOS 27 Sketch Kits",
+        "$class": "Measured",
+        "$platform": "iOS 27 / macOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "lightHC": {
+        "$value": "#B02FC2",
+        "$unit": "sRGB hex",
+        "$source": "Apple HIG Color (image swatch in HIG, carried from plugin)",
+        "$class": "Inferred",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/color",
+        "$confidence": "med",
+        "$notes": "HIG JSON uses PNG swatches; unverified against Xcode asset catalog"
+      },
+      "darkHC": {
+        "$value": "#EA8DFF",
+        "$unit": "sRGB hex",
+        "$source": "Apple HIG Color (image swatch in HIG, carried from plugin)",
+        "$class": "Inferred",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/color",
+        "$confidence": "med",
+        "$notes": "HIG JSON uses PNG swatches; unverified against Xcode asset catalog"
+      }
+    },
+    "pink": {
+      "light": {
+        "$value": "#FF2D55",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 & macOS 27 Sketch Kits",
+        "$class": "Measured",
+        "$platform": "iOS 27 / macOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#FF375F",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 & macOS 27 Sketch Kits",
+        "$class": "Measured",
+        "$platform": "iOS 27 / macOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "lightHC": {
+        "$value": "#E7124D",
+        "$unit": "sRGB hex",
+        "$source": "Apple HIG Color (image swatch in HIG, carried from plugin)",
+        "$class": "Inferred",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/color",
+        "$confidence": "med",
+        "$notes": "HIG JSON uses PNG swatches; unverified against Xcode asset catalog"
+      },
+      "darkHC": {
+        "$value": "#FF8AC4",
+        "$unit": "sRGB hex",
+        "$source": "Apple HIG Color (image swatch in HIG, carried from plugin)",
+        "$class": "Inferred",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/color",
+        "$confidence": "med",
+        "$notes": "HIG JSON uses PNG swatches; unverified against Xcode asset catalog"
+      }
+    },
+    "brown": {
+      "light": {
+        "$value": "#AC7F5E",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 & macOS 27 Sketch Kits",
+        "$class": "Measured",
+        "$platform": "iOS 27 / macOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#B78A66",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 & macOS 27 Sketch Kits",
+        "$class": "Measured",
+        "$platform": "iOS 27 / macOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "lightHC": {
+        "$value": "#956D51",
+        "$unit": "sRGB hex",
+        "$source": "Apple HIG Color (image swatch in HIG, carried from plugin)",
+        "$class": "Inferred",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/color",
+        "$confidence": "med",
+        "$notes": "HIG JSON uses PNG swatches; unverified against Xcode asset catalog"
+      },
+      "darkHC": {
+        "$value": "#DBA679",
+        "$unit": "sRGB hex",
+        "$source": "Apple HIG Color (image swatch in HIG, carried from plugin)",
+        "$class": "Inferred",
+        "$platform": "iOS / macOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/color",
+        "$confidence": "med",
+        "$notes": "HIG JSON uses PNG swatches; unverified against Xcode asset catalog"
+      }
+    }
+  },
+  "systemVibrantMacOS": {
+    "red": {
+      "light": {
+        "$value": "#F52F32",
+        "$unit": "sRGB hex",
+        "$source": "Apple macOS 27 Sketch Kit (Light Vibrant)",
+        "$class": "Measured",
+        "$platform": "macOS 27",
+        "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#FF4747",
+        "$unit": "sRGB hex",
+        "$source": "Apple macOS 27 Sketch Kit (Dark plus lighter)",
+        "$class": "Measured",
+        "$platform": "macOS 27",
+        "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      }
+    },
+    "orange": {
+      "light": {
+        "$value": "#F58625",
+        "$unit": "sRGB hex",
+        "$source": "Apple macOS 27 Sketch Kit (Light Vibrant)",
+        "$class": "Measured",
+        "$platform": "macOS 27",
+        "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#FF9E33",
+        "$unit": "sRGB hex",
+        "$source": "Apple macOS 27 Sketch Kit (Dark plus lighter)",
+        "$class": "Measured",
+        "$platform": "macOS 27",
+        "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      }
+    },
+    "yellow": {
+      "light": {
+        "$value": "#F5C200",
+        "$unit": "sRGB hex",
+        "$source": "Apple macOS 27 Sketch Kit (Light Vibrant)",
+        "$class": "Measured",
+        "$platform": "macOS 27",
+        "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#FFE014",
+        "$unit": "sRGB hex",
+        "$source": "Apple macOS 27 Sketch Kit (Dark plus lighter)",
+        "$class": "Measured",
+        "$platform": "macOS 27",
+        "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      }
+    },
+    "green": {
+      "light": {
+        "$value": "#26BF4D",
+        "$unit": "sRGB hex",
+        "$source": "Apple macOS 27 Sketch Kit (Light Vibrant)",
+        "$class": "Measured",
+        "$platform": "macOS 27",
+        "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#3BDB63",
+        "$unit": "sRGB hex",
+        "$source": "Apple macOS 27 Sketch Kit (Dark plus lighter)",
+        "$class": "Measured",
+        "$platform": "macOS 27",
+        "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      }
+    },
+    "mint": {
+      "light": {
+        "$value": "#00BDA9",
+        "$unit": "sRGB hex",
+        "$source": "Apple macOS 27 Sketch Kit (Light Vibrant)",
+        "$class": "Measured",
+        "$platform": "macOS 27",
+        "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#2DE0CD",
+        "$unit": "sRGB hex",
+        "$source": "Apple macOS 27 Sketch Kit (Dark plus lighter)",
+        "$class": "Measured",
+        "$platform": "macOS 27",
+        "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      }
+    },
+    "teal": {
+      "light": {
+        "$value": "#00B3BF",
+        "$unit": "sRGB hex",
+        "$source": "Apple macOS 27 Sketch Kit (Light Vibrant)",
+        "$class": "Measured",
+        "$platform": "macOS 27",
+        "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#2DD7E0",
+        "$unit": "sRGB hex",
+        "$source": "Apple macOS 27 Sketch Kit (Dark plus lighter)",
+        "$class": "Measured",
+        "$platform": "macOS 27",
+        "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      }
+    },
+    "cyan": {
+      "light": {
+        "$value": "#00ABCF",
+        "$unit": "sRGB hex",
+        "$source": "Apple macOS 27 Sketch Kit (Light Vibrant)",
+        "$class": "Measured",
+        "$platform": "macOS 27",
+        "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#47D8FC",
+        "$unit": "sRGB hex",
+        "$source": "Apple macOS 27 Sketch Kit (Dark plus lighter)",
+        "$class": "Measured",
+        "$platform": "macOS 27",
+        "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      }
+    },
+    "blue": {
+      "light": {
+        "$value": "#0078F0",
+        "$unit": "sRGB hex",
+        "$source": "Apple macOS 27 Sketch Kit (Light Vibrant)",
+        "$class": "Measured",
+        "$platform": "macOS 27",
+        "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#0A99FF",
+        "$unit": "sRGB hex",
+        "$source": "Apple macOS 27 Sketch Kit (Dark plus lighter)",
+        "$class": "Measured",
+        "$platform": "macOS 27",
+        "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      }
+    },
+    "indigo": {
+      "light": {
+        "$value": "#5C50E6",
+        "$unit": "sRGB hex",
+        "$source": "Apple macOS 27 Sketch Kit (Light Vibrant)",
+        "$class": "Measured",
+        "$platform": "macOS 27",
+        "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#7163FF",
+        "$unit": "sRGB hex",
+        "$source": "Apple macOS 27 Sketch Kit (Dark plus lighter)",
+        "$class": "Measured",
+        "$platform": "macOS 27",
+        "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      }
+    },
+    "purple": {
+      "light": {
+        "$value": "#B72BC9",
+        "$unit": "sRGB hex",
+        "$source": "Apple macOS 27 Sketch Kit (Light Vibrant)",
+        "$class": "Measured",
+        "$platform": "macOS 27",
+        "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#E647FC",
+        "$unit": "sRGB hex",
+        "$source": "Apple macOS 27 Sketch Kit (Dark plus lighter)",
+        "$class": "Measured",
+        "$platform": "macOS 27",
+        "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      }
+    },
+    "pink": {
+      "light": {
+        "$value": "#F5234B",
+        "$unit": "sRGB hex",
+        "$source": "Apple macOS 27 Sketch Kit (Light Vibrant)",
+        "$class": "Measured",
+        "$platform": "macOS 27",
+        "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#FF4169",
+        "$unit": "sRGB hex",
+        "$source": "Apple macOS 27 Sketch Kit (Dark plus lighter)",
+        "$class": "Measured",
+        "$platform": "macOS 27",
+        "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      }
+    },
+    "brown": {
+      "light": {
+        "$value": "#9E7354",
+        "$unit": "sRGB hex",
+        "$source": "Apple macOS 27 Sketch Kit (Light Vibrant)",
+        "$class": "Measured",
+        "$platform": "macOS 27",
+        "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#C29672",
+        "$unit": "sRGB hex",
+        "$source": "Apple macOS 27 Sketch Kit (Dark plus lighter)",
+        "$class": "Measured",
+        "$platform": "macOS 27",
+        "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      }
+    }
+  },
+  "grayIOS": {
+    "gray": {
+      "light": {
+        "$value": "#8E8E93",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#8E8E93",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "lightHC": {
+        "$value": "#6C6C70",
+        "$unit": "sRGB hex",
+        "$source": "Apple HIG Color (image swatch in HIG)",
+        "$class": "Inferred",
+        "$platform": "iOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/color",
+        "$confidence": "med"
+      },
+      "darkHC": {
+        "$value": "#AEAEB2",
+        "$unit": "sRGB hex",
+        "$source": "Apple HIG Color (image swatch in HIG)",
+        "$class": "Inferred",
+        "$platform": "iOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/color",
+        "$confidence": "med"
+      }
+    },
+    "gray2": {
+      "light": {
+        "$value": "#AEAEB2",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#636366",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "lightHC": {
+        "$value": "#8E8E93",
+        "$unit": "sRGB hex",
+        "$source": "Apple HIG Color (image swatch in HIG)",
+        "$class": "Inferred",
+        "$platform": "iOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/color",
+        "$confidence": "med"
+      },
+      "darkHC": {
+        "$value": "#7C7C80",
+        "$unit": "sRGB hex",
+        "$source": "Apple HIG Color (image swatch in HIG)",
+        "$class": "Inferred",
+        "$platform": "iOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/color",
+        "$confidence": "med"
+      }
+    },
+    "gray3": {
+      "light": {
+        "$value": "#C7C7CC",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#48484A",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "lightHC": {
+        "$value": "#AEAEB2",
+        "$unit": "sRGB hex",
+        "$source": "Apple HIG Color (image swatch in HIG)",
+        "$class": "Inferred",
+        "$platform": "iOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/color",
+        "$confidence": "med"
+      },
+      "darkHC": {
+        "$value": "#545456",
+        "$unit": "sRGB hex",
+        "$source": "Apple HIG Color (image swatch in HIG)",
+        "$class": "Inferred",
+        "$platform": "iOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/color",
+        "$confidence": "med"
+      }
+    },
+    "gray4": {
+      "light": {
+        "$value": "#D1D1D6",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#3A3A3C",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "lightHC": {
+        "$value": "#BCBCC0",
+        "$unit": "sRGB hex",
+        "$source": "Apple HIG Color (image swatch in HIG)",
+        "$class": "Inferred",
+        "$platform": "iOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/color",
+        "$confidence": "med"
+      },
+      "darkHC": {
+        "$value": "#444446",
+        "$unit": "sRGB hex",
+        "$source": "Apple HIG Color (image swatch in HIG)",
+        "$class": "Inferred",
+        "$platform": "iOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/color",
+        "$confidence": "med"
+      }
+    },
+    "gray5": {
+      "light": {
+        "$value": "#E5E5EA",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#2C2C2E",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "lightHC": {
+        "$value": "#D8D8DC",
+        "$unit": "sRGB hex",
+        "$source": "Apple HIG Color (image swatch in HIG)",
+        "$class": "Inferred",
+        "$platform": "iOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/color",
+        "$confidence": "med"
+      },
+      "darkHC": {
+        "$value": "#363638",
+        "$unit": "sRGB hex",
+        "$source": "Apple HIG Color (image swatch in HIG)",
+        "$class": "Inferred",
+        "$platform": "iOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/color",
+        "$confidence": "med"
+      }
+    },
+    "gray6": {
+      "light": {
+        "$value": "#F2F2F7",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#1C1C1E",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "lightHC": {
+        "$value": "#EBEBF0",
+        "$unit": "sRGB hex",
+        "$source": "Apple HIG Color (image swatch in HIG)",
+        "$class": "Inferred",
+        "$platform": "iOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/color",
+        "$confidence": "med"
+      },
+      "darkHC": {
+        "$value": "#242426",
+        "$unit": "sRGB hex",
+        "$source": "Apple HIG Color (image swatch in HIG)",
+        "$class": "Inferred",
+        "$platform": "iOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/color",
+        "$confidence": "med"
+      }
+    }
+  },
+  "grayMacOS": {
+    "gray": {
+      "light": {
+        "$value": "#8E8E93",
+        "$unit": "sRGB hex",
+        "$source": "Apple macOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "macOS 27",
+        "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#98989D",
+        "$unit": "sRGB hex",
+        "$source": "Apple macOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "macOS 27",
+        "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      }
+    },
+    "grayVibrant": {
+      "light": {
+        "$value": "#848489",
+        "$unit": "sRGB hex",
+        "$source": "Apple macOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "macOS 27",
+        "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#A2A2A7",
+        "$unit": "sRGB hex",
+        "$source": "Apple macOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "macOS 27",
+        "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      }
+    }
+  },
+  "labelIOS": {
+    "primary": {
+      "light": {
+        "$value": "#000000",
+        "$unit": "sRGB hex/alpha",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#FFFFFF",
+        "$unit": "sRGB hex/alpha",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      }
+    },
+    "secondary": {
+      "light": {
+        "$value": "#3C3C43@0.6",
+        "$unit": "sRGB hex/alpha",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#EBEBF5@0.6",
+        "$unit": "sRGB hex/alpha",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      }
+    },
+    "tertiary": {
+      "light": {
+        "$value": "#3C3C43@0.3",
+        "$unit": "sRGB hex/alpha",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#EBEBF5@0.3",
+        "$unit": "sRGB hex/alpha",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      }
+    },
+    "quaternary": {
+      "light": {
+        "$value": "#3C3C43@0.18",
+        "$unit": "sRGB hex/alpha",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#EBEBF5@0.16",
+        "$unit": "sRGB hex/alpha",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      }
+    },
+    "quinary": {
+      "light": {
+        "$value": "#3C3C43@0.09",
+        "$unit": "sRGB hex/alpha",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#EBEBF5@0.09",
+        "$unit": "sRGB hex/alpha",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      }
+    }
+  },
+  "labelOnGlassIOS": {
+    "primary": {
+      "light": {
+        "$value": "#1A1A1A",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#EDEDED",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      }
+    },
+    "secondary": {
+      "light": {
+        "$value": "#727272",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#8A8A8A",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      }
+    },
+    "tertiary": {
+      "light": {
+        "$value": "#BFBFBF",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#404040",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      }
+    },
+    "quaternary": {
+      "light": {
+        "$value": "#D9D9D9",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#262626",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      }
+    }
+  },
+  "labelMacOS": {
+    "primary": {
+      "light": {
+        "$value": "#000000@0.85",
+        "$unit": "sRGB hex/alpha",
+        "$source": "Apple macOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "macOS 27",
+        "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#FFFFFF",
+        "$unit": "sRGB hex/alpha",
+        "$source": "Apple macOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "macOS 27",
+        "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      }
+    },
+    "secondary": {
+      "light": {
+        "$value": "#000000@0.5",
+        "$unit": "sRGB hex/alpha",
+        "$source": "Apple macOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "macOS 27",
+        "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#FFFFFF@0.55",
+        "$unit": "sRGB hex/alpha",
+        "$source": "Apple macOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "macOS 27",
+        "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      }
+    },
+    "tertiary": {
+      "light": {
+        "$value": "#000000@0.25",
+        "$unit": "sRGB hex/alpha",
+        "$source": "Apple macOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "macOS 27",
+        "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#FFFFFF@0.25",
+        "$unit": "sRGB hex/alpha",
+        "$source": "Apple macOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "macOS 27",
+        "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      }
+    },
+    "quaternary": {
+      "light": {
+        "$value": "#000000@0.1",
+        "$unit": "sRGB hex/alpha",
+        "$source": "Apple macOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "macOS 27",
+        "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#FFFFFF@0.1",
+        "$unit": "sRGB hex/alpha",
+        "$source": "Apple macOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "macOS 27",
+        "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      }
+    },
+    "quinary": {
+      "light": {
+        "$value": "#000000@0.05",
+        "$unit": "sRGB hex/alpha",
+        "$source": "Apple macOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "macOS 27",
+        "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#FFFFFF@0.05",
+        "$unit": "sRGB hex/alpha",
+        "$source": "Apple macOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "macOS 27",
+        "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      }
+    },
+    "seximal": {
+      "light": {
+        "$value": "#000000@0.03",
+        "$unit": "sRGB hex/alpha",
+        "$source": "Apple macOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "macOS 27",
+        "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#FFFFFF@0.03",
+        "$unit": "sRGB hex/alpha",
+        "$source": "Apple macOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "macOS 27",
+        "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      }
+    }
+  },
+  "fillIOS": {
+    "primary": {
+      "light": {
+        "$value": "#787878@0.2",
+        "$unit": "sRGB hex/alpha",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#787880@0.36",
+        "$unit": "sRGB hex/alpha",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      }
+    },
+    "secondary": {
+      "light": {
+        "$value": "#787880@0.16",
+        "$unit": "sRGB hex/alpha",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#787880@0.32",
+        "$unit": "sRGB hex/alpha",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      }
+    },
+    "tertiary": {
+      "light": {
+        "$value": "#767680@0.12",
+        "$unit": "sRGB hex/alpha",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#767680@0.24",
+        "$unit": "sRGB hex/alpha",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      }
+    },
+    "quaternary": {
+      "light": {
+        "$value": "#747480@0.08",
+        "$unit": "sRGB hex/alpha",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#767680@0.18",
+        "$unit": "sRGB hex/alpha",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      }
+    },
+    "quinary": {
+      "light": {
+        "$value": "#000000@0.02",
+        "$unit": "sRGB hex/alpha",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#767680@0.02",
+        "$unit": "sRGB hex/alpha",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      }
+    }
+  },
+  "backgroundIOS": {
+    "primary": {
+      "light": {
+        "$value": "#FFFFFF",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "darkBase": {
+        "$value": "#000000",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "darkElevated": {
+        "$value": "#1C1C1E",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      }
+    },
+    "secondary": {
+      "light": {
+        "$value": "#F2F2F7",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "darkBase": {
+        "$value": "#1C1C1E",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "darkElevated": {
+        "$value": "#2C2C2E",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      }
+    },
+    "tertiary": {
+      "light": {
+        "$value": "#FFFFFF",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "darkBase": {
+        "$value": "#2C2C2E",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "darkElevated": {
+        "$value": "#3A3A3C",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      }
+    },
+    "groupedPrimary": {
+      "light": {
+        "$value": "#F2F2F7",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "darkBase": {
+        "$value": "#000000",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "darkElevated": {
+        "$value": "#1C1C1E",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      }
+    },
+    "groupedSecondary": {
+      "light": {
+        "$value": "#FFFFFF",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "darkBase": {
+        "$value": "#1C1C1E",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "darkElevated": {
+        "$value": "#2C2C2E",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      }
+    },
+    "groupedTertiary": {
+      "light": {
+        "$value": "#F2F2F7",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "darkBase": {
+        "$value": "#2C2C2E",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "darkElevated": {
+        "$value": "#3A3A3C",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      }
+    }
+  },
+  "separatorIOS": {
+    "nonOpaque": {
+      "light": {
+        "$value": "#000000@0.12",
+        "$unit": "sRGB hex/alpha",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#FFFFFF@0.12",
+        "$unit": "sRGB hex/alpha",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      }
+    },
+    "opaque": {
+      "light": {
+        "$value": "#C6C6C8",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#38383A",
+        "$unit": "sRGB hex",
+        "$source": "Apple iOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "iOS 27",
+        "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      }
+    }
+  },
+  "macOSSurfaces": {
+    "windowBackground": {
+      "light": {
+        "$value": "#FFFFFF",
+        "$unit": "sRGB hex",
+        "$source": "Apple macOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "macOS 27",
+        "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#1E1E1E",
+        "$unit": "sRGB hex",
+        "$source": "Apple macOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "macOS 27",
+        "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      }
+    },
+    "sidebarActive": {
+      "light": {
+        "$value": "#FAFAFA@0.8",
+        "$unit": "sRGB hex/alpha",
+        "$source": "Apple macOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "macOS 27",
+        "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#0C0C0C@0.85",
+        "$unit": "sRGB hex/alpha",
+        "$source": "Apple macOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "macOS 27",
+        "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      }
+    },
+    "sidebarInactive": {
+      "light": {
+        "$value": "#F4F4F4",
+        "$unit": "sRGB hex/alpha",
+        "$source": "Apple macOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "macOS 27",
+        "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#2E2E2E@0.85",
+        "$unit": "sRGB hex/alpha",
+        "$source": "Apple macOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "macOS 27",
+        "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      }
+    },
+    "separator": {
+      "light": {
+        "$value": "#3C3C43@0.29",
+        "$unit": "sRGB hex/alpha",
+        "$source": "Apple macOS 27 Sketch Kit",
+        "$class": "Measured",
+        "$platform": "macOS 27",
+        "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+        "$confidence": "high"
+      },
+      "dark": {
+        "$value": "#FFFFFF@0.1",
+        "$unit": "sRGB hex/alpha",
+        "$source": "Plugin color.json (absent in macOS kit JSON)",
+        "$class": "Estimated",
+        "$platform": "macOS 27",
+        "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+        "$confidence": "low",
+        "$notes": "macOS kit Separators only contains Light"
+      }
+    }
+  },
+  "focusRing": {
+    "outerWidth": {
+      "$value": 3.5,
+      "$unit": "px/pt",
+      "$source": "Apple macOS 27 Sketch Kit (Global.Focus Ring)",
+      "$class": "Measured",
+      "$platform": "macOS 27",
+      "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+      "$confidence": "high"
+    },
+    "innerWidth": {
+      "$value": 1,
+      "$unit": "px/pt",
+      "$source": "Apple macOS 27 Sketch Kit (Global.Focus Ring)",
+      "$class": "Measured",
+      "$platform": "macOS 27",
+      "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+      "$confidence": "high"
+    },
+    "outerAlpha": {
+      "$value": 0.25,
+      "$unit": "alpha",
+      "$source": "Apple macOS 27 Sketch Kit (Global.Focus Ring)",
+      "$class": "Measured",
+      "$platform": "macOS 27",
+      "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+      "$confidence": "high"
+    },
+    "innerAlpha": {
+      "$value": 0.15,
+      "$unit": "alpha",
+      "$source": "Apple macOS 27 Sketch Kit (Global.Focus Ring)",
+      "$class": "Measured",
+      "$platform": "macOS 27",
+      "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+      "$confidence": "high"
+    }
+  },
+  "dimming": {
+    "clearGlassOverBrightContent": {
+      "$value": "#000000@0.35",
+      "$unit": "sRGB hex/alpha",
+      "$source": "Apple HIG Materials (35% dark dimming layer)",
+      "$class": "Official",
+      "$platform": "iOS 26+ / macOS 26+",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/materials",
+      "$confidence": "high"
+    },
+    "sheetScrim": {
+      "light": {
+        "$value": "#000000@0.2",
+        "$unit": "sRGB hex/alpha",
+        "$source": "Plugin color.json",
+        "$class": "Estimated",
+        "$platform": "iOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/sheets",
+        "$confidence": "low"
+      },
+      "dark": {
+        "$value": "#000000@0.48",
+        "$unit": "sRGB hex/alpha",
+        "$source": "Plugin color.json",
+        "$class": "Estimated",
+        "$platform": "iOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/sheets",
+        "$confidence": "low"
+      }
+    }
+  }
+}

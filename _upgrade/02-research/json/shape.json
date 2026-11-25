@@ -1,0 +1,204 @@
+{
+  "$meta": {
+    "generated": "2026-11-25",
+    "sources": [
+      "https://developer.apple.com/documentation/swiftui/concentricrectangle",
+      "https://caniuse.com/mdn-css_properties_corner-shape_squircle",
+      "https://developer.apple.com/design/human-interface-guidelines/app-icons",
+      "https://kylebashour.com/posts/finding-the-real-iphone-x-corner-radius"
+    ]
+  },
+  "continuousCorner": {
+    "figmaSmoothing": {
+      "$value": 0.6,
+      "$unit": "ratio",
+      "$source": "Figma 60% corner smoothing matching Apple continuous corner",
+      "$class": "Measured",
+      "$platform": "All",
+      "$url": "https://www.figma.com/blog/desperately-seeking-squircles/",
+      "$confidence": "high"
+    },
+    "superellipseApproxN": {
+      "$value": 5,
+      "$unit": "exponent",
+      "$source": "Quintic superellipse approximation of Apple icon curve (vs quartic n=4)",
+      "$class": "Inferred",
+      "$platform": "All",
+      "$url": "https://grida.co/",
+      "$confidence": "high"
+    },
+    "cssCornerShape": {
+      "$value": "squircle",
+      "$unit": "CSS keyword (superellipse(2))",
+      "$source": "Chromium 139+, Safari 18.4+, Firefox 148+ (check caniuse)",
+      "$class": "Official",
+      "$platform": "Web",
+      "$url": "https://caniuse.com/mdn-css_properties_corner-shape_squircle",
+      "$confidence": "high",
+      "$notes": "Note: superellipse(2) differs slightly from Apple n~5 smoothing 0.6"
+    },
+    "appIconRadiusRatio": {
+      "$value": 22.37,
+      "$unit": "percent of icon size",
+      "$source": "iOS/macOS squircle icon mask ratio",
+      "$class": "Inferred",
+      "$platform": "iOS / macOS",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/app-icons",
+      "$confidence": "high",
+      "$notes": "In iOS 26/27, submit unmasked 1024x1024 square layers; OS applies mask"
+    }
+  },
+  "concentricRule": {
+    "formula": {
+      "$value": "innerRadius = max(outerRadius - padding, minimumInner)",
+      "$unit": "pt",
+      "$source": "SwiftUI ConcentricRectangle behavior",
+      "$class": "Official",
+      "$platform": "iOS 26+ / macOS 26+",
+      "$url": "https://developer.apple.com/documentation/swiftui/concentricrectangle",
+      "$confidence": "high"
+    },
+    "minimumInner": {
+      "$value": 4,
+      "$unit": "pt",
+      "$source": "Plugin minimum inner corner radius",
+      "$class": "Estimated",
+      "$platform": "All",
+      "$url": "https://developer.apple.com/documentation/swiftui/concentricrectangle",
+      "$confidence": "high"
+    }
+  },
+  "deviceDisplayCornerRadii": {
+    "iPhone16Pro_17Pro": {
+      "$value": 62,
+      "$unit": "pt",
+      "$source": "Hardware display corner radius (~55-62pt depending on model/sampling; 16 Pro/17 Pro reported 62pt)",
+      "$class": "Measured",
+      "$platform": "iOS",
+      "$url": "https://github.com/kylebshr/ScreenCorners",
+      "$confidence": "high",
+      "$notes": "Plugin previously had 55pt for iPhone 17 Pro and 62pt for Air; confirm on physical hardware"
+    },
+    "iPhone15_16": {
+      "$value": 55,
+      "$unit": "pt",
+      "$source": "ScreenCorners / UIScreen._displayCornerRadius",
+      "$class": "Measured",
+      "$platform": "iOS",
+      "$url": "https://github.com/kylebshr/ScreenCorners",
+      "$confidence": "high"
+    },
+    "iPhoneSE3": {
+      "$value": 0,
+      "$unit": "pt",
+      "$source": "Rectangular display",
+      "$class": "Official",
+      "$platform": "iOS",
+      "$url": "https://developer.apple.com/",
+      "$confidence": "high"
+    },
+    "iPadPro_M4_M5": {
+      "$value": 18,
+      "$unit": "pt",
+      "$source": "iPad Pro Liquid Retina / Tandem OLED display corner radius",
+      "$class": "Measured",
+      "$platform": "iPadOS",
+      "$url": "https://github.com/kylebshr/ScreenCorners",
+      "$confidence": "high",
+      "$notes": "Plugin previously had 30pt; measured community value is 18pt"
+    }
+  },
+  "componentRadii": {
+    "iosSheetFloating": {
+      "$value": 38,
+      "$unit": "pt",
+      "$source": "Floating medium sheet corner radius",
+      "$class": "Estimated",
+      "$platform": "iOS 26/27",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/sheets",
+      "$confidence": "high"
+    },
+    "iosAlert": {
+      "$value": 34,
+      "$unit": "pt",
+      "$source": "iOS 26/27 alert corner radius",
+      "$class": "Estimated",
+      "$platform": "iOS 26/27",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "$confidence": "high"
+    },
+    "iosPopoverMenu": {
+      "$value": 26,
+      "$unit": "pt",
+      "$source": "iOS popover / menu corner radius",
+      "$class": "Estimated",
+      "$platform": "iOS 26/27",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "$confidence": "high"
+    },
+    "iosInsetGroupedSection": {
+      "$value": 26,
+      "$unit": "pt",
+      "$source": "iOS 26/27 insetGrouped section radius",
+      "$class": "Estimated",
+      "$platform": "iOS 26/27",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "$confidence": "high"
+    },
+    "iosCard": {
+      "$value": 22,
+      "$unit": "pt",
+      "$source": "iOS card radius",
+      "$class": "Estimated",
+      "$platform": "iOS 26/27",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "$confidence": "high"
+    },
+    "iosSettingsIcon": {
+      "$value": 7,
+      "$unit": "pt",
+      "$source": "29pt settings icon squircle radius",
+      "$class": "Estimated",
+      "$platform": "iOS",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "$confidence": "high"
+    },
+    "macosWindow": {
+      "$value": 12,
+      "$unit": "pt",
+      "$source": "macOS 27 uniform window radius report (Tahoe 26 varied 16-26pt)",
+      "$class": "Estimated",
+      "$platform": "macOS 27",
+      "$url": "https://www.macrumors.com/",
+      "$confidence": "high",
+      "$notes": "Secondary press report; Apple HIG does not publish exact px"
+    },
+    "macosAlertPopover": {
+      "$value": 16,
+      "$unit": "pt",
+      "$source": "macOS alert / popover radius",
+      "$class": "Estimated",
+      "$platform": "macOS 26/27",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "$confidence": "high"
+    },
+    "macosMenu": {
+      "$value": 12,
+      "$unit": "pt",
+      "$source": "macOS menu corner radius",
+      "$class": "Estimated",
+      "$platform": "macOS 26/27",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "$confidence": "high"
+    },
+    "macosCheckbox": {
+      "$value": 4,
+      "$unit": "pt",
+      "$source": "macOS checkbox corner radius",
+      "$class": "Estimated",
+      "$platform": "macOS",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "$confidence": "high"
+    }
+  }
+}

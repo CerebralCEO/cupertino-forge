@@ -1,0 +1,337 @@
+{
+  "$meta": {
+    "generated": "2026-11-25",
+    "sources": [
+      "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "https://developer.apple.com/design/human-interface-guidelines/accessibility",
+      "https://screens.guide",
+      "https://useyourloaf.com"
+    ]
+  },
+  "hitTargets": {
+    "iosDefault": {
+      "$value": 44,
+      "$unit": "pt",
+      "$source": "Apple HIG Accessibility (44x44 pt)",
+      "$class": "Official",
+      "$platform": "iOS / iPadOS",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/accessibility",
+      "$confidence": "high"
+    },
+    "iosMinimum": {
+      "$value": 28,
+      "$unit": "pt",
+      "$source": "Apple HIG Accessibility (28x28 pt minimum)",
+      "$class": "Official",
+      "$platform": "iOS / iPadOS",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/accessibility",
+      "$confidence": "high"
+    },
+    "macosDefault": {
+      "$value": 28,
+      "$unit": "pt",
+      "$source": "Apple HIG Accessibility (28x28 pt)",
+      "$class": "Official",
+      "$platform": "macOS",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/accessibility",
+      "$confidence": "high"
+    },
+    "macosMinimum": {
+      "$value": 20,
+      "$unit": "pt",
+      "$source": "Apple HIG Accessibility (20x20 pt minimum)",
+      "$class": "Official",
+      "$platform": "macOS",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/accessibility",
+      "$confidence": "high"
+    },
+    "paddedTargetWithBezel": {
+      "$value": 12,
+      "$unit": "pt",
+      "$source": "Apple HIG Accessibility (~12pt padding around bezeled controls)",
+      "$class": "Official",
+      "$platform": "All",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/accessibility",
+      "$confidence": "high"
+    },
+    "paddedTargetWithoutBezel": {
+      "$value": 24,
+      "$unit": "pt",
+      "$source": "Apple HIG Accessibility (~24pt padding around bezel-less controls)",
+      "$class": "Official",
+      "$platform": "All",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/accessibility",
+      "$confidence": "high"
+    }
+  },
+  "spacing": {
+    "baseGrid": {
+      "$value": 4,
+      "$unit": "pt",
+      "$source": "Plugin 4pt base rhythm",
+      "$class": "Inferred",
+      "$platform": "All",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "$confidence": "high"
+    },
+    "scale": {
+      "$value": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        16,
+        20,
+        24,
+        32,
+        40,
+        48,
+        64
+      ],
+      "$unit": "pt",
+      "$source": "Plugin spacing scale",
+      "$class": "Estimated",
+      "$platform": "All",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "$confidence": "high"
+    },
+    "iosMarginCompact": {
+      "$value": 16,
+      "$unit": "pt",
+      "$source": "Apple standard iOS compact margin (matches widget 16pt HIG)",
+      "$class": "Inferred",
+      "$platform": "iOS",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/widgets",
+      "$confidence": "high"
+    },
+    "iosMarginRegular": {
+      "$value": 20,
+      "$unit": "pt",
+      "$source": "Apple standard regular-width margin",
+      "$class": "Estimated",
+      "$platform": "iOS / iPadOS",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "$confidence": "high"
+    },
+    "macosContentPadding": {
+      "$value": 20,
+      "$unit": "pt",
+      "$source": "Standard macOS content margin",
+      "$class": "Estimated",
+      "$platform": "macOS",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "$confidence": "high"
+    },
+    "readableContentMaxWidth": {
+      "$value": 672,
+      "$unit": "pt",
+      "$source": "UIKit readableContentGuide typical max measure",
+      "$class": "Measured",
+      "$platform": "iPadOS / Web",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "$confidence": "med"
+    }
+  },
+  "devicesAndSafeAreas": {
+    "iPhoneSE3": {
+      "$value": {
+        "width": 375,
+        "height": 667,
+        "scale": 2,
+        "safeTop": 20,
+        "safeBottom": 0
+      },
+      "$unit": "pt",
+      "$source": "Apple iOS device specs",
+      "$class": "Measured",
+      "$platform": "iOS",
+      "$url": "https://useyourloaf.com/blog/iphone-screen-resolutions/",
+      "$confidence": "high"
+    },
+    "iPhone15_16": {
+      "$value": {
+        "width": 393,
+        "height": 852,
+        "scale": 3,
+        "safeTop": 59,
+        "safeBottom": 34
+      },
+      "$unit": "pt",
+      "$source": "iPhone 15 / 16 / 16 Pro specs",
+      "$class": "Measured",
+      "$platform": "iOS",
+      "$url": "https://screens.guide/",
+      "$confidence": "high"
+    },
+    "iPhone17_17Pro": {
+      "$value": {
+        "width": 402,
+        "height": 874,
+        "scale": 3,
+        "safeTop": 62,
+        "safeBottom": 34
+      },
+      "$unit": "pt",
+      "$source": "iPhone 17 / 17 Pro 6.3-inch specs",
+      "$class": "Measured",
+      "$platform": "iOS 26/27",
+      "$url": "https://screens.guide/",
+      "$confidence": "high"
+    },
+    "iPhone17ProMax": {
+      "$value": {
+        "width": 440,
+        "height": 956,
+        "scale": 3,
+        "safeTop": 62,
+        "safeBottom": 34
+      },
+      "$unit": "pt",
+      "$source": "iPhone 17 Pro Max 6.9-inch specs",
+      "$class": "Measured",
+      "$platform": "iOS 26/27",
+      "$url": "https://screens.guide/",
+      "$confidence": "high"
+    },
+    "iPadPro11": {
+      "$value": {
+        "width": 834,
+        "height": 1194,
+        "scale": 2,
+        "safeTop": 24,
+        "safeBottom": 20
+      },
+      "$unit": "pt",
+      "$source": "iPad Pro 11-inch M4/M5",
+      "$class": "Measured",
+      "$platform": "iPadOS",
+      "$url": "https://useyourloaf.com/",
+      "$confidence": "high"
+    },
+    "iPadPro13": {
+      "$value": {
+        "width": 1024,
+        "height": 1366,
+        "scale": 2,
+        "safeTop": 24,
+        "safeBottom": 20
+      },
+      "$unit": "pt",
+      "$source": "iPad Pro 13-inch M4/M5",
+      "$class": "Measured",
+      "$platform": "iPadOS",
+      "$url": "https://useyourloaf.com/",
+      "$confidence": "high"
+    }
+  },
+  "sizeClassBreakpoints": {
+    "compactMax": {
+      "$value": 767,
+      "$unit": "pt",
+      "$source": "Adaptive compact width (<768pt)",
+      "$class": "Inferred",
+      "$platform": "iOS / Web / Flutter",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "$confidence": "high"
+    },
+    "regularMin": {
+      "$value": 768,
+      "$unit": "pt",
+      "$source": "Adaptive regular/iPad width (>=768pt)",
+      "$class": "Inferred",
+      "$platform": "iPadOS / Web / Flutter",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "$confidence": "high"
+    },
+    "desktopMin": {
+      "$value": 1180,
+      "$unit": "pt",
+      "$source": "Adaptive macOS desktop width with fine pointer",
+      "$class": "Estimated",
+      "$platform": "macOS / Web / Flutter",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "$confidence": "high"
+    }
+  },
+  "macosMetrics": {
+    "windowMinWidth": {
+      "$value": 480,
+      "$unit": "pt",
+      "$source": "Plugin macOS window min width",
+      "$class": "Estimated",
+      "$platform": "macOS",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "$confidence": "high"
+    },
+    "windowMinHeight": {
+      "$value": 320,
+      "$unit": "pt",
+      "$source": "Plugin macOS window min height",
+      "$class": "Estimated",
+      "$platform": "macOS",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "$confidence": "high"
+    },
+    "toolbarHeight": {
+      "$value": 52,
+      "$unit": "pt",
+      "$source": "macOS unified toolbar height",
+      "$class": "Estimated",
+      "$platform": "macOS 26/27",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/toolbars",
+      "$confidence": "high"
+    },
+    "sidebarDefaultWidth": {
+      "$value": 220,
+      "$unit": "pt",
+      "$source": "macOS sidebar default width (180..320)",
+      "$class": "Estimated",
+      "$platform": "macOS 26/27",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/sidebars",
+      "$confidence": "high"
+    },
+    "inspectorDefaultWidth": {
+      "$value": 280,
+      "$unit": "pt",
+      "$source": "macOS inspector default width (240..320)",
+      "$class": "Estimated",
+      "$platform": "macOS 26/27",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "$confidence": "high"
+    }
+  },
+  "liveActivities": {
+    "lockScreenMargin": {
+      "$value": 14,
+      "$unit": "pt",
+      "$source": "Apple HIG Live Activities standard Lock Screen margin",
+      "$class": "Official",
+      "$platform": "iOS",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/live-activities",
+      "$confidence": "high"
+    }
+  },
+  "widgets": {
+    "standardMargin": {
+      "$value": 16,
+      "$unit": "pt",
+      "$source": "Apple HIG Widgets standard margin",
+      "$class": "Official",
+      "$platform": "iOS / macOS",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/widgets",
+      "$confidence": "high"
+    },
+    "minimumFontSize": {
+      "$value": 11,
+      "$unit": "pt",
+      "$source": "Apple HIG Widgets minimum text size",
+      "$class": "Official",
+      "$platform": "iOS / macOS",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/widgets",
+      "$confidence": "high"
+    }
+  }
+}

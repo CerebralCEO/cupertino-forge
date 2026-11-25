@@ -1,0 +1,433 @@
+=== hig__buttons.txt (141L) ===
+TITLE: Buttons
+URL: https://developer.apple.com/design/human-interface-guidelines/buttons
+
+ABSTRACT: A button initiates an instantaneous action.
+## Best practices
+Make buttons easy for people to use. It’s essential to include enough space around a button so that people can visually distinguish it from surrounding components and content. Giving a button enough space is also critical for helping people select or activate it, regardless of the method of input they use. As a general rule, a button needs a hit region of at least 44x44 pt — in visionOS, 60x60 pt — to ensure that people can select it easily, whether they use a fingertip, a pointer, their eyes, or a remote.
+## Style
+Avoid applying a similar color to button labels and content layer backgrounds. If your app already has bright, colorful content in the content layer, prefer using the default monochromatic appearance of button labels. For more guidance, see Liquid Glass color.
+## Content
+In macOS and visionOS, the system displays a tooltip after people hover over a button for a moment. A tooltip displays a brief phrase that explains what a button does; for guidance, see offering-help.
+## Role
+- Primary. The button is the default button — the button people are most likely to choose.
+- Cancel. The button cancels the current action.
+- Destructive. The button performs an action that can result in data destruction.
+A button’s role can have additional effects on its appearance. For example, a primary button uses an app’s accent color, whereas a destructive button uses the system red color.
+Don’t assign the primary role to a button that performs a destructive action, even if that action is the most likely choice. Because of its visual prominence, people sometimes choose a primary button without reading it first. Help people avoid losing content by assigning the primary role to nondestructive buttons.
+## Platform considerations
+### iOS, iPadOS
+### macOS
+Several specific button types are unique to macOS.
+#### Push buttons
+The standard button type in macOS is known as a push button. You can configure a push button to display text, a symbol, an icon, or an image, or a combination of text and image content. Push buttons can act as the default button in a view and you can tint them.
+#### Square buttons
+Prefer using a symbol in a square button. sf-symbols provides a wide range of symbols that automatically receive appropriate coloring in their default state and in response to user interaction.
+Avoid using labels to introduce square buttons. Because square buttons are closely connected with a specific view, their purpose is generally clear without the need for descriptive text.
+#### Help buttons
+[TABLE #1]
+--- | ---
+Dialog with dismissal buttons (like OK and Cancel) | Lower corner, opposite to the dismissal buttons and vertically aligned with them
+Use a help button within a view, not in the window frame. For example, avoid placing a help button in a toolbar or status bar.
+Avoid displaying text that introduces a help button. People know what a help button does, so they don’t need additional descriptive text.
+#### Image buttons
+Use an image button in a view, not in the window frame. For example, avoid placing an image button in a toolbar or status bar. If you need to use an image as a button in a toolbar, use a toolbar item. See toolbars.
+Include about 10 pixels of padding between the edges of the image and the button edges. An image button’s edges define its clickable area even when they aren’t visible. Including padding ensures that a click registers correctly even if it’s not precisely within the image. In general, avoid including a system-provided border in an image button; for developer guidance, see isBordered.
+### visionOS
+[TABLE #2]
+Shape | Mini (28 pt) | Small (32 pt) | Regular (44 pt) | Large (52 pt) | Extra large (64 pt)
+--- | --- | --- | --- | --- | ---
+Prefer buttons that have a discernible background shape and fill. It tends to be easier for people to see a button when it’s enclosed in a shape that uses a contrasting background fill. The exception is a button in a toolbar, context menu, alert, or ornament where the shape and material of the larger component make the button comfortably visible. The following guidelines can help you ensure that a button looks good in different contexts:
+Avoid creating a custom button that uses a white background fill and black text or icons. The system reserves this visual style to convey the toggled state.
+In general, prefer circular or capsule-shape buttons. People’s eyes tend to be drawn toward the corners in a shape, making it difficult to keep looking at the shape’s center. The more rounded a button’s shape, the easier it is for people to look steadily at it. When you need to display a button by itself, prefer a capsule-shape button.
+Provide enough space around a button to make it easy for people to look at it. Aim to place buttons so their centers are always at least 60 pts apart. If your buttons measure 60 pts or larger, add 4 pts of padding around them to keep the hover effect from overlapping. Also, it’s usually best to avoid displaying small or mini buttons in a vertical stack or horizontal row.
+Choose the right shape if you need to display text-labeled buttons in a stack or row. Specifically, prefer the rounded-rectangle shape in a vertical stack of buttons and prefer the capsule shape in a horizontal row of buttons.
+### watchOS
+Prefer buttons that span the width of the screen for primary actions in your app. Full-width buttons look better and are easier for people to tap. If two buttons must share the same horizontal space, use the same height for both, and use images or short text titles for each button’s content.
+## Resources
+#### Related
+#### Developer documentation
+## Change log
+[TABLE #3]
+--- | ---
+December 16, 2025 | Updated guidance for Liquid Glass.
+June 9, 2025 | Updated guidance for button styles and content.
+=== hig__toggles.txt (63L) ===
+TITLE: Toggles
+URL: https://developer.apple.com/design/human-interface-guidelines/toggles
+
+ABSTRACT: A toggle lets people choose between a pair of opposing states, like on and off, using a different appearance to indicate each state.
+## Best practices
+Clearly identify the setting, view, or content the toggle affects. In general, the surrounding context provides enough information for people to understand what they’re turning on or off. In some cases, often in macOS apps, you can also supply a label to describe the state the toggle controls. If you use a button that behaves like a toggle, you generally use an interface icon that communicates its purpose, and you update its appearance — typically by changing the background — based on the current state.
+Make sure the visual differences in a toggle’s state are obvious. For example, you might add or remove a color fill, show or hide the background shape, or change the inner details you display — like a checkmark or dot — to show that a toggle is on or off. Avoid relying solely on different colors to communicate state, because not everyone can perceive the differences.
+## Platform considerations
+### iOS, iPadOS
+Change the default color of a switch only if necessary. The default green color tends to work well in most cases, but you might want to use your app’s accent color instead. Be sure to use a color that provides enough contrast with the uncolored appearance to be perceptible.
+Avoid supplying a label that explains the button’s purpose. The interface icon you create — combined with the alternative background appearances you supply — help people understand what the button does. For developer guidance, see changesSelectionAsPrimaryAction.
+### macOS
+In addition to the switch toggle style, macOS supports the checkbox style and also defines radio buttons that can provide similar behaviors.
+Use switches, checkboxes, and radio buttons in the window body, not the window frame. In particular, avoid using these components in a toolbar or status bar.
+#### Switches
+Prefer a switch for settings that you want to emphasize. A switch has more visual weight than a checkbox, so it looks better when it controls more functionality than a checkbox typically does. For example, you might use a switch to let people turn on or off a group of settings, instead of just one setting. For developer guidance, see switch.
+#### Checkboxes
+#### Radio buttons
+Prefer a set of radio buttons to present mutually exclusive options. If you need to let people choose multiple options in a set, use checkboxes instead.
+Avoid listing too many radio buttons in a set. A long list of radio buttons takes up a lot of space in the interface and can be overwhelming. If you need to present more than about five options, consider using a component like a pop-up button instead.
+To present a single setting that can be on or off, prefer a checkbox. Although a single radio button can also turn something on or off, the presence or absence of the checkmark in a checkbox can make the current state easier to understand at a glance. In rare cases where a single checkbox doesn’t clearly communicate the opposing states, you can use a pair of radio buttons, each with a label that specifies the state it controls.
+## Resources
+#### Related
+#### Developer documentation
+## Change log
+[TABLE #1]
+--- | ---
+March 29, 2024 | Enhanced guidance for using switches in macOS apps, clarified when a checkbox has a title, and added artwork for radio buttons.
+=== hig__sliders.txt (51L) ===
+TITLE: Sliders
+URL: https://developer.apple.com/design/human-interface-guidelines/sliders
+
+ABSTRACT: A slider is a horizontal track with a control, called a thumb, that people can adjust between a minimum and maximum value.
+As a slider’s value changes, the portion of track between the minimum value and the thumb fills with color. A slider can optionally display left and right icons that illustrate the meaning of the minimum and maximum values.
+## Best practices
+Use familiar slider directions. People expect the minimum and maximum sides of sliders to be consistent in all apps, with minimum values on the leading side and maximum values on the trailing side (for horizontal sliders) and minimum values at the bottom and maximum values at the top (for vertical sliders). For example, people expect to be able to move a horizontal slider that represents a percentage from 0 percent on the leading side to 100 percent on the trailing side.
+## Platform considerations
+### iOS, iPadOS
+### macOS
+Sliders in macOS can also include tick marks, making it easier for people to pinpoint a specific value within the range.
+In a linear slider either with or without tick marks, the thumb is a narrow lozenge shape, and the portion of track between the minimum value and the thumb is filled with color. A linear slider often includes supplementary icons that illustrate the meaning of the minimum and maximum values.
+Choose a slider style that matches peoples’ expectations. A horizontal slider is ideal when moving between a fixed starting and ending point. For example, a graphics app might offer a horizontal slider for setting the opacity level of an object between 0 and 100 percent. Use circular sliders when values repeat or continue indefinitely. For example, a graphics app might use a circular slider to adjust the rotation of an object between 0 and 360 degrees. An animation app might use a circular slider to adjust how many times an object spins when animated — four complete rotations equals four spins, or 1440 degrees of rotation.
+Consider adding labels to tick marks for even greater clarity. Labels can be numbers or words, depending on the slider’s values. It’s unnecessary to label every tick mark unless doing so is needed to reduce confusion. In many cases, labeling only the minimum and maximum values is sufficient. When the values of the slider are nonlinear, like in the Energy Saver settings pane, periodic labels provide context. It’s also a good idea to provide a offering-help#macOS-visionOS that displays the value of the thumb when people hold their pointer over it.
+### visionOS
+Prefer horizontal sliders. It’s generally easier for people to gesture from side to side than up and down.
+### watchOS
+If necessary, create custom glyphs to communicate what the slider does. The system displays plus and minus signs by default.
+## Resources
+#### Related
+#### Developer documentation
+## Change log
+[TABLE #1]
+--- | ---
+=== hig__segmented-controls.txt (54L) ===
+TITLE: Segmented controls
+URL: https://developer.apple.com/design/human-interface-guidelines/segmented-controls
+
+ABSTRACT: A segmented control is a linear set of two or more segments, each of which functions as a button.
+A segmented control offers a single choice from among a set of options, or in macOS, either a single choice or multiple choices. For example, in macOS Keynote people can select only one segment in the alignment options control to align selected text. In contrast, people can choose multiple segments in the font attributes control to combine styles like bold, italics, and underline. The toolbar of a Keynote window also uses a segmented control to let people show and hide various editing panes within the main window area.
+In addition to representing the state of a single or multiple-choice selection, a segmented control can function as a set of buttons that perform actions without showing a selection state. For example, the Reply, Reply all, and Forward buttons in macOS Mail. For developer guidance, see isMomentary and momentary.
+## Best practices
+## Content
+Prefer using either text or images — not a mix of both — in a single segmented control. Although individual segments can contain text labels or images, mixing the two in a single control can lead to a disconnected and confusing interface.
+## Platform considerations
+### iOS, iPadOS
+### macOS
+### tvOS
+Avoid putting other focusable elements close to segmented controls. Segments become selected when focus moves to them, not when people click them. Carefully consider where you position a segmented control relative to other interface elements. If other focusable elements are too close, people might accidentally focus on them when attempting to switch between segments.
+### visionOS
+## Resources
+#### Related
+#### Developer documentation
+## Change log
+[TABLE #1]
+--- | ---
+=== hig__steppers.txt (25L) ===
+TITLE: Steppers
+URL: https://developer.apple.com/design/human-interface-guidelines/steppers
+
+ABSTRACT: A stepper is a two-segment control that people use to increase or decrease an incremental value.
+## Best practices
+## Platform considerations
+No additional considerations for iOS, iPadOS, or visionOS. Not supported in watchOS or tvOS.
+### macOS
+For large value ranges, consider supporting Shift-click to change the value quickly. If your app benefits from larger changes in a stepper’s value, it can be useful to let people Shift-click the stepper to change the value by more than the default increment (by 10 times the default, for example).
+## Resources
+#### Related
+#### Developer documentation
+=== hig__pickers.txt (68L) ===
+TITLE: Pickers
+URL: https://developer.apple.com/design/human-interface-guidelines/pickers
+
+ABSTRACT: A picker displays one or more scrollable lists of distinct values that people can choose from.
+## Best practices
+Avoid switching views to show a picker. A picker works well when displayed in context, below or in proximity to the field people are editing. A picker typically appears at the bottom of a window or in a popover.
+Consider providing less granularity when specifying minutes in a date picker. By default, a minute list includes 60 values (0 to 59). You can optionally increase the minute interval as long as it divides evenly into 60. For example, you might want quarter-hour intervals (0, 15, 30, and 45).
+## Platform considerations
+### iOS, iPadOS
+- Countdown timer — Displays hours and minutes, up to a maximum of 23 hours and 59 minutes. This mode isn’t available in the inline or compact styles.
+[TAB: Compact]
+[TAB: Inline]
+[TAB: Wheels]
+### macOS
+Choose a date picker style that suits your app. There are two styles of date pickers in macOS: textual and graphical. The textual style is useful when you’re working with limited space and you expect people to make specific date and time selections. The graphical style is useful when you want to give people the option of browsing through days in a calendar or selecting a range of dates, or when the look of a clock face is appropriate for your app.
+### tvOS
+### watchOS
+## Resources
+#### Related
+#### Developer documentation
+## Change log
+[TABLE #1]
+--- | ---
+=== hig__text-fields.txt (51L) ===
+TITLE: Text fields
+URL: https://developer.apple.com/design/human-interface-guidelines/text-fields
+
+ABSTRACT: A text field is a rectangular area in which people enter or edit small, specific pieces of text.
+## Best practices
+Adjust line breaks according to the needs of the field. By default, the system clips any text extending beyond the bounds of a text field. Alternatively, you can set up a text field to wrap text to a new line at the character or word level, or to truncate (indicated by an ellipsis) at the beginning, middle, or end.
+Consider using an expansion tooltip to show the full version of clipped or truncated text. An expansion tooltip behaves like a regular offering-help#macOS-visionOS and appears when someone places the pointer over the field.
+In iOS, iPadOS, tvOS, and visionOS apps, show the appropriate keyboard type. Several different keyboard types are available, each designed to facilitate a different type of input, such as numbers or URLs. To streamline data entry, display the keyboard that’s appropriate for the type of content people are entering. For guidance, see virtual-keyboards.
+## Platform considerations
+### iOS, iPadOS
+### macOS
+### watchOS
+Present a text field only when necessary. Whenever possible, prefer displaying a list of options rather than requiring text entry.
+## Resources
+#### Related
+#### Developer documentation
+## Change log
+[TABLE #1]
+--- | ---
+=== hig__search-fields.txt (91L) ===
+TITLE: Search fields
+URL: https://developer.apple.com/design/human-interface-guidelines/search-fields
+
+ABSTRACT: A search field lets people search a collection of content for specific terms they enter.
+## Best practices
+## Scope bars and tokens
+Default to a broader scope and let people refine it as they need. A broader scope provides context for the full set of available results, which helps guide people in a useful direction when they choose to narrow the scope.
+Use tokens to filter by common search terms or items. When you define a token, the term it represents gains a visual treatment that encapsulates it, indicating that people can select and edit it as a single item. Tokens can clarify a search term, like filtering by a specific contact in Mail, or focus a search to a specific set of attributes, like filtering by photos in Messages. For the related macOS component, see token-fields.
+## Platform considerations
+### iOS
+#### Search as a tab
+#### Search in a toolbar
+#### Search as an inline field
+### iPadOS, macOS
+The placement and behavior of the search field in iPadOS and macOS is similar. If your app is available on both iPad and Mac, try to keep the search experience as consistent as possible across both platforms.
+### tvOS
+### watchOS
+When someone taps the search field, the system displays a text-input control that covers the entire screen. The app only returns to the search field after they tap the Cancel or Search button.
+## Resources
+#### Related
+#### Developer documentation
+#### Videos
+## Change log
+[TABLE #1]
+--- | ---
+June 8, 2026 | Updated terminology and refined guidance for search as a tab in iOS.
+June 9, 2025 | Updated guidance for search placement in iOS, consolidated iPadOS and macOS platform considerations, and added guidance for tokens.
+=== hig__progress-indicators.txt (58L) ===
+TITLE: Progress indicators
+URL: https://developer.apple.com/design/human-interface-guidelines/progress-indicators
+
+ABSTRACT: Progress indicators let people know that your app isn’t stalled while it loads content or performs lengthy operations.
+An indeterminate progress indicator — also called an activity indicator — uses an animated image to indicate progress. All platforms support a circular image that appears to spin; however, macOS also supports an indeterminate progress bar.
+## Best practices
+Be as accurate as possible when reporting advancement in a determinate progress indicator. Consider evening out the pace of advancement to help people feel confident about the time needed for the task to complete. Showing 90 percent completion in five seconds and the last 10 percent in 5 minutes can make people wonder if your app is still working and can even feel deceptive.
+When possible, switch a progress bar from indeterminate to determinate. If an indeterminate process reaches a point where you can determine its duration, switch to a determinate progress bar. People generally prefer a determinate progress indicator, because it helps them gauge what’s happening and how long it will take.
+If it’s helpful, display a description that provides additional context for the task. Be accurate and succinct. Avoid vague terms like loading or authenticating because they seldom add value.
+When it’s feasible, let people halt processing. If people can interrupt a process without causing negative side effects, include a Cancel button. If interrupting the process might cause negative side effects — such as losing the downloaded portion of a file — it can be useful to provide a Pause button in addition to a Cancel button.
+## Platform considerations
+### iOS, iPadOS
+#### Refresh content controls
+A refresh control lets people immediately reload content, typically in a table view, without waiting for the next automatic content update to occur. A refresh control is a specialized type of activity indicator that’s hidden by default, becoming visible when people drag down the view they want to reload. In Mail, for example, people can drag down the list of Inbox messages to check for new messages.
+### macOS
+In macOS, an indeterminate progress indicator can have a bar or circular appearance. Both versions use an animated image to indicate that the app is performing a task.
+Prefer an activity indicator (spinner) to communicate the status of a background operation or when space is constrained. Spinners are small and unobtrusive, so they’re useful for asynchronous background tasks, like retrieving messages from a server. Spinners are also good for communicating progress within a small area, such as within a text field or next to a specific control, such as a button.
+Avoid labeling a spinning progress indicator. Because a spinner typically appears when people initiate a process, a label is usually unnecessary.
+### watchOS
+By default the system displays the progress indicators in white over the scene’s background color. You can change the color of the progress indicator by setting its tint color.
+## Resources
+#### Developer documentation
+## Change log
+[TABLE #1]
+--- | ---
+=== hig__alerts.txt (90L) ===
+TITLE: Alerts
+URL: https://developer.apple.com/design/human-interface-guidelines/alerts
+
+ABSTRACT: An alert gives people critical information they need right away.
+## Best practices
+Avoid using an alert merely to provide information. People don’t appreciate an interruption from an alert that’s informative, but not actionable. If you need to provide only information, prefer finding an alternative way to communicate it within the relevant context. For example, when a server connection is unavailable, Mail displays an indicator that people can choose to learn more.
+Avoid displaying alerts for common, undoable actions, even when they’re destructive. For example, you don’t need to alert people about data loss every time they delete an email or file because they do so with the intention of discarding data, and they can undo the action. In comparison, when people take an uncommon destructive action that they can’t undo, it’s important to display an alert in case they initiated the action accidentally.
+Avoid showing an alert when your app starts. If you need to inform people about new or important information the moment they open your app, design a way to make the information easily discoverable. If your app detects a problem at startup, like no network connection, consider alternative ways to let people know. For example, you could show cached or placeholder data and a nonintrusive label that describes the problem.
+## Anatomy
+[TAB: iOS]
+[TAB: macOS]
+[TAB: tvOS]
+[TAB: visionOS]
+[TAB: watchOS]
+## Content
+- In iOS, iPadOS, macOS, and visionOS, an alert can include a text field.
+- Alerts in macOS and visionOS can include an icon and an accessory view.
+- macOS alerts can add a suppression checkbox and a Help button.
+In all alert copy, be direct, and use a neutral, approachable tone. Alerts often describe problems and serious situations, so avoid being oblique or accusatory, or masking the severity of the issue.
+Write a title that clearly and succinctly describes the situation. You need to help people quickly understand the situation, so be complete and specific, without being verbose. As much as possible, describe what happened, the context in which it happened, and why. Avoid writing a title that doesn’t convey useful information — like “Error” or “Error 329347 occurred” — but also avoid overly long titles that wrap to more than two lines. If the title is a complete sentence, use apsgb744e4a3?sub=apdca93e113f1d64 and appropriate ending punctuation. If the title is a sentence fragment, use title-style capitalization, and don’t add ending punctuation.
+Avoid explaining alert buttons. If your alert text and button titles are clear, you don’t need to explain what the buttons do. In rare cases where you need to provide guidance on choosing a button, use a term like choose to account for people’s current device and interaction method, and refer to a button using its exact title without quotes. For guidance, see alerts#Buttons.
+## Buttons
+Create succinct, logical button titles. Aim for a one- or two-word title that describes the result of selecting the button. Prefer verbs and verb phrases that relate directly to the alert text — for example, “View All,” “Reply,” or “Ignore.” In informational alerts only, you can use “OK” for acceptance, avoiding “Yes” and “No.” Always use “Cancel” to title a button that cancels the alert’s action. As with all button titles, use title-style capitalization and no ending punctuation.
+Avoid using OK as the default button title unless the alert is purely informational. The meaning of “OK” can be unclear even in alerts that ask people to confirm that they want to do something. For example, does “OK” mean “OK, I want to complete the action” or “OK, I now understand the negative results my action would have caused”? A specific button title like “Erase,” “Convert,” “Clear,” or “Delete” helps people understand the action they’re taking.
+Place buttons where people expect. In general, place the button people are most likely to choose on the trailing side in a row of buttons or at the top in a stack of buttons. Always place the default button on the trailing side of a row or at the top of a stack. Cancel buttons are typically on the leading side of a row or at the bottom of a stack.
+Use the destructive style to identify a button that performs a destructive action people didn’t deliberately choose. For example, when people deliberately choose a destructive action — such as Empty Trash — the resulting alert doesn’t apply the destructive style to the Empty Trash button because the button performs the person’s original intent. In this scenario, the convenience of pressing Return to confirm the deliberately chosen Empty Trash action outweighs the benefit of reaffirming that the button is destructive. In contrast, people appreciate an alert that draws their attention to a button that can perform a destructive action they didn’t originally intend.
+If there’s a destructive action, include a Cancel button to give people a clear, safe way to avoid the action. Always use the title “Cancel” for a button that cancels an alert’s action. Note that you don’t want to make a Cancel button the default button. If you want to encourage people to read an alert and not just automatically press Return to dismiss it, avoid making any button the default button. Similarly, if you must display an alert with a single button that’s also the default, use a Done button, not a Cancel button.
+Provide alternative ways to cancel an alert when it makes sense. In addition to choosing a Cancel button, people appreciate using keyboard shortcuts or other quick ways to cancel an onscreen alert. For example:
+[TABLE #1]
+--- | ---
+Exit to the Home Screen | iOS, iPadOS
+Pressing Escape (Esc) or Command-Period (.) on an attached keyboard | iOS, iPadOS, macOS, visionOS
+## Platform considerations
+### iOS, iPadOS
+Use an action sheet — not an alert — to offer choices related to an intentional action. For example, when people cancel the Mail message they’re editing, an action sheet provides three choices: delete the edits (or the entire draft), save the draft, or return to editing. Although an alert can also help people confirm or cancel an action that has destructive consequences, it doesn’t provide additional choices related to the action. For guidance, see action-sheets.
+When possible, avoid displaying an alert that scrolls. Although an alert might scroll if the text size is large enough, be sure to minimize the potential for scrolling by keeping alert titles short and including a brief message only when necessary.
+### macOS
+macOS automatically displays your app icon in an alert, but you can supply an alternative icon or symbol. In addition, macOS lets you:
+### visionOS
+If you need to display an accessory view in a visionOS alert, create a view that has a maximum height of 154 pt and a 16-pt corner radius.
+## Resources
+#### Related
+#### Developer documentation
+## Change log
+[TABLE #2]
+--- | ---
+February 2, 2024 | Enhanced guidance for using default and Cancel buttons.
+=== hig__action-sheets.txt (44L) ===
+TITLE: Action sheets
+URL: https://developer.apple.com/design/human-interface-guidelines/action-sheets
+
+ABSTRACT: An action sheet is a modal view that presents choices related to an action people initiate.
+When you use SwiftUI, you can offer action sheet functionality in all platforms by specifying a view-presentation for a confirmation dialog. If you use UIKit, you use the actionSheet to display an action sheet in iOS, iPadOS, and tvOS.
+## Best practices
+Use an action sheet — not an alert — to offer choices related to an intentional action. For example, when people cancel the message they’re editing in Mail on iPhone, an action sheet provides two choices: delete the draft, or save the draft. Although an alert can also help people confirm or cancel an action that has destructive consequences, it doesn’t provide additional choices related to the action. More importantly, an alert is usually unexpected, generally telling people about a problem or a change in the current situation that might require them to act. For guidance, see alerts.
+Use action sheets sparingly. Action sheets give people important information and choices, but they interrupt the current task to do so. To encourage people to pay attention to action sheets, avoid using them more than necessary.
+If necessary, provide a Cancel button that lets people reject an action that might destroy data. Place the Cancel button at the bottom of the action sheet (or in the upper-left corner of the sheet in watchOS). A SwiftUI confirmation dialog includes a Cancel button by default.
+Make destructive choices visually prominent. Use the destructive style for buttons that perform destructive actions, and place these buttons at the top of the action sheet where they tend to be most noticeable. For developer guidance, see destructive (SwiftUI) or destructive (UIKit).
+## Platform considerations
+No additional considerations for macOS or tvOS. Not supported in visionOS.
+### iOS, iPadOS
+Avoid letting an action sheet scroll. The more buttons an action sheet has, the more time and effort it takes for people to make a choice. Also, scrolling an action sheet can be hard to do without inadvertently tapping a button.
+### watchOS
+The system-defined style for action sheets includes a title, an optional message, a Cancel button, and one or more additional buttons. The appearance of this interface is different depending on the device.
+[TABLE #1]
+--- | ---
+Default | The button has no special meaning.
+Destructive | The button destroys user data or performs a destructive action in the app.
+Cancel | The button dismisses the view without taking any action.
+Avoid displaying more than four buttons in an action sheet, including the Cancel button. When there are fewer buttons onscreen, it’s easier for people to view all their options at once. Because the Cancel button is required, aim to provide no more than three additional choices.
+## Resources
+#### Related
+#### Developer documentation
+=== hig__menus.txt (90L) ===
+TITLE: Menus
+URL: https://developer.apple.com/design/human-interface-guidelines/menus
+
+ABSTRACT: A menu reveals its options when people interact with it, making it a space-efficient way to present commands in your app or game.
+Several system-provided components also include menus that support specific use cases. For example, a pop-up button or pull-down button can reveal a menu of options directly related to its action; a context menu lets people access a small number of frequently used actions relevant to their current view or task; and in macOS and iPadOS, menu bar menus contain all the commands people can perform in the app or game.
+## Labels
+Depending on menu layout, an iOS, iPadOS, or visionOS app can display a few unlabeled menu items that use only symbols or icons to identify them. For guidance, see menus#visionOS and menus#iOS-iPadOS.
+To be consistent with platform experiences, use title-style capitalization. Although a game might have a different writing style, generally prefer using title-style capitalization, which capitalizes every word except articles, coordinating conjunctions, and short prepositions, and capitalizes the last word in the label, regardless of the part of speech. For complete guidance on this style of capitalization in English, see web#apdca93e113f1d64.
+## Icons
+## Organization
+Prefer listing important or frequently used menu items first. People tend to start scanning a menu from the top, so listing high-priority items first often means that people can find what they want without reading the entire menu.
+Prefer keeping all logically related commands in the same group, even if the commands don’t all have the same importance. For example, people generally use Paste and Match Style much less often than they use Paste, but they expect to find both commands in the same group that contains more frequently used editing commands like Copy and Cut.
+## Submenus
+Prefer using a submenu to indenting menu items. Using indentation is inconsistent with the system and doesn’t clearly express the relationships between the menu items.
+## Toggled items
+Menu items often represent attributes or objects that people can turn on or off. If you want to avoid listing a separate menu item for each state, it can be efficient to create a single, toggled menu item that communicates the current state and lets people change it.
+## In-game menus
+Let players navigate in-game menus using the platform’s default interaction method. People expect to use the same interactions to navigate your menus as they use for navigating other menus on the device. For example, players expect to navigate your game menus using touch in iOS and iPadOS, and direct and indirect gestures in visionOS.
+## Platform considerations
+No additional considerations for macOS, tvOS, or watchOS.
+### iOS, iPadOS
+In iOS and iPadOS, a menu can display items in one of the following three layouts.
+- Large (the default). The menu displays all items in a list.
+### visionOS
+In visionOS, a menu can display items using the small or large layout styles that iOS and iPadOS define (for guidance, see menus#iOS-iPadOS). You can present a menu in your app or game from 3D content using a SwiftUI view. To ensure that your menu is always visible to people, even when other content occludes it, you can apply a presentationbreakthrougheffect(_:). As in macOS, an open menu in a visionOS window can appear outside of the window’s boundaries.
+Prefer displaying a menu near the content it controls. Because people need to look at a menu item before tapping it, they might miss the item’s effect if the content it controls is too far away.
+Prefer the subtle breakthrough effect in most cases. This effect blends the presentation with its surrounding content, to maintain legibility and usability while preserving the depth and context of the scene. When you select automatic for the breakthrough effect of a menu that overlaps with 3D content, the system applies subtle by default. You can use prominent if it’s important to display a menu prominently over the entire scene in your app or game, but this can disrupt the experience for people and potentially cause discomfort. Alternatively, you can use none to fully occlude your menu behind other 3D content — for example, in a puzzle game that requires people to navigate around barriers — but this may make it difficult for people to see and access the menu.
+## Resources
+#### Related
+#### Developer documentation
+## Change log
+[TABLE #1]
+--- | ---
+June 8, 2026 | Updated guidance for menu item icons.
+December 16, 2025 | Added guidance for presenting menus with breakthrough effects in visionOS.
+July 28, 2025 | Added guidance for representing menu items with icons.
+September 14, 2022 | Added guidelines for using the small, medium, and large menu layouts in iPadOS.
+=== hig__context-menus.txt (64L) ===
+TITLE: Context menus
+URL: https://developer.apple.com/design/human-interface-guidelines/context-menus
+
+ABSTRACT: A context menu provides access to functionality that’s directly related to an item, without cluttering the interface.
+Although a context menu provides convenient access to frequently used items, it’s hidden by default, so people might not know it’s there. To reveal a context menu, people generally choose a view or select some content and then perform an action, using the input modes their current configuration supports. For example:
+- The system-defined touch or pinch and hold gesture in visionOS, iOS, and iPadOS
+- Pressing the Control key while clicking a pointing device in macOS and iPadOS
+- Using a secondary click on a Magic Trackpad in macOS or iPadOS
+## Best practices
+Always make context menu items available in the main interface, too. For example, in Mail in iOS and iPadOS, the context menu items that are available for a message in the Inbox are also available in the toolbar of the message view. In macOS, an app’s menu bar menus list all the app’s commands, including those in various context menus.
+Hide unavailable menu items, don’t dim them. Unlike a regular menu, which helps people discover actions they can perform even when the action isn’t available, a context menu displays only the actions that are relevant to the currently selected view or content. In macOS, the exceptions are the Cut, Copy, and Paste menu items, which may appear unavailable if they don’t apply to the current context.
+In iOS, iPadOS, and visionOS, warn people about context menu items that can destroy data. If you need to include potentially destructive items in your context menu — such as Delete or Remove — list them at the end of the menu and identify them as destructive (for developer guidance, see destructive). The system can display a destructive menu item using a red text color.
+## Content
+Include a title in a context menu only if doing so clarifies the menu’s effect. For example, when people select multiple Mail messages and tap the Mark toolbar button in iOS and iPadOS, the resulting context menu displays a title that states the number of selected messages, reminding people that the command they choose affects all the messages they selected.
+## Platform considerations
+### iOS, iPadOS
+In iPadOS, consider using a context menu to let people create a new object in your app. iPadOS lets you reveal a context menu when people perform a long press on the touchscreen or use a secondary click with an attached trackpad or keyboard. For example, Files lets people create a new folder by revealing a context menu in an area between existing files and folders.
+In iOS and iPadOS, a context menu can display a preview of the current content near the list of commands. People can choose a command in the menu or — in some cases — they can tap the preview to open it or drag it to another area.
+Prefer a graphical preview that clarifies the target of a context menu’s commands. For example, when people reveal a context menu on a list item in Notes or Mail, the preview shows a condensed version of the actual content to help people confirm that they’re working with the item they intend.
+### macOS
+### visionOS
+In general, avoid letting a context menu’s height exceed the height of the window. In visionOS, a window includes system-provided components above and below its top and bottom edges, such as window-management controls and the Share menu, so a context menu that’s too tall could obscure them. As you consider the number of items to include, be guided by the ways people are likely to use your app. For example, people who use an app to accomplish in-depth, specialist tasks often expect to spend time learning a large number of sophisticated commands and might appreciate contextual access to them. On the other hand, people who use an app to perform a few simple actions may appreciate short contextual menus that are quick to scan and use.
+## Resources
+#### Related
+#### Developer documentation
+## Change log
+[TABLE #1]
+--- | ---
+September 14, 2022 | Refined guidance on including a submenu and added a guideline on using a context menu to support object creation in an iPadOS app.
+=== hig__popovers.txt (46L) ===
+TITLE: Popovers
+URL: https://developer.apple.com/design/human-interface-guidelines/popovers
+
+ABSTRACT: A popover is a transient view that appears above other content when people click or tap a control or interactive area.
+## Best practices
+Use a Close button for confirmation and guidance only. A Close button, including Cancel or Done, is worth including if it provides clarity, like exiting with or without saving changes. Otherwise, a popover generally closes when people click or tap outside its bounds or select an item in the popover. If multiple selections are possible, make sure the popover remains open until people explicitly dismiss it or they click or tap outside its bounds.
+Always save work when automatically closing a nonmodal popover. People can unintentionally dismiss a nonmodal popover by clicking or tapping outside its bounds. Discard people’s work only when they click or tap an explicit Cancel button.
+Show one popover at a time. Displaying multiple popovers clutters the interface and causes confusion. Never show a cascade or hierarchy of popovers, in which one emerges from another. If you need to show a new popover, close the open one first.
+Avoid making a popover too big. Make a popover only big enough to display its contents and point to the place it came from. If necessary, the system can adjust the size of a popover to ensure it fits well in the interface.
+Provide a smooth transition when changing the size of a popover. Some popovers provide both condensed and expanded views of the same information. If you adjust the size of a popover, animate the change to avoid giving the impression that a new popover replaced the old one.
+Avoid using the word popover in help documentation. Instead, refer to a specific task or selection. For example, instead of “Select the Show button at the bottom of the popover,” you might write “Select the Show button.”
+Avoid using a popover to show a warning. People can miss a popover or accidentally close it. If you need to warn people, use an alert instead.
+## Platform considerations
+### iOS, iPadOS
+Avoid displaying popovers in compact views. Make your app or game dynamically adjust its layout based on the size class of the content area. Reserve popovers for wide views; for compact views, use all available screen space by presenting information in a full-screen modal view like a sheet instead. For related guidance, see modality.
+### macOS
+You can make a popover detachable in macOS, which becomes a separate panel when people drag it. The panel remains visible onscreen while people interact with other content.
+[TAB: Attached popover]
+[TAB: Detached popover]
+## Resources
+#### Related
+#### Developer documentation
+=== hig__lists-and-tables.txt (62L) ===
+TITLE: Lists and tables
+URL: https://developer.apple.com/design/human-interface-guidelines/lists-and-tables
+
+ABSTRACT: Lists and tables present data in one or more columns of rows.
+A table or list can represent data that’s organized in groups or hierarchies, and it can support user interactions like selecting, adding, deleting, and reordering. Apps and games in all platforms can use tables to present content and options; many apps use lists to express an overall information hierarchy and help people navigate it. For example, iOS Settings uses a hierarchy of lists to help people choose options, and several apps — such as Mail in iPadOS and macOS — use a table within a split-views.
+## Best practices
+Prefer displaying text in a list or table. A table can include any type of content, but the row-based format is especially well suited to making text easy to scan and read. If you have items that vary widely in size — or you need to display a large number of images — consider using a collections instead.
+Let people edit a table when it makes sense. People appreciate being able to reorder a list, even if they can’t add or remove items. In iOS and iPadOS, people must enter an edit mode before they can select table items.
+## Content
+Keep item text succinct so row content is comfortable to read. Short, succinct text can help minimize truncation and wrapping, making text easier to read and scan. If each item consists of a large amount of text, consider alternatives that help you avoid displaying over-large table rows. For example, you could list item titles only, letting people choose an item to reveal its content in a detail view.
+## Style
+Choose a table or list style that coordinates with your data and platform. Some styles use visual details to help communicate grouping and hierarchy or to provide specific experiences. In iOS and iPadOS, for example, the grouped style uses headers, footers, and additional space to separate groups of data; the elliptical style available in watchOS makes items appear as if they’re rolling off a rounded surface as people scroll; and macOS defines a bordered style that uses alternating row backgrounds to help make large tables easier to use. For developer guidance, see ListStyle.
+Choose a row style that fits the information you need to display. For example, you might need to display a small image in the leading end of a row, followed by a brief explanatory label. Some platforms provide built-in row styles you can use to arrange content in list rows, such as the UIListContentConfiguration-swift.struct API you can use to lay out content in a list’s rows, headers, and footers in iOS, iPadOS, and tvOS.
+## Platform considerations
+### iOS, iPadOS, visionOS
+Avoid adding an index to a table that displays controls — like disclosure indicators — in the trailing ends of its rows. An index typically consists of the letters in an alphabet, displayed vertically at the trailing side of a list. People can jump to a specific section in the list by choosing the index letter that maps to it. Because both the index and elements like disclosure indicators appear on the trailing side of a list, it can be difficult for people to use one element without activating the other.
+### macOS
+### tvOS
+### watchOS
+## Resources
+#### Related
+#### Developer documentation
+#### Videos
+## Change log
+[TABLE #1]
+--- | ---

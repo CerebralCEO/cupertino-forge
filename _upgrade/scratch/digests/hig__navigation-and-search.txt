@@ -1,0 +1,6 @@
+TITLE: Navigation and search
+URL: https://developer.apple.com/design/human-interface-guidelines/navigation-and-search
+
+
+TOPIC SECTION: 
+  doc://com.apple.HIG/design/Human-Interface-Guidelines/path-controls, doc://com.apple.HIG/design/Human-Interface-Guidelines/search-fields, doc://com.apple.HIG/design/Human-Interface-Guidelines/sidebars, doc://com.apple.HIG/design/Human-Interface-Guidelines/tab-bars, doc://com.apple.HIG/design/Human-Interface-Guidelines/token-fields
