@@ -1,14 +1,15 @@
 # 05 Shape, corners, concentricity
 
-Source of truth: `tokens/shape.json`.
+Source of truth: `tokens/shape.json` (`ConcentricRectangle` formula `[official]`; `0.6` smoothing / superellipse `[inferred]`; component radii `[estimate]`).
 
 ## Continuous corners (non negotiable)
 
-Apple rounded rectangles use a continuous curvature corner (superellipse), Figma equivalent corner smoothing 60 percent. A normal `border-radius` arc has a visible kink where the straight edge meets the curve. That kink is the single most common reason a UI looks "almost Apple".
+Apple rounded rectangles use a continuous curvature corner (superellipse, approximately quintic `n ≈ 5` `[inferred]`), Figma equivalent corner smoothing 60 percent (`[inferred]`). A normal `border-radius` arc has a visible kink where the straight edge meets the curve.
 
-- Web: `border-radius: R; corner-shape: squircle;` (Chromium 139+). Fallback for Safari and Firefox: the `squircle()` clip-path or SVG mask from `apple-web/assets/lib/squircle.ts`. Use the `Squircle` wrapper component for cards, sheets, images, app icons. For capsules and circles plain `border-radius: 9999px` is correct (a capsule has no corner kink).
-- Flutter: `SquircleBorder(radius: R)` from the adapter (do not use RoundedRectangleBorder or ContinuousRectangleBorder, the latter's math does not match).
-- Tauri: same as web.
+- **Native vs Fallback Curve Policy:**
+  - **Apple Native:** SwiftUI `ConcentricRectangle()` / `.rect(corners: .concentric(minimum: 4))` and UIKit `UICornerConfiguration` (`[official]`).
+  - **Web:** `corner-shape: squircle` is supported in Chromium `139+`, Safari `18.4+`, Firefox `148+` (`[official]` CanIUse), matching `superellipse(2)` (`n=4`), while Safari/legacy fall back to `squircle()` SVG clip-path/mask (`apple-web/assets/lib/squircle.ts`). Keep `Squircle` wrapper for rects; capsules/circles use `9999px`.
+  - **Flutter:** `ClipRSuperellipse` (`Flutter 3.32+`) or plugin `SquircleBorder(radius: R)` `[estimate]` (never `RoundedRectangleBorder`; `ContinuousRectangleBorder` has steeper corners).
 
 ## Shape vocabulary
 
@@ -30,9 +31,9 @@ Examples:
 
 If the inner element is a capsule, concentricity is automatic.
 
-## Radius table (iOS, estimate unless marked)
+## Radius table (iOS, `[estimate]` unless marked)
 
-alert 34, action sheet 34, popover 26, menu 26, context menu preview 22, inset grouped section 26, card 22, text field 12, keyboard 26, small widget 22, small thumbnail 8, medium thumbnail 12, app icon mask 22.37 percent of size (superellipse). Device display radius 55 (iPhone 17 Pro), used for full height sheets and full bleed cards that touch screen corners.
+alert 34, action sheet 34, popover 26, menu 26, context menu preview 22, inset grouped section 26, card 22, text field 12, keyboard 26, small widget 22, small thumbnail 8, medium thumbnail 12, app icon mask 22.37 percent of size (`[inferred]` superellipse). Device display radius: primary token **55** (iPhone 17/17 Pro `[estimate]`) and **30** (iPad Pro `[estimate]`), used for full height sheets and full bleed cards that touch screen corners. Community `ScreenCorners` SPI measurements (`$alt` `[inferred/community]`) report **62pt** on iPhone 16 Pro/17 Pro and **18pt** on OLED iPad Pro M4/M5 — verify on physical device before changing primary tokens.
 
 ## Radius table (macOS, estimate)
 

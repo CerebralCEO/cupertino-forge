@@ -5,14 +5,19 @@
       "wwdc25": "WWDC25 Liquid Glass and design system sessions: concentric shapes",
       "estimate": "measured from kit components, verify in kit Inspect",
       "macrumors": "macOS 27 uniform window radius"
-    }
+    },
+    "reconciledDate": "2026-11-25"
   },
   "continuousCorner": {
     "$usage": "Every rounded rectangle uses a continuous corner. CSS: border-radius R plus corner-shape: squircle where supported, else the SVG squircle path generator. Flutter: ContinuousRectangleBorder is NOT equal, use the plugin's SquircleBorder. Figma equivalent: corner smoothing 60 percent.",
     "smoothing": 0.6,
     "cssCornerShape": "squircle",
     "cssSuperellipseK": 2,
-    "note": "A continuous corner of radius R visually reads smaller than a circular corner of radius R. Do not shrink R to compensate."
+    "note": "A continuous corner of radius R visually reads smaller than a circular corner of radius R. Do not shrink R to compensate.",
+    "$source": "inferred smoothing 0.6 / superellipse n~5; CSS corner-shape official baseline",
+    "$class": "inferred",
+    "$url": "https://developer.apple.com/documentation/swiftui/concentricrectangle",
+    "$platform": "All"
   },
   "shapes": {
     "capsule": {
@@ -30,16 +35,27 @@
     "$usage": "MANDATORY. A shape nested inside another shape uses innerRadius = max(outerRadius - padding, minimumInner). This is what makes Liquid Glass layouts look Apple-made.",
     "formula": "inner = outer - inset",
     "minimumInner": 4,
-    "example": "Window radius 12, toolbar button inset 6 from window edge: button radius 6 if rect, or capsule when height allows. Sheet radius 38 with 16 padding: inner card 22."
+    "example": "Window radius 12, toolbar button inset 6 from window edge: button radius 6 if rect, or capsule when height allows. Sheet radius 38 with 16 padding: inner card 22.",
+    "$source": "Apple SwiftUI ConcentricRectangle / UICornerConfiguration",
+    "$class": "official",
+    "$url": "https://developer.apple.com/documentation/swiftui/concentricrectangle",
+    "$platform": "iOS 26+ / macOS 26+"
   },
   "radiusIOS": {
-    "$source": "estimate from iOS 27 kit, verify",
+    "$source": "estimated (primary deviceDisplay preserved at 55/30 per Rule 1; community 62/18 in $alt)",
     "deviceDisplay": {
       "iPhone17Pro": 55,
       "iPhone17": 55,
       "iPhoneAir": 62,
       "iPhoneSE": 0,
-      "iPadPro": 30
+      "iPadPro": 30,
+      "$alt": {
+        "iPhone16Pro_17Pro": 62,
+        "iPadPro_M4_M5": 18,
+        "$source": "ScreenCorners community SPI",
+        "$class": "inferred/community",
+        "$url": "https://github.com/kylebshr/ScreenCorners"
+      }
     },
     "sheet": "device display radius when full height at the bottom edge; 38 when floating at medium detent with 8 inset",
     "alert": 34,
@@ -64,10 +80,14 @@
     "thumbnailSmall": 8,
     "thumbnailMedium": 12,
     "settingsIcon": 7,
-    "badge": "capsule"
+    "badge": "capsule",
+    "$class": "estimated",
+    "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+    "$platform": "iOS 27",
+    "sheetFloating": 38
   },
   "radiusMacOS": {
-    "$source": "estimate from macOS 27 kit and reports, verify",
+    "$source": "estimated (macOS 27 uniform window 12pt press report; unverified on device)",
     "window": 12,
     "windowNote": "macOS 27 uses one uniform window radius for all apps. Tahoe used 16 to 26 depending on toolbar. Verify exact value against the kit Windows page before shipping.",
     "sheet": 12,
@@ -88,7 +108,10 @@
     "toggle": "capsule",
     "tableRowSelection": 6,
     "card": 10,
-    "dockGlass": 24
+    "dockGlass": 24,
+    "$class": "estimated",
+    "$url": "https://www.macrumors.com/",
+    "$platform": "macOS 27"
   },
   "borders": {
     "hairline": {
@@ -98,6 +121,10 @@
     "control": {
       "px": 1
     },
-    "rule": "Apple almost never draws visible borders around content. Separation comes from material, background level, and spacing. Never add a 1px gray border to cards or inputs on iOS."
+    "rule": "Apple almost never draws visible borders around content. Separation comes from material, background level, and spacing. Never add a 1px gray border to cards or inputs on iOS.",
+    "$source": "estimated hairline 0.5px",
+    "$class": "estimated",
+    "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+    "$platform": "All"
   }
 }

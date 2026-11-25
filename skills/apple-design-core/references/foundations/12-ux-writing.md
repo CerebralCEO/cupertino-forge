@@ -2,7 +2,11 @@
 
 ## Voice
 
-Clear, calm, direct, friendly, never cute or loud. Talk to the user as "you". Short sentences. No jargon, no blame, no exclamation marks, no emoji in UI text.
+Clear, calm, direct, friendly, never cute or loud. Talk to the user as "you" (`[official]`).
+- **December 2025 HIG Pronoun Rule (`[official]`):** NEVER use `"we"` (unclear who "we" refers to; write `"Unable to load content"`, not `"We're having trouble loading this content"`). Minimize possessive pronouns `"my"` and `"your"` (`"Favorites"` instead of `"Your Favorites"`).
+- Write for device input accurately (`"Tap"` on iOS/iPadOS vs `"Click"` on macOS `[official]`).
+- Short sentences. No jargon, no blame (`"Choose a password with at least 8 characters."` instead of `"That password is too short"` or `"Invalid name"` `[official]`), no exclamation marks (`"Oops!"`), no emoji in UI text.
+- **Privacy Purpose Strings (`[official]`):** Sentence case, active voice, concrete purpose, ending with a period (`.`). Never prompt at launch unless core functionality requires it immediately; pre-alert screens must never include a cancel/skip bypass before system permission dialogs.
 
 ## Capitalization
 
@@ -41,6 +45,6 @@ Say what happened and what to do, without technical codes: "Couldn't load your l
 
 Use locale formatters. Relative dates for recent items ("Yesterday", "2 min ago" in feeds), absolute for records. Never show raw ISO strings.
 
-## Bangla and localization
+## Bangla, Arabic & localization
 
-Keep text containers flexible (Bangla runs about 20 to 30 percent longer). Never hardcode strings into images. Use the script font stack and loose leading for Bangla.
+Keep text containers flexible (Bangla runs about 20 to 30 percent wider `[estimate]`). Never hardcode strings into images. Use `fontStacks.webBangla`, zero `letter-spacing`, and `1.35–1.5` line height (`[estimate]`); see `16-localization-rtl.md`.

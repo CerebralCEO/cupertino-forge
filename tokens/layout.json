@@ -1,86 +1,396 @@
 {
   "$meta": {
     "description": "Layout metrics for iOS 27 and macOS 27. Units are points (CSS px, Flutter logical px).",
-    "sources": { "hig": "HIG Layout and Buttons", "estimate": "measured from iOS 27 and macOS 27 kits and devices, verify with kit Inspect" }
+    "sources": {
+      "hig": "HIG Layout and Buttons",
+      "estimate": "measured from iOS 27 and macOS 27 kits and devices, verify with kit Inspect"
+    },
+    "reconciledDate": "2026-11-25"
   },
-
   "spacing": {
     "$usage": "4pt base grid. Only these steps. Apple layouts rely on 8, 16, 20 most.",
-    "scale": [0, 2, 4, 6, 8, 10, 12, 16, 20, 24, 32, 40, 48, 64],
-    "names": { "xxs": 2, "xs": 4, "sm": 8, "md": 12, "lg": 16, "xl": 20, "xxl": 24, "section": 32, "hero": 48 }
+    "scale": [
+      0,
+      2,
+      4,
+      6,
+      8,
+      10,
+      12,
+      16,
+      20,
+      24,
+      32,
+      40,
+      48,
+      64
+    ],
+    "names": {
+      "xxs": 2,
+      "xs": 4,
+      "sm": 8,
+      "md": 12,
+      "lg": 16,
+      "xl": 20,
+      "xxl": 24,
+      "section": 32,
+      "hero": 48
+    },
+    "$source": "estimated 4pt rhythm",
+    "$class": "estimated",
+    "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+    "$platform": "All"
   },
-
-  "hitTarget": { "ios": 44, "ipadPointer": 44, "macos": 28, "macosMinimumClickable": 20, "$source": "hig: 44x44 iOS; macOS estimate" },
-
+  "hitTarget": {
+    "ios": 44,
+    "iosMinimum": 28,
+    "ipadPointer": 44,
+    "macos": 28,
+    "macosMinimumClickable": 20,
+    "paddedWithBezel": 12,
+    "paddedWithoutBezel": 24,
+    "$source": "Apple HIG Accessibility",
+    "$class": "official",
+    "$url": "https://developer.apple.com/design/human-interface-guidelines/accessibility",
+    "$platform": "All"
+  },
   "ios": {
-    "layoutMargins": { "compactWidth": 16, "regularWidth": 20, "iPhoneMax": 20, "$source": "estimate" },
+    "layoutMargins": {
+      "compactWidth": 16,
+      "regularWidth": 20,
+      "iPhoneMax": 20,
+      "$source": "estimated (matches 16pt widget HIG on compact)",
+      "$class": "estimated",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "$platform": "iOS"
+    },
     "readableContentMaxWidth": 672,
     "safeArea": {
-      "$source": "estimate, devices with Dynamic Island",
-      "topDynamicIsland": 62, "topNotch": 47, "topSE": 20, "bottomHomeIndicator": 34, "bottomSE": 0, "landscapeSide": 62
+      "$source": "estimated (primary 62pt preserved per Rule 1; see $alt for community 59pt iPhone 15/16)",
+      "topDynamicIsland": 62,
+      "topNotch": 47,
+      "topSE": 20,
+      "bottomHomeIndicator": 34,
+      "bottomSE": 0,
+      "landscapeSide": 62,
+      "$class": "estimated",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "$platform": "iOS",
+      "$alt": {
+        "iPhone15_16_topDynamicIsland": 59,
+        "iPhone17_17Pro_topDynamicIsland": 62,
+        "$source": "screens.guide community specs",
+        "$class": "inferred/community",
+        "$url": "https://screens.guide/"
+      }
     },
-    "statusBar": { "heightDynamicIsland": 54 },
+    "statusBar": {
+      "heightDynamicIsland": 54
+    },
     "navigationBar": {
-      "height": 44, "largeTitleExtra": 52, "largeTitleStyle": "largeTitle emphasized (34 bold)", "largeTitleLeading": 16,
-      "inlineTitleStyle": "headline (17 semibold)", "barButtonSize": 44, "barButtonGlass": "circle 44 or capsule 44 height for text",
-      "background": "transparent with scroll edge effect; glass only on buttons and button groups"
+      "height": 44,
+      "largeTitleExtra": 52,
+      "largeTitleStyle": "largeTitle emphasized (34 bold)",
+      "largeTitleLeading": 16,
+      "inlineTitleStyle": "headline (17 semibold)",
+      "barButtonSize": 44,
+      "barButtonGlass": "circle 44 or capsule 44 height for text",
+      "background": "transparent with scroll edge effect; glass only on buttons and button groups",
+      "$source": "inferred (44pt UIKit height) + estimated largeTitleExtra",
+      "$class": "inferred",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/toolbars",
+      "$platform": "iOS"
     },
-    "toolbar": { "height": 44, "itemGlassGroupHeight": 44, "bottomInsetFromSafeArea": 0 },
+    "toolbar": {
+      "height": 44,
+      "itemGlassGroupHeight": 44,
+      "bottomInsetFromSafeArea": 0,
+      "$source": "estimated",
+      "$class": "estimated",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "$platform": "iOS 27"
+    },
     "tabBar": {
-      "$source": "estimate iOS 26 and 27",
+      "$source": "estimated",
       "style": "floating capsule of Liquid Glass, separated from screen edges",
-      "height": 62, "sideInset": 20, "bottomGapAboveHomeIndicator": 0, "itemIconSize": 24, "itemLabelStyle": "caption2 emphasized (10 to 11 semibold)",
+      "height": 62,
+      "sideInset": 20,
+      "bottomGapAboveHomeIndicator": 0,
+      "itemIconSize": 24,
+      "itemLabelStyle": "caption2 emphasized (10 to 11 semibold)",
       "selectedIndicator": "inner capsule of glass behind the selected item, tinted label in accent",
       "minimizeOnScroll": "shrinks to a compact capsule showing only the selected tab when scrolling down; restores on scroll up",
-      "searchTab": "search appears as a separate circular glass button at trailing side"
+      "searchTab": "search appears as a separate circular glass button at trailing side",
+      "$class": "estimated",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "$platform": "iOS 27",
+      "maxVisibleTabsPhone": 5
     },
-    "searchField": { "height": 44, "style": "capsule glass at bottom on iPhone (iOS 26+), top in iPad sidebars", "placeholderStyle": "body" },
-    "listRow": { "minHeight": 52, "minHeightCompact": 44, "subtitleRow": 64, "leadingInset": 16, "iconSize": 29, "iconRadius": 7, "separatorLeadingInsetWithIcon": 60, "$source": "estimate" },
-    "listSection": { "insetGroupedSideInset": 16, "headerStyle": "headline sentence case", "footerStyle": "footnote secondary label", "gapBetweenSections": 20 },
-    "sheet": { "grabber": { "width": 36, "height": 5, "topInset": 5, "color": "fillIOS.primary" }, "detents": ["medium (about 50 percent)", "large"], "floatingInsetAtMedium": 8 },
-    "alert": { "width": 300, "padding": 20, "titleStyle": "headline", "messageStyle": "footnote", "buttonHeight": 48, "buttonStyle": "capsule glass buttons, primary tinted" },
+    "searchField": {
+      "height": 44,
+      "style": "capsule glass at bottom on iPhone (iOS 26+), top in iPad sidebars",
+      "placeholderStyle": "body",
+      "$source": "estimated",
+      "$class": "estimated",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "$platform": "iOS 27"
+    },
+    "listRow": {
+      "minHeight": 52,
+      "minHeightCompact": 44,
+      "subtitleRow": 64,
+      "leadingInset": 16,
+      "iconSize": 29,
+      "iconRadius": 7,
+      "separatorLeadingInsetWithIcon": 60,
+      "$source": "estimated",
+      "$class": "estimated",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "$platform": "iOS 27"
+    },
+    "listSection": {
+      "insetGroupedSideInset": 16,
+      "headerStyle": "headline sentence case",
+      "footerStyle": "footnote secondary label",
+      "gapBetweenSections": 20,
+      "$source": "estimated",
+      "$class": "estimated",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "$platform": "iOS 27"
+    },
+    "sheet": {
+      "grabber": {
+        "width": 36,
+        "height": 5,
+        "topInset": 5,
+        "color": "fillIOS.primary"
+      },
+      "detents": [
+        "medium (about 50 percent)",
+        "large"
+      ],
+      "floatingInsetAtMedium": 8,
+      "$source": "estimated",
+      "$class": "estimated",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "$platform": "iOS 27"
+    },
+    "alert": {
+      "width": 300,
+      "padding": 20,
+      "titleStyle": "headline",
+      "messageStyle": "footnote",
+      "buttonHeight": 48,
+      "buttonStyle": "capsule glass buttons, primary tinted",
+      "$source": "estimated",
+      "$class": "estimated",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "$platform": "iOS 27"
+    },
     "button": {
-      "$source": "estimate iOS 26 and 27 control sizes",
-      "mini": 28, "small": 32, "medium": 36, "large": 50, "extraLarge": 56,
-      "horizontalPadding": { "small": 12, "medium": 14, "large": 20 },
-      "labelStyle": { "small": "subheadline emphasized", "medium": "body emphasized", "large": "body emphasized" }
+      "$source": "estimated",
+      "mini": 28,
+      "small": 32,
+      "medium": 36,
+      "large": 50,
+      "extraLarge": 56,
+      "horizontalPadding": {
+        "small": 12,
+        "medium": 14,
+        "large": 20
+      },
+      "labelStyle": {
+        "small": "subheadline emphasized",
+        "medium": "body emphasized",
+        "large": "body emphasized"
+      },
+      "$class": "estimated",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "$platform": "iOS 27"
     },
-    "toggle": { "width": 64, "height": 28, "knobWidth": 38, "knobHeight": 24, "knobInset": 2, "$source": "estimate iOS 26" },
-    "slider": { "trackHeight": 6, "knobWidth": 38, "knobHeight": 24, "$source": "estimate iOS 26" },
-    "segmentedControl": { "height": 36, "selectedInset": 2, "labelStyle": "subheadline emphasized when selected", "$source": "estimate" },
-    "stepper": { "width": 94, "height": 32, "$source": "estimate" },
-    "pageControl": { "dot": 8, "gap": 9 },
-    "textField": { "height": 44, "horizontalPadding": 16, "background": "fillIOS.tertiary on grouped, secondary background on plain" },
-    "keyboardTopRadius": 26
+    "toggle": {
+      "width": 64,
+      "height": 28,
+      "knobWidth": 38,
+      "knobHeight": 24,
+      "knobInset": 2,
+      "$source": "estimated",
+      "$class": "estimated",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "$platform": "iOS 27"
+    },
+    "slider": {
+      "trackHeight": 6,
+      "knobWidth": 38,
+      "knobHeight": 24,
+      "$source": "estimated",
+      "$class": "estimated",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "$platform": "iOS 27"
+    },
+    "segmentedControl": {
+      "height": 36,
+      "selectedInset": 2,
+      "labelStyle": "subheadline emphasized when selected",
+      "$source": "estimated",
+      "$class": "estimated",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "$platform": "iOS 27"
+    },
+    "stepper": {
+      "width": 94,
+      "height": 32,
+      "$source": "estimated",
+      "$class": "estimated",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "$platform": "iOS 27"
+    },
+    "pageControl": {
+      "dot": 8,
+      "gap": 9,
+      "$source": "estimated",
+      "$class": "estimated",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "$platform": "iOS 27"
+    },
+    "textField": {
+      "height": 44,
+      "horizontalPadding": 16,
+      "background": "fillIOS.tertiary on grouped, secondary background on plain",
+      "$source": "estimated",
+      "$class": "estimated",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "$platform": "iOS 27"
+    },
+    "keyboardTopRadius": 26,
+    "widgets": {
+      "standardMargin": 16,
+      "tightMargin": 11,
+      "minimumFontSize": 11,
+      "$source": "Apple HIG Widgets (Oct 2026)",
+      "$class": "official",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/widgets",
+      "$platform": "iOS / macOS"
+    },
+    "liveActivities": {
+      "lockScreenMargin": 14,
+      "limitedWidthCircle": 28,
+      "$source": "Apple HIG Live Activities (Oct 2026)",
+      "$class": "official",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/live-activities",
+      "$platform": "iOS"
+    }
   },
-
   "macos": {
-    "windowMinimum": { "width": 480, "height": 320 },
+    "windowMinimum": {
+      "width": 480,
+      "height": 320
+    },
     "titlebarHeight": 32,
     "toolbarHeight": 52,
     "toolbarHeightCompact": 38,
-    "trafficLights": { "$source": "estimate macOS 26 and 27", "diameter": 14, "gap": 9, "leadingInset": 16, "centerYFromTop": 26, "colors": { "close": "#FF5F57", "minimize": "#FEBC2E", "zoom": "#28C840", "inactive": "#000000@0.1 light, #FFFFFF@0.15 dark" }, "glyphsOnHoverOnly": true },
-    "sidebar": { "minWidth": 180, "defaultWidth": 220, "maxWidth": 320, "rowHeight": 32, "rowInset": 10, "iconSize": 16, "sectionHeaderStyle": "subheadline emphasized secondary", "edgeToEdge": true, "$source": "estimate; macOS 27 sidebars are edge to edge, not floating" },
-    "inspector": { "minWidth": 240, "defaultWidth": 280 },
+    "trafficLights": {
+      "$source": "estimate macOS 26 and 27",
+      "diameter": 14,
+      "gap": 9,
+      "leadingInset": 16,
+      "centerYFromTop": 26,
+      "colors": {
+        "close": "#FF5F57",
+        "minimize": "#FEBC2E",
+        "zoom": "#28C840",
+        "inactive": "#000000@0.1 light, #FFFFFF@0.15 dark"
+      },
+      "glyphsOnHoverOnly": true
+    },
+    "sidebar": {
+      "minWidth": 180,
+      "defaultWidth": 220,
+      "maxWidth": 320,
+      "rowHeight": 32,
+      "rowInset": 10,
+      "iconSize": 16,
+      "sectionHeaderStyle": "subheadline emphasized secondary",
+      "edgeToEdge": true,
+      "$source": "estimate; macOS 27 sidebars are edge to edge, not floating"
+    },
+    "inspector": {
+      "minWidth": 240,
+      "defaultWidth": 280
+    },
     "controlSizes": {
       "$source": "estimate macOS 26 and 27",
-      "mini": 16, "small": 20, "regular": 24, "large": 28, "extraLarge": 36,
-      "labelStyle": { "mini": "caption", "small": "subheadline", "regular": "body", "large": "body", "extraLarge": "title3" },
-      "horizontalPadding": { "small": 8, "regular": 10, "large": 14 }
+      "mini": 16,
+      "small": 20,
+      "regular": 24,
+      "large": 28,
+      "extraLarge": 36,
+      "labelStyle": {
+        "mini": "caption",
+        "small": "subheadline",
+        "regular": "body",
+        "large": "body",
+        "extraLarge": "title3"
+      },
+      "horizontalPadding": {
+        "small": 8,
+        "regular": 10,
+        "large": 14
+      }
     },
-    "menu": { "itemHeight": 24, "itemHorizontalPadding": 10, "outerPadding": 5, "separatorHeight": 9, "minWidth": 180, "labelStyle": "body", "shortcutStyle": "body secondary", "$source": "estimate" },
-    "table": { "rowHeight": 24, "rowHeightLarge": 32, "headerHeight": 28, "alternatingRows": true },
+    "menu": {
+      "itemHeight": 24,
+      "itemHorizontalPadding": 10,
+      "outerPadding": 5,
+      "separatorHeight": 9,
+      "minWidth": 180,
+      "labelStyle": "body",
+      "shortcutStyle": "body secondary",
+      "$source": "estimate"
+    },
+    "table": {
+      "rowHeight": 24,
+      "rowHeightLarge": 32,
+      "headerHeight": 28,
+      "alternatingRows": true
+    },
     "contentPadding": 20,
     "formRowSpacing": 12,
-    "settingsWindow": { "width": 715, "formStyle": "grouped form, labels leading, controls trailing" },
+    "settingsWindow": {
+      "width": 715,
+      "formStyle": "grouped form, labels leading, controls trailing"
+    },
     "tooltipDelayMs": 1000,
-    "dock": "not part of app UI, never imitate"
+    "dock": "not part of app UI, never imitate",
+    "$source": "estimated (menuBar 24pt & splitView divider 1pt official HIG)",
+    "$class": "estimated",
+    "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+    "$platform": "macOS 27",
+    "menuBarHeight": 24,
+    "splitViewDividerWidth": 1
   },
-
   "breakpoints": {
     "$usage": "Web and Flutter: choose iOS style below 768, iPad style 768 to 1179, macOS style 1180 and up OR when a pointer is fine and hover capable. Base on available width (size class), not on device type.",
-    "compact": 0, "regular": 768, "desktop": 1180
+    "compact": 0,
+    "regular": 768,
+    "desktop": 1180,
+    "$source": "inferred size-class breakpoints (768pt regular) + estimated 1180pt desktop",
+    "$class": "inferred",
+    "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+    "$platform": "Web / Flutter"
   },
-
-  "zIndex": { "content": 0, "scrollEdge": 10, "bars": 20, "floatingButton": 30, "popover": 40, "sheet": 50, "alert": 60, "toast": 70 }
+  "zIndex": {
+    "content": 0,
+    "scrollEdge": 10,
+    "bars": 20,
+    "floatingButton": 30,
+    "popover": 40,
+    "sheet": 50,
+    "alert": 60,
+    "toast": 70,
+    "$source": "estimated",
+    "$class": "estimated",
+    "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+    "$platform": "Web"
+  }
 }

@@ -1,7 +1,11 @@
 {
   "$meta": {
     "description": "Shadows and elevation. Apple shadows are soft, large, low alpha, and always paired with a hairline edge. Values from the macOS 27 and iOS 27 kits unless marked.",
-    "sources": { "kit": "macOS 27 Windows, Panels, Knobs layer styles; iOS 27 Controls", "estimate": "verify visually" }
+    "sources": {
+      "kit": "macOS 27 Windows, Panels, Knobs layer styles; iOS 27 Controls",
+      "estimate": "verify visually"
+    },
+    "reconciledDate": "2026-11-25"
   },
   "rules": [
     "Content layer elements (cards, rows) have NO shadow on iOS. Separation comes from background level (grouped vs secondary).",
@@ -12,16 +16,88 @@
   ],
   "levels": {
     "none": "none",
-    "knob": { "light": "0 3px 8px rgba(0,0,0,0.15), 0 3px 1px rgba(0,0,0,0.06), 0 0 0 0.5px rgba(0,0,0,0.04)", "dark": "0 3px 8px rgba(0,0,0,0.3), 0 0 0 0.5px rgba(0,0,0,0.2)", "$source": "estimate from kit Knobs" },
-    "sliderKnob": { "light": "0 1px 5px rgba(0,0,0,0.1), 0 0 0 0.5px rgba(0,0,0,0.04)", "$source": "kit-macos27 Knobs - Sliders" },
-    "raised": { "light": "0 1px 3px rgba(0,0,0,0.08), 0 0 0 0.5px rgba(0,0,0,0.06)", "dark": "0 1px 3px rgba(0,0,0,0.4), 0 0 0 0.5px rgba(255,255,255,0.08)" },
-    "popover": { "light": "0 8px 32px rgba(0,0,0,0.16), 0 0 0 0.5px rgba(0,0,0,0.12)", "dark": "0 8px 32px rgba(0,0,0,0.5), 0 0 0 0.5px rgba(255,255,255,0.12)" },
-    "menu": { "light": "0 4px 24px rgba(0,0,0,0.3), 0 0 0 0.5px rgba(0,0,0,0.2)", "dark": "0 4px 24px rgba(0,0,0,0.3), 0 0 0 0.5px rgba(0,0,0,0.8), inset 0 0 0 1px rgba(102,102,102,0.4)", "$source": "kit-macos27 Liquid Glass Menus" },
-    "panel": { "light": "0 5px 20px rgba(0,0,0,0.3)", "dark": "0 16px 33px rgba(0,0,0,0.4), 0 0 1px rgba(0,0,0,0.8), inset 0 0 0 1px rgba(255,255,255,0.2)", "$source": "kit-macos27 Panels" },
-    "windowActive": { "light": "0 36px 100px rgba(0,0,0,0.4), 0 0 1px rgba(0,0,0,0.8)", "dark": "0 36px 100px rgba(0,0,0,0.4), 0 0 1px rgba(0,0,0,0.8), inset 0 0 0 1px rgba(255,255,255,0.2)", "$source": "kit-macos27 Windows Active" },
-    "windowInactive": { "light": "0 16px 32px rgba(0,0,0,0.2), 0 0 1px rgba(0,0,0,0.8)", "dark": "0 16px 32px rgba(0,0,0,0.2), 0 0 1px rgba(0,0,0,0.8)", "$source": "kit-macos27 Windows Inactive" },
-    "sheet": { "light": "0 -1px 0 rgba(0,0,0,0.04), 0 -10px 40px rgba(0,0,0,0.12)", "dark": "0 -10px 40px rgba(0,0,0,0.5)", "$source": "estimate" },
+    "knob": {
+      "light": "0 3px 8px rgba(0,0,0,0.15), 0 3px 1px rgba(0,0,0,0.06), 0 0 0 0.5px rgba(0,0,0,0.04)",
+      "dark": "0 3px 8px rgba(0,0,0,0.3), 0 0 0 0.5px rgba(0,0,0,0.2)",
+      "$source": "estimated",
+      "$class": "estimated",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "$platform": "All"
+    },
+    "sliderKnob": {
+      "light": "0 1px 5px rgba(0,0,0,0.1), 0 0 0 0.5px rgba(0,0,0,0.04)",
+      "$source": "kit-macos27 Knobs - Sliders",
+      "dark": "0 1px 5px rgba(0,0,0,0.35), 0 0 0 0.5px rgba(255,255,255,0.12)",
+      "$darkClass": "estimated"
+    },
+    "raised": {
+      "light": "0 1px 3px rgba(0,0,0,0.08), 0 0 0 0.5px rgba(0,0,0,0.06)",
+      "dark": "0 1px 3px rgba(0,0,0,0.4), 0 0 0 0.5px rgba(255,255,255,0.08)",
+      "$source": "estimated",
+      "$class": "estimated",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "$platform": "All"
+    },
+    "popover": {
+      "light": "0 8px 32px rgba(0,0,0,0.16), 0 0 0 0.5px rgba(0,0,0,0.12)",
+      "dark": "0 8px 32px rgba(0,0,0,0.5), 0 0 0 0.5px rgba(255,255,255,0.12)",
+      "$source": "estimated",
+      "$class": "estimated",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "$platform": "All"
+    },
+    "menu": {
+      "light": "0 4px 24px rgba(0,0,0,0.3), 0 0 0 0.5px rgba(0,0,0,0.2)",
+      "dark": "0 4px 24px rgba(0,0,0,0.3), 0 0 0 0.5px rgba(0,0,0,0.8), inset 0 0 0 1px rgba(102,102,102,0.4)",
+      "$source": "Apple macOS 27 Sketch Kit",
+      "$class": "measured",
+      "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+      "$platform": "macOS 27"
+    },
+    "panel": {
+      "light": "0 5px 20px rgba(0,0,0,0.3)",
+      "dark": "0 16px 33px rgba(0,0,0,0.4), 0 0 1px rgba(0,0,0,0.8), inset 0 0 0 1px rgba(255,255,255,0.2)",
+      "$source": "Apple macOS 27 Sketch Kit",
+      "$class": "measured",
+      "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+      "$platform": "macOS 27"
+    },
+    "windowActive": {
+      "light": "0 36px 100px rgba(0,0,0,0.4), 0 0 1px rgba(0,0,0,0.8)",
+      "dark": "0 36px 100px rgba(0,0,0,0.4), 0 0 1px rgba(0,0,0,0.8), inset 0 0 0 1px rgba(255,255,255,0.2)",
+      "$source": "Apple macOS 27 Sketch Kit",
+      "$class": "measured",
+      "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+      "$platform": "macOS 27"
+    },
+    "windowInactive": {
+      "light": "0 16px 32px rgba(0,0,0,0.2), 0 0 1px rgba(0,0,0,0.8)",
+      "dark": "0 16px 32px rgba(0,0,0,0.2), 0 0 1px rgba(0,0,0,0.8)",
+      "$source": "Apple macOS 27 Sketch Kit",
+      "$class": "measured",
+      "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+      "$platform": "macOS 27"
+    },
+    "sheet": {
+      "light": "0 -1px 0 rgba(0,0,0,0.04), 0 -10px 40px rgba(0,0,0,0.12)",
+      "dark": "0 -10px 40px rgba(0,0,0,0.5)",
+      "$source": "estimated",
+      "$class": "estimated",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "$platform": "All"
+    },
     "glassBar": "use materials.liquidGlass.tuned.regular boxShadow",
-    "toast": { "light": "0 10px 30px rgba(0,0,0,0.15), 0 0 0 0.5px rgba(0,0,0,0.06)", "dark": "0 10px 30px rgba(0,0,0,0.5), 0 0 0 0.5px rgba(255,255,255,0.1)", "$source": "estimate" }
+    "toast": {
+      "light": "0 10px 30px rgba(0,0,0,0.15), 0 0 0 0.5px rgba(0,0,0,0.06)",
+      "dark": "0 10px 30px rgba(0,0,0,0.5), 0 0 0 0.5px rgba(255,255,255,0.1)",
+      "$source": "estimated",
+      "$class": "estimated",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "$platform": "All"
+    },
+    "$source": "macOS 27 Sketch Kit + estimated cross-platform levels",
+    "$class": "measured",
+    "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+    "$platform": "All"
   }
 }

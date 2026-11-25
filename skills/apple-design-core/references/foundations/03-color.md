@@ -1,6 +1,6 @@
 # 03 Color
 
-Source of truth: `tokens/color.json` (iOS 27 and macOS 27 kits, HIG increased contrast values).
+Source of truth: `tokens/color.json` (iOS 27 & macOS 27 Sketch kits `[measured]`; HIG HC image swatches `[inferred]`; Clear glass 35% dimming & contrast thresholds `[official]`; macOS Dark separator & scrim `[estimate]`).
 
 ## Token names you use in code
 
@@ -53,9 +53,17 @@ Note the iOS 26 and later blue is #0088FF, not the old #007AFF. Using #007AFF in
 
 ## Increased contrast and accessibility
 
-- Every token has light and dark; system colors and grays also have HC variants (tokens). The generated CSS switches on `prefers-contrast: more` or `data-contrast="more"`.
-- Text contrast: 4.5:1 for body, 3:1 for large text (title3 and up) and glyphs.
-- Never convey state with color alone (add a checkmark, label, or shape).
+- Every token has light and dark (`[measured]`); system colors and grays also have HC variants (`[inferred]` from HIG PNG swatches). Generated CSS switches on `prefers-contrast: more` or `data-contrast="more"` without overriding dark mode.
+- **Official Apple HIG Contrast Thresholds (`[official]`):**
+  - Regular text `<= 17 pt` (all weights): minimum **`4.5:1`**
+  - Large text **`>= 18 pt`** (all weights): minimum **`3:1`**
+  - **Bold text** (all sizes): minimum **`3:1`**
+  - Non-text UI controls, icons, focus rings & active states: minimum **`3:1`** (`WCAG 2.2` `[official]`)
+  - Dark Mode custom text target: aim for **`7:1`** on small text (`[official]` HIG Dark Mode)
+- Focus ring (`[measured]` macOS 27 kit `Global.Focus Ring`): outer `3.5px` accent `@0.25`, inner `1px` accent `@0.15`; verify contrast against glass or tinted backgrounds (`AX-8`).
+- Clear Liquid Glass over bright media: add `#000000@0.35` dimming layer (`[official]`).
+- macOS Desktop Tinting (`[official]`): when Graphite accent is chosen, window backgrounds pick up desktop wallpaper tint; only keep custom neutral fills subtly translucent, never colored controls.
+- Never convey state with color alone (add a checkmark, label, or shape). Use `scripts/contrast-check.mjs`.
 
 ## Forbidden
 

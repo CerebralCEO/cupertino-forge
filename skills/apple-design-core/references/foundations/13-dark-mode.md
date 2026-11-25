@@ -9,12 +9,12 @@
 
 ## Checklist for every screen
 
-1. All colors are tokens (they flip automatically).
-2. Images and illustrations: provide dark variants or reduce brightness 10 percent with a subtle dark overlay when they are bright white.
-3. Pure white text on pure black only for label; secondary text uses label-2 (60 percent) to reduce glare.
-4. Glass dark recipe is darker and less transparent; check legibility on light content scrolling beneath (glass adapts appearance from content for small elements).
-5. Increased contrast dark values are applied when the user enables it.
-6. Charts: use system colors dark variants; gridlines label-4.
+1. All colors are tokens (they flip automatically; `[measured]` from iOS/macOS 27 kits).
+2. Images and illustrations: provide dark variants or reduce brightness (`~10%` `[estimate]`) when white backgrounds glow against Dark Mode (`[official]` HIG Dark Mode).
+3. Pure white text on pure black only for label; secondary text uses label-2 (60 percent `[measured]`) to reduce glare. Aim for **`4.5:1`** minimum and **`7:1`** target on custom small Dark Mode text (`[official]`).
+4. Test **Dark Mode + Increase Contrast + Reduce Transparency** together (`[official]` HIG Dark Mode) — verify dark text never loses legibility when translucent glass becomes opaque.
+5. macOS Desktop Tinting (`[official]`): keep neutral custom control fills subtly translucent (`Control` tokens) while keeping colored controls opaque.
+6. Charts: use system colors dark variants (`[measured]`); gridlines label-4 (`[measured]`).
 
 ## Appearance switching
 

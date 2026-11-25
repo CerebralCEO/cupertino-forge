@@ -1,24 +1,24 @@
 # 08 Motion
 
-Source of truth: `tokens/motion.json`. SwiftUI's default animation is a spring with response 0.55 and damping fraction 1.0; presets smooth (bounce 0), snappy (0.15), bouncy (0.3) use duration 0.5.
+Source of truth: `tokens/motion.json`. SwiftUI `Spring` presets: `default` (0.55, 0), `smooth` (0.5, 0), `snappy` (0.5, 0.15), and `bouncy` (0.5, 0.3) -> verified `(mass: 1.0, stiffness: 157.9, damping: 17.6)` directly against Apple SwiftUI documentation `[official]`. Scroll `decelerationRate`: `0.998` normal / `0.99` fast `[official]`. Custom transitions and rubber-band constant `c = 0.55` carry `[inferred]` / `[estimate]` provenance.
 
 ## Spring model
 
-Duration d and bounce b convert to physics (mass 1): stiffness = (2 pi / d)^2, damping = 4 pi (1 - b) / d.
+Duration d and bounce b convert to physics (mass 1 `[official]`): stiffness = (2 pi / d)^2, damping = 4 pi (1 - b) / d.
 
-| Token | Duration | Bounce | Use |
-|---|---|---|---|
-| default | 0.55 | 0 | anything without a rule |
-| smooth | 0.5 | 0 | layout and size changes, fades with movement |
-| snappy | 0.5 | 0.15 | selection, toggles, segmented indicator |
-| bouncy | 0.5 | 0.3 | playful confirmations, drop into place (rare) |
-| interactive | 0.15 | 0 | finger tracking, drag follow |
-| press | 0.2 | 0 | press down |
-| release | 0.35 | 0.15 | release after press, glass settle |
-| sheet | 0.5 | 0 | sheets, detents |
-| push | 0.5 | 0 | navigation push and pop |
-| popover | 0.35 | 0.1 | menus, popovers, alerts in |
-| glassMorph | 0.45 | 0.2 | glass shapes merging and splitting |
+| Token | Duration | Bounce | Provenance | Use |
+|---|---|---|---|---|
+| default | 0.55 | 0 | `[official]` | anything without a rule |
+| smooth | 0.5 | 0 | `[official]` | layout and size changes, fades with movement |
+| snappy | 0.5 | 0.15 | `[official]` | selection, toggles, segmented indicator |
+| bouncy | 0.5 | 0.3 | `[official]` | playful confirmations, drop into place (rare) |
+| interactive | 0.15 | 0 | `[estimate]` | finger tracking, drag follow |
+| press | 0.2 | 0 | `[estimate]` | press down |
+| release | 0.35 | 0.15 | `[estimate]` | release after press, glass settle |
+| sheet | 0.5 | 0 | `[estimate]` | sheets, detents |
+| push | 0.5 | 0 | `[estimate]` | navigation push and pop |
+| popover | 0.35 | 0.1 | `[estimate]` | menus, popovers, alerts in |
+| glassMorph | 0.45 | 0.2 | `[estimate]` | glass shapes merging and splitting |
 
 Implementation:
 - Web: `motion` (Framer Motion) with `spring('snappy')` helper from generated TS; pure CSS transitions use `var(--cf-ease-snappy)` and `var(--cf-dur-snappy)` (a sampled spring curve).
@@ -27,32 +27,32 @@ Implementation:
 
 ## Transitions catalog
 
-| Transition | Spec |
-|---|---|
-| Navigation push | incoming slides from trailing edge 100 percent; outgoing moves to leading 30 percent and dims 10 percent; spring push; interruptible; back swipe from leading 20pt edge |
-| Sheet present | slides from bottom with spring sheet; scrim fades in the same spring; drag down to dismiss with velocity 600 pt/s or 40 percent distance |
-| Alert | scale 1.08 to 1 and opacity 0 to 1, spring popover; dismiss opacity 150ms |
-| Menu / popover | grows from its source button: scale 0.6 to 1 anchored at the source, opacity, spring popover; glass morphs out of the button; close scale 0.8 and fade 180ms |
-| Context menu | target lifts 1.04, background blurs 20, menu springs in |
-| Tab switch | content crossfade 150ms (no slide); selection capsule slides with snappy |
-| Tab bar minimize | glassMorph while scrolling down, restore on scroll up |
-| Toggle | knob snappy, knob stretches to 1.25 width while pressed, track color crossfade 150ms |
-| Segmented | indicator slides snappy, stretches while dragging |
-| List row tap | highlight appears instantly, fades out 250ms after release |
-| Expand / collapse | height and opacity smooth; chevron rotates 90 degrees with snappy |
-| Drag and drop | lift 1.03 to 1.05 with shadow, follow with interactive, drop with snappy and rigid haptic |
-| Pull to refresh | rubber band, spinner appears after threshold with light haptic |
+| Interaction -> Motion | Spec | Interruptible | Reduced Motion (`[inferred]`) |
+|---|---|---|---|
+| Navigation push | incoming slides from trailing edge 100%; outgoing moves to leading 30% (`[inferred]`) and dims 10%; spring push; back swipe from leading 20pt edge `[estimate]` | Yes | 200ms crossfade, no slide/parallax |
+| Shared element / Zoom | SwiftUI `NavigationTransition.zoom` + `matchedTransitionSource` (`[official]`) / `matchedGeometryEffect`; Web View Transitions API / `layoutId`; Flutter `Hero` | Yes | 200ms crossfade |
+| Sheet present | slides from bottom with spring sheet; scrim fades; drag dismiss velocity 600 pt/s or 40% distance `[estimate]` | Yes | 200ms crossfade, bounce 0 |
+| Alert | scale 1.08 to 1 and opacity 0 to 1, spring popover; dismiss opacity 150ms `[estimate]` | Yes | 200ms crossfade, no scale |
+| Menu / popover | grows from source button: scale 0.6 to 1 anchored at source, spring popover; close scale 0.8 and fade 180ms `[estimate]` | Yes | 200ms crossfade |
+| Context menu | target lifts 1.04, background blurs 20, menu springs in `[estimate]` | Yes | 200ms crossfade, no blur animation |
+| Tab switch | content crossfade 150ms `[estimate]`; selection capsule slides with snappy | Yes | 150ms crossfade only |
+| Tab bar minimize | `.tabBarMinimizeBehavior(.onScrollDown)` `[official]` + glassMorph `[estimate]` | Yes | instant/200ms crossfade |
+| Toggle / Segmented | knob snappy, knob stretches 1.25 `[estimate]`, track color crossfade 150ms | Yes | instant/150ms color crossfade, bounce 0 |
+| List row tap | highlight appears 0ms, fades out 250ms `[estimate]` | Yes | 200ms fade |
+| Expand / collapse | height and opacity smooth; chevron rotates 90 deg snappy `[estimate]` | Yes | 200ms crossfade |
+| Drag and drop | lift 1.03–1.05, follow interactive, drop snappy + rigid haptic `[estimate]` | Yes | no overshoot, bounce 0 |
+| Pull to refresh | rubber band (`c=0.55` `[inferred]`), spinner after threshold + light haptic | Yes | spinner fade 200ms |
 
 ## Gestures
 
-- Track the finger 1:1 (interactive spring), then hand off velocity to the settle spring. Never snap without velocity.
-- Rubber band past edges: offset = (1 - 1 / ((x * 0.55 / d) + 1)) * d.
-- Scroll deceleration 0.998 per ms (normal), 0.99 (paging feel).
-- Every animation can be interrupted mid flight by a new gesture.
+- Track finger 1:1 (`interactive` spring), hand off velocity to settle spring.
+- Rubber band past edges: offset = (1 - 1 / ((x * 0.55 / d) + 1)) * d (`[inferred]`).
+- Scroll deceleration: `0.998` per ms (`normal`), `0.99` (`fast`) (`UIScrollView.DecelerationRate` `[official]`).
+- Input modality (`[official]` HIG Motion): Liquid Glass responds with stronger emphasis on touch than on trackpad/mouse (`1.08–1.12` vs `1.02` `[inferred]`).
 
 ## Reduced motion
 
-Replace movement with 200ms crossfades, set bounce 0, disable parallax and glass wobble, keep state feedback. Generated CSS already swaps easing under prefers-reduced-motion; JS code must check `useReducedMotion()` / `MediaQuery.disableAnimations`.
+Replace x/y/z slides, scales, and blur transitions (`Avoid animating into and out of blurs` `[official]`) with 200ms crossfades (`[inferred]`), set bounce 0, disable parallax and glass wobble. CSS swaps automatically under `prefers-reduced-motion`; Web React MUST wrap root in `<MotionConfig reducedMotion="user">` (`[official]`); Flutter checks `MediaQuery.disableAnimationsOf(context)`.
 
 ## Do not
 

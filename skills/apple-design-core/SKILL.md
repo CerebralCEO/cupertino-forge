@@ -44,6 +44,7 @@ If a rule here conflicts with a user request, follow the user but say in one lin
 | Copy, labels, alerts text | foundations/12-ux-writing.md |
 | Fonts, SF licensing, non Apple OS | foundations/14-licensing-fallbacks.md |
 | What changed in 27 | foundations/15-version-diff.md |
+| Localization, RTL, Bangla/Arabic | foundations/16-localization-rtl.md |
 | iOS style components | components-ios/navigation.md, controls.md, presentation.md, content.md |
 | macOS style components | components-macos/window-chrome.md, navigation.md, controls.md, presentation.md, content.md |
 | Empty, loading, error, onboarding, settings, forms, search | patterns/screens.md, patterns/states.md |

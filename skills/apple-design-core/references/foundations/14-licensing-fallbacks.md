@@ -7,7 +7,8 @@ Copying Apple's look is about matching values and behavior. Copying Apple's asse
 - SF Pro, SF Compact, SF Mono, New York: licensed only for designing and developing apps for Apple platforms; not for web fonts, Android, Windows, Linux, and not for mockups of non Apple software.
 - Allowed: calling the system font on Apple devices (web `-apple-system, system-ui`; Flutter default Cupertino font on iOS and macOS; Tauri on macOS WebKit). The OS renders SF; nothing is redistributed.
 - Never commit .otf or .ttf files of SF fonts, never load them from a CDN.
-- Fallback everywhere else: Inter variable (SIL OFL) with tracking from tokens plus Inter compensation. Rounded fallback: Nunito or ui-rounded. Serif fallback: Iowan Old Style or Georgia. Mono: JetBrains Mono (OFL).
+- **Non-Latin System Fonts (`[official]` / `[platform-dependent]`):** Apple OS includes `SF Arabic` (`[official]`) and `Kohinoor Bangla` (`[platform-dependent]`). Never bundle `.otf`/`.ttf` Apple fonts; on non-Apple OS fall back to `'Hind Siliguri', 'Noto Sans Bengali'` (`bn`) and disable negative SF tracking (`0em`) so Indic matras and cursive Arabic join cleanly.
+- Fallback everywhere else: Inter variable (SIL OFL) with tracking from tokens plus Inter compensation (`-0.01em` `[estimate]`). Rounded fallback: Nunito or ui-rounded. Serif fallback: Iowan Old Style or Georgia. Mono: JetBrains Mono (OFL).
 
 ## Icons
 

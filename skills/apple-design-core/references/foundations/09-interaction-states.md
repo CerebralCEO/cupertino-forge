@@ -18,9 +18,10 @@ Every interactive element implements all applicable states. Values come from `to
 | Toggle | knob stretches 1.25 | none | focus ring | 40 percent opacity | track accent (or green when set in config) |
 | Text field | n/a | none | focus ring (macOS) or caret only (iOS) | label-3 text, field disabled | n/a |
 
-## Focus ring
+## Focus ring (`[measured]` macOS 27 kit + `[estimate]` contrast verification)
 
-macOS style (and all keyboard focus on web and desktop): two outlines following the exact control shape: outer 3.5 accent at 25 percent, inner 1 accent at 15 percent (`--cf-focus-ring` / `focus-ring` class). Show only on keyboard focus (`:focus-visible`). iOS touch never shows focus rings.
+macOS style (and all keyboard focus on web and desktop): two outlines following the exact control shape: outer `3.5px` accent at `25%` (`[measured]`), inner `1px` accent at `15%` (`[measured]` macOS 27 kit `Global.Focus Ring` -> `--cf-focus-ring` / `focus-ring` class). Show only on keyboard focus (`:focus-visible`). iOS touch never shows focus rings.
+- **Glass/Tinted Focus Ring Contrast Rule (`AX-8`):** When focused controls sit atop Liquid Glass or tinted banners, ensure the inner `1px` + outer `3.5px` focus ring meets `>= 3:1` non-text UI contrast (`[official]` WCAG 2.2) or enable `prefers-contrast: more` ring borders.
 
 ## Timing
 

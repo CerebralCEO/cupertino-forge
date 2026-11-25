@@ -1,1481 +1,1564 @@
 {
- "$meta": {
-  "description": "Typography tokens for iOS 27 and macOS 27. Sizes in points (1pt = 1 CSS px = 1 Flutter logical px). trackingEm is letter-spacing in em, already computed from Apple's tracking tables. Always apply tracking: the SF system font does it automatically on Apple platforms, every other font needs it explicitly.",
-  "sources": {
-   "hig": "HIG Typography specifications (Dynamic Type tables, tracking tables, macOS text styles)",
-   "kit": "iOS 27 and macOS 27 UI kit text styles (tight and loose leading)"
-  }
- },
- "fontStacks": {
-  "$usage": "Pick the stack by target. Never ship SF font files: license allows Apple platforms only. On Apple devices the system font IS SF, so system-ui stacks render real SF legally.",
-  "web": "-apple-system, BlinkMacSystemFont, system-ui, 'Inter Variable', 'Inter', 'Segoe UI Variable', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
-  "webRounded": "ui-rounded, 'SF Pro Rounded', -apple-system, system-ui, 'Nunito', sans-serif",
-  "webSerif": "ui-serif, 'New York', 'Iowan Old Style', Georgia, serif",
-  "webMono": "ui-monospace, 'SF Mono', SFMono-Regular, Menlo, 'JetBrains Mono', Consolas, monospace",
-  "webBangla": "'Hind Siliguri', 'Noto Sans Bengali', 'Kohinoor Bangla', sans-serif",
-  "flutterApple": ".SF Pro Text / .SF Pro Display via CupertinoTheme default (do not set fontFamily on iOS/macOS)",
-  "flutterOther": "Inter (bundle Inter variable font, OFL license) with tracking from this file",
-  "tauriMac": "-apple-system (WebKit on macOS renders SF)",
-  "tauriWindows": "'Inter Variable', 'Segoe UI Variable', sans-serif"
- },
- "fallbackCompensation": {
-  "$usage": "When the rendered font is Inter instead of SF (Android, Windows, Linux), Inter runs about 2 to 3 percent wider. Apply these on top of tracking to keep line lengths and wraps identical to SF.",
-  "inter": {
-   "trackingDeltaEm": -0.01,
-   "fontFeatureSettings": "'cv11', 'ss01', 'ss03'",
-   "note": "cv11 single storey a off, ss01 open digits, ss03 rounded quotes bring Inter closer to SF. Keep optical sizing on: font-optical-sizing auto."
-  }
- },
- "iosDynamicType": {
-  "$default": "Large",
-  "$usage": "Large is the default size. Apps must scale text when the user changes size (xSmall through AX5). Layouts must reflow at AX sizes.",
-  "sizes": {
-   "xSmall": {
-    "largeTitle": {
-     "size": 31.0,
-     "lineHeight": 38.0,
-     "weight": 400,
-     "emphasizedWeight": 700,
-     "trackingEm": 0.013,
-     "trackingPx": 0.4
-    },
-    "title1": {
-     "size": 25.0,
-     "lineHeight": 31.0,
-     "weight": 400,
-     "emphasizedWeight": 700,
-     "trackingEm": 0.006,
-     "trackingPx": 0.15
-    },
-    "title2": {
-     "size": 19.0,
-     "lineHeight": 24.0,
-     "weight": 400,
-     "emphasizedWeight": 700,
-     "trackingEm": -0.024,
-     "trackingPx": -0.46
-    },
-    "title3": {
-     "size": 17.0,
-     "lineHeight": 22.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": -0.026,
-     "trackingPx": -0.44
-    },
-    "headline": {
-     "size": 14.0,
-     "lineHeight": 19.0,
-     "weight": 600,
-     "emphasizedWeight": 600,
-     "trackingEm": -0.011,
-     "trackingPx": -0.15
-    },
-    "body": {
-     "size": 14.0,
-     "lineHeight": 19.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": -0.011,
-     "trackingPx": -0.15
-    },
-    "callout": {
-     "size": 13.0,
-     "lineHeight": 18.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": -0.006,
-     "trackingPx": -0.08
-    },
-    "subheadline": {
-     "size": 12.0,
-     "lineHeight": 16.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": 0.0,
-     "trackingPx": 0.0
-    },
-    "footnote": {
-     "size": 12.0,
-     "lineHeight": 16.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": 0.0,
-     "trackingPx": 0.0
-    },
-    "caption1": {
-     "size": 11.0,
-     "lineHeight": 13.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": 0.006,
-     "trackingPx": 0.07
-    },
-    "caption2": {
-     "size": 11.0,
-     "lineHeight": 13.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": 0.006,
-     "trackingPx": 0.07
-    }
-   },
-   "Small": {
-    "largeTitle": {
-     "size": 32.0,
-     "lineHeight": 39.0,
-     "weight": 400,
-     "emphasizedWeight": 700,
-     "trackingEm": 0.013,
-     "trackingPx": 0.42
-    },
-    "title1": {
-     "size": 26.0,
-     "lineHeight": 32.0,
-     "weight": 400,
-     "emphasizedWeight": 700,
-     "trackingEm": 0.008,
-     "trackingPx": 0.21
-    },
-    "title2": {
-     "size": 20.0,
-     "lineHeight": 25.0,
-     "weight": 400,
-     "emphasizedWeight": 700,
-     "trackingEm": -0.023,
-     "trackingPx": -0.46
-    },
-    "title3": {
-     "size": 18.0,
-     "lineHeight": 23.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": -0.025,
-     "trackingPx": -0.45
-    },
-    "headline": {
-     "size": 15.0,
-     "lineHeight": 20.0,
-     "weight": 600,
-     "emphasizedWeight": 600,
-     "trackingEm": -0.016,
-     "trackingPx": -0.24
-    },
-    "body": {
-     "size": 15.0,
-     "lineHeight": 20.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": -0.016,
-     "trackingPx": -0.24
-    },
-    "callout": {
-     "size": 14.0,
-     "lineHeight": 19.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": -0.011,
-     "trackingPx": -0.15
-    },
-    "subheadline": {
-     "size": 13.0,
-     "lineHeight": 18.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": -0.006,
-     "trackingPx": -0.08
-    },
-    "footnote": {
-     "size": 12.0,
-     "lineHeight": 16.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": 0.0,
-     "trackingPx": 0.0
-    },
-    "caption1": {
-     "size": 11.0,
-     "lineHeight": 13.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": 0.006,
-     "trackingPx": 0.07
-    },
-    "caption2": {
-     "size": 11.0,
-     "lineHeight": 13.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": 0.006,
-     "trackingPx": 0.07
-    }
-   },
-   "Medium": {
-    "largeTitle": {
-     "size": 33.0,
-     "lineHeight": 40.0,
-     "weight": 400,
-     "emphasizedWeight": 700,
-     "trackingEm": 0.012,
-     "trackingPx": 0.4
-    },
-    "title1": {
-     "size": 27.0,
-     "lineHeight": 33.0,
-     "weight": 400,
-     "emphasizedWeight": 700,
-     "trackingEm": 0.011,
-     "trackingPx": 0.3
-    },
-    "title2": {
-     "size": 21.0,
-     "lineHeight": 26.0,
-     "weight": 400,
-     "emphasizedWeight": 700,
-     "trackingEm": -0.018,
-     "trackingPx": -0.38
-    },
-    "title3": {
-     "size": 19.0,
-     "lineHeight": 24.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": -0.024,
-     "trackingPx": -0.46
-    },
-    "headline": {
-     "size": 16.0,
-     "lineHeight": 21.0,
-     "weight": 600,
-     "emphasizedWeight": 600,
-     "trackingEm": -0.02,
-     "trackingPx": -0.32
-    },
-    "body": {
-     "size": 16.0,
-     "lineHeight": 21.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": -0.02,
-     "trackingPx": -0.32
-    },
-    "callout": {
-     "size": 15.0,
-     "lineHeight": 20.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": -0.016,
-     "trackingPx": -0.24
-    },
-    "subheadline": {
-     "size": 14.0,
-     "lineHeight": 19.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": -0.011,
-     "trackingPx": -0.15
-    },
-    "footnote": {
-     "size": 12.0,
-     "lineHeight": 16.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": 0.0,
-     "trackingPx": 0.0
-    },
-    "caption1": {
-     "size": 11.0,
-     "lineHeight": 13.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": 0.006,
-     "trackingPx": 0.07
-    },
-    "caption2": {
-     "size": 11.0,
-     "lineHeight": 13.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": 0.006,
-     "trackingPx": 0.07
-    }
-   },
-   "Large": {
-    "largeTitle": {
-     "size": 34.0,
-     "lineHeight": 41.0,
-     "weight": 400,
-     "emphasizedWeight": 700,
-     "lineHeightTight": 39,
-     "lineHeightLoose": 43,
-     "trackingEm": 0.012,
-     "trackingPx": 0.41
-    },
-    "title1": {
-     "size": 28.0,
-     "lineHeight": 34.0,
-     "weight": 400,
-     "emphasizedWeight": 700,
-     "lineHeightTight": 32,
-     "lineHeightLoose": 36,
-     "trackingEm": 0.014,
-     "trackingPx": 0.39
-    },
-    "title2": {
-     "size": 22.0,
-     "lineHeight": 28.0,
-     "weight": 400,
-     "emphasizedWeight": 700,
-     "lineHeightTight": 26,
-     "lineHeightLoose": 30,
-     "trackingEm": -0.012,
-     "trackingPx": -0.26
-    },
-    "title3": {
-     "size": 20.0,
-     "lineHeight": 25.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "lineHeightTight": 23,
-     "lineHeightLoose": 27,
-     "trackingEm": -0.023,
-     "trackingPx": -0.46
-    },
-    "headline": {
-     "size": 17.0,
-     "lineHeight": 22.0,
-     "weight": 600,
-     "emphasizedWeight": 600,
-     "lineHeightTight": 20,
-     "lineHeightLoose": 24,
-     "trackingEm": -0.026,
-     "trackingPx": -0.44
-    },
-    "body": {
-     "size": 17.0,
-     "lineHeight": 22.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "lineHeightTight": 20,
-     "lineHeightLoose": 24,
-     "trackingEm": -0.026,
-     "trackingPx": -0.44
-    },
-    "callout": {
-     "size": 16.0,
-     "lineHeight": 21.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "lineHeightTight": 19,
-     "lineHeightLoose": 23,
-     "trackingEm": -0.02,
-     "trackingPx": -0.32
-    },
-    "subheadline": {
-     "size": 15.0,
-     "lineHeight": 20.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "lineHeightTight": 18,
-     "lineHeightLoose": 22,
-     "trackingEm": -0.016,
-     "trackingPx": -0.24
-    },
-    "footnote": {
-     "size": 13.0,
-     "lineHeight": 18.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "lineHeightTight": 16,
-     "lineHeightLoose": 20,
-     "trackingEm": -0.006,
-     "trackingPx": -0.08
-    },
-    "caption1": {
-     "size": 12.0,
-     "lineHeight": 16.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "lineHeightTight": 14,
-     "lineHeightLoose": 18,
-     "trackingEm": 0.0,
-     "trackingPx": 0.0
-    },
-    "caption2": {
-     "size": 11.0,
-     "lineHeight": 13.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "lineHeightTight": 11,
-     "lineHeightLoose": 15,
-     "trackingEm": 0.006,
-     "trackingPx": 0.07
-    }
-   },
-   "xLarge": {
-    "largeTitle": {
-     "size": 36.0,
-     "lineHeight": 43.0,
-     "weight": 400,
-     "emphasizedWeight": 700,
-     "trackingEm": 0.01,
-     "trackingPx": 0.36
-    },
-    "title1": {
-     "size": 30.0,
-     "lineHeight": 37.0,
-     "weight": 400,
-     "emphasizedWeight": 700,
-     "trackingEm": 0.014,
-     "trackingPx": 0.42
-    },
-    "title2": {
-     "size": 24.0,
-     "lineHeight": 30.0,
-     "weight": 400,
-     "emphasizedWeight": 700,
-     "trackingEm": 0.003,
-     "trackingPx": 0.07
-    },
-    "title3": {
-     "size": 22.0,
-     "lineHeight": 28.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": -0.012,
-     "trackingPx": -0.26
-    },
-    "headline": {
-     "size": 19.0,
-     "lineHeight": 24.0,
-     "weight": 600,
-     "emphasizedWeight": 600,
-     "trackingEm": -0.024,
-     "trackingPx": -0.46
-    },
-    "body": {
-     "size": 19.0,
-     "lineHeight": 24.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": -0.024,
-     "trackingPx": -0.46
-    },
-    "callout": {
-     "size": 18.0,
-     "lineHeight": 23.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": -0.025,
-     "trackingPx": -0.45
-    },
-    "subheadline": {
-     "size": 17.0,
-     "lineHeight": 22.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": -0.026,
-     "trackingPx": -0.44
-    },
-    "footnote": {
-     "size": 15.0,
-     "lineHeight": 20.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": -0.016,
-     "trackingPx": -0.24
-    },
-    "caption1": {
-     "size": 14.0,
-     "lineHeight": 19.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": -0.011,
-     "trackingPx": -0.15
-    },
-    "caption2": {
-     "size": 13.0,
-     "lineHeight": 18.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": -0.006,
-     "trackingPx": -0.08
-    }
-   },
-   "xxLarge": {
-    "largeTitle": {
-     "size": 38.0,
-     "lineHeight": 46.0,
-     "weight": 400,
-     "emphasizedWeight": 700,
-     "trackingEm": 0.01,
-     "trackingPx": 0.38
-    },
-    "title1": {
-     "size": 32.0,
-     "lineHeight": 39.0,
-     "weight": 400,
-     "emphasizedWeight": 700,
-     "trackingEm": 0.013,
-     "trackingPx": 0.42
-    },
-    "title2": {
-     "size": 26.0,
-     "lineHeight": 32.0,
-     "weight": 400,
-     "emphasizedWeight": 700,
-     "trackingEm": 0.008,
-     "trackingPx": 0.21
-    },
-    "title3": {
-     "size": 24.0,
-     "lineHeight": 30.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": 0.003,
-     "trackingPx": 0.07
-    },
-    "headline": {
-     "size": 21.0,
-     "lineHeight": 26.0,
-     "weight": 600,
-     "emphasizedWeight": 600,
-     "trackingEm": -0.018,
-     "trackingPx": -0.38
-    },
-    "body": {
-     "size": 21.0,
-     "lineHeight": 26.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": -0.018,
-     "trackingPx": -0.38
-    },
-    "callout": {
-     "size": 20.0,
-     "lineHeight": 25.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": -0.023,
-     "trackingPx": -0.46
-    },
-    "subheadline": {
-     "size": 19.0,
-     "lineHeight": 24.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": -0.024,
-     "trackingPx": -0.46
-    },
-    "footnote": {
-     "size": 17.0,
-     "lineHeight": 22.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": -0.026,
-     "trackingPx": -0.44
-    },
-    "caption1": {
-     "size": 16.0,
-     "lineHeight": 21.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": -0.02,
-     "trackingPx": -0.32
-    },
-    "caption2": {
-     "size": 15.0,
-     "lineHeight": 20.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": -0.016,
-     "trackingPx": -0.24
-    }
-   },
-   "xxxLarge": {
-    "largeTitle": {
-     "size": 40.0,
-     "lineHeight": 48.0,
-     "weight": 400,
-     "emphasizedWeight": 700,
-     "trackingEm": 0.01,
-     "trackingPx": 0.4
-    },
-    "title1": {
-     "size": 34.0,
-     "lineHeight": 41.0,
-     "weight": 400,
-     "emphasizedWeight": 700,
-     "trackingEm": 0.012,
-     "trackingPx": 0.41
-    },
-    "title2": {
-     "size": 28.0,
-     "lineHeight": 34.0,
-     "weight": 400,
-     "emphasizedWeight": 700,
-     "trackingEm": 0.014,
-     "trackingPx": 0.39
-    },
-    "title3": {
-     "size": 26.0,
-     "lineHeight": 32.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": 0.008,
-     "trackingPx": 0.21
-    },
-    "headline": {
-     "size": 23.0,
-     "lineHeight": 29.0,
-     "weight": 600,
-     "emphasizedWeight": 600,
-     "trackingEm": -0.004,
-     "trackingPx": -0.09
-    },
-    "body": {
-     "size": 23.0,
-     "lineHeight": 29.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": -0.004,
-     "trackingPx": -0.09
-    },
-    "callout": {
-     "size": 22.0,
-     "lineHeight": 28.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": -0.012,
-     "trackingPx": -0.26
-    },
-    "subheadline": {
-     "size": 21.0,
-     "lineHeight": 28.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": -0.018,
-     "trackingPx": -0.38
-    },
-    "footnote": {
-     "size": 19.0,
-     "lineHeight": 24.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": -0.024,
-     "trackingPx": -0.46
-    },
-    "caption1": {
-     "size": 18.0,
-     "lineHeight": 23.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": -0.025,
-     "trackingPx": -0.45
-    },
-    "caption2": {
-     "size": 17.0,
-     "lineHeight": 22.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": -0.026,
-     "trackingPx": -0.44
-    }
-   },
-   "AX1": {
-    "largeTitle": {
-     "size": 44.0,
-     "lineHeight": 52.0,
-     "weight": 400,
-     "emphasizedWeight": 700,
-     "trackingEm": 0.008,
-     "trackingPx": 0.35
-    },
-    "title1": {
-     "size": 38.0,
-     "lineHeight": 46.0,
-     "weight": 400,
-     "emphasizedWeight": 700,
-     "trackingEm": 0.01,
-     "trackingPx": 0.38
-    },
-    "title2": {
-     "size": 34.0,
-     "lineHeight": 41.0,
-     "weight": 400,
-     "emphasizedWeight": 700,
-     "trackingEm": 0.012,
-     "trackingPx": 0.41
-    },
-    "title3": {
-     "size": 31.0,
-     "lineHeight": 38.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": 0.013,
-     "trackingPx": 0.4
-    },
-    "headline": {
-     "size": 28.0,
-     "lineHeight": 34.0,
-     "weight": 600,
-     "emphasizedWeight": 600,
-     "trackingEm": 0.014,
-     "trackingPx": 0.39
-    },
-    "body": {
-     "size": 28.0,
-     "lineHeight": 34.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": 0.014,
-     "trackingPx": 0.39
-    },
-    "callout": {
-     "size": 26.0,
-     "lineHeight": 32.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": 0.008,
-     "trackingPx": 0.21
-    },
-    "subheadline": {
-     "size": 25.0,
-     "lineHeight": 31.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": 0.006,
-     "trackingPx": 0.15
-    },
-    "footnote": {
-     "size": 23.0,
-     "lineHeight": 29.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": -0.004,
-     "trackingPx": -0.09
-    },
-    "caption1": {
-     "size": 22.0,
-     "lineHeight": 28.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": -0.012,
-     "trackingPx": -0.26
-    },
-    "caption2": {
-     "size": 20.0,
-     "lineHeight": 25.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": -0.023,
-     "trackingPx": -0.46
-    }
-   },
-   "AX2": {
-    "largeTitle": {
-     "size": 48.0,
-     "lineHeight": 57.0,
-     "weight": 400,
-     "emphasizedWeight": 700,
-     "trackingEm": 0.008,
-     "trackingPx": 0.38
-    },
-    "title1": {
-     "size": 43.0,
-     "lineHeight": 51.0,
-     "weight": 400,
-     "emphasizedWeight": 700,
-     "trackingEm": 0.009,
-     "trackingPx": 0.39
-    },
-    "title2": {
-     "size": 39.0,
-     "lineHeight": 47.0,
-     "weight": 400,
-     "emphasizedWeight": 700,
-     "trackingEm": 0.01,
-     "trackingPx": 0.39
-    },
-    "title3": {
-     "size": 37.0,
-     "lineHeight": 44.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": 0.01,
-     "trackingPx": 0.37
-    },
-    "headline": {
-     "size": 33.0,
-     "lineHeight": 40.0,
-     "weight": 600,
-     "emphasizedWeight": 600,
-     "trackingEm": 0.012,
-     "trackingPx": 0.4
-    },
-    "body": {
-     "size": 33.0,
-     "lineHeight": 40.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": 0.012,
-     "trackingPx": 0.4
-    },
-    "callout": {
-     "size": 32.0,
-     "lineHeight": 39.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": 0.013,
-     "trackingPx": 0.42
-    },
-    "subheadline": {
-     "size": 30.0,
-     "lineHeight": 37.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": 0.014,
-     "trackingPx": 0.42
-    },
-    "footnote": {
-     "size": 27.0,
-     "lineHeight": 33.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": 0.011,
-     "trackingPx": 0.3
-    },
-    "caption1": {
-     "size": 26.0,
-     "lineHeight": 32.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": 0.008,
-     "trackingPx": 0.21
-    },
-    "caption2": {
-     "size": 24.0,
-     "lineHeight": 30.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": 0.003,
-     "trackingPx": 0.07
-    }
-   },
-   "AX3": {
-    "largeTitle": {
-     "size": 52.0,
-     "lineHeight": 61.0,
-     "weight": 400,
-     "emphasizedWeight": 700,
-     "trackingEm": 0.006,
-     "trackingPx": 0.31
-    },
-    "title1": {
-     "size": 48.0,
-     "lineHeight": 57.0,
-     "weight": 400,
-     "emphasizedWeight": 700,
-     "trackingEm": 0.008,
-     "trackingPx": 0.38
-    },
-    "title2": {
-     "size": 44.0,
-     "lineHeight": 52.0,
-     "weight": 400,
-     "emphasizedWeight": 700,
-     "trackingEm": 0.008,
-     "trackingPx": 0.35
-    },
-    "title3": {
-     "size": 43.0,
-     "lineHeight": 51.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": 0.009,
-     "trackingPx": 0.39
-    },
-    "headline": {
-     "size": 40.0,
-     "lineHeight": 48.0,
-     "weight": 600,
-     "emphasizedWeight": 600,
-     "trackingEm": 0.01,
-     "trackingPx": 0.4
-    },
-    "body": {
-     "size": 40.0,
-     "lineHeight": 48.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": 0.01,
-     "trackingPx": 0.4
-    },
-    "callout": {
-     "size": 38.0,
-     "lineHeight": 46.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": 0.01,
-     "trackingPx": 0.38
-    },
-    "subheadline": {
-     "size": 36.0,
-     "lineHeight": 43.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": 0.01,
-     "trackingPx": 0.36
-    },
-    "footnote": {
-     "size": 33.0,
-     "lineHeight": 40.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": 0.012,
-     "trackingPx": 0.4
-    },
-    "caption1": {
-     "size": 32.0,
-     "lineHeight": 39.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": 0.013,
-     "trackingPx": 0.42
-    },
-    "caption2": {
-     "size": 29.0,
-     "lineHeight": 35.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": 0.014,
-     "trackingPx": 0.41
-    }
-   },
-   "AX4": {
-    "largeTitle": {
-     "size": 56.0,
-     "lineHeight": 66.0,
-     "weight": 400,
-     "emphasizedWeight": 700,
-     "trackingEm": 0.006,
-     "trackingPx": 0.34
-    },
-    "title1": {
-     "size": 53.0,
-     "lineHeight": 62.0,
-     "weight": 400,
-     "emphasizedWeight": 700,
-     "trackingEm": 0.006,
-     "trackingPx": 0.32
-    },
-    "title2": {
-     "size": 50.0,
-     "lineHeight": 59.0,
-     "weight": 400,
-     "emphasizedWeight": 700,
-     "trackingEm": 0.007,
-     "trackingPx": 0.35
-    },
-    "title3": {
-     "size": 49.0,
-     "lineHeight": 58.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": 0.007,
-     "trackingPx": 0.34
-    },
-    "headline": {
-     "size": 47.0,
-     "lineHeight": 56.0,
-     "weight": 600,
-     "emphasizedWeight": 600,
-     "trackingEm": 0.008,
-     "trackingPx": 0.38
-    },
-    "body": {
-     "size": 47.0,
-     "lineHeight": 56.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": 0.008,
-     "trackingPx": 0.38
-    },
-    "callout": {
-     "size": 44.0,
-     "lineHeight": 52.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": 0.008,
-     "trackingPx": 0.35
-    },
-    "subheadline": {
-     "size": 42.0,
-     "lineHeight": 50.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": 0.009,
-     "trackingPx": 0.38
-    },
-    "footnote": {
-     "size": 38.0,
-     "lineHeight": 46.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": 0.01,
-     "trackingPx": 0.38
-    },
-    "caption1": {
-     "size": 37.0,
-     "lineHeight": 44.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": 0.01,
-     "trackingPx": 0.37
-    },
-    "caption2": {
-     "size": 34.0,
-     "lineHeight": 41.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": 0.012,
-     "trackingPx": 0.41
-    }
-   },
-   "AX5": {
-    "largeTitle": {
-     "size": 60.0,
-     "lineHeight": 70.0,
-     "weight": 400,
-     "emphasizedWeight": 700,
-     "trackingEm": 0.004,
-     "trackingPx": 0.24
-    },
-    "title1": {
-     "size": 58.0,
-     "lineHeight": 68.0,
-     "weight": 400,
-     "emphasizedWeight": 700,
-     "trackingEm": 0.005,
-     "trackingPx": 0.29
-    },
-    "title2": {
-     "size": 56.0,
-     "lineHeight": 66.0,
-     "weight": 400,
-     "emphasizedWeight": 700,
-     "trackingEm": 0.006,
-     "trackingPx": 0.34
-    },
-    "title3": {
-     "size": 55.0,
-     "lineHeight": 65.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": 0.006,
-     "trackingPx": 0.33
-    },
-    "headline": {
-     "size": 53.0,
-     "lineHeight": 62.0,
-     "weight": 600,
-     "emphasizedWeight": 600,
-     "trackingEm": 0.006,
-     "trackingPx": 0.32
-    },
-    "body": {
-     "size": 53.0,
-     "lineHeight": 62.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": 0.006,
-     "trackingPx": 0.32
-    },
-    "callout": {
-     "size": 51.0,
-     "lineHeight": 60.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": 0.007,
-     "trackingPx": 0.36
-    },
-    "subheadline": {
-     "size": 49.0,
-     "lineHeight": 58.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": 0.007,
-     "trackingPx": 0.34
-    },
-    "footnote": {
-     "size": 44.0,
-     "lineHeight": 52.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": 0.008,
-     "trackingPx": 0.35
-    },
-    "caption1": {
-     "size": 43.0,
-     "lineHeight": 51.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": 0.009,
-     "trackingPx": 0.39
-    },
-    "caption2": {
-     "size": 40.0,
-     "lineHeight": 48.0,
-     "weight": 400,
-     "emphasizedWeight": 600,
-     "trackingEm": 0.01,
-     "trackingPx": 0.4
-    }
-   }
-  }
- },
- "macosTextStyles": {
-  "$usage": "macOS has no Dynamic Type. These are fixed. Body is 13, never 17 on Mac.",
-  "styles": {
-   "largeTitle": {
-    "size": 26,
-    "lineHeight": 32,
-    "weight": 400,
-    "emphasizedWeight": 700,
-    "lineHeightTight": 30,
-    "lineHeightLoose": 34,
-    "trackingEm": 0.008,
-    "trackingPx": 0.21
-   },
-   "title1": {
-    "size": 22,
-    "lineHeight": 26,
-    "weight": 400,
-    "emphasizedWeight": 700,
-    "lineHeightTight": 24,
-    "lineHeightLoose": 28,
-    "trackingEm": -0.012,
-    "trackingPx": -0.26
-   },
-   "title2": {
-    "size": 17,
-    "lineHeight": 22,
-    "weight": 400,
-    "emphasizedWeight": 700,
-    "lineHeightTight": 20,
-    "lineHeightLoose": 24,
-    "trackingEm": -0.026,
-    "trackingPx": -0.44
-   },
-   "title3": {
-    "size": 15,
-    "lineHeight": 20,
-    "weight": 400,
-    "emphasizedWeight": 600,
-    "lineHeightTight": 18,
-    "lineHeightLoose": 22,
-    "trackingEm": -0.016,
-    "trackingPx": -0.24
-   },
-   "headline": {
-    "size": 13,
-    "lineHeight": 16,
-    "weight": 700,
-    "emphasizedWeight": 800,
-    "lineHeightTight": 14,
-    "lineHeightLoose": 18,
-    "trackingEm": -0.006,
-    "trackingPx": -0.08
-   },
-   "body": {
-    "size": 13,
-    "lineHeight": 16,
-    "weight": 400,
-    "emphasizedWeight": 600,
-    "lineHeightTight": 14,
-    "lineHeightLoose": 18,
-    "trackingEm": -0.006,
-    "trackingPx": -0.08
-   },
-   "callout": {
-    "size": 12,
-    "lineHeight": 15,
-    "weight": 400,
-    "emphasizedWeight": 600,
-    "lineHeightTight": 13,
-    "lineHeightLoose": 17,
-    "trackingEm": 0.0,
-    "trackingPx": 0.0
-   },
-   "subheadline": {
-    "size": 11,
-    "lineHeight": 14,
-    "weight": 400,
-    "emphasizedWeight": 600,
-    "lineHeightTight": 12,
-    "lineHeightLoose": 16,
-    "trackingEm": 0.006,
-    "trackingPx": 0.07
-   },
-   "footnote": {
-    "size": 10,
-    "lineHeight": 13,
-    "weight": 400,
-    "emphasizedWeight": 600,
-    "lineHeightTight": 11,
-    "lineHeightLoose": 15,
-    "trackingEm": 0.012,
-    "trackingPx": 0.12
-   },
-   "caption1": {
-    "size": 10,
-    "lineHeight": 13,
-    "weight": 400,
-    "emphasizedWeight": 500,
-    "lineHeightTight": 11,
-    "lineHeightLoose": 15,
-    "trackingEm": 0.012,
-    "trackingPx": 0.12
-   },
-   "caption2": {
-    "size": 10,
-    "lineHeight": 13,
-    "weight": 500,
-    "emphasizedWeight": 600,
-    "lineHeightTight": 11,
-    "lineHeightLoose": 15,
-    "trackingEm": 0.012,
-    "trackingPx": 0.12
-   }
-  }
- },
- "trackingTables": {
-  "$usage": "1/1000 em by point size. Interpolate by taking the nearest lower listed size.",
-  "sfProIOS": {
-   "6": 41,
-   "7": 34,
-   "8": 26,
-   "9": 19,
-   "10": 12,
-   "11": 6,
-   "12": 0,
-   "13": -6,
-   "14": -11,
-   "15": -16,
-   "16": -20,
-   "17": -26,
-   "18": -25,
-   "19": -24,
-   "20": -23,
-   "21": -18,
-   "22": -12,
-   "23": -4,
-   "24": 3,
-   "25": 6,
-   "26": 8,
-   "27": 11,
-   "28": 14,
-   "29": 14,
-   "30": 14,
-   "31": 13,
-   "32": 13,
-   "33": 12,
-   "34": 12,
-   "35": 11,
-   "36": 10,
-   "37": 10,
-   "38": 10,
-   "39": 10,
-   "40": 10,
-   "41": 9,
-   "42": 9,
-   "43": 9,
-   "44": 8,
-   "45": 8,
-   "46": 8,
-   "47": 8,
-   "48": 8,
-   "49": 7,
-   "50": 7,
-   "51": 7,
-   "52": 6,
-   "53": 6,
-   "54": 6,
-   "56": 6,
-   "58": 5,
-   "60": 4,
-   "62": 4,
-   "64": 4,
-   "66": 3,
-   "68": 2,
-   "70": 2,
-   "72": 2,
-   "76": 1,
-   "80": 0,
-   "84": 0,
-   "88": 0,
-   "92": 0,
-   "96": 0
+  "$meta": {
+    "description": "Typography tokens for iOS 27 and macOS 27. Sizes in points (1pt = 1 CSS px = 1 Flutter logical px). trackingEm is letter-spacing in em, already computed from Apple's tracking tables. Always apply tracking: the SF system font does it automatically on Apple platforms, every other font needs it explicitly.",
+    "sources": {
+      "hig": "HIG Typography specifications (Dynamic Type tables, tracking tables, macOS text styles)",
+      "kit": "iOS 27 and macOS 27 UI kit text styles (tight and loose leading)"
+    },
+    "reconciledDate": "2026-11-25"
   },
-  "sfProMacOS": {
-   "6": 41,
-   "7": 34,
-   "8": 26,
-   "9": 19,
-   "10": 12,
-   "11": 6,
-   "12": 0,
-   "13": -6,
-   "14": -11,
-   "15": -16,
-   "16": -20,
-   "17": -26,
-   "18": -25,
-   "19": -24,
-   "20": -23,
-   "21": -18,
-   "22": -12,
-   "23": -4,
-   "24": 3,
-   "25": 6,
-   "26": 8,
-   "27": 11,
-   "28": 14,
-   "29": 14,
-   "30": 14,
-   "31": 13,
-   "32": 13,
-   "33": 12,
-   "34": 12,
-   "35": 11,
-   "36": 10,
-   "37": 10,
-   "38": 10,
-   "39": 10,
-   "40": 10,
-   "41": 9,
-   "42": 9,
-   "43": 9,
-   "44": 8,
-   "45": 8,
-   "46": 8,
-   "47": 8,
-   "48": 8,
-   "49": 7,
-   "50": 7,
-   "51": 7,
-   "52": 6,
-   "53": 6,
-   "54": 6,
-   "56": 6,
-   "58": 5,
-   "60": 4,
-   "62": 4,
-   "64": 4,
-   "66": 3,
-   "68": 2,
-   "70": 2,
-   "72": 2,
-   "76": 1,
-   "80": 0,
-   "84": 0,
-   "88": 0,
-   "92": 0,
-   "96": 0
+  "fontStacks": {
+    "$usage": "Pick the stack by target. Never ship SF font files: license allows Apple platforms only. On Apple devices the system font IS SF, so system-ui stacks render real SF legally.",
+    "web": "-apple-system, BlinkMacSystemFont, system-ui, 'Inter Variable', 'Inter', 'Segoe UI Variable', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+    "webRounded": "ui-rounded, 'SF Pro Rounded', -apple-system, system-ui, 'Nunito', sans-serif",
+    "webSerif": "ui-serif, 'New York', 'Iowan Old Style', Georgia, serif",
+    "webMono": "ui-monospace, 'SF Mono', SFMono-Regular, Menlo, 'JetBrains Mono', Consolas, monospace",
+    "webBangla": "'Hind Siliguri', 'Noto Sans Bengali', 'Kohinoor Bangla', sans-serif",
+    "flutterApple": ".SF Pro Text / .SF Pro Display via CupertinoTheme default (do not set fontFamily on iOS/macOS)",
+    "flutterOther": "Inter (bundle Inter variable font, OFL license) with tracking from this file",
+    "tauriMac": "-apple-system (WebKit on macOS renders SF)",
+    "tauriWindows": "'Inter Variable', 'Segoe UI Variable', sans-serif",
+    "$source": "Apple System Fonts + OFL cross-platform stacks",
+    "$class": "platform-dependent",
+    "$url": "https://developer.apple.com/fonts/",
+    "$platform": "All"
   },
-  "sfProRounded": {
-   "6": 87,
-   "7": 80,
-   "8": 72,
-   "9": 65,
-   "10": 58,
-   "11": 52,
-   "12": 46,
-   "13": 40,
-   "14": 35,
-   "15": 30,
-   "16": 26,
-   "17": 22,
-   "18": 21,
-   "19": 20,
-   "20": 18,
-   "21": 17,
-   "22": 16,
-   "23": 16,
-   "24": 15,
-   "25": 14,
-   "26": 14,
-   "27": 14,
-   "28": 13,
-   "29": 13,
-   "30": 12,
-   "31": 12,
-   "32": 12,
-   "33": 12,
-   "34": 12,
-   "35": 11,
-   "36": 11,
-   "37": 10,
-   "38": 10,
-   "39": 10,
-   "40": 10,
-   "41": 10,
-   "42": 10,
-   "43": 9,
-   "44": 8,
-   "45": 8,
-   "46": 8,
-   "47": 8,
-   "48": 8,
-   "49": 8,
-   "50": 7,
-   "51": 6,
-   "52": 6,
-   "53": 6,
-   "54": 6,
-   "56": 6,
-   "58": 4,
-   "60": 4,
-   "62": 4,
-   "64": 3,
-   "66": 2,
-   "68": 2,
-   "70": 2,
-   "72": 2,
-   "76": 1,
-   "80": 0,
-   "84": 0,
-   "88": 0,
-   "92": 0,
-   "96": 0
+  "fallbackCompensation": {
+    "$usage": "When the rendered font is Inter instead of SF (Android, Windows, Linux), Inter runs about 2 to 3 percent wider. Apply these on top of tracking to keep line lengths and wraps identical to SF.",
+    "inter": {
+      "trackingDeltaEm": -0.01,
+      "fontFeatureSettings": "'cv11', 'ss01', 'ss03'",
+      "note": "cv11 single storey a off, ss01 open digits, ss03 rounded quotes bring Inter closer to SF. Keep optical sizing on: font-optical-sizing auto."
+    },
+    "$source": "estimated Inter width compensation",
+    "$class": "estimated",
+    "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+    "$platform": "Web / Non-Apple OS"
+  },
+  "iosDynamicType": {
+    "$default": "Large",
+    "$usage": "Large is the default size. Apps must scale text when the user changes size (xSmall through AX5). Layouts must reflow at AX sizes.",
+    "sizes": {
+      "xSmall": {
+        "largeTitle": {
+          "size": 31.0,
+          "lineHeight": 38.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.013,
+          "trackingPx": 0.4
+        },
+        "title1": {
+          "size": 25.0,
+          "lineHeight": 31.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.006,
+          "trackingPx": 0.15
+        },
+        "title2": {
+          "size": 19.0,
+          "lineHeight": 24.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": -0.024,
+          "trackingPx": -0.46
+        },
+        "title3": {
+          "size": 17.0,
+          "lineHeight": 22.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.026,
+          "trackingPx": -0.44
+        },
+        "headline": {
+          "size": 14.0,
+          "lineHeight": 19.0,
+          "weight": 600,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.011,
+          "trackingPx": -0.15
+        },
+        "body": {
+          "size": 14.0,
+          "lineHeight": 19.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.011,
+          "trackingPx": -0.15
+        },
+        "callout": {
+          "size": 13.0,
+          "lineHeight": 18.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.006,
+          "trackingPx": -0.08
+        },
+        "subheadline": {
+          "size": 12.0,
+          "lineHeight": 16.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.0,
+          "trackingPx": 0.0
+        },
+        "footnote": {
+          "size": 12.0,
+          "lineHeight": 16.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.0,
+          "trackingPx": 0.0
+        },
+        "caption1": {
+          "size": 11.0,
+          "lineHeight": 13.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.006,
+          "trackingPx": 0.07
+        },
+        "caption2": {
+          "size": 11.0,
+          "lineHeight": 13.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.006,
+          "trackingPx": 0.07
+        }
+      },
+      "Small": {
+        "largeTitle": {
+          "size": 32.0,
+          "lineHeight": 39.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.013,
+          "trackingPx": 0.42
+        },
+        "title1": {
+          "size": 26.0,
+          "lineHeight": 32.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.008,
+          "trackingPx": 0.21
+        },
+        "title2": {
+          "size": 20.0,
+          "lineHeight": 25.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": -0.023,
+          "trackingPx": -0.46
+        },
+        "title3": {
+          "size": 18.0,
+          "lineHeight": 23.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.025,
+          "trackingPx": -0.45
+        },
+        "headline": {
+          "size": 15.0,
+          "lineHeight": 20.0,
+          "weight": 600,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.016,
+          "trackingPx": -0.24
+        },
+        "body": {
+          "size": 15.0,
+          "lineHeight": 20.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.016,
+          "trackingPx": -0.24
+        },
+        "callout": {
+          "size": 14.0,
+          "lineHeight": 19.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.011,
+          "trackingPx": -0.15
+        },
+        "subheadline": {
+          "size": 13.0,
+          "lineHeight": 18.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.006,
+          "trackingPx": -0.08
+        },
+        "footnote": {
+          "size": 12.0,
+          "lineHeight": 16.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.0,
+          "trackingPx": 0.0
+        },
+        "caption1": {
+          "size": 11.0,
+          "lineHeight": 13.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.006,
+          "trackingPx": 0.07
+        },
+        "caption2": {
+          "size": 11.0,
+          "lineHeight": 13.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.006,
+          "trackingPx": 0.07
+        }
+      },
+      "Medium": {
+        "largeTitle": {
+          "size": 33.0,
+          "lineHeight": 40.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.012,
+          "trackingPx": 0.4
+        },
+        "title1": {
+          "size": 27.0,
+          "lineHeight": 33.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.011,
+          "trackingPx": 0.3
+        },
+        "title2": {
+          "size": 21.0,
+          "lineHeight": 26.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": -0.018,
+          "trackingPx": -0.38
+        },
+        "title3": {
+          "size": 19.0,
+          "lineHeight": 24.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.024,
+          "trackingPx": -0.46
+        },
+        "headline": {
+          "size": 16.0,
+          "lineHeight": 21.0,
+          "weight": 600,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.02,
+          "trackingPx": -0.32
+        },
+        "body": {
+          "size": 16.0,
+          "lineHeight": 21.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.02,
+          "trackingPx": -0.32
+        },
+        "callout": {
+          "size": 15.0,
+          "lineHeight": 20.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.016,
+          "trackingPx": -0.24
+        },
+        "subheadline": {
+          "size": 14.0,
+          "lineHeight": 19.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.011,
+          "trackingPx": -0.15
+        },
+        "footnote": {
+          "size": 12.0,
+          "lineHeight": 16.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.0,
+          "trackingPx": 0.0
+        },
+        "caption1": {
+          "size": 11.0,
+          "lineHeight": 13.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.006,
+          "trackingPx": 0.07
+        },
+        "caption2": {
+          "size": 11.0,
+          "lineHeight": 13.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.006,
+          "trackingPx": 0.07
+        }
+      },
+      "Large": {
+        "largeTitle": {
+          "size": 34.0,
+          "lineHeight": 41.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "lineHeightTight": 39,
+          "lineHeightLoose": 43,
+          "trackingEm": 0.012,
+          "trackingPx": 0.41
+        },
+        "title1": {
+          "size": 28.0,
+          "lineHeight": 34.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "lineHeightTight": 32,
+          "lineHeightLoose": 36,
+          "trackingEm": 0.014,
+          "trackingPx": 0.39
+        },
+        "title2": {
+          "size": 22.0,
+          "lineHeight": 28.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "lineHeightTight": 26,
+          "lineHeightLoose": 30,
+          "trackingEm": -0.012,
+          "trackingPx": -0.26
+        },
+        "title3": {
+          "size": 20.0,
+          "lineHeight": 25.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "lineHeightTight": 23,
+          "lineHeightLoose": 27,
+          "trackingEm": -0.023,
+          "trackingPx": -0.46
+        },
+        "headline": {
+          "size": 17.0,
+          "lineHeight": 22.0,
+          "weight": 600,
+          "emphasizedWeight": 600,
+          "lineHeightTight": 20,
+          "lineHeightLoose": 24,
+          "trackingEm": -0.026,
+          "trackingPx": -0.44
+        },
+        "body": {
+          "size": 17.0,
+          "lineHeight": 22.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "lineHeightTight": 20,
+          "lineHeightLoose": 24,
+          "trackingEm": -0.026,
+          "trackingPx": -0.44
+        },
+        "callout": {
+          "size": 16.0,
+          "lineHeight": 21.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "lineHeightTight": 19,
+          "lineHeightLoose": 23,
+          "trackingEm": -0.02,
+          "trackingPx": -0.32
+        },
+        "subheadline": {
+          "size": 15.0,
+          "lineHeight": 20.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "lineHeightTight": 18,
+          "lineHeightLoose": 22,
+          "trackingEm": -0.016,
+          "trackingPx": -0.24
+        },
+        "footnote": {
+          "size": 13.0,
+          "lineHeight": 18.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "lineHeightTight": 16,
+          "lineHeightLoose": 20,
+          "trackingEm": -0.006,
+          "trackingPx": -0.08
+        },
+        "caption1": {
+          "size": 12.0,
+          "lineHeight": 16.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "lineHeightTight": 14,
+          "lineHeightLoose": 18,
+          "trackingEm": 0.0,
+          "trackingPx": 0.0
+        },
+        "caption2": {
+          "size": 11.0,
+          "lineHeight": 13.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "lineHeightTight": 11,
+          "lineHeightLoose": 15,
+          "trackingEm": 0.006,
+          "trackingPx": 0.07
+        }
+      },
+      "xLarge": {
+        "largeTitle": {
+          "size": 36.0,
+          "lineHeight": 43.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.01,
+          "trackingPx": 0.36
+        },
+        "title1": {
+          "size": 30.0,
+          "lineHeight": 37.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.014,
+          "trackingPx": 0.42
+        },
+        "title2": {
+          "size": 24.0,
+          "lineHeight": 30.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.003,
+          "trackingPx": 0.07
+        },
+        "title3": {
+          "size": 22.0,
+          "lineHeight": 28.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.012,
+          "trackingPx": -0.26
+        },
+        "headline": {
+          "size": 19.0,
+          "lineHeight": 24.0,
+          "weight": 600,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.024,
+          "trackingPx": -0.46
+        },
+        "body": {
+          "size": 19.0,
+          "lineHeight": 24.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.024,
+          "trackingPx": -0.46
+        },
+        "callout": {
+          "size": 18.0,
+          "lineHeight": 23.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.025,
+          "trackingPx": -0.45
+        },
+        "subheadline": {
+          "size": 17.0,
+          "lineHeight": 22.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.026,
+          "trackingPx": -0.44
+        },
+        "footnote": {
+          "size": 15.0,
+          "lineHeight": 20.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.016,
+          "trackingPx": -0.24
+        },
+        "caption1": {
+          "size": 14.0,
+          "lineHeight": 19.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.011,
+          "trackingPx": -0.15
+        },
+        "caption2": {
+          "size": 13.0,
+          "lineHeight": 18.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.006,
+          "trackingPx": -0.08
+        }
+      },
+      "xxLarge": {
+        "largeTitle": {
+          "size": 38.0,
+          "lineHeight": 46.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.01,
+          "trackingPx": 0.38
+        },
+        "title1": {
+          "size": 32.0,
+          "lineHeight": 39.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.013,
+          "trackingPx": 0.42
+        },
+        "title2": {
+          "size": 26.0,
+          "lineHeight": 32.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.008,
+          "trackingPx": 0.21
+        },
+        "title3": {
+          "size": 24.0,
+          "lineHeight": 30.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.003,
+          "trackingPx": 0.07
+        },
+        "headline": {
+          "size": 21.0,
+          "lineHeight": 26.0,
+          "weight": 600,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.018,
+          "trackingPx": -0.38
+        },
+        "body": {
+          "size": 21.0,
+          "lineHeight": 26.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.018,
+          "trackingPx": -0.38
+        },
+        "callout": {
+          "size": 20.0,
+          "lineHeight": 25.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.023,
+          "trackingPx": -0.46
+        },
+        "subheadline": {
+          "size": 19.0,
+          "lineHeight": 24.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.024,
+          "trackingPx": -0.46
+        },
+        "footnote": {
+          "size": 17.0,
+          "lineHeight": 22.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.026,
+          "trackingPx": -0.44
+        },
+        "caption1": {
+          "size": 16.0,
+          "lineHeight": 21.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.02,
+          "trackingPx": -0.32
+        },
+        "caption2": {
+          "size": 15.0,
+          "lineHeight": 20.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.016,
+          "trackingPx": -0.24
+        }
+      },
+      "xxxLarge": {
+        "largeTitle": {
+          "size": 40.0,
+          "lineHeight": 48.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.01,
+          "trackingPx": 0.4
+        },
+        "title1": {
+          "size": 34.0,
+          "lineHeight": 41.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.012,
+          "trackingPx": 0.41
+        },
+        "title2": {
+          "size": 28.0,
+          "lineHeight": 34.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.014,
+          "trackingPx": 0.39
+        },
+        "title3": {
+          "size": 26.0,
+          "lineHeight": 32.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.008,
+          "trackingPx": 0.21
+        },
+        "headline": {
+          "size": 23.0,
+          "lineHeight": 29.0,
+          "weight": 600,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.004,
+          "trackingPx": -0.09
+        },
+        "body": {
+          "size": 23.0,
+          "lineHeight": 29.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.004,
+          "trackingPx": -0.09
+        },
+        "callout": {
+          "size": 22.0,
+          "lineHeight": 28.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.012,
+          "trackingPx": -0.26
+        },
+        "subheadline": {
+          "size": 21.0,
+          "lineHeight": 28.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.018,
+          "trackingPx": -0.38
+        },
+        "footnote": {
+          "size": 19.0,
+          "lineHeight": 24.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.024,
+          "trackingPx": -0.46
+        },
+        "caption1": {
+          "size": 18.0,
+          "lineHeight": 23.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.025,
+          "trackingPx": -0.45
+        },
+        "caption2": {
+          "size": 17.0,
+          "lineHeight": 22.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.026,
+          "trackingPx": -0.44
+        }
+      },
+      "AX1": {
+        "largeTitle": {
+          "size": 44.0,
+          "lineHeight": 52.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.008,
+          "trackingPx": 0.35
+        },
+        "title1": {
+          "size": 38.0,
+          "lineHeight": 46.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.01,
+          "trackingPx": 0.38
+        },
+        "title2": {
+          "size": 34.0,
+          "lineHeight": 41.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.012,
+          "trackingPx": 0.41
+        },
+        "title3": {
+          "size": 31.0,
+          "lineHeight": 38.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.013,
+          "trackingPx": 0.4
+        },
+        "headline": {
+          "size": 28.0,
+          "lineHeight": 34.0,
+          "weight": 600,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.014,
+          "trackingPx": 0.39
+        },
+        "body": {
+          "size": 28.0,
+          "lineHeight": 34.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.014,
+          "trackingPx": 0.39
+        },
+        "callout": {
+          "size": 26.0,
+          "lineHeight": 32.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.008,
+          "trackingPx": 0.21
+        },
+        "subheadline": {
+          "size": 25.0,
+          "lineHeight": 31.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.006,
+          "trackingPx": 0.15
+        },
+        "footnote": {
+          "size": 23.0,
+          "lineHeight": 29.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.004,
+          "trackingPx": -0.09
+        },
+        "caption1": {
+          "size": 22.0,
+          "lineHeight": 28.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.012,
+          "trackingPx": -0.26
+        },
+        "caption2": {
+          "size": 20.0,
+          "lineHeight": 25.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": -0.023,
+          "trackingPx": -0.46
+        }
+      },
+      "AX2": {
+        "largeTitle": {
+          "size": 48.0,
+          "lineHeight": 57.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.008,
+          "trackingPx": 0.38
+        },
+        "title1": {
+          "size": 43.0,
+          "lineHeight": 51.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.009,
+          "trackingPx": 0.39
+        },
+        "title2": {
+          "size": 39.0,
+          "lineHeight": 47.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.01,
+          "trackingPx": 0.39
+        },
+        "title3": {
+          "size": 37.0,
+          "lineHeight": 44.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.01,
+          "trackingPx": 0.37
+        },
+        "headline": {
+          "size": 33.0,
+          "lineHeight": 40.0,
+          "weight": 600,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.012,
+          "trackingPx": 0.4
+        },
+        "body": {
+          "size": 33.0,
+          "lineHeight": 40.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.012,
+          "trackingPx": 0.4
+        },
+        "callout": {
+          "size": 32.0,
+          "lineHeight": 39.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.013,
+          "trackingPx": 0.42
+        },
+        "subheadline": {
+          "size": 30.0,
+          "lineHeight": 37.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.014,
+          "trackingPx": 0.42
+        },
+        "footnote": {
+          "size": 27.0,
+          "lineHeight": 33.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.011,
+          "trackingPx": 0.3
+        },
+        "caption1": {
+          "size": 26.0,
+          "lineHeight": 32.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.008,
+          "trackingPx": 0.21
+        },
+        "caption2": {
+          "size": 24.0,
+          "lineHeight": 30.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.003,
+          "trackingPx": 0.07
+        }
+      },
+      "AX3": {
+        "largeTitle": {
+          "size": 52.0,
+          "lineHeight": 61.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.006,
+          "trackingPx": 0.31
+        },
+        "title1": {
+          "size": 48.0,
+          "lineHeight": 57.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.008,
+          "trackingPx": 0.38
+        },
+        "title2": {
+          "size": 44.0,
+          "lineHeight": 52.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.008,
+          "trackingPx": 0.35
+        },
+        "title3": {
+          "size": 43.0,
+          "lineHeight": 51.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.009,
+          "trackingPx": 0.39
+        },
+        "headline": {
+          "size": 40.0,
+          "lineHeight": 48.0,
+          "weight": 600,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.01,
+          "trackingPx": 0.4
+        },
+        "body": {
+          "size": 40.0,
+          "lineHeight": 48.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.01,
+          "trackingPx": 0.4
+        },
+        "callout": {
+          "size": 38.0,
+          "lineHeight": 46.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.01,
+          "trackingPx": 0.38
+        },
+        "subheadline": {
+          "size": 36.0,
+          "lineHeight": 43.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.01,
+          "trackingPx": 0.36
+        },
+        "footnote": {
+          "size": 33.0,
+          "lineHeight": 40.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.012,
+          "trackingPx": 0.4
+        },
+        "caption1": {
+          "size": 32.0,
+          "lineHeight": 39.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.013,
+          "trackingPx": 0.42
+        },
+        "caption2": {
+          "size": 29.0,
+          "lineHeight": 35.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.014,
+          "trackingPx": 0.41
+        }
+      },
+      "AX4": {
+        "largeTitle": {
+          "size": 56.0,
+          "lineHeight": 66.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.006,
+          "trackingPx": 0.34
+        },
+        "title1": {
+          "size": 53.0,
+          "lineHeight": 62.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.006,
+          "trackingPx": 0.32
+        },
+        "title2": {
+          "size": 50.0,
+          "lineHeight": 59.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.007,
+          "trackingPx": 0.35
+        },
+        "title3": {
+          "size": 49.0,
+          "lineHeight": 58.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.007,
+          "trackingPx": 0.34
+        },
+        "headline": {
+          "size": 47.0,
+          "lineHeight": 56.0,
+          "weight": 600,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.008,
+          "trackingPx": 0.38
+        },
+        "body": {
+          "size": 47.0,
+          "lineHeight": 56.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.008,
+          "trackingPx": 0.38
+        },
+        "callout": {
+          "size": 44.0,
+          "lineHeight": 52.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.008,
+          "trackingPx": 0.35
+        },
+        "subheadline": {
+          "size": 42.0,
+          "lineHeight": 50.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.009,
+          "trackingPx": 0.38
+        },
+        "footnote": {
+          "size": 38.0,
+          "lineHeight": 46.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.01,
+          "trackingPx": 0.38
+        },
+        "caption1": {
+          "size": 37.0,
+          "lineHeight": 44.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.01,
+          "trackingPx": 0.37
+        },
+        "caption2": {
+          "size": 34.0,
+          "lineHeight": 41.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.012,
+          "trackingPx": 0.41
+        }
+      },
+      "AX5": {
+        "largeTitle": {
+          "size": 60.0,
+          "lineHeight": 70.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.004,
+          "trackingPx": 0.24
+        },
+        "title1": {
+          "size": 58.0,
+          "lineHeight": 68.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.005,
+          "trackingPx": 0.29
+        },
+        "title2": {
+          "size": 56.0,
+          "lineHeight": 66.0,
+          "weight": 400,
+          "emphasizedWeight": 700,
+          "trackingEm": 0.006,
+          "trackingPx": 0.34
+        },
+        "title3": {
+          "size": 55.0,
+          "lineHeight": 65.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.006,
+          "trackingPx": 0.33
+        },
+        "headline": {
+          "size": 53.0,
+          "lineHeight": 62.0,
+          "weight": 600,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.006,
+          "trackingPx": 0.32
+        },
+        "body": {
+          "size": 53.0,
+          "lineHeight": 62.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.006,
+          "trackingPx": 0.32
+        },
+        "callout": {
+          "size": 51.0,
+          "lineHeight": 60.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.007,
+          "trackingPx": 0.36
+        },
+        "subheadline": {
+          "size": 49.0,
+          "lineHeight": 58.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.007,
+          "trackingPx": 0.34
+        },
+        "footnote": {
+          "size": 44.0,
+          "lineHeight": 52.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.008,
+          "trackingPx": 0.35
+        },
+        "caption1": {
+          "size": 43.0,
+          "lineHeight": 51.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.009,
+          "trackingPx": 0.39
+        },
+        "caption2": {
+          "size": 40.0,
+          "lineHeight": 48.0,
+          "weight": 400,
+          "emphasizedWeight": 600,
+          "trackingEm": 0.01,
+          "trackingPx": 0.4
+        }
+      }
+    },
+    "$source": "Apple HIG Typography Dynamic Type tables (verified 0 diffs across 132 cells)",
+    "$class": "official",
+    "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+    "$platform": "iOS / iPadOS"
+  },
+  "macosTextStyles": {
+    "$usage": "macOS has no Dynamic Type. These are fixed. Body is 13, never 17 on Mac.",
+    "styles": {
+      "largeTitle": {
+        "size": 26,
+        "lineHeight": 32,
+        "weight": 400,
+        "emphasizedWeight": 700,
+        "lineHeightTight": 30,
+        "lineHeightLoose": 34,
+        "trackingEm": 0.008,
+        "trackingPx": 0.21
+      },
+      "title1": {
+        "size": 22,
+        "lineHeight": 26,
+        "weight": 400,
+        "emphasizedWeight": 700,
+        "lineHeightTight": 24,
+        "lineHeightLoose": 28,
+        "trackingEm": -0.012,
+        "trackingPx": -0.26
+      },
+      "title2": {
+        "size": 17,
+        "lineHeight": 22,
+        "weight": 400,
+        "emphasizedWeight": 700,
+        "lineHeightTight": 20,
+        "lineHeightLoose": 24,
+        "trackingEm": -0.026,
+        "trackingPx": -0.44
+      },
+      "title3": {
+        "size": 15,
+        "lineHeight": 20,
+        "weight": 400,
+        "emphasizedWeight": 600,
+        "lineHeightTight": 18,
+        "lineHeightLoose": 22,
+        "trackingEm": -0.016,
+        "trackingPx": -0.24
+      },
+      "headline": {
+        "size": 13,
+        "lineHeight": 16,
+        "weight": 700,
+        "emphasizedWeight": 800,
+        "lineHeightTight": 14,
+        "lineHeightLoose": 18,
+        "trackingEm": -0.006,
+        "trackingPx": -0.08
+      },
+      "body": {
+        "size": 13,
+        "lineHeight": 16,
+        "weight": 400,
+        "emphasizedWeight": 600,
+        "lineHeightTight": 14,
+        "lineHeightLoose": 18,
+        "trackingEm": -0.006,
+        "trackingPx": -0.08
+      },
+      "callout": {
+        "size": 12,
+        "lineHeight": 15,
+        "weight": 400,
+        "emphasizedWeight": 600,
+        "lineHeightTight": 13,
+        "lineHeightLoose": 17,
+        "trackingEm": 0.0,
+        "trackingPx": 0.0
+      },
+      "subheadline": {
+        "size": 11,
+        "lineHeight": 14,
+        "weight": 400,
+        "emphasizedWeight": 600,
+        "lineHeightTight": 12,
+        "lineHeightLoose": 16,
+        "trackingEm": 0.006,
+        "trackingPx": 0.07
+      },
+      "footnote": {
+        "size": 10,
+        "lineHeight": 13,
+        "weight": 400,
+        "emphasizedWeight": 600,
+        "lineHeightTight": 11,
+        "lineHeightLoose": 15,
+        "trackingEm": 0.012,
+        "trackingPx": 0.12
+      },
+      "caption1": {
+        "size": 10,
+        "lineHeight": 13,
+        "weight": 400,
+        "emphasizedWeight": 500,
+        "lineHeightTight": 11,
+        "lineHeightLoose": 15,
+        "trackingEm": 0.012,
+        "trackingPx": 0.12
+      },
+      "caption2": {
+        "size": 10,
+        "lineHeight": 13,
+        "weight": 500,
+        "emphasizedWeight": 600,
+        "lineHeightTight": 11,
+        "lineHeightLoose": 15,
+        "trackingEm": 0.012,
+        "trackingPx": 0.12
+      }
+    },
+    "$source": "Apple HIG Typography macOS built-in text styles",
+    "$class": "official",
+    "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+    "$platform": "macOS",
+    "$kitConflict": {
+      "$status": "needs-device-verification",
+      "$source": "Apple macOS 27 Sketch Kit vs Apple HIG Typography",
+      "$class": "measured",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+      "headline": {
+        "higEmphasizedWeight": 800,
+        "kitEmphasizedWeight": 900
+      },
+      "caption1": {
+        "higEmphasizedWeight": 500,
+        "kitEmphasizedWeight": 600
+      },
+      "caption2": {
+        "higWeight": 500,
+        "kitWeight": 400
+      }
+    }
+  },
+  "trackingTables": {
+    "$usage": "1/1000 em by point size. Interpolate by taking the nearest lower listed size.",
+    "sfProIOS": {
+      "6": 41,
+      "7": 34,
+      "8": 26,
+      "9": 19,
+      "10": 12,
+      "11": 6,
+      "12": 0,
+      "13": -6,
+      "14": -11,
+      "15": -16,
+      "16": -20,
+      "17": -26,
+      "18": -25,
+      "19": -24,
+      "20": -23,
+      "21": -18,
+      "22": -12,
+      "23": -4,
+      "24": 3,
+      "25": 6,
+      "26": 8,
+      "27": 11,
+      "28": 14,
+      "29": 14,
+      "30": 14,
+      "31": 13,
+      "32": 13,
+      "33": 12,
+      "34": 12,
+      "35": 11,
+      "36": 10,
+      "37": 10,
+      "38": 10,
+      "39": 10,
+      "40": 10,
+      "41": 9,
+      "42": 9,
+      "43": 9,
+      "44": 8,
+      "45": 8,
+      "46": 8,
+      "47": 8,
+      "48": 8,
+      "49": 7,
+      "50": 7,
+      "51": 7,
+      "52": 6,
+      "53": 6,
+      "54": 6,
+      "56": 6,
+      "58": 5,
+      "60": 4,
+      "62": 4,
+      "64": 4,
+      "66": 3,
+      "68": 2,
+      "70": 2,
+      "72": 2,
+      "76": 1,
+      "80": 0,
+      "84": 0,
+      "88": 0,
+      "92": 0,
+      "96": 0
+    },
+    "sfProMacOS": {
+      "6": 41,
+      "7": 34,
+      "8": 26,
+      "9": 19,
+      "10": 12,
+      "11": 6,
+      "12": 0,
+      "13": -6,
+      "14": -11,
+      "15": -16,
+      "16": -20,
+      "17": -26,
+      "18": -25,
+      "19": -24,
+      "20": -23,
+      "21": -18,
+      "22": -12,
+      "23": -4,
+      "24": 3,
+      "25": 6,
+      "26": 8,
+      "27": 11,
+      "28": 14,
+      "29": 14,
+      "30": 14,
+      "31": 13,
+      "32": 13,
+      "33": 12,
+      "34": 12,
+      "35": 11,
+      "36": 10,
+      "37": 10,
+      "38": 10,
+      "39": 10,
+      "40": 10,
+      "41": 9,
+      "42": 9,
+      "43": 9,
+      "44": 8,
+      "45": 8,
+      "46": 8,
+      "47": 8,
+      "48": 8,
+      "49": 7,
+      "50": 7,
+      "51": 7,
+      "52": 6,
+      "53": 6,
+      "54": 6,
+      "56": 6,
+      "58": 5,
+      "60": 4,
+      "62": 4,
+      "64": 4,
+      "66": 3,
+      "68": 2,
+      "70": 2,
+      "72": 2,
+      "76": 1,
+      "80": 0,
+      "84": 0,
+      "88": 0,
+      "92": 0,
+      "96": 0
+    },
+    "sfProRounded": {
+      "6": 87,
+      "7": 80,
+      "8": 72,
+      "9": 65,
+      "10": 58,
+      "11": 52,
+      "12": 46,
+      "13": 40,
+      "14": 35,
+      "15": 30,
+      "16": 26,
+      "17": 22,
+      "18": 21,
+      "19": 20,
+      "20": 18,
+      "21": 17,
+      "22": 16,
+      "23": 16,
+      "24": 15,
+      "25": 14,
+      "26": 14,
+      "27": 14,
+      "28": 13,
+      "29": 13,
+      "30": 12,
+      "31": 12,
+      "32": 12,
+      "33": 12,
+      "34": 12,
+      "35": 11,
+      "36": 11,
+      "37": 10,
+      "38": 10,
+      "39": 10,
+      "40": 10,
+      "41": 10,
+      "42": 10,
+      "43": 9,
+      "44": 8,
+      "45": 8,
+      "46": 8,
+      "47": 8,
+      "48": 8,
+      "49": 8,
+      "50": 7,
+      "51": 6,
+      "52": 6,
+      "53": 6,
+      "54": 6,
+      "56": 6,
+      "58": 4,
+      "60": 4,
+      "62": 4,
+      "64": 3,
+      "66": 2,
+      "68": 2,
+      "70": 2,
+      "72": 2,
+      "76": 1,
+      "80": 0,
+      "84": 0,
+      "88": 0,
+      "92": 0,
+      "96": 0
+    },
+    "$source": "Apple HIG Typography tracking tables (verified 0 diffs across 64+64+64 rows)",
+    "$class": "official",
+    "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+    "$platform": "iOS / macOS"
+  },
+  "minimumSizes": {
+    "ios": 11,
+    "macos": 10,
+    "$usage": "Never render UI text below these.",
+    "$source": "Apple HIG Accessibility",
+    "$class": "official",
+    "$url": "https://developer.apple.com/design/human-interface-guidelines/accessibility",
+    "$platform": "All"
+  },
+  "defaultSizes": {
+    "ios": 17,
+    "macos": 13,
+    "$source": "Apple HIG Accessibility",
+    "$class": "official",
+    "$url": "https://developer.apple.com/design/human-interface-guidelines/accessibility",
+    "$platform": "All"
+  },
+  "weights": {
+    "ultralight": 100,
+    "thin": 200,
+    "light": 300,
+    "regular": 400,
+    "medium": 500,
+    "semibold": 600,
+    "bold": 700,
+    "heavy": 800,
+    "black": 900,
+    "$rule": "UI text uses regular, medium, semibold, bold only. Never light or thinner for text under 20pt.",
+    "$source": "Apple SF Pro weights",
+    "$class": "official",
+    "$url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+    "$platform": "All"
+  },
+  "rules": [
+    "Every text element maps to exactly one named style. No free font sizes.",
+    "Emphasis uses the style's emphasizedWeight, never a different size.",
+    "Use lineHeightTight only for single line labels inside controls; lineHeightLoose only for long reading text.",
+    "Numbers that change (timers, prices, counters) use tabular figures: font-variant-numeric tabular-nums.",
+    "Titles never use letter-spacing above trackingEm; never uppercase labels except iOS section footers are sentence case and macOS table headers are title case."
+  ],
+  "nonLatin": {
+    "$source": "Apple System Fonts + HIG RTL + W3C ALReq",
+    "$class": "inferred",
+    "$url": "https://developer.apple.com/design/human-interface-guidelines/right-to-left",
+    "$platform": "All",
+    "banglaSystemFont": "Kohinoor Bangla",
+    "arabicSystemFont": "SF Arabic",
+    "disableTrackingLangs": [
+      "bn",
+      "ar",
+      "he"
+    ],
+    "trackingOverrideEm": 0,
+    "banglaLineHeightScale": {
+      "min": 1.35,
+      "max": 1.5,
+      "$source": "estimated",
+      "$class": "estimated"
+    },
+    "banglaExpansionPercent": {
+      "min": 20,
+      "max": 30,
+      "$source": "estimated",
+      "$class": "estimated"
+    },
+    "rtlAllCapsBalanceDeltaPt": {
+      "value": 2,
+      "$source": "Apple HIG Right to left",
+      "$class": "official",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/right-to-left"
+    }
   }
- },
- "minimumSizes": {
-  "ios": 11,
-  "macos": 10,
-  "$usage": "Never render UI text below these."
- },
- "defaultSizes": {
-  "ios": 17,
-  "macos": 13
- },
- "weights": {
-  "ultralight": 100,
-  "thin": 200,
-  "light": 300,
-  "regular": 400,
-  "medium": 500,
-  "semibold": 600,
-  "bold": 700,
-  "heavy": 800,
-  "black": 900,
-  "$rule": "UI text uses regular, medium, semibold, bold only. Never light or thinner for text under 20pt."
- },
- "rules": [
-  "Every text element maps to exactly one named style. No free font sizes.",
-  "Emphasis uses the style's emphasizedWeight, never a different size.",
-  "Use lineHeightTight only for single line labels inside controls; lineHeightLoose only for long reading text.",
-  "Numbers that change (timers, prices, counters) use tabular figures: font-variant-numeric tabular-nums.",
-  "Titles never use letter-spacing above trackingEm; never uppercase labels except iOS section footers are sentence case and macOS table headers are title case."
- ]
 }

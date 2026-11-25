@@ -28,9 +28,17 @@ Think in SF Symbol names (house, gearshape, square.and.arrow.up), then map with 
 
 29 by 29 squircle, radius 7, white glyph (17 to 18 semibold) on a system color background. Use only in settings and similar lists. Do not put colored circles behind icons anywhere else.
 
-## Animated symbols
+## Animated symbols & SF Symbols 7 (`[official]`)
 
-Use symbol effects from motion tokens: bounce on state change (like adding to favorites), replace for toggling between two symbols (play and pause), pulse for ongoing activity, wiggle for attention (rare). Never loop decorative animations.
+SF Symbols supports four rendering modes (**Monochrome**, **Hierarchical**, **Palette**, **Multicolor**) plus **SF Symbols 7 (`July 28, 2025` HIG)** linear **Gradients** across all rendering modes `[official]`. Supported symbol effects include **Appear**, **Disappear**, **Bounce**, **Scale**, **Pulse**, **Variable color** (`open loop` vs `closed loop`), **Replace / Magic Replace**, **Wiggle**, **Breathe**, **Rotate**, and **Draw On / Draw Off** (draws along guide points in SF Symbols 7+ `[official]`). Never loop decorative animations.
+
+## Layered App Icons (`[official]`)
+
+iOS, iPadOS, macOS (`1024×1024 px` Square input `[official]`), and watchOS (`1088×1088 px` `[official]`) app icons use layered `.icon` artwork authored in Icon Composer (`Oct 28, 2026` HIG format options `[official]`). Provide 6 appearance variants (`default`, `dark`, `clear light`, `clear dark`, `tinted light`, `tinted dark` `[official]`), including for alternate app icons; let the OS apply squircle masking, shadows, refraction, and specular highlights.
+
+## RTL & Localization (`[official]`)
+
+Use SF Symbols RTL variants (`arrow.backward`, `chevron.forward`, localized signature/rich-text glyphs) or CSS `scaleX(-1)` ONLY for reading-direction or forward/backward motion glyphs (`16-localization-rtl.md`). Never flip checkmarks, clocks, logos, or prohibition slashes.
 
 ## Never
 

@@ -1,12 +1,15 @@
 #!/usr/bin/env node
 // cupertino-forge: build platform token files from tokens/*.json
 // Usage:
-//   node build-tokens.mjs --out <dir> [--targets css,tailwind,ts,dart] [--tokens <tokensDir>] [--accent "#0088FF"]
+//   node build-tokens.mjs --out <dir> [--targets css,tailwind,ts,dart,rust,json,estimates] [--tokens <tokensDir>] [--accent "#0088FF"] [--write-estimates <file>]
 // Outputs (only for requested targets):
-//   cupertino.tokens.css   CSS custom properties, light, dark, elevated, increased contrast, ios and macos semantics
-//   cupertino.theme.css    Tailwind v4 @theme mapping onto the CSS variables
-//   cupertino.tokens.ts    Typed constants for JS (springs for motion, type scale, layout)
-//   apple_tokens.dart      Flutter constants (colors, text styles, springs, radii, spacing)
+//   cupertino.tokens.css            CSS custom properties, light, dark, elevated, increased contrast, ios and macos semantics
+//   cupertino.theme.css             Tailwind v4 @theme mapping onto the CSS variables
+//   cupertino.tokens.ts             Typed constants for JS (springs for motion, type scale, layout)
+//   apple_tokens.dart               Flutter constants (colors, text styles, springs, radii, spacing)
+//   apple_tokens.rs                 Rust constants for Tauri 2 (window radius, traffic lights, toolbar, sidebar, colors)
+//   cupertino.tokens.resolved.json  Resolved token snapshot with provenance metadata
+//   ESTIMATES.md                    Auto-generated ledger of estimated / community-alt / needs-verification tokens
 // Never edit generated files by hand. Edit tokens/*.json and rebuild.
 
 import fs from 'node:fs';
@@ -117,17 +120,17 @@ sem.ios.bg = bg.primary; sem.ios['bg-2'] = bg.secondary; sem.ios['bg-3'] = bg.te
 sem.ios['bg-grouped'] = bg.groupedPrimary; sem.ios['bg-grouped-2'] = bg.groupedSecondary; sem.ios['bg-grouped-3'] = bg.groupedTertiary;
 const ms = color.macOSSurfaces;
 sem.macos.bg = ms.windowBackground;
-sem.macos['bg-2'] = { light: '#F5F5F7', dark: '#262626' };
-sem.macos['bg-3'] = { light: '#FFFFFF', dark: '#2E2E2E' };
-sem.macos['bg-grouped'] = { light: '#F5F5F7', dark: '#1E1E1E' };
-sem.macos['bg-grouped-2'] = { light: '#FFFFFF', dark: '#262626' };
-sem.macos['bg-grouped-3'] = { light: '#F5F5F7', dark: '#2E2E2E' };
+sem.macos['bg-2'] = ms.bg2;
+sem.macos['bg-3'] = ms.bg3;
+sem.macos['bg-grouped'] = ms.bgGrouped;
+sem.macos['bg-grouped-2'] = ms.bgGrouped2;
+sem.macos['bg-grouped-3'] = ms.bgGrouped3;
 sem.ios.separator = color.separatorIOS.nonOpaque; sem.ios['separator-opaque'] = color.separatorIOS.opaque;
-sem.macos.separator = ms.separator; sem.macos['separator-opaque'] = { light: '#D8D8D8', dark: '#3A3A3A' };
+sem.macos.separator = ms.separator; sem.macos['separator-opaque'] = ms.separatorOpaque;
 sem.macos['sidebar'] = ms.sidebarActive; sem.macos['sidebar-inactive'] = ms.sidebarInactive;
 sem.ios['sidebar'] = bg.secondary; sem.ios['sidebar-inactive'] = bg.secondary;
 sem.macos['field'] = ms.inputFieldIdle; sem.macos['field-border'] = ms.inputFieldBorder;
-sem.ios['field'] = color.fillIOS.tertiary; sem.ios['field-border'] = { light: '#000000@0', dark: '#000000@0' };
+sem.ios['field'] = color.fillIOS.tertiary; sem.ios['field-border'] = color.iosFieldBorder;
 const cf = color.macOSControlFills.contentArea;
 sem.macos['control'] = cf.bordered; sem.macos['control-pressed'] = cf.borderedPressed; sem.macos['control-disabled'] = cf.borderedDisabled;
 sem.ios['control'] = color.fillIOS.secondary; sem.ios['control-pressed'] = color.fillIOS.primary; sem.ios['control-disabled'] = color.fillIOS.quaternary;
@@ -152,12 +155,13 @@ function buildCSS() {
     L.push('  color-scheme: light dark;');
     mode(sem.shared, 'light'); mode(sem.ios, 'light');
     put('accent', css(accent.light));
-    put('accent-contrast', '#ffffff');
+    put('accent-contrast', css(color.highContrastLabels.accentContrast));
     // typography (iOS Large default)
     const ios = typo.iosDynamicType.sizes.Large;
     put('type-scale', '1');
     put('font', typo.fontStacks.web); put('font-rounded', typo.fontStacks.webRounded);
     put('font-serif', typo.fontStacks.webSerif); put('font-mono', typo.fontStacks.webMono);
+    put('font-bangla', typo.fontStacks.webBangla);
     for (const [k, s] of entries(ios)) {
       const n = kebab(k);
       put(`text-${n}-size`, `calc(${s.size}px * var(--cf-type-scale))`);
@@ -168,7 +172,7 @@ function buildCSS() {
       put(`text-${n}-tracking`, `${s.trackingEm}em`);
     }
     // spacing, radii, layout
-    for (const [k, v] of Object.entries(layout.spacing.names)) put(`space-${k}`, `${v}px`);
+    for (const [k, v] of entries(layout.spacing.names)) put(`space-${k}`, `${v}px`);
     const rI = shape.radiusIOS;
     for (const [k, v] of entries(rI)) if (typeof v === 'number') put(`radius-${kebab(k)}`, `${v}px`);
     if (rI.deviceDisplay && typeof rI.deviceDisplay.iPhone17Pro === 'number') {
@@ -258,14 +262,16 @@ function buildCSS() {
   L.push('}');
 
   // Increased contrast
+  const hcl = color.highContrastLabels;
   const hc = (m) => () => {
+    const modeKey = m === 'lightHC' ? 'light' : 'dark';
     entries(color.system).forEach(([k, v]) => put(kebab(k), css(v[m])));
     entries(color.grayIOS).forEach(([k, v]) => put(kebab(k), css(v[m])));
     put('accent', css(accentOverride || color.system.blue[m]));
-    put('label-2', m === 'lightHC' ? 'rgb(60 60 67 / 0.8)' : 'rgb(235 235 245 / 0.8)');
-    put('label-3', m === 'lightHC' ? 'rgb(60 60 67 / 0.6)' : 'rgb(235 235 245 / 0.6)');
+    put('label-2', css(hcl.label2[modeKey]));
+    put('label-3', css(hcl.label3[modeKey]));
     put('glass-filter', 'none');
-    put('glass-shadow', m === 'lightHC' ? '0 0 0 1px rgb(0 0 0 / 0.35)' : '0 0 0 1px rgb(255 255 255 / 0.35)');
+    put('glass-shadow', `0 0 0 1px ${css(hcl.glassBorder[modeKey])}`);
     put('glass-bg', 'var(--cf-glass-opaque)');
   };
   block(':root[data-contrast="more"]', hc('lightHC'));
@@ -295,6 +301,10 @@ function buildCSS() {
   block(':root', () => { for (const [k] of entries(motion.springs)) { put(`ease-${kebab(k)}`, 'linear(0, 1)'); put(`dur-${kebab(k)}`, '200ms'); } });
   L.push('}');
 
+  // Non-Latin script protection (Indic matras & cursive Arabic break under negative SF tracking)
+  L.push(':lang(bn), :lang(ar), :lang(he) { letter-spacing: 0 !important; }');
+  L.push(':lang(bn) { font-family: var(--cf-font-bangla); }');
+
   // Dynamic Type: apps set --cf-type-scale (0.82 xSmall .. 1 Large .. 1.24 xxxLarge, AX up to 3.1) from a user setting.
   // lib/platform.ts reads the iOS text size via the -apple-system-body probe and writes it.
 
@@ -314,7 +324,7 @@ function buildTailwind() {
   for (const n of colorNames) L.push(`  --color-${kebab(n)}: var(--cf-${kebab(n)});`);
   L.push('  --color-accent: var(--cf-accent);');
   L.push('  --color-accent-contrast: var(--cf-accent-contrast);');
-  for (const k of Object.keys(typo.iosDynamicType.sizes.Large)) {
+  for (const [k] of entries(typo.iosDynamicType.sizes.Large)) {
     const n = kebab(k);
     L.push(`  --text-${n}: var(--cf-text-${n}-size);`);
     L.push(`  --text-${n}--line-height: var(--cf-text-${n}-line);`);
@@ -327,10 +337,10 @@ function buildTailwind() {
   L.push('  --radius-sheet-floating: var(--cf-radius-sheet-floating);');
   L.push('  --radius-sheet: var(--cf-radius-sheet);');
   L.push('  --radius-capsule: 9999px;');
-  for (const k of Object.keys(layout.spacing.names)) L.push(`  --spacing-${k}: var(--cf-space-${k});`);
+  for (const [k] of entries(layout.spacing.names)) L.push(`  --spacing-${k}: var(--cf-space-${k});`);
   L.push('  --shadow-none: none;');
   for (const [k, v] of entries(elev.levels)) if (v && typeof v === 'object' && v.light) L.push(`  --shadow-${kebab(k)}: var(--cf-shadow-${kebab(k)});`);
-  for (const k of Object.keys(motion.springs)) L.push(`  --ease-${kebab(k)}: var(--cf-ease-${kebab(k)});`);
+  for (const [k] of entries(motion.springs)) L.push(`  --ease-${kebab(k)}: var(--cf-ease-${kebab(k)});`);
   L.push('}');
   L.push('');
   L.push('/* Utilities that Tailwind cannot express with theme keys */');
@@ -420,7 +430,7 @@ function buildDart() {
   tsEmit('AppleTypeMacOS', typo.macosTextStyles.styles, 'null');
   L.push('');
   L.push('abstract final class AppleSpacing {');
-  for (const [k, v] of Object.entries(layout.spacing.names)) L.push(`  static const double ${k} = ${v};`);
+  for (const [k, v] of entries(layout.spacing.names)) L.push(`  static const double ${k} = ${v};`);
   L.push('}');
   L.push('abstract final class AppleRadiusIOS {');
   for (const [k, v] of entries(shape.radiusIOS)) if (typeof v === 'number') L.push(`  static const double ${camel(k)} = ${v};`);
@@ -456,6 +466,107 @@ function buildDart() {
   return L.join('\n') + '\n';
 }
 
+// ---------- Rust (Tauri 2) ----------
+function buildRust() {
+  const mac = layout.macos;
+  const rM = shape.radiusMacOS;
+  const lines = [
+    '// Generated by cupertino-forge build-tokens.mjs. Do not edit. Edit tokens/*.json and rebuild.',
+    '#![allow(dead_code)]',
+    '',
+    `pub const WINDOW_CORNER_RADIUS: f64 = ${Number(rM.window).toFixed(1)};`,
+    `pub const WINDOW_MIN_WIDTH: f64 = ${Number(mac.windowMinimum.width).toFixed(1)};`,
+    `pub const WINDOW_MIN_HEIGHT: f64 = ${Number(mac.windowMinimum.height).toFixed(1)};`,
+    `pub const TITLEBAR_HEIGHT: f64 = ${Number(mac.titlebarHeight).toFixed(1)};`,
+    `pub const TOOLBAR_HEIGHT: f64 = ${Number(mac.toolbarHeight).toFixed(1)};`,
+    `pub const TOOLBAR_HEIGHT_COMPACT: f64 = ${Number(mac.toolbarHeightCompact).toFixed(1)};`,
+    `pub const TRAFFIC_LIGHT_DIAMETER: f64 = ${Number(mac.trafficLights.diameter).toFixed(1)};`,
+    `pub const TRAFFIC_LIGHT_GAP: f64 = ${Number(mac.trafficLights.gap).toFixed(1)};`,
+    `pub const TRAFFIC_LIGHT_X: f64 = ${Number(mac.trafficLights.leadingInset).toFixed(1)};`,
+    `pub const TRAFFIC_LIGHT_Y: f64 = ${Number(mac.trafficLights.centerYFromTop).toFixed(1)};`,
+    `pub const SIDEBAR_MIN_WIDTH: f64 = ${Number(mac.sidebar.minWidth).toFixed(1)};`,
+    `pub const SIDEBAR_DEFAULT_WIDTH: f64 = ${Number(mac.sidebar.defaultWidth).toFixed(1)};`,
+    `pub const SIDEBAR_MAX_WIDTH: f64 = ${Number(mac.sidebar.maxWidth).toFixed(1)};`,
+    `pub const HIT_TARGET_MACOS: f64 = ${Number(layout.hitTarget.macos).toFixed(1)};`,
+    `pub const ACCENT_LIGHT_HEX: &str = "${accent.light}";`,
+    `pub const ACCENT_DARK_HEX: &str = "${accent.dark}";`,
+    `pub const WINDOW_BG_LIGHT_HEX: &str = "${ms.windowBackground.light}";`,
+    `pub const WINDOW_BG_DARK_HEX: &str = "${ms.windowBackground.dark}";`,
+  ];
+  return lines.join('\n') + '\n';
+}
+
+// ---------- Resolved JSON ----------
+function buildJSON() {
+  const springs = Object.fromEntries(entries(motion.springs).map(([k, s]) => {
+    const p = springPhysics(s);
+    return [k, { duration: s.duration, bounce: s.bounce, stiffness: +p.stiffness.toFixed(3), damping: +p.damping.toFixed(3), mass: 1, $class: s.$class || 'estimated' }];
+  }));
+  return JSON.stringify({
+    $meta: { generatedBy: 'cupertino-forge/scripts/build-tokens.mjs', accent },
+    colors: { system: color.system, backgroundIOS: color.backgroundIOS, macOSSurfaces: color.macOSSurfaces, focusRing: color.focusRing, dimming: color.dimming },
+    typography: { iosLarge: typo.iosDynamicType.sizes.Large, macos: typo.macosTextStyles.styles, nonLatin: typo.nonLatin },
+    layout: { spacing: layout.spacing, hitTarget: layout.hitTarget, ios: layout.ios, macos: layout.macos, breakpoints: layout.breakpoints },
+    shape: { radiusIOS: shape.radiusIOS, radiusMacOS: shape.radiusMacOS, concentric: shape.concentric },
+    materials: { officialSpec: mat.liquidGlass.officialSpec, intensityCurve: mat.liquidGlass.intensityCurve, perfBudget: mat.liquidGlass.perfBudget, fallbackOpaque: mat.liquidGlass.engine.fallbackOpaque },
+    motion: { springs, scroll: motion.scroll, transitions: motion.transitions },
+  }, null, 2) + '\n';
+}
+
+// ---------- Auto-generated ESTIMATES.md ----------
+function buildEstimatesMd() {
+  const tokenFiles = fs.readdirSync(tokensDir).filter((f) => f.endsWith('.json') && !f.startsWith('apple-')).sort();
+  const estRows = [];
+  const conflictRows = [];
+  const summarize = (v) => {
+    if (v === null || v === undefined) return 'null';
+    if (typeof v !== 'object') return String(v);
+    const ks = Object.keys(v).filter((k) => !k.startsWith('$'));
+    return `{ ${ks.slice(0, 4).map((k) => `${k}: ${typeof v[k] === 'object' ? '[...]' : v[k]}`).join(', ')}${ks.length > 4 ? ', ...' : ''} }`;
+  };
+  const scan = (node, file, pathStr) => {
+    if (!node || typeof node !== 'object') return;
+    if (node.$alt && typeof node.$alt === 'object') {
+      conflictRows.push({ file, path: `${pathStr}.$alt`, value: summarize(node.$alt), cls: node.$alt.$class || 'inferred/community', source: node.$alt.$source || '', url: node.$alt.$url || '' });
+    }
+    if (node.$kitConflict && typeof node.$kitConflict === 'object') {
+      conflictRows.push({ file, path: `${pathStr}.$kitConflict`, value: summarize(node.$kitConflict), cls: node.$kitConflict.$status || 'needs-device-verification', source: node.$kitConflict.$source || '', url: node.$kitConflict.$url || '' });
+    }
+    const cls = String(node.$class || '').toLowerCase();
+    const src = String(node.$source || '').toLowerCase();
+    if (cls === 'estimated' || (!cls && src.includes('estimate'))) {
+      estRows.push({ file, path: pathStr || '(root)', value: summarize(node), cls: node.$class || 'estimated', source: node.$source || 'estimated', url: node.$url || '' });
+    }
+    for (const [k, v] of Object.entries(node)) {
+      if (k.startsWith('$')) continue;
+      if (v && typeof v === 'object' && !Array.isArray(v)) scan(v, file, pathStr ? `${pathStr}.${k}` : k);
+    }
+  };
+  for (const f of tokenFiles) scan(read(f), f, '');
+
+  const L = [
+    '# Token Estimates, Community Alternates & Pending Verification',
+    '',
+    '<!-- Generated automatically by `node scripts/build-tokens.mjs --write-estimates tokens/ESTIMATES.md`. Do not hand-edit. -->',
+    '',
+    'These token entries carry `$class: "estimated"` (not published numerically by Apple HIG or Sketch token exports), `$class: "inferred/community"` (community SPI benchmarks kept out of primary official/kit tokens per merge Rule 1), or `$status: "needs-device-verification"`. List relevant items in the Compliance Report (`Values marked estimate`).',
+    '',
+    `## 1. Estimated Tokens (${estRows.length} groups/entries)`,
+    '',
+    '| Token File | Path | Sample Value | Class | Source Note |',
+    '|---|---|---|---|---|',
+    ...estRows.map((r) => `| \`${r.file}\` | \`${r.path}\` | \`${r.value.replace(/\|/g, '\\|')}\` | \`${r.cls}\` | ${String(r.source).replace(/\|/g, '\\|')} |`),
+    '',
+    `## 2. Source Conflicts & Community Alternates (${conflictRows.length} entries)`,
+    '',
+    '| Token File | Path | Alternate / Conflict Values | Status / Class | Source |',
+    '|---|---|---|---|---|',
+    ...conflictRows.map((r) => `| \`${r.file}\` | \`${r.path}\` | \`${r.value.replace(/\|/g, '\\|')}\` | \`${r.cls}\` | ${String(r.source).replace(/\|/g, '\\|')} |`),
+    '',
+  ];
+  return L.join('\n');
+}
+
 fs.mkdirSync(outDir, { recursive: true });
 const written = [];
 const write = (name, content) => { fs.writeFileSync(path.join(outDir, name), content); written.push(name); };
@@ -463,4 +574,12 @@ if (targets.includes('css')) write('cupertino.tokens.css', buildCSS());
 if (targets.includes('tailwind')) write('cupertino.theme.css', buildTailwind());
 if (targets.includes('ts')) write('cupertino.tokens.ts', buildTS());
 if (targets.includes('dart')) write('apple_tokens.dart', buildDart());
+if (targets.includes('rust')) write('apple_tokens.rs', buildRust());
+if (targets.includes('json')) write('cupertino.tokens.resolved.json', buildJSON());
+if (targets.includes('estimates')) write('ESTIMATES.md', buildEstimatesMd());
+if (typeof args['write-estimates'] === 'string') {
+  const estOut = path.resolve(args['write-estimates']);
+  fs.writeFileSync(estOut, buildEstimatesMd());
+  written.push(path.relative(outDir, estOut) || estOut);
+}
 console.log(`cupertino-forge: wrote ${written.join(', ')} to ${outDir}`);

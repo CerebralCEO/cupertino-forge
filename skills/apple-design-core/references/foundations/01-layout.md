@@ -1,40 +1,40 @@
 # 01 Layout and metrics
 
-All numbers come from `tokens/layout.json`. Values marked estimate there must be listed in the Compliance Report.
+All numbers come from `tokens/layout.json`. Values carry `[official]`, `[measured]`, `[inferred]`, or `[estimate]` provenance; estimates must be listed in the Compliance Report (`Values marked estimate`).
 
 ## Units
 
-1 point = 1 CSS px = 1 Flutter logical pixel. Design at 1x points. Hairlines are 0.5pt (render 1 physical pixel on 2x and 3x screens).
+1 point = 1 CSS px = 1 Flutter logical pixel. Design at 1x points. Hairlines are 0.5pt (render 1 physical pixel on 2x and 3x screens `[estimate]`).
 
 ## Grid and spacing
 
-- Base 4. Allowed steps: 2, 4, 6, 8, 10, 12, 16, 20, 24, 32, 40, 48, 64.
+- Base 4 `[estimate]`. Allowed steps: 2, 4, 6, 8, 10, 12, 16, 20, 24, 32, 40, 48, 64.
 - Inside a component: 4 to 12. Between related items: 8 to 16. Between groups or sections: 20 to 32. Hero spacing: 48 to 64.
-- Never use 5, 7, 14, 15, 18, 30 or any value outside the scale.
+- Never use 5, 7, 14, 15, 18, 30 or any value outside the scale (note: Apple official HIG margins for Widgets are `16` `[official]` with tight `11`, and Live Activities Lock Screen margin is `14` `[official]` / compact `28×28` `[official]`).
 
 ## iOS
 
 | Item | Value |
 |---|---|
-| Screen side margin | 16 compact, 20 regular width |
-| Readable content max width | 672 |
-| Safe area top (Dynamic Island) | 62 (estimate) |
-| Home indicator bottom inset | 34 |
-| Navigation bar | 44 tall below status bar; large title adds 52 |
-| Large title | largeTitle emphasized (34 bold), leading 16 |
-| Inline title | headline 17 semibold, centered |
-| Bar buttons | 44 circles or 44 tall capsules of glass, grouped |
-| Tab bar | floating glass capsule, about 62 tall, 20 from sides, sits above home indicator |
-| Search | capsule glass, 44 tall, bottom of screen on iPhone (iOS 26+) |
-| List row | min 52 (44 compact), subtitle row 64, leading inset 16 |
-| Settings style row icon | 29 square, radius 7, separator inset 60 |
-| Inset grouped section | 16 from sides, radius 26 (estimate), 20 gap between sections |
-| Sheet grabber | 36 by 5, 5 from top |
-| Alert | 300 wide, 20 padding |
-| Buttons | mini 28, small 32, medium 36, large 50, extra large 56 (estimate) |
-| Toggle | 64 by 28 track, 38 by 24 knob (estimate) |
-| Segmented control | 36 tall (estimate) |
-| Hit target | 44 by 44 minimum |
+| Screen side margin | 16 `[estimate]` compact (matches 16pt Widget margin `[official]`), 20 `[estimate]` regular width |
+| Readable content max width | 672 `[inferred]` |
+| Safe area top (Dynamic Island) | 62 `[estimate]` (iPhone 16 Pro / 17 / 17 Pro); community specs report 59 on iPhone 15/16 (`$alt` `[inferred/community]`) |
+| Home indicator bottom inset | 34 `[inferred/community]` |
+| Navigation bar | 44 `[inferred]` tall below status bar; large title adds 52 `[estimate]` |
+| Large title | largeTitle emphasized (34 bold `[official]`), leading 16 `[estimate]` |
+| Inline title | headline 17 semibold `[official]`, centered |
+| Bar buttons | 44 circles or 44 tall capsules of glass, grouped (`[official]` min hit target) |
+| Tab bar | floating glass capsule, about 62 tall `[estimate]`, 20 from sides `[estimate]`, max 5 tabs on iPhone `[official]`; `.tabBarMinimizeBehavior(.onScrollDown)` + `Tab(role: .search)` `[official]` |
+| Search | capsule glass, 44 tall `[estimate]`, trailing standalone tab / bottom on iPhone (iOS 26+) |
+| List row | min 52 `[estimate]` (44 minimum accessible `[official]`), subtitle row 64 `[estimate]`, leading inset 16 `[estimate]` |
+| Settings style row icon | 29 square, radius 7, separator inset 60 `[estimate]` |
+| Inset grouped section | 16 from sides, radius 26 `[estimate]`, 20 gap between sections |
+| Sheet grabber | 36 by 5, 5 from top `[estimate]` |
+| Alert | 300 wide, 20 padding `[estimate]` |
+| Buttons | mini 28, small 32, medium 36, large 50, extra large 56 `[estimate]` (note: HIG publishes 28/32/44/52/64 specifically for visionOS) |
+| Toggle | 64 by 28 track, 38 by 24 knob `[estimate]` (legacy <=18 UISwitch was 51 by 31 `[inferred]`) |
+| Segmented control | 36 tall `[estimate]` |
+| Hit target | 44 by 44 recommended, 28 by 28 absolute minimum `[official]`; add ~12pt padding around bezeled or ~24pt around bezel-less controls `[official]` |
 
 ### iOS screen skeleton
 
@@ -57,17 +57,19 @@ home indicator
 
 | Item | Value |
 |---|---|
-| Window minimum | 480 by 320 |
-| Titlebar | 32 |
-| Unified toolbar | 52 (38 compact) |
-| Traffic lights | 14 diameter, 9 gap, 16 from leading, centered on the toolbar (estimate) |
-| Sidebar | 180 to 320, default 220, edge to edge (macOS 27), rows 32, icons 16 |
-| Inspector | 240 to 320, default 280, trailing |
-| Content padding | 20 |
-| Control heights | mini 16, small 20, regular 24, large 28, extra large 36 (estimate) |
-| Menu item | 24 tall, 10 side padding, menu 5 outer padding |
-| Table row | 24 (32 large), header 28 |
-| Hit target | 28 by 28 recommended, 20 minimum |
+| Window minimum | 480 by 320 `[estimate]` |
+| Menu bar height | 24 `[official]` |
+| Titlebar | 32 `[estimate]` |
+| Unified toolbar | 52 (38 compact) `[estimate]` |
+| Traffic lights | 14 diameter, 9 gap, 16 from leading, centered on the toolbar `[estimate]` |
+| Sidebar | 180 to 320, default 220 `[estimate]`, edge to edge (macOS 27 `[official]`), rows 32, icons 16 `[estimate]` |
+| Split view divider | 1pt (`thin` divider style `[official]`) |
+| Inspector | 240 to 320, default 280, trailing `[estimate]` |
+| Content padding | 20 `[estimate]` |
+| Control heights | mini 16, small 20, regular 24, large 28, extra large 36 `[estimate]` |
+| Menu item | 24 tall, 10 side padding, menu 5 outer padding `[estimate]` |
+| Table row | 24 (32 large), header 28 `[estimate]` |
+| Hit target | 28 by 28 recommended, 20 minimum `[official]` (do not shrink/move layout when Mac touch display is active) |
 
 ### macOS window skeleton
 

@@ -1,9 +1,13 @@
 {
   "$meta": {
     "description": "Haptic and sound feedback map. Every interaction event maps to one haptic and at most one sound, per platform.",
-    "sources": { "hig": "HIG Playing haptics: notification, impact, selection patterns", "android": "android.view.HapticFeedbackConstants", "estimate": "event pairing and web fallbacks" }
+    "sources": {
+      "hig": "HIG Playing haptics: notification, impact, selection patterns",
+      "android": "android.view.HapticFeedbackConstants",
+      "estimate": "event pairing and web fallbacks"
+    },
+    "reconciledDate": "2026-11-25"
   },
-
   "principles": [
     "Haptic first, sound almost never. iOS standard controls give haptics, not sounds. macOS gives neither for buttons.",
     "One event, one feedback. Never play haptic and sound on every tap.",
@@ -12,48 +16,223 @@
     "Sounds are OFF by default. They are opt in per app (setting: Interface sounds).",
     "Never play feedback on scroll or hover."
   ],
-
   "events": {
-    "toggleChange":        { "ios": "selection", "android": "TOGGLE_ON / TOGGLE_OFF (API 34+), else CLOCK_TICK", "flutter": "HapticFeedback.selectionClick", "web": "selection", "sound": "toggle (opt in)" },
-    "pickerTick":          { "ios": "selection", "android": "SEGMENT_FREQUENT_TICK (API 34+), else CLOCK_TICK", "flutter": "HapticFeedback.selectionClick", "web": "selection", "sound": "tick (opt in, throttle 40ms)" },
-    "segmentChange":       { "ios": "selection", "android": "SEGMENT_TICK", "flutter": "HapticFeedback.selectionClick", "web": "selection", "sound": "none" },
-    "sliderDetent":        { "ios": "selection", "android": "SEGMENT_TICK", "flutter": "HapticFeedback.selectionClick", "web": "selection", "sound": "none" },
-    "sliderEdgeHit":       { "ios": "impact light", "android": "CONTEXT_CLICK", "flutter": "HapticFeedback.lightImpact", "web": "light", "sound": "none" },
-    "buttonPrimaryTap":    { "ios": "none (system buttons do not buzz)", "android": "VIRTUAL_KEY only if app setting on", "flutter": "none", "web": "none", "sound": "tap (opt in)" },
-    "longPressMenuOpen":   { "ios": "impact medium", "android": "LONG_PRESS", "flutter": "HapticFeedback.mediumImpact", "web": "medium", "sound": "none" },
-    "pullToRefreshTrigger":{ "ios": "impact light at threshold", "android": "GESTURE_THRESHOLD_ACTIVATE", "flutter": "HapticFeedback.lightImpact", "web": "light", "sound": "refresh (opt in)" },
-    "swipeActionThreshold":{ "ios": "impact light", "android": "GESTURE_THRESHOLD_ACTIVATE", "flutter": "HapticFeedback.lightImpact", "web": "light", "sound": "none" },
-    "dragSnap":            { "ios": "impact soft", "android": "SEGMENT_TICK", "flutter": "HapticFeedback.lightImpact", "web": "light", "sound": "none" },
-    "dropIntoPlace":       { "ios": "impact rigid", "android": "CONFIRM", "flutter": "HapticFeedback.mediumImpact", "web": "medium", "sound": "none" },
-    "success":             { "ios": "notification success", "android": "CONFIRM", "flutter": "HapticFeedback.mediumImpact", "web": "success", "sound": "success (opt in)" },
-    "warning":             { "ios": "notification warning", "android": "REJECT", "flutter": "HapticFeedback.heavyImpact", "web": "warning", "sound": "none" },
-    "error":               { "ios": "notification error", "android": "REJECT", "flutter": "HapticFeedback.heavyImpact then vibrate", "web": "error", "sound": "error (opt in)" },
-    "sheetDetentSnap":     { "ios": "impact light", "android": "SEGMENT_TICK", "flutter": "HapticFeedback.lightImpact", "web": "light", "sound": "none" },
-    "keyboardKey":         { "ios": "system keyboard handles", "android": "KEYBOARD_TAP", "flutter": "none", "web": "none", "sound": "keyboard (opt in, custom keyboards only)" },
-    "messageSent":         { "ios": "impact light", "android": "CONFIRM", "flutter": "HapticFeedback.lightImpact", "web": "light", "sound": "send (opt in)" },
-    "deleteConfirmed":     { "ios": "notification warning", "android": "REJECT", "flutter": "HapticFeedback.heavyImpact", "web": "warning", "sound": "none" },
-    "macOSAlignmentSnap":  { "macos": "NSHapticFeedbackPattern.alignment (Force Touch trackpad)", "tauri": "not available, skip", "web": "none" }
+    "toggleChange": {
+      "ios": "selection",
+      "android": "TOGGLE_ON / TOGGLE_OFF (API 34+), else CLOCK_TICK",
+      "flutter": "HapticFeedback.selectionClick",
+      "web": "selection",
+      "sound": "toggle (opt in)"
+    },
+    "pickerTick": {
+      "ios": "selection",
+      "android": "SEGMENT_FREQUENT_TICK (API 34+), else CLOCK_TICK",
+      "flutter": "HapticFeedback.selectionClick",
+      "web": "selection",
+      "sound": "tick (opt in, throttle 40ms)"
+    },
+    "segmentChange": {
+      "ios": "selection",
+      "android": "SEGMENT_TICK",
+      "flutter": "HapticFeedback.selectionClick",
+      "web": "selection",
+      "sound": "none"
+    },
+    "sliderDetent": {
+      "ios": "selection",
+      "android": "SEGMENT_TICK",
+      "flutter": "HapticFeedback.selectionClick",
+      "web": "selection",
+      "sound": "none"
+    },
+    "sliderEdgeHit": {
+      "ios": "impact light",
+      "android": "CONTEXT_CLICK",
+      "flutter": "HapticFeedback.lightImpact",
+      "web": "light",
+      "sound": "none"
+    },
+    "buttonPrimaryTap": {
+      "ios": "none (system buttons do not buzz)",
+      "android": "VIRTUAL_KEY only if app setting on",
+      "flutter": "none",
+      "web": "none",
+      "sound": "tap (opt in)"
+    },
+    "longPressMenuOpen": {
+      "ios": "impact medium",
+      "android": "LONG_PRESS",
+      "flutter": "HapticFeedback.mediumImpact",
+      "web": "medium",
+      "sound": "none"
+    },
+    "pullToRefreshTrigger": {
+      "ios": "impact light at threshold",
+      "android": "GESTURE_THRESHOLD_ACTIVATE",
+      "flutter": "HapticFeedback.lightImpact",
+      "web": "light",
+      "sound": "refresh (opt in)"
+    },
+    "swipeActionThreshold": {
+      "ios": "impact light",
+      "android": "GESTURE_THRESHOLD_ACTIVATE",
+      "flutter": "HapticFeedback.lightImpact",
+      "web": "light",
+      "sound": "none"
+    },
+    "dragSnap": {
+      "ios": "impact soft",
+      "android": "SEGMENT_TICK",
+      "flutter": "HapticFeedback.lightImpact",
+      "web": "light",
+      "sound": "none"
+    },
+    "dropIntoPlace": {
+      "ios": "impact rigid",
+      "android": "CONFIRM",
+      "flutter": "HapticFeedback.mediumImpact",
+      "web": "medium",
+      "sound": "none"
+    },
+    "success": {
+      "ios": "notification success",
+      "android": "CONFIRM",
+      "flutter": "HapticFeedback.mediumImpact",
+      "web": "success",
+      "sound": "success (opt in)"
+    },
+    "warning": {
+      "ios": "notification warning",
+      "android": "REJECT",
+      "flutter": "HapticFeedback.heavyImpact",
+      "web": "warning",
+      "sound": "none"
+    },
+    "error": {
+      "ios": "notification error",
+      "android": "REJECT",
+      "flutter": "HapticFeedback.heavyImpact then vibrate",
+      "web": "error",
+      "sound": "error (opt in)"
+    },
+    "sheetDetentSnap": {
+      "ios": "impact light",
+      "android": "SEGMENT_TICK",
+      "flutter": "HapticFeedback.lightImpact",
+      "web": "light",
+      "sound": "none"
+    },
+    "keyboardKey": {
+      "ios": "system keyboard handles",
+      "android": "KEYBOARD_TAP",
+      "flutter": "none",
+      "web": "none",
+      "sound": "keyboard (opt in, custom keyboards only)"
+    },
+    "messageSent": {
+      "ios": "impact light",
+      "android": "CONFIRM",
+      "flutter": "HapticFeedback.lightImpact",
+      "web": "light",
+      "sound": "send (opt in)"
+    },
+    "deleteConfirmed": {
+      "ios": "notification warning",
+      "android": "REJECT",
+      "flutter": "HapticFeedback.heavyImpact",
+      "web": "warning",
+      "sound": "none"
+    },
+    "macOSAlignmentSnap": {
+      "macos": "NSHapticFeedbackPattern.alignment (Force Touch trackpad)",
+      "tauri": "not available, skip",
+      "web": "none"
+    },
+    "$source": "Apple HIG Playing haptics mapping + estimated Android/Web pairings",
+    "$class": "inferred",
+    "$url": "https://developer.apple.com/design/human-interface-guidelines/playing-haptics",
+    "$platform": "All"
   },
-
   "webHaptics": {
     "$usage": "Implement in lib/haptics.ts. Android Chrome: navigator.vibrate patterns. iOS Safari 18+: no Vibration API; trigger the native switch haptic by programmatically clicking a hidden <label> bound to <input type=checkbox switch>. Only works inside a user gesture. Desktop: no-op.",
-    "vibratePatternsMs": { "selection": [8], "light": [10], "medium": [18], "heavy": [28], "success": [12, 60, 18], "warning": [20, 80, 20], "error": [25, 50, 25, 50, 25] },
-    "iosSafariSwitchTrick": true
+    "vibratePatternsMs": {
+      "selection": [
+        8
+      ],
+      "light": [
+        10
+      ],
+      "medium": [
+        18
+      ],
+      "heavy": [
+        28
+      ],
+      "success": [
+        12,
+        60,
+        18
+      ],
+      "warning": [
+        20,
+        80,
+        20
+      ],
+      "error": [
+        25,
+        50,
+        25,
+        50,
+        25
+      ]
+    },
+    "iosSafariSwitchTrick": true,
+    "$source": "estimated Web Vibration API + iOS Safari switch workaround",
+    "$class": "estimated",
+    "$url": "https://developer.apple.com/design/human-interface-guidelines/playing-haptics",
+    "$platform": "Web"
   },
-
   "sounds": {
     "$usage": "Original synthesized sounds shipped in assets/sounds (generated by scripts/synth-sounds.py). Never ship Apple system sound files: they are Apple copyrighted assets.",
     "masterVolume": 0.35,
     "throttleMs": 40,
     "catalog": {
-      "tap":     { "file": "tap.wav",     "spec": "8ms noise click through 4.5kHz band pass plus 1.8kHz sine, 25ms exponential decay, peak -14 dBFS" },
-      "toggle":  { "file": "toggle-on.wav / toggle-off.wav", "spec": "two partial knock: on = 1.2kHz then 2.4kHz 18ms apart, off = reverse order, 40ms decay" },
-      "tick":    { "file": "tick.wav",    "spec": "3ms 6kHz click, 12ms decay, very quiet -22 dBFS (pickers)" },
-      "success": { "file": "success.wav", "spec": "two sine notes E6 then B6, 90ms each, soft attack 5ms, decay 220ms" },
-      "error":   { "file": "error.wav",   "spec": "two low notes A4 then F4, 100ms each, slightly detuned square softened by low pass 2kHz" },
-      "send":    { "file": "send.wav",    "spec": "300ms rising filtered noise whoosh 400Hz to 3kHz" },
-      "refresh": { "file": "refresh.wav", "spec": "soft pop 900Hz sine 30ms with pitch drop" },
-      "keyboard":{ "file": "keyboard.wav","spec": "5ms click 3.2kHz plus thud 180Hz 15ms" }
-    }
+      "tap": {
+        "file": "tap.wav",
+        "spec": "8ms noise click through 4.5kHz band pass plus 1.8kHz sine, 25ms exponential decay, peak -14 dBFS"
+      },
+      "toggle": {
+        "file": "toggle-on.wav / toggle-off.wav",
+        "spec": "two partial knock: on = 1.2kHz then 2.4kHz 18ms apart, off = reverse order, 40ms decay"
+      },
+      "tick": {
+        "file": "tick.wav",
+        "spec": "3ms 6kHz click, 12ms decay, very quiet -22 dBFS (pickers)"
+      },
+      "success": {
+        "file": "success.wav",
+        "spec": "two sine notes E6 then B6, 90ms each, soft attack 5ms, decay 220ms"
+      },
+      "error": {
+        "file": "error.wav",
+        "spec": "two low notes A4 then F4, 100ms each, slightly detuned square softened by low pass 2kHz"
+      },
+      "send": {
+        "file": "send.wav",
+        "spec": "300ms rising filtered noise whoosh 400Hz to 3kHz"
+      },
+      "refresh": {
+        "file": "refresh.wav",
+        "spec": "soft pop 900Hz sine 30ms with pitch drop"
+      },
+      "keyboard": {
+        "file": "keyboard.wav",
+        "spec": "5ms click 3.2kHz plus thud 180Hz 15ms"
+      }
+    },
+    "$source": "estimated original 44.1kHz WAV synthesis (scripts/synth-sounds.py)",
+    "$class": "estimated",
+    "$url": "https://developer.apple.com/design/human-interface-guidelines/playing-audio",
+    "$platform": "Web / Flutter / Tauri"
   }
 }

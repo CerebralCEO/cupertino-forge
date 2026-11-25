@@ -1,24 +1,27 @@
 # 15 Version diff: what is new in iOS 27 and macOS 27
 
-Baseline: iOS 26 and macOS 26 Tahoe introduced Liquid Glass (WWDC 2025). iOS 27 and macOS 27 Golden Gate refine it (WWDC 2026, shipped fall 2026). Plugin tokens are synced to the iOS 27 and macOS 27 UI kits (Sketch, exported November 2026).
+Baseline: iOS 26 and macOS 26 Tahoe introduced Liquid Glass (WWDC 2025 `[official]`). iOS 27 and macOS 27 refine it (`Oct 2026` HIG DocC `[official]` + WWDC 2026 secondary press `[inferred]`). Plugin primary tokens match the Apple iOS 27 and macOS 27 UI kits (`tokens/source/`, Sketch `[measured]`).
 
-## Changes that affect your UI
+## Tier A — Official Apple HIG & SDK Changes (June 2025 – Oct 2026 `[official]`)
 
-1. **Liquid Glass intensity slider.** Users choose from ultra clear to fully tinted. Implement `glassIntensity` (0 to 1). Your UI must stay legible at both ends.
-2. **Better readability.** More uniform refraction, improved diffusion and contrast. Our tuned recipes use stronger tint than iOS 26.
-3. **macOS uniform window corner radius.** All windows share one radius (12 estimate) instead of Tahoe's toolbar dependent 16 to 26.
-4. **macOS edge to edge sidebars.** Sidebars are no longer floating glass slabs; they extend to the window edge with a vibrant material. Do not inset or float the sidebar.
-5. **macOS uniform toolbars.** Toolbar items sit on a consistent bar behind them for legibility.
-6. **macOS colored sidebar icons are back.** Sidebar glyphs use the accent color (or their fixed color) instead of monochrome.
-7. **Window active state is clearer** via sidebar appearance, opacity and window shadow (use windowActive vs windowInactive tokens and sidebar vs sidebar-inactive).
-8. **App icons** use multiple Liquid Glass layers (Icon Composer). For your own app icon design: layered foreground on glass, no text.
-9. **iOS 26 to 27 carried over:** floating capsule tab bar that minimizes on scroll, bottom search, glass button groups in navigation bars, sheets that float at medium detent, scroll edge effects, concentric layout, system blue #0088FF.
+1. **Mac touch input (`Oct 28, 2026` `[official]`):** Desktop Mac UI with touch displays/Sidecar keeps keyboard & pointer primary and preserves control layout/sizing without jumping.
+2. **App icon formats & 6 appearances (`Oct 28, 2026` / `June 8, 2026` `[official]`):** Layered `.icon` in Icon Composer (`1024×1024 px` Square input) vs nonlayered bitmap options; 6 required appearances (`default`, `dark`, `clear light/dark`, `tinted light/dark`).
+3. **Live Activities & Dynamic Island limited width (`Oct 13, 2026` `[official]`):** `28×28 pt` compact circular fit and `14 pt` Lock Screen margins; Widgets `16 pt` margins and `11 pt` minimum text (`[official]`).
+4. **Sidebar colored accent icons (`June 8, 2026` `[official]`):** Sidebars use app/system accent color by default; `.backgroundExtensionEffect()` extends content smoothly under edge-to-edge sidebars/inspectors.
+5. **Tab bar search & scroll edge (`June 8, 2026` `[official]`):** `Tab(role: .search)` trailing standalone capsule, `.tabBarMinimizeBehavior(.onScrollDown)`, `.scrollEdgeEffectStyle(.soft | .hard | .automatic)`, menu item icons from standard selectors, and iOS single-view Sheets placing Cancel leading & Done trailing (`Mar 24, 2026` `[official]`).
+6. **List headers (`[official]`):** Lists, tables, and forms use title-style capitalization instead of forced ALL CAPS.
+7. **SF Symbols 7 (`July 28, 2025` `[official]`):** `Draw On / Draw Off` animations and smooth linear gradient rendering across all modes.
+
+## Tier B — Secondary Press Reports (`[inferred]`/`[estimate]`, pending Xcode 27 / device measurement)
+
+1. **Liquid Glass intensity slider (`[inferred]`):** Settings continuous slider between clear and tinted/more opaque; plugin models `--cf-glass-intensity` (`0..1`, default `0.5` `[estimate]`).
+2. **macOS uniform window corner radius (`[estimate]`):** Secondary press reports `~12 pt` uniform window radius replacing Tahoe `16–26 pt` (`[estimate]` until measured on macOS 27 hardware).
+3. **Community hardware radius/safe-area `$alt` notes (`[inferred/community]`):** Community `ScreenCorners` / `screens.guide` report `62pt` display radius (16 Pro/17 Pro), `18pt` (iPad Pro OLED), and `59pt` safe-area top (iPhone 15/16); kept out of primary kit tokens (`55pt`/`30pt`/`62pt`) until official confirmation.
 
 ## Things that are old and must not appear
 
-- iOS 15 to 18 style: solid white or translucent bars spanning full width with a hairline, tab bar glued to the bottom edge, #007AFF blue, 10pt radius grouped sections, uppercase grouped section headers, 51 by 31 toggles.
-- macOS Tahoe 26 style: floating inset sidebar, large window corner radius 26.
-- macOS Sequoia and older style: opaque gray toolbars without glass, monochrome sidebar only, flat menus.
+- iOS 15 to 18 style: solid full-width bars with hairline, bottom-glued tab bar, `#007AFF` blue, `10pt` grouped corners, uppercase grouped list headers, `51×31` toggle switch.
+- macOS Tahoe 26 / Sequoia style: floating inset sidebar (`26` window corners) or opaque gray toolbars without glass.
 
 ## Update procedure
 
@@ -27,3 +30,4 @@ Run `/apple-sync` after each WWDC and each kit update. Record the diff here with
 | Date | Source | Change |
 |---|---|---|
 | 2026-11-21 | iOS 27 and macOS 27 Sketch kits, HIG | Initial token sync |
+| 2026-11-25 | Official Apple DocC (62 pages), Sketch kits, WWDC 2026 press | Reconciled provenance (`[official]`/`[measured]`/`[inferred]`/`[estimate]`), added Oct 2026 HIG deltas & conflicts ledger |

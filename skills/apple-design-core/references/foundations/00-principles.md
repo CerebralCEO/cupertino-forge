@@ -4,10 +4,11 @@ Use this as a decision procedure, not as inspiration.
 
 ## The four questions, asked for every element
 
-1. **Is this content or control?** Content sits in the content layer: opaque, calm, edge to edge, no glass. Controls float in the functional layer: Liquid Glass, grouped, minimal.
-2. **What is the one thing the user came here to do?** That action gets the single prominent (tinted) button or the primary position (top trailing on iOS navigation, bottom trailing in macOS dialogs). Everything else is secondary or goes in a menu.
+1. **Is this content or control?** Content sits in the content layer: opaque, calm, edge to edge, no glass (`[official]`). Controls float in the functional layer: Liquid Glass, grouped, minimal.
+2. **What is the one thing the user came here to do?** That action gets the single prominent (tinted) button (`1–2` max per view `[official]`) or the primary position (top trailing on iOS navigation, Cancel leading / Done trailing on iOS single-view sheets `[official]`, bottom trailing in macOS dialogs). Everything else is secondary or goes in a menu.
 3. **Can it be removed?** Apple screens feel premium because of what is missing. Remove decorative icons, borders, dividers between unrelated groups, helper text that repeats the label, and duplicate actions.
-4. **Does it behave like the platform?** Same gestures, same positions, same words as Settings, Mail, Notes, Finder. Familiar beats clever.
+4. **Does it behave like the platform?** Same gestures, same positions, same words as Settings, Mail, Notes, Finder. On Macs with touch displays (`Oct 2026` HIG `[official]`), keyboard + pointer remain primary and layout/control positions MUST stay stable across touch and pointer input. Familiar beats clever.
+5. **Avoid time-boxed auto-dismissal on critical UI (`[official]`).** Cognitive & VoiceOver accessibility requires explicit user actions rather than timed disappears.
 
 ## Hierarchy
 

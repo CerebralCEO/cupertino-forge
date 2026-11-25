@@ -4,23 +4,31 @@ Apple quality means accessible by default. These are requirements, not extras.
 
 ## Settings every build must honor
 
-| Setting | Web signal | Flutter signal | Behavior |
-|---|---|---|---|
-| Dark mode | prefers-color-scheme | MediaQuery.platformBrightness | dark tokens |
-| Increase contrast | prefers-contrast: more | MediaQuery.highContrast | HC colors, opaque glass, borders on glass |
-| Reduce transparency | prefers-reduced-transparency | (iOS) accessibility features via channel; expose app setting | opaque glass |
-| Reduce motion | prefers-reduced-motion | MediaQuery.disableAnimations | crossfades instead of movement |
-| Larger text | --cf-type-scale from app setting; respect browser zoom | MediaQuery.textScaler | reflow layouts, never clip |
-| Bold text | app setting | MediaQuery.boldText | step weights up one level |
-| Button shapes (iOS) | app setting | n/a | underline plain text buttons |
+| Setting | Web signal | Web Browser Matrix (`[official]`) | Flutter signal | Behavior |
+|---|---|---|---|---|
+| Dark mode | prefers-color-scheme | All modern browsers | MediaQuery.platformBrightness | dark tokens |
+| Increase contrast | prefers-contrast: more | Chromium 96+, Safari 14.1+, Firefox 101+ | MediaQuery.highContrast | HC colors, opaque glass, borders on glass (`--cf-glass-shadow`) |
+| Reduce transparency | prefers-reduced-transparency + `[data-transparency="reduce"]` | Chromium `118+` supported; **Safari unsupported** (`[official]` CanIUse -> mandatory in-app toggle) | App setting + OS accessibility | opaque glass (`glass`, `glass-clear`, `glass-large`, `glass-menu`) |
+| Reduce motion | prefers-reduced-motion + `<MotionConfig reducedMotion="user">` | All modern browsers | MediaQuery.disableAnimations | crossfades (`200ms` `[inferred]`) instead of movement, bounce `0` |
+| Larger text | `--cf-type-scale` + browser zoom | Target `>= 200%` enlargement (`140%` watchOS `[official]`) | MediaQuery.textScaler | reflow layouts, never clip |
+| Bold text | app setting | Fallback CSS class | MediaQuery.boldText | step weights up one level |
+| Button shapes (iOS) | app setting | Fallback CSS underline | n/a | underline plain text buttons |
 
-## Contrast
+## Contrast (`[official]` Apple HIG Accessibility & WCAG 2.2)
 
-Body text 4.5:1, large text (title3 and up) and glyphs 3:1, against the actual background including glass over the worst case content. Use `scripts/contrast-check.mjs`.
+- Regular text `<= 17 pt` (all weights): **`>= 4.5:1`** (`[official]`)
+- Large text **`>= 18 pt`** (all weights): **`>= 3.0:1`** (`[official]`)
+- **Bold text** (all sizes): **`>= 3.0:1`** (`[official]`)
+- Non-text UI controls, glyphs, focus rings: **`>= 3.0:1`** (`[official]`)
+- Dark Mode small custom text goal: **`7.0:1`** (`[official]` HIG Dark Mode)
+Use `scripts/contrast-check.mjs` (never exempt text over Liquid Glass — test worst-case background).
 
-## Targets and spacing
+## Targets and spacing (`[official]`)
 
-44 by 44 iOS, 28 by 28 macOS minimum. Keep 8 points between adjacent targets.
+- iOS / iPadOS / watchOS: **`44 × 44 pt`** recommended, **`28 × 28 pt`** minimum (`[official]`).
+- macOS: **`28 × 28 pt`** recommended, **`20 × 20 pt`** minimum (`[official]`).
+- Target padding: **`~12 pt`** around bezeled controls, **`~24 pt`** around bezel-less controls (`[official]`).
+- Avoid time-boxed auto-dismissal on notifications/alerts where cognitive or VoiceOver users need time to read (`[official]`). Support Assistive Access (`>= 2` confirmations on destructive actions `[official]`).
 
 ## Screen readers
 
@@ -40,6 +48,6 @@ Body text 4.5:1, large text (title3 and up) and glyphs 3:1, against the actual b
 
 No flashing above 3 per second. Parallax and auto playing motion off under reduced motion.
 
-## Language
+## Language & RTL
 
-Support right to left by using logical properties (margin-inline-start, Alignment.start). Mirror directional icons (chevrons, back arrows) in RTL.
+Support right-to-left interfaces using logical properties (`padding-inline`, `margin-inline`, `EdgeInsetsDirectional`) and follow the 3-line paragraph rule, `+2pt` RTL/all-caps Latin balance, numeral digit-preservation, and non-Latin zero-tracking rules in `foundations/16-localization-rtl.md`.

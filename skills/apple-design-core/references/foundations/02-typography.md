@@ -1,6 +1,8 @@
 # 02 Typography
 
-Source of truth: `tokens/typography.json` (HIG Dynamic Type tables, HIG tracking tables, iOS 27 and macOS 27 kit text styles).
+Source of truth: `tokens/typography.json` (`[official]` Apple HIG Dynamic Type tables across 132 cells and HIG tracking tables across 64 SF Pro + 64 macOS + 64 SF Pro Rounded rows — verified `0 diffs` against official Apple HIG DocC JSON; tight/loose leading from Apple iOS 27 / macOS 27 Sketch UI kits `[measured]`). Optical size switches continuously (`Text <= 19pt`, `Display >= 20pt` `[official]`).
+
+> **Known macOS Sketch Kit vs HIG Weight Conflict (`needs-device-verification`)**: `tokens/typography.json` retains Official HIG macOS weights (`headline`: `700`/`800`, `caption1`: `400`/`500`, `caption2`: `500`/`600`), while the raw macOS 27 Sketch UI kit has `headline` emphasized `900`, `caption1` emphasized `600`, and `caption2` regular `400`. Both sets are recorded under `macosTextStyles.$kitConflict`; do not change until verified on live macOS 27 hardware.
 
 ## Styles (iOS Large default size)
 
@@ -71,7 +73,7 @@ Tight and loose leading variants exist for every style (tokens). Tight only insi
 4. Truncate with tail ellipsis in single line rows; let body text wrap. At AX sizes, stack trailing values under the title instead of truncating.
 5. Text color comes from labels: label, label-2, label-3. Disabled text is label-3. Never gray-xxx.
 6. Numbers that update use tabular figures. Currency and units use the locale formatter.
-7. Bangla and other scripts: use the script font stack in tokens and raise line height by one step (use loose leading).
+7. Bangla, Arabic, Hebrew & Indic scripts: use `fontStacks.webBangla` (`Kohinoor Bangla` system font `[platform-dependent]`) or `SF Arabic` (`[official]`) and **NEVER apply negative SF tracking (`-0.026em`)** — set `letter-spacing: 0` (`:lang(bn), :lang(ar), :lang(he)`) `[inferred]` and use loose leading / `1.35–1.5` line height `[estimate]` so matras and cursive glyphs never clip or break. Full rules in `16-localization-rtl.md`.
 
 ## Dynamic Type
 

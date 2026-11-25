@@ -35,8 +35,16 @@ Exact CSS values are generated as `--cf-glass-*` variables.
 4. Glass sits on content that scrolls beneath it. Add the scroll edge effect: a 40 to 60 point gradient blur and fade of the content under top and bottom bars, instead of solid bar backgrounds.
 5. Press: glass element scales up to about 1.1 with the press spring, rim brightens, releases with the release spring. With mouse or trackpad the effect is subdued (1.02, no glow).
 6. Reduce Transparency: glass becomes opaque (`--cf-glass-opaque`). Increase Contrast: no blur, opaque, 1px label border at 35 percent.
-7. Intensity: honor `glassIntensity` from config (0 clear to 1 tinted). It scales the tint alpha and blur radius.
-8. Performance: limit simultaneous backdrop filters to about 6 on screen. Never animate blur radius; animate opacity and transform only.
+7. **Unified Intensity Curve (`[estimate]`):** Honor `glassIntensity` (`0.0` clear to `1.0` tinted, default `0.5`) mapped via `materials.json -> liquidGlass.intensityCurve` (`alphaScale` & `blurScale = 0.7 + 0.6 * intensity` in both Web & Flutter). iOS 27 / macOS 27 press report indicates a continuous OS slider (`[inferred]`).
+8. **Reduce Transparency & Safari Matrix:** `@media (prefers-reduced-transparency: reduce)` works in Chromium `118+` `[official]` but is **unsupported in Safari/WebKit `[official]`** — apps MUST provide an in-app `[data-transparency="reduce"]` setting (`--cf-glass-opaque` `#F6F6F6` / `#262626` `[estimate]`).
+9. **Performance Budget (`[estimate]`):** Limit simultaneous backdrop filters to **`<= 6`** on screen. Never animate blur radius (`sigma`); animate opacity/transform only. In **SwiftUI**, wrap adjacent glass controls in `GlassEffectContainer(spacing:)` `[official]`. In **Flutter `3.29+`**, use `BackdropGroup` + `BackdropFilter.grouped` `[official]` (clipped with `ClipRRect`, never on overlapping siblings).
+
+## Glass vs Solid Decision Tree
+
+1. Is the element in the navigation/control **functional layer** floating over scrolling content (tab bar, nav bar, toolbar, sidebar, menu, popover, alert, medium sheet, active knob)? -> If NO (card, row, page bg, form section), use **solid/grouped background or standard material**, NEVER glass (`[official]`).
+2. Is another glass layer already directly beneath it? -> If YES, use `overGlass` / vibrant fills, NEVER stack glass on glass (`[official]`).
+3. Is it floating directly over bright photo/video/map media? -> Use `clear` variant + `#000000@0.35` dark dimming layer (`[official]`), else use `regular` (or `large` `[estimate]` for sidebars/sheets).
+4. Are > 6 backdrop elements active or is `Reduce Transparency` / `Increase Contrast` on? -> Collapse to opaque fallback (`[estimate]`).
 
 ## Refraction (lens) effect
 

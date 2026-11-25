@@ -1,221 +1,485 @@
 {
- "$meta": {
-  "description": "Motion tokens. Apple UI motion is spring based. Duration and bounce are the perceptual model from WWDC23 Animate with springs.",
-  "sources": {
-   "swiftui": "SwiftUI Animation.default = spring(response 0.55, dampingFraction 1.0); smooth, snappy, bouncy presets",
-   "wwdc23": "Spring model: duration and bounce map to stiffness and damping",
-   "uikit": "UIScrollView decelerationRate normal 0.998, fast 0.99",
-   "estimate": "transition specific values tuned to match iOS 27 recordings"
-  }
- },
- "springModel": {
-  "$usage": "Convert duration d (seconds) and bounce b to physics with mass 1: stiffness = (2*pi/d)^2; damping = 4*pi*(1-b)/d when b >= 0, else 4*pi/(d*(1+b)). Flutter SpringDescription(mass:1, stiffness, damping). Framer Motion / motion: { type: 'spring', visualDuration: d, bounce: b }.",
-  "formulaStiffness": "(2*PI/duration)^2",
-  "formulaDamping": "4*PI*(1-bounce)/duration"
- },
- "springs": {
-  "default": {
-   "duration": 0.55,
-   "bounce": 0.0,
-   "usage": "Anything without a specific rule"
+  "$meta": {
+    "description": "Motion tokens. Apple UI motion is spring based. Duration and bounce are the perceptual model from WWDC23 Animate with springs.",
+    "sources": {
+      "swiftui": "SwiftUI Animation.default = spring(response 0.55, dampingFraction 1.0); smooth, snappy, bouncy presets",
+      "wwdc23": "Spring model: duration and bounce map to stiffness and damping",
+      "uikit": "UIScrollView decelerationRate normal 0.998, fast 0.99",
+      "estimate": "transition specific values tuned to match iOS 27 recordings"
+    },
+    "reconciledDate": "2026-11-25"
   },
-  "smooth": {
-   "duration": 0.5,
-   "bounce": 0.0,
-   "usage": "Layout changes, fades with movement, size changes"
+  "springModel": {
+    "$usage": "Convert duration d (seconds) and bounce b to physics with mass 1: stiffness = (2*pi/d)^2; damping = 4*pi*(1-b)/d when b >= 0, else 4*pi/(d*(1+b)). Flutter SpringDescription(mass:1, stiffness, damping). Framer Motion / motion: { type: 'spring', visualDuration: d, bounce: b }.",
+    "formulaStiffness": "(2*PI/duration)^2",
+    "formulaDamping": "4*PI*(1-bounce)/duration",
+    "$source": "WWDC23 Animate with springs + SwiftUI Spring",
+    "$class": "official",
+    "$url": "https://developer.apple.com/documentation/swiftui/spring",
+    "$platform": "iOS / macOS"
   },
-  "snappy": {
-   "duration": 0.5,
-   "bounce": 0.15,
-   "usage": "Selection changes, toggles, segmented indicator, small UI responses"
+  "springs": {
+    "default": {
+      "duration": 0.55,
+      "bounce": 0.0,
+      "usage": "Anything without a specific rule",
+      "$source": "SwiftUI Spring preset",
+      "$class": "official",
+      "$url": "https://developer.apple.com/documentation/swiftui/spring",
+      "$platform": "iOS / macOS"
+    },
+    "smooth": {
+      "duration": 0.5,
+      "bounce": 0.0,
+      "usage": "Layout changes, fades with movement, size changes",
+      "$source": "SwiftUI Spring preset",
+      "$class": "official",
+      "$url": "https://developer.apple.com/documentation/swiftui/spring",
+      "$platform": "iOS / macOS"
+    },
+    "snappy": {
+      "duration": 0.5,
+      "bounce": 0.15,
+      "usage": "Selection changes, toggles, segmented indicator, small UI responses",
+      "$source": "SwiftUI Spring preset",
+      "$class": "official",
+      "$url": "https://developer.apple.com/documentation/swiftui/spring",
+      "$platform": "iOS / macOS"
+    },
+    "bouncy": {
+      "duration": 0.5,
+      "bounce": 0.3,
+      "usage": "Playful confirmations, glass morph, drop into place. Use rarely.",
+      "$source": "SwiftUI Spring preset",
+      "$class": "official",
+      "$url": "https://developer.apple.com/documentation/swiftui/spring",
+      "$platform": "iOS / macOS"
+    },
+    "interactive": {
+      "duration": 0.15,
+      "bounce": 0.0,
+      "usage": "Finger tracking, press down, drag follow. Must be near instant.",
+      "$source": "estimated",
+      "$class": "estimated",
+      "$url": "https://developer.apple.com/documentation/swiftui/spring",
+      "$platform": "iOS / macOS"
+    },
+    "press": {
+      "duration": 0.2,
+      "bounce": 0.0,
+      "usage": "Press down scale and highlight",
+      "$source": "estimated",
+      "$class": "estimated",
+      "$url": "https://developer.apple.com/documentation/swiftui/spring",
+      "$platform": "iOS / macOS"
+    },
+    "release": {
+      "duration": 0.35,
+      "bounce": 0.15,
+      "usage": "Release after press, glass settle",
+      "$source": "estimated",
+      "$class": "estimated",
+      "$url": "https://developer.apple.com/documentation/swiftui/spring",
+      "$platform": "iOS / macOS"
+    },
+    "sheet": {
+      "duration": 0.5,
+      "bounce": 0.0,
+      "usage": "Sheet present and dismiss, detent changes",
+      "$source": "estimated",
+      "$class": "estimated",
+      "$url": "https://developer.apple.com/documentation/swiftui/spring",
+      "$platform": "iOS / macOS"
+    },
+    "push": {
+      "duration": 0.5,
+      "bounce": 0.0,
+      "usage": "Navigation push and pop",
+      "$source": "estimated",
+      "$class": "estimated",
+      "$url": "https://developer.apple.com/documentation/swiftui/spring",
+      "$platform": "iOS / macOS"
+    },
+    "popover": {
+      "duration": 0.35,
+      "bounce": 0.1,
+      "usage": "Menus, popovers, context menus scale in from source",
+      "$source": "estimated",
+      "$class": "estimated",
+      "$url": "https://developer.apple.com/documentation/swiftui/spring",
+      "$platform": "iOS / macOS"
+    },
+    "glassMorph": {
+      "duration": 0.45,
+      "bounce": 0.2,
+      "usage": "Liquid Glass shapes merging, splitting, tab bar minimize",
+      "$source": "estimated",
+      "$class": "estimated",
+      "$url": "https://developer.apple.com/documentation/swiftui/spring",
+      "$platform": "iOS / macOS"
+    }
   },
-  "bouncy": {
-   "duration": 0.5,
-   "bounce": 0.3,
-   "usage": "Playful confirmations, glass morph, drop into place. Use rarely."
+  "cssFallbackEasing": {
+    "$usage": "Only when a JS spring is impossible (pure CSS transitions). build-tokens.mjs samples each spring in springs{} and emits --cf-ease-<name> as a CSS linear() curve plus --cf-dur-<name> settle duration. Never use ease, ease-in-out or linear keywords for movement.",
+    "generated": true
   },
-  "interactive": {
-   "duration": 0.15,
-   "bounce": 0.0,
-   "usage": "Finger tracking, press down, drag follow. Must be near instant."
+  "transitions": {
+    "$source": "estimated (navigationPush 30% outgoing parallax inferred from UIKit)",
+    "navigationPush": {
+      "spring": "push",
+      "incomingFrom": "trailing 100 percent",
+      "outgoingTo": "leading 30 percent with dim 0.1",
+      "backSwipeEdgeWidth": 20,
+      "interruptible": true,
+      "reducedMotion": {
+        "strategy": "crossfade",
+        "durationMs": 200,
+        "bounce": 0,
+        "$source": "Apple HIG Accessibility Reduce Motion",
+        "$class": "inferred",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/accessibility"
+      },
+      "$source": "inferred from UINavigationController (estimated 20pt edge width)",
+      "$class": "inferred",
+      "$url": "https://developer.apple.com/documentation/uikit/uinavigationcontroller",
+      "$platform": "iOS"
+    },
+    "sheetPresent": {
+      "spring": "sheet",
+      "from": "bottom",
+      "scrim": "fade 0 to scrim alpha in same spring",
+      "backgroundScale": "underlying content stays at 1.0 on iOS 26+ (no card stack shrink) except fullscreen cover",
+      "interruptible": true,
+      "reducedMotion": {
+        "strategy": "crossfade",
+        "durationMs": 200,
+        "bounce": 0,
+        "$source": "Apple HIG Accessibility Reduce Motion",
+        "$class": "inferred",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/accessibility"
+      },
+      "$source": "estimated",
+      "$class": "estimated",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/motion",
+      "$platform": "All"
+    },
+    "sheetDismiss": {
+      "dragToDismiss": true,
+      "velocityThresholdPtPerS": 600,
+      "distanceThreshold": "40 percent of sheet height",
+      "interruptible": true,
+      "reducedMotion": {
+        "strategy": "crossfade",
+        "durationMs": 200,
+        "bounce": 0,
+        "$source": "Apple HIG Accessibility Reduce Motion",
+        "$class": "inferred",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/accessibility"
+      },
+      "$source": "estimated",
+      "$class": "estimated",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/motion",
+      "$platform": "All"
+    },
+    "alertPresent": {
+      "from": "scale 1.08 opacity 0",
+      "to": "scale 1 opacity 1",
+      "spring": "popover",
+      "interruptible": true,
+      "reducedMotion": {
+        "strategy": "crossfade",
+        "durationMs": 200,
+        "bounce": 0,
+        "$source": "Apple HIG Accessibility Reduce Motion",
+        "$class": "inferred",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/accessibility"
+      },
+      "$source": "estimated",
+      "$class": "estimated",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/motion",
+      "$platform": "All"
+    },
+    "alertDismiss": {
+      "to": "opacity 0",
+      "durationMs": 150,
+      "interruptible": true,
+      "reducedMotion": {
+        "strategy": "crossfade",
+        "durationMs": 200,
+        "bounce": 0,
+        "$source": "Apple HIG Accessibility Reduce Motion",
+        "$class": "inferred",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/accessibility"
+      },
+      "$source": "estimated",
+      "$class": "estimated",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/motion",
+      "$platform": "All"
+    },
+    "menuOpen": {
+      "from": "scale 0.6 from the source anchor opacity 0",
+      "to": "scale 1",
+      "spring": "popover",
+      "glassMorphFromButton": true,
+      "interruptible": true,
+      "reducedMotion": {
+        "strategy": "crossfade",
+        "durationMs": 200,
+        "bounce": 0,
+        "$source": "Apple HIG Accessibility Reduce Motion",
+        "$class": "inferred",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/accessibility"
+      },
+      "$source": "estimated",
+      "$class": "estimated",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/motion",
+      "$platform": "All"
+    },
+    "menuClose": {
+      "to": "scale 0.8 opacity 0",
+      "durationMs": 180,
+      "interruptible": true,
+      "reducedMotion": {
+        "strategy": "crossfade",
+        "durationMs": 200,
+        "bounce": 0,
+        "$source": "Apple HIG Accessibility Reduce Motion",
+        "$class": "inferred",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/accessibility"
+      },
+      "$source": "estimated",
+      "$class": "estimated",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/motion",
+      "$platform": "All"
+    },
+    "contextMenu": {
+      "liftScale": 1.04,
+      "blurBackground": 20,
+      "spring": "popover",
+      "interruptible": true,
+      "reducedMotion": {
+        "strategy": "crossfade",
+        "durationMs": 200,
+        "bounce": 0,
+        "$source": "Apple HIG Accessibility Reduce Motion",
+        "$class": "inferred",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/accessibility"
+      },
+      "$source": "estimated",
+      "$class": "estimated",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/motion",
+      "$platform": "All"
+    },
+    "tabSwitch": {
+      "content": "crossfade 150ms, no slide",
+      "indicator": "glass capsule slides with spring snappy",
+      "interruptible": true,
+      "reducedMotion": {
+        "strategy": "crossfade",
+        "durationMs": 200,
+        "bounce": 0,
+        "$source": "Apple HIG Accessibility Reduce Motion",
+        "$class": "inferred",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/accessibility"
+      },
+      "$source": "estimated",
+      "$class": "estimated",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/motion",
+      "$platform": "All"
+    },
+    "tabBarMinimize": {
+      "spring": "glassMorph",
+      "interruptible": true,
+      "reducedMotion": {
+        "strategy": "crossfade",
+        "durationMs": 200,
+        "bounce": 0,
+        "$source": "Apple HIG Accessibility Reduce Motion",
+        "$class": "inferred",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/accessibility"
+      },
+      "$source": "estimated",
+      "$class": "estimated",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/motion",
+      "$platform": "All"
+    },
+    "toggle": {
+      "knob": "spring snappy",
+      "knobStretchWhilePressed": 1.25,
+      "trackColor": "150ms crossfade",
+      "interruptible": true,
+      "reducedMotion": {
+        "strategy": "crossfade",
+        "durationMs": 200,
+        "bounce": 0,
+        "$source": "Apple HIG Accessibility Reduce Motion",
+        "$class": "inferred",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/accessibility"
+      },
+      "$source": "estimated",
+      "$class": "estimated",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/motion",
+      "$platform": "All"
+    },
+    "segmentedSelection": {
+      "spring": "snappy",
+      "indicatorStretchWhileDragging": true,
+      "interruptible": true,
+      "reducedMotion": {
+        "strategy": "crossfade",
+        "durationMs": 200,
+        "bounce": 0,
+        "$source": "Apple HIG Accessibility Reduce Motion",
+        "$class": "inferred",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/accessibility"
+      },
+      "$source": "estimated",
+      "$class": "estimated",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/motion",
+      "$platform": "All"
+    },
+    "listRowHighlight": {
+      "pressInMs": 0,
+      "fadeOutMs": 250,
+      "interruptible": true,
+      "reducedMotion": {
+        "strategy": "crossfade",
+        "durationMs": 200,
+        "bounce": 0,
+        "$source": "Apple HIG Accessibility Reduce Motion",
+        "$class": "inferred",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/accessibility"
+      },
+      "$source": "estimated",
+      "$class": "estimated",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/motion",
+      "$platform": "All"
+    },
+    "fade": {
+      "durationMs": 200,
+      "interruptible": true,
+      "reducedMotion": {
+        "strategy": "crossfade",
+        "durationMs": 200,
+        "bounce": 0,
+        "$source": "Apple HIG Accessibility Reduce Motion",
+        "$class": "inferred",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/accessibility"
+      },
+      "$source": "estimated",
+      "$class": "estimated",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/motion",
+      "$platform": "All"
+    },
+    "toast": {
+      "from": "top, translateY -20 opacity 0",
+      "spring": "snappy",
+      "interruptible": true,
+      "reducedMotion": {
+        "strategy": "crossfade",
+        "durationMs": 200,
+        "bounce": 0,
+        "$source": "Apple HIG Accessibility Reduce Motion",
+        "$class": "inferred",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/accessibility"
+      },
+      "$source": "estimated",
+      "$class": "estimated",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/motion",
+      "$platform": "All"
+    },
+    "$class": "estimated",
+    "$url": "https://developer.apple.com/documentation/swiftui/navigationtransition",
+    "$platform": "All"
   },
   "press": {
-   "duration": 0.2,
-   "bounce": 0.0,
-   "usage": "Press down scale and highlight"
+    "$usage": "Every tappable thing has a press state. Values per category.",
+    "glassButton": {
+      "scale": 1.1,
+      "highlight": "brighten rim",
+      "spring": "press",
+      "releaseSpring": "release"
+    },
+    "solidButton": {
+      "scale": 0.97,
+      "opacity": 1,
+      "overlay": "#000000@0.1 light / #FFFFFF@0.1 dark",
+      "spring": "press"
+    },
+    "plainTextButton": {
+      "opacity": 0.35,
+      "durationMs": 0,
+      "releaseFadeMs": 200
+    },
+    "listRow": {
+      "background": "fillIOS.quaternary on iOS (gray5 light / gray4 dark)",
+      "scale": 1
+    },
+    "card": {
+      "scale": 0.98,
+      "spring": "press"
+    },
+    "macOSControl": {
+      "scale": 1,
+      "fill": "macOSControlFills.contentArea.borderedPressed",
+      "durationMs": 0
+    },
+    "$source": "estimated (HIG Motion touch vs pointer qualitative)",
+    "$class": "estimated",
+    "$url": "https://developer.apple.com/design/human-interface-guidelines/motion",
+    "$platform": "All"
   },
-  "release": {
-   "duration": 0.35,
-   "bounce": 0.15,
-   "usage": "Release after press, glass settle"
+  "hover": {
+    "$usage": "Pointer devices only (@media (hover: hover) and (pointer: fine)). Never on touch.",
+    "macOSToolbarItem": {
+      "background": "fillMacOS.secondary",
+      "durationMs": 100
+    },
+    "macOSListRow": "no hover background except in sidebars and menus",
+    "menuItem": {
+      "background": "accent",
+      "label": "#FFFFFF",
+      "durationMs": 0
+    },
+    "iPadPointer": {
+      "lift": 1.04,
+      "shadow": "0 6px 16px rgba(0,0,0,0.18)"
+    },
+    "link": "no underline on hover in app UI",
+    "cursor": "default arrow on buttons in macOS style; pointer cursor only for web links",
+    "$source": "estimated",
+    "$class": "estimated",
+    "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+    "$platform": "macOS / iPadOS / Web"
   },
-  "sheet": {
-   "duration": 0.5,
-   "bounce": 0.0,
-   "usage": "Sheet present and dismiss, detent changes"
+  "scroll": {
+    "decelerationRateNormal": 0.998,
+    "decelerationRateFast": 0.99,
+    "rubberBand": {
+      "formula": "offset = (1 - 1 / ((x * c / d) + 1)) * d",
+      "c": 0.55,
+      "d": "viewport dimension",
+      "$class": "inferred",
+      "$source": "inferred reverse-engineered UIScrollView c=0.55"
+    },
+    "scrollEdgeEffect": "content under bars fades and softly blurs over the top 40 to 60pt instead of a hard bar background",
+    "$source": "UIScrollView.DecelerationRate official; rubberBand c=0.55 inferred",
+    "$class": "official",
+    "$url": "https://developer.apple.com/documentation/uikit/uiscrollview/decelerationrate",
+    "$platform": "iOS / iPadOS"
   },
-  "push": {
-   "duration": 0.5,
-   "bounce": 0.0,
-   "usage": "Navigation push and pop"
+  "reducedMotion": {
+    "$usage": "When prefers-reduced-motion or the OS setting is on: replace slides, scales and bounces with 200ms crossfades. Keep spring bounce 0. Disable parallax and glass wobble. Never remove state feedback."
   },
-  "popover": {
-   "duration": 0.35,
-   "bounce": 0.1,
-   "usage": "Menus, popovers, context menus scale in from source"
-  },
-  "glassMorph": {
-   "duration": 0.45,
-   "bounce": 0.2,
-   "usage": "Liquid Glass shapes merging, splitting, tab bar minimize"
+  "symbolEffects": {
+    "bounce": "scale 1 to 1.2 to 1 with snappy spring",
+    "pulse": "opacity 1 to 0.5 loop 1s",
+    "replace": "old symbol scales to 0.6 and fades while new scales from 0.6, 250ms",
+    "wiggle": "rotate -8 to 8 deg 3 times",
+    "variableColor": "layered opacity cycle",
+    "$source": "estimated CSS/SVG timing approximations of SF Symbols animations",
+    "$class": "estimated",
+    "$url": "https://developer.apple.com/design/human-interface-guidelines/sf-symbols",
+    "$platform": "Web / Flutter"
   }
- },
- "cssFallbackEasing": {
-  "$usage": "Only when a JS spring is impossible (pure CSS transitions). build-tokens.mjs samples each spring in springs{} and emits --cf-ease-<name> as a CSS linear() curve plus --cf-dur-<name> settle duration. Never use ease, ease-in-out or linear keywords for movement.",
-  "generated": true
- },
- "transitions": {
-  "$source": "estimate",
-  "navigationPush": {
-   "spring": "push",
-   "incomingFrom": "trailing 100 percent",
-   "outgoingTo": "leading 30 percent with dim 0.1",
-   "backSwipeEdgeWidth": 20,
-   "interruptible": true
-  },
-  "sheetPresent": {
-   "spring": "sheet",
-   "from": "bottom",
-   "scrim": "fade 0 to scrim alpha in same spring",
-   "backgroundScale": "underlying content stays at 1.0 on iOS 26+ (no card stack shrink) except fullscreen cover"
-  },
-  "sheetDismiss": {
-   "dragToDismiss": true,
-   "velocityThresholdPtPerS": 600,
-   "distanceThreshold": "40 percent of sheet height"
-  },
-  "alertPresent": {
-   "from": "scale 1.08 opacity 0",
-   "to": "scale 1 opacity 1",
-   "spring": "popover"
-  },
-  "alertDismiss": {
-   "to": "opacity 0",
-   "durationMs": 150
-  },
-  "menuOpen": {
-   "from": "scale 0.6 from the source anchor opacity 0",
-   "to": "scale 1",
-   "spring": "popover",
-   "glassMorphFromButton": true
-  },
-  "menuClose": {
-   "to": "scale 0.8 opacity 0",
-   "durationMs": 180
-  },
-  "contextMenu": {
-   "liftScale": 1.04,
-   "blurBackground": 20,
-   "spring": "popover"
-  },
-  "tabSwitch": {
-   "content": "crossfade 150ms, no slide",
-   "indicator": "glass capsule slides with spring snappy"
-  },
-  "tabBarMinimize": {
-   "spring": "glassMorph"
-  },
-  "toggle": {
-   "knob": "spring snappy",
-   "knobStretchWhilePressed": 1.25,
-   "trackColor": "150ms crossfade"
-  },
-  "segmentedSelection": {
-   "spring": "snappy",
-   "indicatorStretchWhileDragging": true
-  },
-  "listRowHighlight": {
-   "pressInMs": 0,
-   "fadeOutMs": 250
-  },
-  "fade": {
-   "durationMs": 200
-  },
-  "toast": {
-   "from": "top, translateY -20 opacity 0",
-   "spring": "snappy"
-  }
- },
- "press": {
-  "$usage": "Every tappable thing has a press state. Values per category.",
-  "glassButton": {
-   "scale": 1.1,
-   "highlight": "brighten rim",
-   "spring": "press",
-   "releaseSpring": "release"
-  },
-  "solidButton": {
-   "scale": 0.97,
-   "opacity": 1,
-   "overlay": "#000000@0.1 light / #FFFFFF@0.1 dark",
-   "spring": "press"
-  },
-  "plainTextButton": {
-   "opacity": 0.35,
-   "durationMs": 0,
-   "releaseFadeMs": 200
-  },
-  "listRow": {
-   "background": "fillIOS.quaternary on iOS (gray5 light / gray4 dark)",
-   "scale": 1
-  },
-  "card": {
-   "scale": 0.98,
-   "spring": "press"
-  },
-  "macOSControl": {
-   "scale": 1,
-   "fill": "macOSControlFills.contentArea.borderedPressed",
-   "durationMs": 0
-  }
- },
- "hover": {
-  "$usage": "Pointer devices only (@media (hover: hover) and (pointer: fine)). Never on touch.",
-  "macOSToolbarItem": {
-   "background": "fillMacOS.secondary",
-   "durationMs": 100
-  },
-  "macOSListRow": "no hover background except in sidebars and menus",
-  "menuItem": {
-   "background": "accent",
-   "label": "#FFFFFF",
-   "durationMs": 0
-  },
-  "iPadPointer": {
-   "lift": 1.04,
-   "shadow": "0 6px 16px rgba(0,0,0,0.18)"
-  },
-  "link": "no underline on hover in app UI",
-  "cursor": "default arrow on buttons in macOS style; pointer cursor only for web links"
- },
- "scroll": {
-  "decelerationRateNormal": 0.998,
-  "decelerationRateFast": 0.99,
-  "rubberBand": {
-   "formula": "offset = (1 - 1 / ((x * c / d) + 1)) * d",
-   "c": 0.55,
-   "d": "viewport dimension"
-  },
-  "scrollEdgeEffect": "content under bars fades and softly blurs over the top 40 to 60pt instead of a hard bar background"
- },
- "reducedMotion": {
-  "$usage": "When prefers-reduced-motion or the OS setting is on: replace slides, scales and bounces with 200ms crossfades. Keep spring bounce 0. Disable parallax and glass wobble. Never remove state feedback."
- },
- "symbolEffects": {
-  "bounce": "scale 1 to 1.2 to 1 with snappy spring",
-  "pulse": "opacity 1 to 0.5 loop 1s",
-  "replace": "old symbol scales to 0.6 and fades while new scales from 0.6, 250ms",
-  "wiggle": "rotate -8 to 8 deg 3 times",
-  "variableColor": "layered opacity cycle"
- }
 }

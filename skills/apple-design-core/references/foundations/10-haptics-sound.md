@@ -4,10 +4,12 @@ Source of truth: `tokens/feedback.json`.
 
 ## Apple's actual behavior
 
-- iOS standard controls play haptics, not sounds: toggles, pickers, sliders at detents use selection; long press uses impact; outcomes use notification success, warning, error.
-- Plain button taps have NO haptic in Apple apps. Do not add a buzz to every button.
-- macOS UI is silent and has no haptics except Force Touch trackpad alignment and level change feedback.
-- The "satisfying" feel comes from instant press visuals plus springs plus well placed haptics, not from click sounds.
+- iOS standard controls play haptics, not sounds (`[official]`): toggles, pickers, sliders at detents use selection (`UISelectionFeedbackGenerator`); long press uses impact (`UIImpactFeedbackGenerator`: `light`, `medium`, `heavy`, `soft`, `rigid` `[official]`); outcomes use notification (`UINotificationFeedbackGenerator`: `success`, `warning`, `error` `[official]`).
+- Plain button taps have NO haptic in Apple apps (`[official]`/`[inferred]`). Do not add a buzz to every button.
+- macOS UI is silent and has no haptics except Force Touch trackpad feedback (`NSHapticFeedbackManager`: `alignment`, `levelChange`, `generic` `[official]`).
+- watchOS defines 9 `WKHapticType` patterns (`notification`, `directionUp`, `directionDown`, `success`, `failure`, `retry`, `start`, `stop`, `click` `[official]`) alongside `64 kbps` HE-AAC (`[official]`) media encoding.
+- Audio session: use `AVAudioSessionCategory.ambient` (`[official]`) for UI sound effects so user music continues playing; sound assets remain `opt-in OFF` (`0.35` master gain, `40ms` throttle `[estimate]`).
+- **Never stack haptic and sound on toggles (`[inferred]`):** play haptic when supported (`CfHaptics.supported` / mobile Web), and only fall back to toggle audio when haptic is disabled/unsupported.
 
 ## Haptic map (summary)
 

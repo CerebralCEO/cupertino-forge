@@ -1,0 +1,1400 @@
+{
+  "$meta": {
+    "generatedBy": "cupertino-forge/scripts/build-tokens.mjs",
+    "accent": {
+      "light": "#0088FF",
+      "dark": "#0091FF",
+      "lightHC": "#1E6EF4",
+      "darkHC": "#5CB8FF"
+    }
+  },
+  "colors": {
+    "system": {
+      "$source": "Apple iOS 27 & macOS 27 Sketch Kits (HC from HIG swatches)",
+      "red": {
+        "light": "#FF383C",
+        "dark": "#FF4245",
+        "lightHC": "#E9152D",
+        "darkHC": "#FF6165"
+      },
+      "orange": {
+        "light": "#FF8D28",
+        "dark": "#FF9230",
+        "lightHC": "#C55300",
+        "darkHC": "#FFA056"
+      },
+      "yellow": {
+        "light": "#FFCC00",
+        "dark": "#FFD600",
+        "lightHC": "#A16A00",
+        "darkHC": "#FEDF43"
+      },
+      "green": {
+        "light": "#34C759",
+        "dark": "#30D158",
+        "lightHC": "#008932",
+        "darkHC": "#4AD968"
+      },
+      "mint": {
+        "light": "#00C8B3",
+        "dark": "#00DAC3",
+        "lightHC": "#008575",
+        "darkHC": "#54DFCB"
+      },
+      "teal": {
+        "light": "#00C3D0",
+        "dark": "#00D2E0",
+        "lightHC": "#008198",
+        "darkHC": "#3BDDEC"
+      },
+      "cyan": {
+        "light": "#00C0E8",
+        "dark": "#3CD3FE",
+        "lightHC": "#007EAE",
+        "darkHC": "#6DD9FF"
+      },
+      "blue": {
+        "light": "#0088FF",
+        "dark": "#0091FF",
+        "lightHC": "#1E6EF4",
+        "darkHC": "#5CB8FF"
+      },
+      "indigo": {
+        "light": "#6155F5",
+        "dark": "#6D7CFF",
+        "lightHC": "#564ADE",
+        "darkHC": "#A7AAFF"
+      },
+      "purple": {
+        "light": "#CB30E0",
+        "dark": "#DB34F2",
+        "lightHC": "#B02FC2",
+        "darkHC": "#EA8DFF"
+      },
+      "pink": {
+        "light": "#FF2D55",
+        "dark": "#FF375F",
+        "lightHC": "#E7124D",
+        "darkHC": "#FF8AC4"
+      },
+      "brown": {
+        "light": "#AC7F5E",
+        "dark": "#B78A66",
+        "lightHC": "#956D51",
+        "darkHC": "#DBA679"
+      },
+      "$class": "measured",
+      "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json & apple-macos-27-ui-kit.tokens.json",
+      "$platform": "iOS 27 / macOS 27",
+      "$hcClass": "inferred"
+    },
+    "backgroundIOS": {
+      "$source": "Apple iOS 27 Sketch Kit",
+      "$usage": "Dark mode has two levels: base (full screen) and elevated (sheets, popovers, anything presented above). Always switch to elevated for presented surfaces in dark mode.",
+      "primary": {
+        "light": "#FFFFFF",
+        "dark": "#000000",
+        "darkElevated": "#1C1C1E"
+      },
+      "secondary": {
+        "light": "#F2F2F7",
+        "dark": "#1C1C1E",
+        "darkElevated": "#2C2C2E"
+      },
+      "tertiary": {
+        "light": "#FFFFFF",
+        "dark": "#2C2C2E",
+        "darkElevated": "#3A3A3C"
+      },
+      "groupedPrimary": {
+        "light": "#F2F2F7",
+        "dark": "#000000",
+        "darkElevated": "#1C1C1E"
+      },
+      "groupedSecondary": {
+        "light": "#FFFFFF",
+        "dark": "#1C1C1E",
+        "darkElevated": "#2C2C2E"
+      },
+      "groupedTertiary": {
+        "light": "#F2F2F7",
+        "dark": "#2C2C2E",
+        "darkElevated": "#3A3A3C"
+      },
+      "$class": "measured",
+      "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json",
+      "$platform": "iOS 27"
+    },
+    "macOSSurfaces": {
+      "$source": "Apple macOS 27 Sketch Kit (separator.dark & grouped surfaces estimated)",
+      "windowBackground": {
+        "light": "#FFFFFF",
+        "dark": "#1E1E1E"
+      },
+      "sidebarActive": {
+        "light": "#FAFAFA@0.8",
+        "dark": "#0C0C0C@0.85"
+      },
+      "sidebarInactive": {
+        "light": "#F4F4F4",
+        "dark": "#2E2E2E@0.85"
+      },
+      "separator": {
+        "light": "#3C3C43@0.29",
+        "dark": "#FFFFFF@0.1"
+      },
+      "inputFieldIdle": {
+        "light": "#FFFFFF",
+        "dark": "#1E1E1E"
+      },
+      "inputFieldBorder": {
+        "light": "#000000@0.05",
+        "dark": "#FFFFFF@0.04"
+      },
+      "inputFieldDisabled": {
+        "light": "#FFFFFF@0.5",
+        "dark": "#1E1E1E@0.5"
+      },
+      "inputFieldDisabledBorder": {
+        "light": "#000000@0.04",
+        "dark": "#000000@0.04"
+      },
+      "colorAreaOutline": {
+        "light": "#000000@0.1",
+        "dark": "#FFFFFF@0.1"
+      },
+      "glyphNeutral": {
+        "light": "#000000@0.7",
+        "dark": "#FFFFFF@0.7"
+      },
+      "glyphNeutralDisabled": {
+        "light": "#000000@0.22",
+        "dark": "#FFFFFF@0.22"
+      },
+      "$class": "measured",
+      "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+      "$platform": "macOS 27",
+      "$darkSeparatorClass": "estimated",
+      "bg2": {
+        "light": "#F5F5F7",
+        "dark": "#262626",
+        "$source": "estimated",
+        "$class": "estimated",
+        "$platform": "macOS 27",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/color"
+      },
+      "bg3": {
+        "light": "#FFFFFF",
+        "dark": "#2E2E2E",
+        "$source": "estimated",
+        "$class": "estimated",
+        "$platform": "macOS 27",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/color"
+      },
+      "bgGrouped": {
+        "light": "#F5F5F7",
+        "dark": "#1E1E1E",
+        "$source": "estimated",
+        "$class": "estimated",
+        "$platform": "macOS 27",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/color"
+      },
+      "bgGrouped2": {
+        "light": "#FFFFFF",
+        "dark": "#262626",
+        "$source": "estimated",
+        "$class": "estimated",
+        "$platform": "macOS 27",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/color"
+      },
+      "bgGrouped3": {
+        "light": "#F5F5F7",
+        "dark": "#2E2E2E",
+        "$source": "estimated",
+        "$class": "estimated",
+        "$platform": "macOS 27",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/color"
+      },
+      "separatorOpaque": {
+        "light": "#D8D8D8",
+        "dark": "#3A3A3A",
+        "$source": "estimated",
+        "$class": "estimated",
+        "$platform": "macOS 27",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/color"
+      }
+    },
+    "focusRing": {
+      "$source": "Apple macOS 27 Sketch Kit (Global.Focus Ring: 3.5px@0.25 outer, 1px@0.15 inner)",
+      "$usage": "Two stacked outlines around the focused control, following its exact shape: outer 3.5px accent@0.25, inner 1px accent@0.15. Tint follows the accent color.",
+      "outer": {
+        "width": 3.5,
+        "color": "accent@0.25"
+      },
+      "inner": {
+        "width": 1,
+        "color": "accent@0.15"
+      },
+      "$class": "measured",
+      "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
+      "$platform": "macOS 27 / Web"
+    },
+    "dimming": {
+      "$source": "Apple HIG Materials (clear glass dimming) + estimated sheet scrim",
+      "$class": "official",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/materials",
+      "$platform": "All",
+      "clearGlassOverBrightContent": "#000000@0.35",
+      "sheetScrim": {
+        "light": "#000000@0.2",
+        "dark": "#000000@0.48",
+        "$source": "estimated",
+        "$class": "estimated",
+        "$platform": "iOS",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/sheets"
+      }
+    }
+  },
+  "typography": {
+    "iosLarge": {
+      "largeTitle": {
+        "size": 34,
+        "lineHeight": 41,
+        "weight": 400,
+        "emphasizedWeight": 700,
+        "lineHeightTight": 39,
+        "lineHeightLoose": 43,
+        "trackingEm": 0.012,
+        "trackingPx": 0.41
+      },
+      "title1": {
+        "size": 28,
+        "lineHeight": 34,
+        "weight": 400,
+        "emphasizedWeight": 700,
+        "lineHeightTight": 32,
+        "lineHeightLoose": 36,
+        "trackingEm": 0.014,
+        "trackingPx": 0.39
+      },
+      "title2": {
+        "size": 22,
+        "lineHeight": 28,
+        "weight": 400,
+        "emphasizedWeight": 700,
+        "lineHeightTight": 26,
+        "lineHeightLoose": 30,
+        "trackingEm": -0.012,
+        "trackingPx": -0.26
+      },
+      "title3": {
+        "size": 20,
+        "lineHeight": 25,
+        "weight": 400,
+        "emphasizedWeight": 600,
+        "lineHeightTight": 23,
+        "lineHeightLoose": 27,
+        "trackingEm": -0.023,
+        "trackingPx": -0.46
+      },
+      "headline": {
+        "size": 17,
+        "lineHeight": 22,
+        "weight": 600,
+        "emphasizedWeight": 600,
+        "lineHeightTight": 20,
+        "lineHeightLoose": 24,
+        "trackingEm": -0.026,
+        "trackingPx": -0.44
+      },
+      "body": {
+        "size": 17,
+        "lineHeight": 22,
+        "weight": 400,
+        "emphasizedWeight": 600,
+        "lineHeightTight": 20,
+        "lineHeightLoose": 24,
+        "trackingEm": -0.026,
+        "trackingPx": -0.44
+      },
+      "callout": {
+        "size": 16,
+        "lineHeight": 21,
+        "weight": 400,
+        "emphasizedWeight": 600,
+        "lineHeightTight": 19,
+        "lineHeightLoose": 23,
+        "trackingEm": -0.02,
+        "trackingPx": -0.32
+      },
+      "subheadline": {
+        "size": 15,
+        "lineHeight": 20,
+        "weight": 400,
+        "emphasizedWeight": 600,
+        "lineHeightTight": 18,
+        "lineHeightLoose": 22,
+        "trackingEm": -0.016,
+        "trackingPx": -0.24
+      },
+      "footnote": {
+        "size": 13,
+        "lineHeight": 18,
+        "weight": 400,
+        "emphasizedWeight": 600,
+        "lineHeightTight": 16,
+        "lineHeightLoose": 20,
+        "trackingEm": -0.006,
+        "trackingPx": -0.08
+      },
+      "caption1": {
+        "size": 12,
+        "lineHeight": 16,
+        "weight": 400,
+        "emphasizedWeight": 600,
+        "lineHeightTight": 14,
+        "lineHeightLoose": 18,
+        "trackingEm": 0,
+        "trackingPx": 0
+      },
+      "caption2": {
+        "size": 11,
+        "lineHeight": 13,
+        "weight": 400,
+        "emphasizedWeight": 600,
+        "lineHeightTight": 11,
+        "lineHeightLoose": 15,
+        "trackingEm": 0.006,
+        "trackingPx": 0.07
+      }
+    },
+    "macos": {
+      "largeTitle": {
+        "size": 26,
+        "lineHeight": 32,
+        "weight": 400,
+        "emphasizedWeight": 700,
+        "lineHeightTight": 30,
+        "lineHeightLoose": 34,
+        "trackingEm": 0.008,
+        "trackingPx": 0.21
+      },
+      "title1": {
+        "size": 22,
+        "lineHeight": 26,
+        "weight": 400,
+        "emphasizedWeight": 700,
+        "lineHeightTight": 24,
+        "lineHeightLoose": 28,
+        "trackingEm": -0.012,
+        "trackingPx": -0.26
+      },
+      "title2": {
+        "size": 17,
+        "lineHeight": 22,
+        "weight": 400,
+        "emphasizedWeight": 700,
+        "lineHeightTight": 20,
+        "lineHeightLoose": 24,
+        "trackingEm": -0.026,
+        "trackingPx": -0.44
+      },
+      "title3": {
+        "size": 15,
+        "lineHeight": 20,
+        "weight": 400,
+        "emphasizedWeight": 600,
+        "lineHeightTight": 18,
+        "lineHeightLoose": 22,
+        "trackingEm": -0.016,
+        "trackingPx": -0.24
+      },
+      "headline": {
+        "size": 13,
+        "lineHeight": 16,
+        "weight": 700,
+        "emphasizedWeight": 800,
+        "lineHeightTight": 14,
+        "lineHeightLoose": 18,
+        "trackingEm": -0.006,
+        "trackingPx": -0.08
+      },
+      "body": {
+        "size": 13,
+        "lineHeight": 16,
+        "weight": 400,
+        "emphasizedWeight": 600,
+        "lineHeightTight": 14,
+        "lineHeightLoose": 18,
+        "trackingEm": -0.006,
+        "trackingPx": -0.08
+      },
+      "callout": {
+        "size": 12,
+        "lineHeight": 15,
+        "weight": 400,
+        "emphasizedWeight": 600,
+        "lineHeightTight": 13,
+        "lineHeightLoose": 17,
+        "trackingEm": 0,
+        "trackingPx": 0
+      },
+      "subheadline": {
+        "size": 11,
+        "lineHeight": 14,
+        "weight": 400,
+        "emphasizedWeight": 600,
+        "lineHeightTight": 12,
+        "lineHeightLoose": 16,
+        "trackingEm": 0.006,
+        "trackingPx": 0.07
+      },
+      "footnote": {
+        "size": 10,
+        "lineHeight": 13,
+        "weight": 400,
+        "emphasizedWeight": 600,
+        "lineHeightTight": 11,
+        "lineHeightLoose": 15,
+        "trackingEm": 0.012,
+        "trackingPx": 0.12
+      },
+      "caption1": {
+        "size": 10,
+        "lineHeight": 13,
+        "weight": 400,
+        "emphasizedWeight": 500,
+        "lineHeightTight": 11,
+        "lineHeightLoose": 15,
+        "trackingEm": 0.012,
+        "trackingPx": 0.12
+      },
+      "caption2": {
+        "size": 10,
+        "lineHeight": 13,
+        "weight": 500,
+        "emphasizedWeight": 600,
+        "lineHeightTight": 11,
+        "lineHeightLoose": 15,
+        "trackingEm": 0.012,
+        "trackingPx": 0.12
+      }
+    },
+    "nonLatin": {
+      "$source": "Apple System Fonts + HIG RTL + W3C ALReq",
+      "$class": "inferred",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/right-to-left",
+      "$platform": "All",
+      "banglaSystemFont": "Kohinoor Bangla",
+      "arabicSystemFont": "SF Arabic",
+      "disableTrackingLangs": [
+        "bn",
+        "ar",
+        "he"
+      ],
+      "trackingOverrideEm": 0,
+      "banglaLineHeightScale": {
+        "min": 1.35,
+        "max": 1.5,
+        "$source": "estimated",
+        "$class": "estimated"
+      },
+      "banglaExpansionPercent": {
+        "min": 20,
+        "max": 30,
+        "$source": "estimated",
+        "$class": "estimated"
+      },
+      "rtlAllCapsBalanceDeltaPt": {
+        "value": 2,
+        "$source": "Apple HIG Right to left",
+        "$class": "official",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/right-to-left"
+      }
+    }
+  },
+  "layout": {
+    "spacing": {
+      "$usage": "4pt base grid. Only these steps. Apple layouts rely on 8, 16, 20 most.",
+      "scale": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        16,
+        20,
+        24,
+        32,
+        40,
+        48,
+        64
+      ],
+      "names": {
+        "xxs": 2,
+        "xs": 4,
+        "sm": 8,
+        "md": 12,
+        "lg": 16,
+        "xl": 20,
+        "xxl": 24,
+        "section": 32,
+        "hero": 48
+      },
+      "$source": "estimated 4pt rhythm",
+      "$class": "estimated",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "$platform": "All"
+    },
+    "hitTarget": {
+      "ios": 44,
+      "iosMinimum": 28,
+      "ipadPointer": 44,
+      "macos": 28,
+      "macosMinimumClickable": 20,
+      "paddedWithBezel": 12,
+      "paddedWithoutBezel": 24,
+      "$source": "Apple HIG Accessibility",
+      "$class": "official",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/accessibility",
+      "$platform": "All"
+    },
+    "ios": {
+      "layoutMargins": {
+        "compactWidth": 16,
+        "regularWidth": 20,
+        "iPhoneMax": 20,
+        "$source": "estimated (matches 16pt widget HIG on compact)",
+        "$class": "estimated",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+        "$platform": "iOS"
+      },
+      "readableContentMaxWidth": 672,
+      "safeArea": {
+        "$source": "estimated (primary 62pt preserved per Rule 1; see $alt for community 59pt iPhone 15/16)",
+        "topDynamicIsland": 62,
+        "topNotch": 47,
+        "topSE": 20,
+        "bottomHomeIndicator": 34,
+        "bottomSE": 0,
+        "landscapeSide": 62,
+        "$class": "estimated",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+        "$platform": "iOS",
+        "$alt": {
+          "iPhone15_16_topDynamicIsland": 59,
+          "iPhone17_17Pro_topDynamicIsland": 62,
+          "$source": "screens.guide community specs",
+          "$class": "inferred/community",
+          "$url": "https://screens.guide/"
+        }
+      },
+      "statusBar": {
+        "heightDynamicIsland": 54
+      },
+      "navigationBar": {
+        "height": 44,
+        "largeTitleExtra": 52,
+        "largeTitleStyle": "largeTitle emphasized (34 bold)",
+        "largeTitleLeading": 16,
+        "inlineTitleStyle": "headline (17 semibold)",
+        "barButtonSize": 44,
+        "barButtonGlass": "circle 44 or capsule 44 height for text",
+        "background": "transparent with scroll edge effect; glass only on buttons and button groups",
+        "$source": "inferred (44pt UIKit height) + estimated largeTitleExtra",
+        "$class": "inferred",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/toolbars",
+        "$platform": "iOS"
+      },
+      "toolbar": {
+        "height": 44,
+        "itemGlassGroupHeight": 44,
+        "bottomInsetFromSafeArea": 0,
+        "$source": "estimated",
+        "$class": "estimated",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+        "$platform": "iOS 27"
+      },
+      "tabBar": {
+        "$source": "estimated",
+        "style": "floating capsule of Liquid Glass, separated from screen edges",
+        "height": 62,
+        "sideInset": 20,
+        "bottomGapAboveHomeIndicator": 0,
+        "itemIconSize": 24,
+        "itemLabelStyle": "caption2 emphasized (10 to 11 semibold)",
+        "selectedIndicator": "inner capsule of glass behind the selected item, tinted label in accent",
+        "minimizeOnScroll": "shrinks to a compact capsule showing only the selected tab when scrolling down; restores on scroll up",
+        "searchTab": "search appears as a separate circular glass button at trailing side",
+        "$class": "estimated",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+        "$platform": "iOS 27",
+        "maxVisibleTabsPhone": 5
+      },
+      "searchField": {
+        "height": 44,
+        "style": "capsule glass at bottom on iPhone (iOS 26+), top in iPad sidebars",
+        "placeholderStyle": "body",
+        "$source": "estimated",
+        "$class": "estimated",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+        "$platform": "iOS 27"
+      },
+      "listRow": {
+        "minHeight": 52,
+        "minHeightCompact": 44,
+        "subtitleRow": 64,
+        "leadingInset": 16,
+        "iconSize": 29,
+        "iconRadius": 7,
+        "separatorLeadingInsetWithIcon": 60,
+        "$source": "estimated",
+        "$class": "estimated",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+        "$platform": "iOS 27"
+      },
+      "listSection": {
+        "insetGroupedSideInset": 16,
+        "headerStyle": "headline sentence case",
+        "footerStyle": "footnote secondary label",
+        "gapBetweenSections": 20,
+        "$source": "estimated",
+        "$class": "estimated",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+        "$platform": "iOS 27"
+      },
+      "sheet": {
+        "grabber": {
+          "width": 36,
+          "height": 5,
+          "topInset": 5,
+          "color": "fillIOS.primary"
+        },
+        "detents": [
+          "medium (about 50 percent)",
+          "large"
+        ],
+        "floatingInsetAtMedium": 8,
+        "$source": "estimated",
+        "$class": "estimated",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+        "$platform": "iOS 27"
+      },
+      "alert": {
+        "width": 300,
+        "padding": 20,
+        "titleStyle": "headline",
+        "messageStyle": "footnote",
+        "buttonHeight": 48,
+        "buttonStyle": "capsule glass buttons, primary tinted",
+        "$source": "estimated",
+        "$class": "estimated",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+        "$platform": "iOS 27"
+      },
+      "button": {
+        "$source": "estimated",
+        "mini": 28,
+        "small": 32,
+        "medium": 36,
+        "large": 50,
+        "extraLarge": 56,
+        "horizontalPadding": {
+          "small": 12,
+          "medium": 14,
+          "large": 20
+        },
+        "labelStyle": {
+          "small": "subheadline emphasized",
+          "medium": "body emphasized",
+          "large": "body emphasized"
+        },
+        "$class": "estimated",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+        "$platform": "iOS 27"
+      },
+      "toggle": {
+        "width": 64,
+        "height": 28,
+        "knobWidth": 38,
+        "knobHeight": 24,
+        "knobInset": 2,
+        "$source": "estimated",
+        "$class": "estimated",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+        "$platform": "iOS 27"
+      },
+      "slider": {
+        "trackHeight": 6,
+        "knobWidth": 38,
+        "knobHeight": 24,
+        "$source": "estimated",
+        "$class": "estimated",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+        "$platform": "iOS 27"
+      },
+      "segmentedControl": {
+        "height": 36,
+        "selectedInset": 2,
+        "labelStyle": "subheadline emphasized when selected",
+        "$source": "estimated",
+        "$class": "estimated",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+        "$platform": "iOS 27"
+      },
+      "stepper": {
+        "width": 94,
+        "height": 32,
+        "$source": "estimated",
+        "$class": "estimated",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+        "$platform": "iOS 27"
+      },
+      "pageControl": {
+        "dot": 8,
+        "gap": 9,
+        "$source": "estimated",
+        "$class": "estimated",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+        "$platform": "iOS 27"
+      },
+      "textField": {
+        "height": 44,
+        "horizontalPadding": 16,
+        "background": "fillIOS.tertiary on grouped, secondary background on plain",
+        "$source": "estimated",
+        "$class": "estimated",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+        "$platform": "iOS 27"
+      },
+      "keyboardTopRadius": 26,
+      "widgets": {
+        "standardMargin": 16,
+        "tightMargin": 11,
+        "minimumFontSize": 11,
+        "$source": "Apple HIG Widgets (Oct 2026)",
+        "$class": "official",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/widgets",
+        "$platform": "iOS / macOS"
+      },
+      "liveActivities": {
+        "lockScreenMargin": 14,
+        "limitedWidthCircle": 28,
+        "$source": "Apple HIG Live Activities (Oct 2026)",
+        "$class": "official",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/live-activities",
+        "$platform": "iOS"
+      }
+    },
+    "macos": {
+      "windowMinimum": {
+        "width": 480,
+        "height": 320
+      },
+      "titlebarHeight": 32,
+      "toolbarHeight": 52,
+      "toolbarHeightCompact": 38,
+      "trafficLights": {
+        "$source": "estimate macOS 26 and 27",
+        "diameter": 14,
+        "gap": 9,
+        "leadingInset": 16,
+        "centerYFromTop": 26,
+        "colors": {
+          "close": "#FF5F57",
+          "minimize": "#FEBC2E",
+          "zoom": "#28C840",
+          "inactive": "#000000@0.1 light, #FFFFFF@0.15 dark"
+        },
+        "glyphsOnHoverOnly": true
+      },
+      "sidebar": {
+        "minWidth": 180,
+        "defaultWidth": 220,
+        "maxWidth": 320,
+        "rowHeight": 32,
+        "rowInset": 10,
+        "iconSize": 16,
+        "sectionHeaderStyle": "subheadline emphasized secondary",
+        "edgeToEdge": true,
+        "$source": "estimate; macOS 27 sidebars are edge to edge, not floating"
+      },
+      "inspector": {
+        "minWidth": 240,
+        "defaultWidth": 280
+      },
+      "controlSizes": {
+        "$source": "estimate macOS 26 and 27",
+        "mini": 16,
+        "small": 20,
+        "regular": 24,
+        "large": 28,
+        "extraLarge": 36,
+        "labelStyle": {
+          "mini": "caption",
+          "small": "subheadline",
+          "regular": "body",
+          "large": "body",
+          "extraLarge": "title3"
+        },
+        "horizontalPadding": {
+          "small": 8,
+          "regular": 10,
+          "large": 14
+        }
+      },
+      "menu": {
+        "itemHeight": 24,
+        "itemHorizontalPadding": 10,
+        "outerPadding": 5,
+        "separatorHeight": 9,
+        "minWidth": 180,
+        "labelStyle": "body",
+        "shortcutStyle": "body secondary",
+        "$source": "estimate"
+      },
+      "table": {
+        "rowHeight": 24,
+        "rowHeightLarge": 32,
+        "headerHeight": 28,
+        "alternatingRows": true
+      },
+      "contentPadding": 20,
+      "formRowSpacing": 12,
+      "settingsWindow": {
+        "width": 715,
+        "formStyle": "grouped form, labels leading, controls trailing"
+      },
+      "tooltipDelayMs": 1000,
+      "dock": "not part of app UI, never imitate",
+      "$source": "estimated (menuBar 24pt & splitView divider 1pt official HIG)",
+      "$class": "estimated",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "$platform": "macOS 27",
+      "menuBarHeight": 24,
+      "splitViewDividerWidth": 1
+    },
+    "breakpoints": {
+      "$usage": "Web and Flutter: choose iOS style below 768, iPad style 768 to 1179, macOS style 1180 and up OR when a pointer is fine and hover capable. Base on available width (size class), not on device type.",
+      "compact": 0,
+      "regular": 768,
+      "desktop": 1180,
+      "$source": "inferred size-class breakpoints (768pt regular) + estimated 1180pt desktop",
+      "$class": "inferred",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "$platform": "Web / Flutter"
+    }
+  },
+  "shape": {
+    "radiusIOS": {
+      "$source": "estimated (primary deviceDisplay preserved at 55/30 per Rule 1; community 62/18 in $alt)",
+      "deviceDisplay": {
+        "iPhone17Pro": 55,
+        "iPhone17": 55,
+        "iPhoneAir": 62,
+        "iPhoneSE": 0,
+        "iPadPro": 30,
+        "$alt": {
+          "iPhone16Pro_17Pro": 62,
+          "iPadPro_M4_M5": 18,
+          "$source": "ScreenCorners community SPI",
+          "$class": "inferred/community",
+          "$url": "https://github.com/kylebshr/ScreenCorners"
+        }
+      },
+      "sheet": "device display radius when full height at the bottom edge; 38 when floating at medium detent with 8 inset",
+      "alert": 34,
+      "actionSheet": 34,
+      "popover": 26,
+      "menu": 26,
+      "contextMenuPreview": 22,
+      "listSectionInsetGrouped": 26,
+      "card": 22,
+      "textFieldRounded": 12,
+      "searchField": "capsule",
+      "button": "capsule (all sizes)",
+      "iconButton": "circle",
+      "segmentedControl": "capsule",
+      "toggleTrack": "capsule",
+      "sliderTrack": "capsule",
+      "tabBar": "capsule",
+      "toolbarGroup": "capsule",
+      "keyboard": 26,
+      "widgetSmall": 22,
+      "appIconMask": "superellipse, 22.37 percent of icon size",
+      "thumbnailSmall": 8,
+      "thumbnailMedium": 12,
+      "settingsIcon": 7,
+      "badge": "capsule",
+      "$class": "estimated",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "$platform": "iOS 27",
+      "sheetFloating": 38
+    },
+    "radiusMacOS": {
+      "$source": "estimated (macOS 27 uniform window 12pt press report; unverified on device)",
+      "window": 12,
+      "windowNote": "macOS 27 uses one uniform window radius for all apps. Tahoe used 16 to 26 depending on toolbar. Verify exact value against the kit Windows page before shipping.",
+      "sheet": 12,
+      "alert": 16,
+      "popover": 16,
+      "menu": 12,
+      "menuItemHighlight": 6,
+      "tooltip": 6,
+      "sidebarRowSelection": 8,
+      "pushButtonRegular": "capsule on Liquid Glass toolbars; 6 in content area",
+      "pushButtonLarge": 8,
+      "textField": 6,
+      "searchField": "capsule",
+      "popupButton": 6,
+      "checkbox": 4,
+      "radio": "circle",
+      "segmentedControl": "capsule",
+      "toggle": "capsule",
+      "tableRowSelection": 6,
+      "card": 10,
+      "dockGlass": 24,
+      "$class": "estimated",
+      "$url": "https://www.macrumors.com/",
+      "$platform": "macOS 27"
+    },
+    "concentric": {
+      "$usage": "MANDATORY. A shape nested inside another shape uses innerRadius = max(outerRadius - padding, minimumInner). This is what makes Liquid Glass layouts look Apple-made.",
+      "formula": "inner = outer - inset",
+      "minimumInner": 4,
+      "example": "Window radius 12, toolbar button inset 6 from window edge: button radius 6 if rect, or capsule when height allows. Sheet radius 38 with 16 padding: inner card 22.",
+      "$source": "Apple SwiftUI ConcentricRectangle / UICornerConfiguration",
+      "$class": "official",
+      "$url": "https://developer.apple.com/documentation/swiftui/concentricrectangle",
+      "$platform": "iOS 26+ / macOS 26+"
+    }
+  },
+  "materials": {
+    "officialSpec": {
+      "$source": "Apple HIG Materials & SwiftUI Glass / UIKit UIGlassEffect / AppKit NSGlassEffectView",
+      "$class": "official",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/materials",
+      "$platform": "iOS 26+ / macOS 26+",
+      "variants": [
+        "regular",
+        "clear",
+        "identity"
+      ],
+      "clearDimmingLayer": "#000000@0.35",
+      "scrollEdgeStyles": [
+        "automatic",
+        "soft",
+        "hard"
+      ],
+      "tabBarMinimizeBehavior": [
+        "automatic",
+        "onScrollDown",
+        "onScrollUp",
+        "never"
+      ]
+    },
+    "intensityCurve": {
+      "$source": "estimated unified web/Flutter curve for iOS 27 / macOS 27 Settings intensity slider",
+      "$class": "estimated",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/materials",
+      "$platform": "Web / Flutter",
+      "min": 0,
+      "max": 1,
+      "default": 0.5,
+      "alphaScaleFormula": "0.7 + 0.6 * intensity",
+      "blurScaleFormula": "0.7 + 0.6 * intensity"
+    },
+    "perfBudget": {
+      "$source": "estimated GPU overdraw budget + Flutter 3.29 BackdropFilter.grouped",
+      "$class": "estimated",
+      "$url": "https://api.flutter.dev/flutter/widgets/BackdropFilter-class.html",
+      "$platform": "Web / Flutter",
+      "maxSimultaneousBackdrop": 6,
+      "neverAnimateBlurSigma": true,
+      "flutterRequireBackdropGroup": true
+    },
+    "fallbackOpaque": {
+      "light": "#F6F6F6",
+      "dark": "#262626"
+    }
+  },
+  "motion": {
+    "springs": {
+      "default": {
+        "duration": 0.55,
+        "bounce": 0,
+        "stiffness": 130.507,
+        "damping": 22.848,
+        "mass": 1,
+        "$class": "official"
+      },
+      "smooth": {
+        "duration": 0.5,
+        "bounce": 0,
+        "stiffness": 157.914,
+        "damping": 25.133,
+        "mass": 1,
+        "$class": "official"
+      },
+      "snappy": {
+        "duration": 0.5,
+        "bounce": 0.15,
+        "stiffness": 157.914,
+        "damping": 21.363,
+        "mass": 1,
+        "$class": "official"
+      },
+      "bouncy": {
+        "duration": 0.5,
+        "bounce": 0.3,
+        "stiffness": 157.914,
+        "damping": 17.593,
+        "mass": 1,
+        "$class": "official"
+      },
+      "interactive": {
+        "duration": 0.15,
+        "bounce": 0,
+        "stiffness": 1754.596,
+        "damping": 83.776,
+        "mass": 1,
+        "$class": "estimated"
+      },
+      "press": {
+        "duration": 0.2,
+        "bounce": 0,
+        "stiffness": 986.96,
+        "damping": 62.832,
+        "mass": 1,
+        "$class": "estimated"
+      },
+      "release": {
+        "duration": 0.35,
+        "bounce": 0.15,
+        "stiffness": 322.273,
+        "damping": 30.518,
+        "mass": 1,
+        "$class": "estimated"
+      },
+      "sheet": {
+        "duration": 0.5,
+        "bounce": 0,
+        "stiffness": 157.914,
+        "damping": 25.133,
+        "mass": 1,
+        "$class": "estimated"
+      },
+      "push": {
+        "duration": 0.5,
+        "bounce": 0,
+        "stiffness": 157.914,
+        "damping": 25.133,
+        "mass": 1,
+        "$class": "estimated"
+      },
+      "popover": {
+        "duration": 0.35,
+        "bounce": 0.1,
+        "stiffness": 322.273,
+        "damping": 32.314,
+        "mass": 1,
+        "$class": "estimated"
+      },
+      "glassMorph": {
+        "duration": 0.45,
+        "bounce": 0.2,
+        "stiffness": 194.955,
+        "damping": 22.34,
+        "mass": 1,
+        "$class": "estimated"
+      }
+    },
+    "scroll": {
+      "decelerationRateNormal": 0.998,
+      "decelerationRateFast": 0.99,
+      "rubberBand": {
+        "formula": "offset = (1 - 1 / ((x * c / d) + 1)) * d",
+        "c": 0.55,
+        "d": "viewport dimension",
+        "$class": "inferred",
+        "$source": "inferred reverse-engineered UIScrollView c=0.55"
+      },
+      "scrollEdgeEffect": "content under bars fades and softly blurs over the top 40 to 60pt instead of a hard bar background",
+      "$source": "UIScrollView.DecelerationRate official; rubberBand c=0.55 inferred",
+      "$class": "official",
+      "$url": "https://developer.apple.com/documentation/uikit/uiscrollview/decelerationrate",
+      "$platform": "iOS / iPadOS"
+    },
+    "transitions": {
+      "$source": "estimated (navigationPush 30% outgoing parallax inferred from UIKit)",
+      "navigationPush": {
+        "spring": "push",
+        "incomingFrom": "trailing 100 percent",
+        "outgoingTo": "leading 30 percent with dim 0.1",
+        "backSwipeEdgeWidth": 20,
+        "interruptible": true,
+        "reducedMotion": {
+          "strategy": "crossfade",
+          "durationMs": 200,
+          "bounce": 0,
+          "$source": "Apple HIG Accessibility Reduce Motion",
+          "$class": "inferred",
+          "$url": "https://developer.apple.com/design/human-interface-guidelines/accessibility"
+        },
+        "$source": "inferred from UINavigationController (estimated 20pt edge width)",
+        "$class": "inferred",
+        "$url": "https://developer.apple.com/documentation/uikit/uinavigationcontroller",
+        "$platform": "iOS"
+      },
+      "sheetPresent": {
+        "spring": "sheet",
+        "from": "bottom",
+        "scrim": "fade 0 to scrim alpha in same spring",
+        "backgroundScale": "underlying content stays at 1.0 on iOS 26+ (no card stack shrink) except fullscreen cover",
+        "interruptible": true,
+        "reducedMotion": {
+          "strategy": "crossfade",
+          "durationMs": 200,
+          "bounce": 0,
+          "$source": "Apple HIG Accessibility Reduce Motion",
+          "$class": "inferred",
+          "$url": "https://developer.apple.com/design/human-interface-guidelines/accessibility"
+        },
+        "$source": "estimated",
+        "$class": "estimated",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/motion",
+        "$platform": "All"
+      },
+      "sheetDismiss": {
+        "dragToDismiss": true,
+        "velocityThresholdPtPerS": 600,
+        "distanceThreshold": "40 percent of sheet height",
+        "interruptible": true,
+        "reducedMotion": {
+          "strategy": "crossfade",
+          "durationMs": 200,
+          "bounce": 0,
+          "$source": "Apple HIG Accessibility Reduce Motion",
+          "$class": "inferred",
+          "$url": "https://developer.apple.com/design/human-interface-guidelines/accessibility"
+        },
+        "$source": "estimated",
+        "$class": "estimated",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/motion",
+        "$platform": "All"
+      },
+      "alertPresent": {
+        "from": "scale 1.08 opacity 0",
+        "to": "scale 1 opacity 1",
+        "spring": "popover",
+        "interruptible": true,
+        "reducedMotion": {
+          "strategy": "crossfade",
+          "durationMs": 200,
+          "bounce": 0,
+          "$source": "Apple HIG Accessibility Reduce Motion",
+          "$class": "inferred",
+          "$url": "https://developer.apple.com/design/human-interface-guidelines/accessibility"
+        },
+        "$source": "estimated",
+        "$class": "estimated",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/motion",
+        "$platform": "All"
+      },
+      "alertDismiss": {
+        "to": "opacity 0",
+        "durationMs": 150,
+        "interruptible": true,
+        "reducedMotion": {
+          "strategy": "crossfade",
+          "durationMs": 200,
+          "bounce": 0,
+          "$source": "Apple HIG Accessibility Reduce Motion",
+          "$class": "inferred",
+          "$url": "https://developer.apple.com/design/human-interface-guidelines/accessibility"
+        },
+        "$source": "estimated",
+        "$class": "estimated",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/motion",
+        "$platform": "All"
+      },
+      "menuOpen": {
+        "from": "scale 0.6 from the source anchor opacity 0",
+        "to": "scale 1",
+        "spring": "popover",
+        "glassMorphFromButton": true,
+        "interruptible": true,
+        "reducedMotion": {
+          "strategy": "crossfade",
+          "durationMs": 200,
+          "bounce": 0,
+          "$source": "Apple HIG Accessibility Reduce Motion",
+          "$class": "inferred",
+          "$url": "https://developer.apple.com/design/human-interface-guidelines/accessibility"
+        },
+        "$source": "estimated",
+        "$class": "estimated",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/motion",
+        "$platform": "All"
+      },
+      "menuClose": {
+        "to": "scale 0.8 opacity 0",
+        "durationMs": 180,
+        "interruptible": true,
+        "reducedMotion": {
+          "strategy": "crossfade",
+          "durationMs": 200,
+          "bounce": 0,
+          "$source": "Apple HIG Accessibility Reduce Motion",
+          "$class": "inferred",
+          "$url": "https://developer.apple.com/design/human-interface-guidelines/accessibility"
+        },
+        "$source": "estimated",
+        "$class": "estimated",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/motion",
+        "$platform": "All"
+      },
+      "contextMenu": {
+        "liftScale": 1.04,
+        "blurBackground": 20,
+        "spring": "popover",
+        "interruptible": true,
+        "reducedMotion": {
+          "strategy": "crossfade",
+          "durationMs": 200,
+          "bounce": 0,
+          "$source": "Apple HIG Accessibility Reduce Motion",
+          "$class": "inferred",
+          "$url": "https://developer.apple.com/design/human-interface-guidelines/accessibility"
+        },
+        "$source": "estimated",
+        "$class": "estimated",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/motion",
+        "$platform": "All"
+      },
+      "tabSwitch": {
+        "content": "crossfade 150ms, no slide",
+        "indicator": "glass capsule slides with spring snappy",
+        "interruptible": true,
+        "reducedMotion": {
+          "strategy": "crossfade",
+          "durationMs": 200,
+          "bounce": 0,
+          "$source": "Apple HIG Accessibility Reduce Motion",
+          "$class": "inferred",
+          "$url": "https://developer.apple.com/design/human-interface-guidelines/accessibility"
+        },
+        "$source": "estimated",
+        "$class": "estimated",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/motion",
+        "$platform": "All"
+      },
+      "tabBarMinimize": {
+        "spring": "glassMorph",
+        "interruptible": true,
+        "reducedMotion": {
+          "strategy": "crossfade",
+          "durationMs": 200,
+          "bounce": 0,
+          "$source": "Apple HIG Accessibility Reduce Motion",
+          "$class": "inferred",
+          "$url": "https://developer.apple.com/design/human-interface-guidelines/accessibility"
+        },
+        "$source": "estimated",
+        "$class": "estimated",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/motion",
+        "$platform": "All"
+      },
+      "toggle": {
+        "knob": "spring snappy",
+        "knobStretchWhilePressed": 1.25,
+        "trackColor": "150ms crossfade",
+        "interruptible": true,
+        "reducedMotion": {
+          "strategy": "crossfade",
+          "durationMs": 200,
+          "bounce": 0,
+          "$source": "Apple HIG Accessibility Reduce Motion",
+          "$class": "inferred",
+          "$url": "https://developer.apple.com/design/human-interface-guidelines/accessibility"
+        },
+        "$source": "estimated",
+        "$class": "estimated",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/motion",
+        "$platform": "All"
+      },
+      "segmentedSelection": {
+        "spring": "snappy",
+        "indicatorStretchWhileDragging": true,
+        "interruptible": true,
+        "reducedMotion": {
+          "strategy": "crossfade",
+          "durationMs": 200,
+          "bounce": 0,
+          "$source": "Apple HIG Accessibility Reduce Motion",
+          "$class": "inferred",
+          "$url": "https://developer.apple.com/design/human-interface-guidelines/accessibility"
+        },
+        "$source": "estimated",
+        "$class": "estimated",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/motion",
+        "$platform": "All"
+      },
+      "listRowHighlight": {
+        "pressInMs": 0,
+        "fadeOutMs": 250,
+        "interruptible": true,
+        "reducedMotion": {
+          "strategy": "crossfade",
+          "durationMs": 200,
+          "bounce": 0,
+          "$source": "Apple HIG Accessibility Reduce Motion",
+          "$class": "inferred",
+          "$url": "https://developer.apple.com/design/human-interface-guidelines/accessibility"
+        },
+        "$source": "estimated",
+        "$class": "estimated",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/motion",
+        "$platform": "All"
+      },
+      "fade": {
+        "durationMs": 200,
+        "interruptible": true,
+        "reducedMotion": {
+          "strategy": "crossfade",
+          "durationMs": 200,
+          "bounce": 0,
+          "$source": "Apple HIG Accessibility Reduce Motion",
+          "$class": "inferred",
+          "$url": "https://developer.apple.com/design/human-interface-guidelines/accessibility"
+        },
+        "$source": "estimated",
+        "$class": "estimated",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/motion",
+        "$platform": "All"
+      },
+      "toast": {
+        "from": "top, translateY -20 opacity 0",
+        "spring": "snappy",
+        "interruptible": true,
+        "reducedMotion": {
+          "strategy": "crossfade",
+          "durationMs": 200,
+          "bounce": 0,
+          "$source": "Apple HIG Accessibility Reduce Motion",
+          "$class": "inferred",
+          "$url": "https://developer.apple.com/design/human-interface-guidelines/accessibility"
+        },
+        "$source": "estimated",
+        "$class": "estimated",
+        "$url": "https://developer.apple.com/design/human-interface-guidelines/motion",
+        "$platform": "All"
+      },
+      "$class": "estimated",
+      "$url": "https://developer.apple.com/documentation/swiftui/navigationtransition",
+      "$platform": "All"
+    }
+  }
+}

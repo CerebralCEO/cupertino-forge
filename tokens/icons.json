@@ -5,7 +5,8 @@
       "web": "lucide-react (ISC) with strokeWidth from the weight table, or @phosphor-icons/react (MIT) weight regular/bold/fill",
       "flutter": "CupertinoIcons (MIT, ships with Flutter) first, lucide_icons_flutter second",
       "apple-native": "Real SF Symbols through the OS when the target is iOS or macOS native"
-    }
+    },
+    "reconciledDate": "2026-11-25"
   },
   "rules": [
     "Icon weight matches the adjacent text weight. Regular text = regular icon.",
@@ -16,77 +17,374 @@
     "Never put icons inside colored circles in list rows unless they are Settings-style app rows (29pt rounded square, radius 7, white glyph on system color).",
     "Never mix icon families in one screen."
   ],
-  "weightToLucideStroke": { "ultralight": 1, "thin": 1.25, "light": 1.5, "regular": 1.75, "medium": 2, "semibold": 2.25, "bold": 2.5, "heavy": 2.75, "black": 3 },
+  "weightToLucideStroke": {
+    "ultralight": 1,
+    "thin": 1.25,
+    "light": 1.5,
+    "regular": 1.75,
+    "medium": 2,
+    "semibold": 2.25,
+    "bold": 2.5,
+    "heavy": 2.75,
+    "black": 3,
+    "$source": "estimated",
+    "$class": "estimated",
+    "$url": "https://developer.apple.com/design/human-interface-guidelines/sf-symbols"
+  },
   "map": {
-    "chevron.left": { "lucide": "ChevronLeft", "phosphor": "CaretLeft", "cupertino": "chevron_back" },
-    "chevron.right": { "lucide": "ChevronRight", "phosphor": "CaretRight", "cupertino": "chevron_forward" },
-    "chevron.down": { "lucide": "ChevronDown", "phosphor": "CaretDown", "cupertino": "chevron_down" },
-    "chevron.up.chevron.down": { "lucide": "ChevronsUpDown", "phosphor": "CaretUpDown", "cupertino": "chevron_up_chevron_down" },
-    "xmark": { "lucide": "X", "phosphor": "X", "cupertino": "xmark" },
-    "xmark.circle.fill": { "lucide": "CircleX", "phosphor": "XCircle fill", "cupertino": "xmark_circle_fill" },
-    "checkmark": { "lucide": "Check", "phosphor": "Check", "cupertino": "checkmark" },
-    "checkmark.circle.fill": { "lucide": "CircleCheck", "phosphor": "CheckCircle fill", "cupertino": "checkmark_circle_fill" },
-    "plus": { "lucide": "Plus", "phosphor": "Plus", "cupertino": "plus" },
-    "minus": { "lucide": "Minus", "phosphor": "Minus", "cupertino": "minus" },
-    "magnifyingglass": { "lucide": "Search", "phosphor": "MagnifyingGlass", "cupertino": "search" },
-    "ellipsis": { "lucide": "Ellipsis", "phosphor": "DotsThree", "cupertino": "ellipsis" },
-    "ellipsis.circle": { "lucide": "CircleEllipsis", "phosphor": "DotsThreeCircle", "cupertino": "ellipsis_circle" },
-    "square.and.arrow.up": { "lucide": "Share", "phosphor": "Export", "cupertino": "share" },
-    "trash": { "lucide": "Trash2", "phosphor": "Trash", "cupertino": "trash" },
-    "pencil": { "lucide": "Pencil", "phosphor": "PencilSimple", "cupertino": "pencil" },
-    "square.and.pencil": { "lucide": "SquarePen", "phosphor": "NotePencil", "cupertino": "square_pencil" },
-    "gearshape": { "lucide": "Settings", "phosphor": "Gear", "cupertino": "gear_alt" },
-    "house": { "lucide": "House", "phosphor": "House", "cupertino": "house" },
-    "house.fill": { "lucide": "House (use Phosphor fill)", "phosphor": "House fill", "cupertino": "house_fill" },
-    "person": { "lucide": "User", "phosphor": "User", "cupertino": "person" },
-    "person.crop.circle": { "lucide": "CircleUserRound", "phosphor": "UserCircle", "cupertino": "person_crop_circle" },
-    "person.2": { "lucide": "Users", "phosphor": "Users", "cupertino": "person_2" },
-    "bell": { "lucide": "Bell", "phosphor": "Bell", "cupertino": "bell" },
-    "heart": { "lucide": "Heart", "phosphor": "Heart", "cupertino": "heart" },
-    "heart.fill": { "lucide": "Heart fill=currentColor", "phosphor": "Heart fill", "cupertino": "heart_fill" },
-    "star": { "lucide": "Star", "phosphor": "Star", "cupertino": "star" },
-    "bookmark": { "lucide": "Bookmark", "phosphor": "BookmarkSimple", "cupertino": "bookmark" },
-    "folder": { "lucide": "Folder", "phosphor": "Folder", "cupertino": "folder" },
-    "doc": { "lucide": "File", "phosphor": "File", "cupertino": "doc" },
-    "doc.text": { "lucide": "FileText", "phosphor": "FileText", "cupertino": "doc_text" },
-    "photo": { "lucide": "Image", "phosphor": "Image", "cupertino": "photo" },
-    "camera": { "lucide": "Camera", "phosphor": "Camera", "cupertino": "camera" },
-    "mic": { "lucide": "Mic", "phosphor": "Microphone", "cupertino": "mic" },
-    "paperplane": { "lucide": "Send", "phosphor": "PaperPlaneTilt", "cupertino": "paperplane" },
-    "arrow.up.circle.fill": { "lucide": "CircleArrowUp", "phosphor": "ArrowCircleUp fill", "cupertino": "arrow_up_circle_fill" },
-    "envelope": { "lucide": "Mail", "phosphor": "Envelope", "cupertino": "mail" },
-    "message": { "lucide": "MessageCircle", "phosphor": "ChatCircle", "cupertino": "chat_bubble" },
-    "phone": { "lucide": "Phone", "phosphor": "Phone", "cupertino": "phone" },
-    "calendar": { "lucide": "Calendar", "phosphor": "CalendarBlank", "cupertino": "calendar" },
-    "clock": { "lucide": "Clock", "phosphor": "Clock", "cupertino": "clock" },
-    "location": { "lucide": "Navigation", "phosphor": "NavigationArrow", "cupertino": "location" },
-    "map": { "lucide": "Map", "phosphor": "MapTrifold", "cupertino": "map" },
-    "lock": { "lucide": "Lock", "phosphor": "Lock", "cupertino": "lock" },
-    "eye": { "lucide": "Eye", "phosphor": "Eye", "cupertino": "eye" },
-    "eye.slash": { "lucide": "EyeOff", "phosphor": "EyeSlash", "cupertino": "eye_slash" },
-    "info.circle": { "lucide": "Info", "phosphor": "Info", "cupertino": "info_circle" },
-    "exclamationmark.triangle": { "lucide": "TriangleAlert", "phosphor": "Warning", "cupertino": "exclamationmark_triangle" },
-    "questionmark.circle": { "lucide": "CircleHelp", "phosphor": "Question", "cupertino": "question_circle" },
-    "arrow.clockwise": { "lucide": "RotateCw", "phosphor": "ArrowClockwise", "cupertino": "arrow_clockwise" },
-    "arrow.down.circle": { "lucide": "CircleArrowDown", "phosphor": "ArrowCircleDown", "cupertino": "arrow_down_circle" },
-    "line.3.horizontal.decrease": { "lucide": "ListFilter", "phosphor": "FunnelSimple", "cupertino": "line_horizontal_3_decrease" },
-    "sidebar.left": { "lucide": "PanelLeft", "phosphor": "SidebarSimple", "cupertino": "sidebar_left" },
-    "square.grid.2x2": { "lucide": "LayoutGrid", "phosphor": "SquaresFour", "cupertino": "square_grid_2x2" },
-    "list.bullet": { "lucide": "List", "phosphor": "List", "cupertino": "list_bullet" },
-    "slider.horizontal.3": { "lucide": "SlidersHorizontal", "phosphor": "Sliders", "cupertino": "slider_horizontal_3" },
-    "cart": { "lucide": "ShoppingCart", "phosphor": "ShoppingCart", "cupertino": "cart" },
-    "creditcard": { "lucide": "CreditCard", "phosphor": "CreditCard", "cupertino": "creditcard" },
-    "play.fill": { "lucide": "Play fill=currentColor", "phosphor": "Play fill", "cupertino": "play_fill" },
-    "pause.fill": { "lucide": "Pause fill=currentColor", "phosphor": "Pause fill", "cupertino": "pause_fill" },
-    "sparkles": { "lucide": "Sparkles", "phosphor": "Sparkle", "cupertino": "sparkles" },
-    "wifi": { "lucide": "Wifi", "phosphor": "WifiHigh", "cupertino": "wifi" },
-    "moon": { "lucide": "Moon", "phosphor": "Moon", "cupertino": "moon" },
-    "sun.max": { "lucide": "Sun", "phosphor": "Sun", "cupertino": "sun_max" },
-    "globe": { "lucide": "Globe", "phosphor": "Globe", "cupertino": "globe" },
-    "link": { "lucide": "Link", "phosphor": "Link", "cupertino": "link" },
-    "tray": { "lucide": "Inbox", "phosphor": "Tray", "cupertino": "tray" },
-    "archivebox": { "lucide": "Archive", "phosphor": "Archive", "cupertino": "archivebox" },
-    "flag": { "lucide": "Flag", "phosphor": "Flag", "cupertino": "flag" },
-    "tag": { "lucide": "Tag", "phosphor": "Tag", "cupertino": "tag" }
-  }
+    "chevron.left": {
+      "lucide": "ChevronLeft",
+      "phosphor": "CaretLeft",
+      "cupertino": "chevron_back"
+    },
+    "chevron.right": {
+      "lucide": "ChevronRight",
+      "phosphor": "CaretRight",
+      "cupertino": "chevron_forward"
+    },
+    "chevron.down": {
+      "lucide": "ChevronDown",
+      "phosphor": "CaretDown",
+      "cupertino": "chevron_down"
+    },
+    "chevron.up.chevron.down": {
+      "lucide": "ChevronsUpDown",
+      "phosphor": "CaretUpDown",
+      "cupertino": "chevron_up_chevron_down"
+    },
+    "xmark": {
+      "lucide": "X",
+      "phosphor": "X",
+      "cupertino": "xmark"
+    },
+    "xmark.circle.fill": {
+      "lucide": "CircleX",
+      "phosphor": "XCircle fill",
+      "cupertino": "xmark_circle_fill"
+    },
+    "checkmark": {
+      "lucide": "Check",
+      "phosphor": "Check",
+      "cupertino": "checkmark"
+    },
+    "checkmark.circle.fill": {
+      "lucide": "CircleCheck",
+      "phosphor": "CheckCircle fill",
+      "cupertino": "checkmark_circle_fill"
+    },
+    "plus": {
+      "lucide": "Plus",
+      "phosphor": "Plus",
+      "cupertino": "plus"
+    },
+    "minus": {
+      "lucide": "Minus",
+      "phosphor": "Minus",
+      "cupertino": "minus"
+    },
+    "magnifyingglass": {
+      "lucide": "Search",
+      "phosphor": "MagnifyingGlass",
+      "cupertino": "search"
+    },
+    "ellipsis": {
+      "lucide": "Ellipsis",
+      "phosphor": "DotsThree",
+      "cupertino": "ellipsis"
+    },
+    "ellipsis.circle": {
+      "lucide": "CircleEllipsis",
+      "phosphor": "DotsThreeCircle",
+      "cupertino": "ellipsis_circle"
+    },
+    "square.and.arrow.up": {
+      "lucide": "Share",
+      "phosphor": "Export",
+      "cupertino": "share"
+    },
+    "trash": {
+      "lucide": "Trash2",
+      "phosphor": "Trash",
+      "cupertino": "trash"
+    },
+    "pencil": {
+      "lucide": "Pencil",
+      "phosphor": "PencilSimple",
+      "cupertino": "pencil"
+    },
+    "square.and.pencil": {
+      "lucide": "SquarePen",
+      "phosphor": "NotePencil",
+      "cupertino": "square_pencil"
+    },
+    "gearshape": {
+      "lucide": "Settings",
+      "phosphor": "Gear",
+      "cupertino": "gear_alt"
+    },
+    "house": {
+      "lucide": "House",
+      "phosphor": "House",
+      "cupertino": "house"
+    },
+    "house.fill": {
+      "lucide": "House (use Phosphor fill)",
+      "phosphor": "House fill",
+      "cupertino": "house_fill"
+    },
+    "person": {
+      "lucide": "User",
+      "phosphor": "User",
+      "cupertino": "person"
+    },
+    "person.crop.circle": {
+      "lucide": "CircleUserRound",
+      "phosphor": "UserCircle",
+      "cupertino": "person_crop_circle"
+    },
+    "person.2": {
+      "lucide": "Users",
+      "phosphor": "Users",
+      "cupertino": "person_2"
+    },
+    "bell": {
+      "lucide": "Bell",
+      "phosphor": "Bell",
+      "cupertino": "bell"
+    },
+    "heart": {
+      "lucide": "Heart",
+      "phosphor": "Heart",
+      "cupertino": "heart"
+    },
+    "heart.fill": {
+      "lucide": "Heart fill=currentColor",
+      "phosphor": "Heart fill",
+      "cupertino": "heart_fill"
+    },
+    "star": {
+      "lucide": "Star",
+      "phosphor": "Star",
+      "cupertino": "star"
+    },
+    "bookmark": {
+      "lucide": "Bookmark",
+      "phosphor": "BookmarkSimple",
+      "cupertino": "bookmark"
+    },
+    "folder": {
+      "lucide": "Folder",
+      "phosphor": "Folder",
+      "cupertino": "folder"
+    },
+    "doc": {
+      "lucide": "File",
+      "phosphor": "File",
+      "cupertino": "doc"
+    },
+    "doc.text": {
+      "lucide": "FileText",
+      "phosphor": "FileText",
+      "cupertino": "doc_text"
+    },
+    "photo": {
+      "lucide": "Image",
+      "phosphor": "Image",
+      "cupertino": "photo"
+    },
+    "camera": {
+      "lucide": "Camera",
+      "phosphor": "Camera",
+      "cupertino": "camera"
+    },
+    "mic": {
+      "lucide": "Mic",
+      "phosphor": "Microphone",
+      "cupertino": "mic"
+    },
+    "paperplane": {
+      "lucide": "Send",
+      "phosphor": "PaperPlaneTilt",
+      "cupertino": "paperplane"
+    },
+    "arrow.up.circle.fill": {
+      "lucide": "CircleArrowUp",
+      "phosphor": "ArrowCircleUp fill",
+      "cupertino": "arrow_up_circle_fill"
+    },
+    "envelope": {
+      "lucide": "Mail",
+      "phosphor": "Envelope",
+      "cupertino": "mail"
+    },
+    "message": {
+      "lucide": "MessageCircle",
+      "phosphor": "ChatCircle",
+      "cupertino": "chat_bubble"
+    },
+    "phone": {
+      "lucide": "Phone",
+      "phosphor": "Phone",
+      "cupertino": "phone"
+    },
+    "calendar": {
+      "lucide": "Calendar",
+      "phosphor": "CalendarBlank",
+      "cupertino": "calendar"
+    },
+    "clock": {
+      "lucide": "Clock",
+      "phosphor": "Clock",
+      "cupertino": "clock"
+    },
+    "location": {
+      "lucide": "Navigation",
+      "phosphor": "NavigationArrow",
+      "cupertino": "location"
+    },
+    "map": {
+      "lucide": "Map",
+      "phosphor": "MapTrifold",
+      "cupertino": "map"
+    },
+    "lock": {
+      "lucide": "Lock",
+      "phosphor": "Lock",
+      "cupertino": "lock"
+    },
+    "eye": {
+      "lucide": "Eye",
+      "phosphor": "Eye",
+      "cupertino": "eye"
+    },
+    "eye.slash": {
+      "lucide": "EyeOff",
+      "phosphor": "EyeSlash",
+      "cupertino": "eye_slash"
+    },
+    "info.circle": {
+      "lucide": "Info",
+      "phosphor": "Info",
+      "cupertino": "info_circle"
+    },
+    "exclamationmark.triangle": {
+      "lucide": "TriangleAlert",
+      "phosphor": "Warning",
+      "cupertino": "exclamationmark_triangle"
+    },
+    "questionmark.circle": {
+      "lucide": "CircleHelp",
+      "phosphor": "Question",
+      "cupertino": "question_circle"
+    },
+    "arrow.clockwise": {
+      "lucide": "RotateCw",
+      "phosphor": "ArrowClockwise",
+      "cupertino": "arrow_clockwise"
+    },
+    "arrow.down.circle": {
+      "lucide": "CircleArrowDown",
+      "phosphor": "ArrowCircleDown",
+      "cupertino": "arrow_down_circle"
+    },
+    "line.3.horizontal.decrease": {
+      "lucide": "ListFilter",
+      "phosphor": "FunnelSimple",
+      "cupertino": "line_horizontal_3_decrease"
+    },
+    "sidebar.left": {
+      "lucide": "PanelLeft",
+      "phosphor": "SidebarSimple",
+      "cupertino": "sidebar_left"
+    },
+    "square.grid.2x2": {
+      "lucide": "LayoutGrid",
+      "phosphor": "SquaresFour",
+      "cupertino": "square_grid_2x2"
+    },
+    "list.bullet": {
+      "lucide": "List",
+      "phosphor": "List",
+      "cupertino": "list_bullet"
+    },
+    "slider.horizontal.3": {
+      "lucide": "SlidersHorizontal",
+      "phosphor": "Sliders",
+      "cupertino": "slider_horizontal_3"
+    },
+    "cart": {
+      "lucide": "ShoppingCart",
+      "phosphor": "ShoppingCart",
+      "cupertino": "cart"
+    },
+    "creditcard": {
+      "lucide": "CreditCard",
+      "phosphor": "CreditCard",
+      "cupertino": "creditcard"
+    },
+    "play.fill": {
+      "lucide": "Play fill=currentColor",
+      "phosphor": "Play fill",
+      "cupertino": "play_fill"
+    },
+    "pause.fill": {
+      "lucide": "Pause fill=currentColor",
+      "phosphor": "Pause fill",
+      "cupertino": "pause_fill"
+    },
+    "sparkles": {
+      "lucide": "Sparkles",
+      "phosphor": "Sparkle",
+      "cupertino": "sparkles"
+    },
+    "wifi": {
+      "lucide": "Wifi",
+      "phosphor": "WifiHigh",
+      "cupertino": "wifi"
+    },
+    "moon": {
+      "lucide": "Moon",
+      "phosphor": "Moon",
+      "cupertino": "moon"
+    },
+    "sun.max": {
+      "lucide": "Sun",
+      "phosphor": "Sun",
+      "cupertino": "sun_max"
+    },
+    "globe": {
+      "lucide": "Globe",
+      "phosphor": "Globe",
+      "cupertino": "globe"
+    },
+    "link": {
+      "lucide": "Link",
+      "phosphor": "Link",
+      "cupertino": "link"
+    },
+    "tray": {
+      "lucide": "Inbox",
+      "phosphor": "Tray",
+      "cupertino": "tray"
+    },
+    "archivebox": {
+      "lucide": "Archive",
+      "phosphor": "Archive",
+      "cupertino": "archivebox"
+    },
+    "flag": {
+      "lucide": "Flag",
+      "phosphor": "Flag",
+      "cupertino": "flag"
+    },
+    "tag": {
+      "lucide": "Tag",
+      "phosphor": "Tag",
+      "cupertino": "tag"
+    }
+  },
+  "$source": "Apple SF Symbols HIG + estimated Lucide/Phosphor/CupertinoIcons cross-mapping",
+  "$class": "inferred",
+  "$url": "https://developer.apple.com/design/human-interface-guidelines/sf-symbols",
+  "$platform": "All"
 }
