@@ -1,218 +1,112 @@
-# cupertino-forge: Installation and User Guide
+# cupertino-forge v2.0.0 — Complete Engineering Reference Manual
 
-> **For Claude Code:** read this whole file before doing anything with the cupertino-forge plugin. It explains what the plugin is, where it lives on this machine, how it is installed, how every part works, and the exact procedures to follow. When this guide and a plugin file disagree, the plugin file wins (it is newer); when the plugin files are silent, follow this guide.
+> **Audience:** Human engineers and AI coding agents (Claude Code, Google Antigravity, Cursor, Windsurf).
+> When this manual and a source code/token file disagree, the source file wins. All paths, flags, exit codes, and code snippets below are verified directly against `cupertino-forge@2.0.0`.
 
 ---
 
-## 0. Quick facts
+## Table of Contents
 
-| Item | Value |
+1. [System Architecture & Data Flow Map](#1-system-architecture--data-flow-map)
+2. [Complete Master Use-Flow (Human + AI Agent Playbook)](#2-complete-master-use-flow-human--ai-agent-playbook)
+3. [Platform-by-Platform Integration Guide](#3-platform-by-platform-integration-guide)
+4. [Complete CLI, Scripts & QA Reference](#4-complete-cli-scripts--qa-reference)
+5. [Quality Gates (G1-G7), Scorecard & Reference Audit Workflow](#5-quality-gates-g1-g7-scorecard--reference-audit-workflow)
+6. [Extending & Maintaining the Plugin](#6-extending--maintaining-the-plugin)
+7. [Troubleshooting, Windows Gotchas & FAQ](#7-troubleshooting-windows-gotchas--faq)
+
+---
+
+## 1. System Architecture & Data Flow Map
+
+### 1.1 End-to-End Pipeline
+
+```mermaid
+flowchart LR
+    T["tokens/*.json (9 source files)"] --> BT["scripts/build-tokens.mjs"]
+    BT --> CSS["cupertino.tokens.css + cupertino.theme.css"]
+    BT --> TS["cupertino.tokens.ts"]
+    BT --> DART["apple_tokens.dart"]
+    BT --> RS["apple_tokens.rs"]
+    BT --> JSON["cupertino.tokens.resolved.json"]
+    BT --> EST["tokens/ESTIMATES.md"]
+
+    CSS --> WEB["skills/apple-web (Next.js + Tailwind v4 + Motion)"]
+    TS --> WEB
+    DART --> FLU["skills/apple-flutter (Flutter 3.29+ Cupertino)"]
+    RS --> TAU["skills/apple-tauri (Tauri 2 + window-vibrancy 0.8)"]
+    WEB --> TAU
+
+    WEB --> LINT["hooks/scripts/lint.mjs (Static Rules + Hooks)"]
+    FLU --> LINT
+    TAU --> LINT
+    JSON --> DOM["qa/computed-style-audit.mjs + qa/ux-keyboard.mjs"]
+    WEB --> DOM
+    WEB --> CAP["scripts/capture.py (4-img or 72-img --matrix)"]
+    LINT --> REV["agents/apple-design-reviewer.md (visual + behavior)"]
+    DOM --> REV
+    CAP --> REV
+```
+
+### 1.2 Honest Cross-Platform Parity Principle
+
+- **Apple native platforms (iOS, iPadOS, macOS):** Native APIs (`NSGlassEffectView`, SwiftUI `ConcentricRectangle`, `UINotificationFeedbackGenerator`, native SF Pro) provide maximum parity.
+- **Web, Flutter, and Tauri (Windows / Linux / MAS):** `cupertino-forge` enforces **documented visual approximation paired with 100% Apple design psychology, spatial hierarchy, motion discipline, and UX**. Never claim "100% pixel-perfect on every platform."
+
+### 1.3 Token Provenance System (`tokens/*.json` & `tokens/ESTIMATES.md`)
+
+Every token group carries explicit provenance metadata:
+
+| Field | Allowed Values / Purpose |
 |---|---|
-| Plugin name | `cupertino-forge` |
-| Version | 2.0.0 |
-| Owner | ZeroFounder (Rahat) |
-| Location on disk | `D:\Claude-Plugins\cupertino-forge` |
-| Local marketplace name | `zerofounder-local` |
-| Install id | `cupertino-forge@zerofounder-local` |
-| OS | Windows 11 (PowerShell), macOS, Linux — Node 18+ required |
-| Design target | Apple iOS 27 and macOS 27 (Liquid Glass era, WWDC 2026) |
-| Supported stacks | Next.js + Tailwind v4 + shadcn/ui (web), Flutter (Android, iOS, macOS, Windows, Linux), Tauri 2 + Rust (desktop) |
-| Source of design values | Apple iOS 27 & macOS 27 Sketch & Figma UI kits + Official Apple HIG DocC tables (`$class: official / measured / inferred / estimated`) |
+| `$class` | `official` (Apple HIG DocC / SDK docs), `measured` (Apple iOS 27 / macOS 27 Sketch or Figma UI kits), `inferred` (derived from UIKit/SwiftUI behavior), `estimated` (not published numerically by Apple; tracked in `tokens/ESTIMATES.md`), `measured-kit-reference` (stored under `$kitReference` without overwriting cross-platform primary estimates), `inferred/community` (stored under `$alt`, e.g. `ScreenCorners` / `screens.guide`) |
+| `$source` | Human-readable provenance citation (kit version, Figma node ID, or HIG page + date) |
+| `$previous` | Preserves prior estimate value whenever a token is updated from Figma/kit measurements |
+| `$alt` | Community SPI alternates kept separate from primary Apple kit tokens |
+| `$kitConflict` | Recorded with `$status: "needs-device-verification"` when HIG and Sketch kit disagree (e.g., macOS `headline`/`caption1`/`caption2` weights in `tokens/typography.json`) |
 
-**Goal of the plugin:** deliver maximum parity via native APIs on Apple platforms, and documented visual approximation paired with **100% Apple design psychology, spatial hierarchy, motion discipline, and UX** on Web (Next.js), Flutter, and Tauri 2 — enforced via Claude Code hooks or Google Antigravity manual quality gates (`workflows/use-flow.md`).
+`tokens/ESTIMATES.md` is auto-generated by `scripts/build-tokens.mjs --write-estimates tokens/ESTIMATES.md` (currently **70 estimated groups/entries** + **3 conflicts/alternates** after Phase 3c Figma measurements). Every estimate-backed check or review remark must be tagged `estimate-based` and listed in the Compliance Report.
 
 ---
 
-## 1. How the plugin works (mental model)
+## 2. Complete Master Use-Flow (Human + AI Agent Playbook)
 
-The plugin has four layers. Understand all four before using it.
+This section is synced 1:1 with [`skills/apple-design-core/references/workflows/use-flow.md`](skills/apple-design-core/references/workflows/use-flow.md).
 
-| Layer | What it is | Where |
+### 2.1 Four Entry Scenarios (Serial Execution Order)
+
+| Scenario | Trigger | Exact Serial Order |
 |---|---|---|
-| 1. Knowledge | Rules, specs and decisions an Apple designer uses | `skills/apple-design-core` (SKILL.md + references) |
-| 2. Values | Every color, size, radius, shadow, spring and sound spec as data | `tokens/*.json` (single source of truth) |
-| 3. Code | Ready made primitives per platform built from the values | `skills/apple-web`, `skills/apple-flutter`, `skills/apple-tauri` assets |
-| 4. Enforcement and verification | Lint hook that blocks off spec code, stop gate, reviewer agent, audit | `hooks/`, `agents/`, `skills/apple-design-audit` |
+| **A — Greenfield App** | New Web, Flutter, or Tauri project (no `.apple-design.json`) | 1. `/apple-doctor` -> 2. `/apple-init` (creates `.apple-design.json`, validates accent, runs `build-tokens.mjs`, copies primitives, installs IDE rules) -> 3. Read `SKILL.md` + `anti-patterns.md` + adapter `SKILL.md` -> 4. `/apple-screen` per screen -> 5. `/apple-component` only if catalog lacks a primitive -> 6. Quality Gates `G1`–`G7` -> 7. Print Compliance Report |
+| **B — Existing Project Redesign** | Legacy generic / Material / Tailwind / shadcn app | 1. `/apple-doctor` -> 2. `/apple-init` (if `.apple-design.json` missing) -> 3. Read `patterns/redesign-playbook.md` + `00-principles.md` + `08-motion.md` + `anti-patterns.md` -> 4. Run `/apple-redesign` screen-by-screen (5-stage order below) -> 5. Run `/apple-audit` (`--reference <dir>` optional) -> 6. Fix all Blocking items (`< 85` = not done) -> 7. Print Compliance Report |
+| **C — Single Screen or Component** | `.apple-design.json` already configured | 1. Confirm `.apple-design.json` -> 2. Read targeted specs via `SKILL.md` Section 2 router -> 3. `/apple-screen` or `/apple-component` -> 4. Quality Gates `G3`–`G7` -> 5. Print Compliance Report |
+| **D1 — Token Update** | WWDC or Apple UI kit release | `/apple-sync` (`apple-spec-researcher` diff -> confirm -> update `tokens/*.json` + `15-version-diff.md` -> `build-tokens.mjs --write-estimates tokens/ESTIMATES.md` -> verify) |
+| **D2 — Design Audit / Bugfix** | Checking or fixing an existing app | `/apple-audit [--reference <dir>]` (lint + `computed-style-audit.mjs` + `ux-keyboard.mjs` + `capture.py` + `apple-design-reviewer` -> `apple-audit-report.md`) |
 
-Flow of a typical task:
+### 2.2 Claude Code vs. Google Antigravity Execution Mapping
 
-```
-User prompt (any UI request)
-  -> UserPromptSubmit hook reminds Claude to load the skills
-  -> Claude loads apple-design-core, then the platform adapter skill
-  -> Claude builds with generated tokens + primitives
-  -> every Write/Edit is linted by the PostToolUse hook (violations = blocked, exit 2)
-  -> Stop hook refuses to finish while changed files still violate rules
-  -> apple-design-reviewer agent checks screenshots (score must be 85+)
-  -> Claude prints the Apple Design Compliance report
-```
-
----
-
-## 2. Folder map (what every file is for)
-
-```
-D:\Claude-Plugins\cupertino-forge
-|   README.md                      short overview
-|
-+---.claude-plugin
-|       plugin.json                plugin manifest (name, version, description)
-|       marketplace.json           local marketplace "zerofounder-local" pointing to this folder
-|
-+---agents
-|       apple-design-reviewer.md   visual QA agent: screenshots -> scored deviation list
-|       apple-spec-researcher.md   keeps tokens current with new Apple kits and HIG
-|
-+---assets\sounds                  9 ORIGINAL synthesized UI sounds (no Apple audio)
-|       tap, toggle-on, toggle-off, tick, success, error, send, refresh, keyboard (.wav)
-|
-+---commands                       slash commands
-|       apple-init.md              install the system into a project
-|       apple-screen.md            build a full screen
-|       apple-redesign.md          convert an existing project/screen using redesign-playbook.md
-|       apple-component.md         build or restyle one component
-|       apple-audit.md             score an existing app and list fixes (--reference optional)
-|       apple-doctor.md            verify plugin integrity and local toolchains
-|       apple-sync.md              update tokens after WWDC or a kit update
-|
-+---hooks
-|   |   hooks.json                 SessionStart, UserPromptSubmit, PostToolUse, Stop
-|   \---scripts
-|           lint.mjs               the design linter (28 rules) + all hook entry points
-|
-+---scripts
-|       build-tokens.mjs           tokens -> CSS vars, Tailwind v4 theme, TS constants, Dart constants
-|       capture.py                 screenshots at 390 and 1100 widths, light and dark
-|       contrast-check.mjs         WCAG contrast for tokens or a brand accent
-|       pixel-diff.mjs             compare a screenshot with an Apple kit reference
-|       synth-sounds.py            re-render the original UI sounds
-|
-+---skills
-|   +---apple-design-core          THE BRAIN (always load first)
-|   |   |   SKILL.md               contract, router, 25 golden rules, Definition of Done, Compliance report
-|   |   \---references
-|   |       |   anti-patterns.md   instant fails and their fixes
-|   |       +---foundations        00-principles .. 15-version-diff (16 files)
-|   |       +---components-ios     navigation, controls, presentation, content
-|   |       +---components-macos   window-chrome, navigation, controls, presentation, content
-|   |       +---patterns           screens (recipes), states (empty, loading, error), system-experiences, redesign-playbook
-|   |       \---workflows          use-flow.md (canonical master execution flow for Claude Code & Google Antigravity)
-|   +---apple-web                  Next.js adapter: SKILL.md, references/components-web.md, assets (16 components, 5 lib files, base CSS)
-|   +---apple-flutter              Flutter adapter: SKILL.md, references/widgets-flutter.md, assets (13 Dart files, Android haptics Kotlin)
-|   +---apple-tauri                Tauri adapter: SKILL.md, assets (tauri.conf snippet, Cargo snippet, apple_window.rs, apple_menu.rs, lib-snippet.rs)
-|   \---apple-design-audit         audit skill + references/scorecard.md (15 layers)
-|
-+---templates
-|       apple-design.json          template for the per project config .apple-design.json
-|       CLAUDE.apple.md            block appended to a project's CLAUDE.md by /apple-init
-|       AGENTS.apple.md            portable rule template for Google Antigravity (.agent/rules/) & cross-IDE AGENTS.md
-|
-\---tokens
-        color.json                 system colors (light, dark, increased contrast), labels, fills, backgrounds, macOS control fills, focus ring
-        typography.json            iOS Dynamic Type (all sizes xSmall..AX5), macOS styles, tracking tables, font stacks, Inter compensation
-        materials.json             Liquid Glass recipes (kit raw + tuned CSS), standard materials, glass rules
-        shape.json                 continuous corners, concentric rule, iOS and macOS radius tables
-        layout.json                spacing scale, hit targets, iOS and macOS metrics, breakpoints, z-index
-        elevation.json             shadow levels (from macOS kit windows, panels, menus, knobs)
-        motion.json                springs (duration + bounce), transitions catalog, press, hover, scroll physics
-        feedback.json              haptic map per event (iOS, Android, Flutter, web) and sound catalog
-        icons.json                 SF Symbol -> Lucide / Phosphor / CupertinoIcons map, icon rules
-        \---source
-                apple-ios-27-ui-kit.tokens.json     raw export from Apple's iOS 27 Sketch kit (402 tokens)
-                apple-macos-27-ui-kit.tokens.json   raw export from Apple's macOS 27 Sketch kit (676 tokens)
-```
-
-Notes:
-- `tokens/source/` holds the untouched Apple kit exports. They are not read at runtime. `/apple-sync` uses them as the baseline to diff against future kit versions. Never edit them.
-- `skills/apple-tauri/references/` may be an empty folder. It is unused and harmless.
-- Values that Apple's kit export does not include (some control heights, blur radii, some corner radii) carry `"$source": "estimate"` inside the token files. They are used, but must be listed in the Compliance report.
-
----
-
-## 3. Installation
-
-### 3.1 Prerequisites
-
-| Tool | Why | Check |
+| Mechanism | Claude Code | Google Antigravity / Cross-IDE (`AGENTS.apple.md`) |
 |---|---|---|
-| Claude Code (latest) | runs the plugin | `claude --version` |
-| Node.js 18+ | hooks, linter, token builder | `node -v` |
-| Git | Stop hook uses `git status` to find changed files (falls back to full scan) | `git --version` |
-| Python 3 + `pip install playwright` (optional) | screenshots for the reviewer agent | `python -c "import playwright"` |
-| Chrome or Edge (optional) | used by capture.py | installed browser |
-| numpy (optional) | only to re-render sounds | `python -c "import numpy"` |
+| **Path variable** | `${CLAUDE_PLUGIN_ROOT}` (auto-resolved) | `<PLUGIN_PATH>` set inside `.agent/rules/cupertino-forge.md` or project-root `AGENTS.md` (copied from `templates/AGENTS.apple.md`) |
+| **Session & prompt rules** | `templates/CLAUDE.apple.md` + `hooks/hooks.json` (`SessionStart`, `UserPromptSubmit`) | `.agent/rules/cupertino-forge.md` or `AGENTS.md` loaded automatically; start every session with `workflows/use-flow.md` |
+| **Commands** | Slash commands (`/apple-init`, `/apple-screen`, `/apple-redesign`, `/apple-component`, `/apple-audit`, `/apple-doctor`, `/apple-sync`) | Open `<PLUGIN_PATH>/commands/<name>.md` and execute steps verbatim |
+| **Post-edit lint** | Automatic `PostToolUse` hook (`lint.mjs --hook post`, blocks with exit `2`) | Manual terminal run after UI edits: `node "<PLUGIN_PATH>/hooks/scripts/lint.mjs" --all --root .` |
+| **Pre-finish stop gate** | Automatic `Stop` hook (`lint.mjs --hook stop` on git-changed files) | Manual terminal verification of all applicable gates (`G1`–`G7`) before replying done |
+| **Visual & behavior review** | `apple-design-reviewer` agent (`visual` + `behavior` modes) | Run `capture.py`, `computed-style-audit.mjs`, `ux-keyboard.mjs`, and follow `agents/apple-design-reviewer.md` checklist |
 
-### 3.2 Install steps
+### 2.3 Brownfield Conversion in 5 Stages (`/apple-redesign` + `redesign-playbook.md`)
 
-1. Make sure the folder exists exactly at `D:\Claude-Plugins\cupertino-forge` and contains `.claude-plugin\plugin.json`.
-2. In Claude Code run:
-   ```
-   /plugin marketplace add D:\Claude-Plugins\cupertino-forge
-   /plugin install cupertino-forge@zerofounder-local
-   ```
-3. Restart Claude Code.
-
-### 3.3 Verify the install
-
-- `/plugin` lists `cupertino-forge` as installed and enabled.
-- Typing `/` shows: `apple-init`, `apple-screen`, `apple-component`, `apple-audit`, `apple-sync` (may appear as `cupertino-forge:apple-init` and so on).
-- Skills available: `apple-design-core`, `apple-web`, `apple-flutter`, `apple-tauri`, `apple-design-audit`.
-- Agents available: `apple-design-reviewer`, `apple-spec-researcher`.
-- Linter runs:
-  ```powershell
-  node D:\Claude-Plugins\cupertino-forge\hooks\scripts\lint.mjs --all --root .
-  ```
-  It prints `cupertino-forge lint: X error(s), Y warning(s) in N file(s)`.
-
-### 3.4 Important rules about the folder
-
-- Do not move or rename `D:\Claude-Plugins\cupertino-forge` after installing. If it moves, run `/plugin marketplace remove zerofounder-local` and add it again from the new path.
-- After editing any plugin file, run `/plugin` and reinstall or restart Claude Code so changes load.
-- `${CLAUDE_PLUGIN_ROOT}` inside plugin files always resolves to the installed plugin folder. Use it in commands instead of hardcoded paths.
-
-### 3.5 Using cupertino-forge in Google Antigravity (or other IDEs without Claude hooks)
-
-Google Antigravity and other agentic IDEs do not run Claude Code's `CLAUDE_PLUGIN_ROOT` hooks automatically. Use the portable bridge template instead:
-
-1. Copy `D:\Claude-Plugins\cupertino-forge\templates\AGENTS.apple.md` into your target project at either:
-   - `.agent/rules/cupertino-forge.md` (Google Antigravity workspace rule), or
-   - `AGENTS.md` at the project root.
-2. Edit the `<PLUGIN_PATH>` line inside that copied file to match your local clone path (e.g., `D:\Claude-Plugins\cupertino-forge`).
-3. Create `.apple-design.json` at the project root from `templates/apple-design.json`.
-4. After each UI edit, run the manual verification scripts from the terminal (the agent is instructed to run these in `AGENTS.apple.md`):
-   ```powershell
-   node D:\Claude-Plugins\cupertino-forge\scripts\build-tokens.mjs --out src\styles\cupertino --targets css,tailwind,ts
-   node D:\Claude-Plugins\cupertino-forge\hooks\scripts\lint.mjs --all --root .
-   node D:\Claude-Plugins\cupertino-forge\scripts\contrast-check.mjs --accent "#0088FF"
-   node D:\Claude-Plugins\cupertino-forge\qa\computed-style-audit.mjs --url http://127.0.0.1:3000 --platform ios
-   ```
+1. **Stage A — Tokens & Theme:** Create `.apple-design.json` from `templates/apple-design.json`, check custom accent with `contrast-check.mjs`, run `build-tokens.mjs`, and wrap the app root (`CupertinoRoot` + `CupertinoThemeScript`, `CfApp`, or Tauri `apply_apple_window`).
+2. **Stage B — Deconstruction & IA:** Strip card-in-card nesting, decorative 1px borders, iOS content shadows, CTA clutter (`<= 1` prominent CTA per view), hamburger drawers, and web top navbars. Install native navigation (`TabBar` + `NavBar` on iOS; `MacWindow` + edge-to-edge `Sidebar` + unified `Toolbar` on macOS).
+3. **Stage C — Liquid Glass & Continuous Shape:** Put Liquid Glass strictly on the functional layer (never on cards/rows, never glass-on-glass). Apply `Squircle` / `SquircleBorder` (`cornerSmoothing: 0.6` measured) and concentric radii (`inner = max(outer - padding, 4)`).
+4. **Stage D — Motion, Haptics, States & Accessibility:** Replace `ease`/`linear` with `tokens/motion.json` springs, add 0ms pointer-down press states, wire haptics without stacking haptic+sound on toggles, add empty/loading (`>300ms` delay)/error states (`patterns/states.md`), and verify dark elevated surfaces, `contrast-more`, `reduced-transparency`, `reduced-motion`, Dynamic Type, and keyboard focus.
+5. **Stage E — QA Audit:** Run `lint.mjs`, platform compiler/analyzer, `computed-style-audit.mjs`, `ux-keyboard.mjs`, and `apple-design-reviewer`.
 
 ---
 
-## 4. Setting up a project (`/apple-init`)
+## 3. Platform-by-Platform Integration Guide
 
-Run inside the project root:
-
-```
-/apple-init                         # auto detect stack, ask the rest
-/apple-init web ios                 # Next.js app, iPhone style
-/apple-init flutter adaptive        # Flutter, iOS on phones, macOS style on desktop widths
-/apple-init tauri macos "#5B3DF5"   # Tauri desktop app with a brand accent
-```
-
-What it does, in order:
-
-1. Detects the stack (`package.json` with next/react/vite = web, `pubspec.yaml` = flutter, `src-tauri/` = tauri).
-2. Asks only missing choices: style, accent, sounds, Windows chrome (Tauri).
-3. Writes `.apple-design.json` at the project root.
-4. Checks a custom accent with `contrast-check.mjs` and proposes a passing shade if it fails.
-5. Runs the adapter skill's setup (dependencies, token generation, copying primitives, root wrapper).
-6. Copies sounds for Flutter and Tauri when sounds are enabled.
-7. Appends the Apple rules block to the project's `CLAUDE.md`.
-8. Runs typecheck or `flutter analyze` plus the linter.
-9. Reports what was installed.
-
-### 4.1 `.apple-design.json` (project config)
+### 3.1 `.apple-design.json` Project Config (`templates/apple-design.json`)
 
 ```json
 {
@@ -224,183 +118,27 @@ What it does, in order:
   "sounds": false,
   "haptics": true,
   "windowsChrome": "mac",
+  "distribution": "direct",
   "tokensOut": "src/styles/cupertino",
   "appleRelease": "iOS 27 / macOS 27"
 }
 ```
 
-| Field | Values | Meaning |
-|---|---|---|
-| platform | web, flutter, tauri | which adapter skill to load |
-| style | ios, macos, adaptive | adaptive = iOS under 768pt, iPad 768 to 1179, macOS at 1180+ with a fine pointer |
-| accent | null or hex | null = Apple system blue #0088FF; custom must pass 4.5:1 |
-| appearance | system, light, dark | default follows the OS |
-| glassIntensity | 0 to 1 | 0 clear, 1 tinted (mirrors iOS 27's Liquid Glass slider) |
-| sounds | true, false | UI sounds, OFF by default |
-| haptics | true, false | haptic feedback |
-| windowsChrome | mac, native | Tauri on Windows: custom traffic lights or native caption buttons |
-| tokensOut | path | where generated token files go |
+- `style: "adaptive"` switches by viewport width + pointer capability (`< 768` iOS, `768–1179` iPad, `>= 1180` + fine pointer macOS) — never by user-agent sniffing.
+- `distribution` (Tauri macOS): `"direct"` enables `macOSPrivateApi: true` + `apply_liquid_glass`; `"mac-app-store"` disables private API and falls back to public `apply_vibrancy(Sidebar)`.
 
-**The presence of `.apple-design.json` is what activates all hooks.** Projects without it are never linted or blocked.
+### 3.2 Web (Next.js / React + Tailwind v4 + shadcn/ui)
 
----
-
-## 5. Daily usage
-
-### 5.1 Commands
-
-| Command | Use it when | Output |
-|---|---|---|
-| `/apple-init [stack] [style] [accent]` | first time in a project | config, tokens, primitives, CLAUDE.md block |
-| `/apple-screen <description>` | building a whole screen | screen with all states + Compliance report |
-| `/apple-redesign [path or 'whole project'] [style]` | converting an existing app/screen to Apple 27 | deconstruction plan, converted screens via `redesign-playbook.md`, QA checks + Compliance report |
-| `/apple-component <description>` | one component (or restyling one) | component with all states, usage example |
-| `/apple-audit [path or URL] [--reference <dir>]` | checking an existing app | `apple-audit-report.md` with Rule-Conformance (`0-100`), Fidelity (`N/A` without reference), and top fixes |
-| `/apple-doctor` | checking plugin health & local toolchains | `PASS` / `NOT RUN` / `FAIL` summary |
-| `/apple-sync` | after WWDC or a new Apple kit | token diff, updated tokens, rebuilt files |
-
-After `/apple-init`, normal prompts work too ("build the onboarding flow", "make the settings page"). The hooks make Claude load the skills automatically.
-
-### 5.2 Example prompts
-
-```
-/apple-screen settings screen with account row, notifications, appearance and sign out
-/apple-screen macOS style file browser window with sidebar, table and inspector
-/apple-component floating glass toolbar for a photo editor with undo, redo, share
-/apple-audit
-Build the paywall screen following patterns/screens.md
-Make this dashboard look like Apple's Health app summary
-```
-
-### 5.3 Canonical Master Use-Flow (Claude Code & Google Antigravity)
-
-Before starting any UI task, follow [`skills/apple-design-core/references/workflows/use-flow.md`](skills/apple-design-core/references/workflows/use-flow.md):
-- **Scenario A (Greenfield):** `/apple-doctor` -> `/apple-init` -> `build-tokens.mjs` -> `/apple-screen` -> QA gates -> `apple-design-reviewer` -> Compliance report.
-- **Scenario B (Existing Project Redesign):** `/apple-doctor` -> `/apple-init` -> `/apple-redesign` (5-stage `redesign-playbook.md` order) -> QA scripts -> `/apple-audit` + `apple-design-reviewer` -> Compliance report.
-- **Scenario C (Single Screen/Component):** Read targeted specs -> `/apple-screen` or `/apple-component` -> QA gates -> Compliance report.
-- **Scenario D (Token Sync / Audit):** `/apple-sync` (with `--write-estimates`) or `/apple-audit [--reference <dir>]`.
-
-Both Claude Code (automated hooks) and Google Antigravity (`templates/AGENTS.apple.md` + manual terminal gates) enforce the same blocking stop conditions and `NOT RUN (<reason>)` reporting rule.
-
-### 5.4 What Claude must do on every UI task (the contract)
-
-From `apple-design-core/SKILL.md` section 0:
-
-1. Read `.apple-design.json` (run `/apple-init` if missing).
-2. Load the adapter skill (`apple-web`, `apple-flutter`, or `apple-tauri` + `apple-web`).
-3. Read the references the router table points to, and `anti-patterns.md` once per session.
-4. Use only generated tokens. Never type raw hex, px radii, shadows, font sizes, durations or easing. Missing value = add it to plugin tokens, rebuild, then use it.
-5. Build with the primitives; do not restyle shadcn, Material or default widgets from scratch.
-6. Verify with the Definition of Done and print the Compliance report.
-
----
-
-## 6. Enforcement: the hooks
-
-All hooks run `hooks/scripts/lint.mjs` and only act when `.apple-design.json` exists in the project (searched upward from the file or working folder).
-
-| Hook | When | Behavior |
-|---|---|---|
-| SessionStart | session opens | injects a reminder of the design contract with the project's platform, style, accent, sounds |
-| UserPromptSubmit | each prompt that mentions UI words (ui, screen, page, button, sheet, theme, ডিজাইন, স্ক্রিন, বাটন ...) | injects the same reminder |
-| PostToolUse (Write, Edit, MultiEdit) | after every file write | lints the file; **errors block with exit 2** and the violations are sent back to Claude to fix; warnings are added as context |
-| Stop | Claude tries to finish | lints changed files (git status); remaining errors block finishing once; never loops |
-
-### 6.1 Lint rules
-
-Web (tsx, jsx, ts, js, css, scss, html, vue, svelte, astro), 18 rules:
-
-| Rule | Severity | Catches |
-|---|---|---|
-| raw-hex | error | `#007AFF`, `#fff` in app code |
-| raw-color-fn | error | `rgb(`, `rgba(`, `hsl(`, `oklch(` literals |
-| tw-palette | error | `text-gray-500`, `bg-blue-600`, slate, zinc ... |
-| shadcn-default | warn | `bg-primary`, `text-muted-foreground` ... (remapped, but prefer cf names) |
-| tw-rounded | error | `rounded-md`, `rounded-lg`, `rounded-[12px]` without `squircle` |
-| css-radius | error | `border-radius: 12px` without `corner-shape` |
-| tw-shadow | error | `shadow-sm` .. `shadow-2xl` |
-| css-shadow | error | hand written `box-shadow` values |
-| easing | error | `ease-in-out`, `linear`, `cubic-bezier(`, motion `ease: "easeInOut"` |
-| tw-text-size | error | `text-sm`, `text-lg`, `text-[14px]` |
-| css-font-size | error | `font-size: 14px` |
-| font-family | error | literal Roboto, Arial, Helvetica, Inter, Poppins ... |
-| thin-weight | error | `font-light`, `font-thin`, weight 100 to 300 |
-| gradient-bg | warn | decorative gradients |
-| hamburger | error | hamburger menu icons |
-| glass-border | error | Dribbble glass `1px solid rgba(255,255,255,...)` |
-| raw-backdrop | error | hand rolled `backdrop-filter` / `backdrop-blur` |
-| emoji-icon | warn | emoji used as icons |
-
-Dart, 10 rules:
-
-| Rule | Severity | Catches |
-|---|---|---|
-| material-import | error | `package:flutter/material.dart` |
-| material-widget | error | Scaffold, AppBar, ElevatedButton, InkWell, ListTile, Card, SnackBar, MaterialApp, Material Switch/Slider ... |
-| material-colors | error | `Colors.blue` |
-| raw-color | error | `Color(0xFF...)`, `Color.fromARGB` |
-| curves | error | `Curves.easeInOut`, `Curves.linear` ... |
-| border-radius | warn | `BorderRadius.circular`, `RoundedRectangleBorder` |
-| font-size | error | `fontSize: 14` |
-| text-style-literal | warn | `TextStyle(` |
-| box-shadow | warn | literal `BoxShadow(` |
-| ripple | error | splash / highlight ripple settings |
-
-Excluded from linting (vetted or generated): `components/apple/`, `lib/cupertino/`, `styles/cupertino/`, `lib/apple_ui/`, `cupertino.tokens.*`, `cupertino.theme.css`, `cupertino.base.css`, `apple_tokens.dart`, tests, stories, `node_modules`, build folders.
-
-### 6.2 Exceptions
-
-Add the comment `cf-ignore` on a line to skip it. Use only for justified cases (for example Apple's fixed traffic light colors) and list every exception in the Compliance report under "Deviations".
-
-### 6.3 Running the linter manually
-
-```powershell
-node D:\Claude-Plugins\cupertino-forge\hooks\scripts\lint.mjs --all --root .
-node D:\Claude-Plugins\cupertino-forge\hooks\scripts\lint.mjs src\app\page.tsx
-node D:\Claude-Plugins\cupertino-forge\hooks\scripts\lint.mjs --all --json > lint.json
-```
-
-Exit code 1 means errors exist.
-
----
-
-## 7. Tokens and the build pipeline
-
-`tokens/*.json` is the single source of truth. Code never contains raw values; it uses generated files.
-
-```powershell
-# web (CSS variables + Tailwind v4 theme + TypeScript constants)
-node D:\Claude-Plugins\cupertino-forge\scripts\build-tokens.mjs --out src\styles\cupertino --targets css,tailwind,ts --accent "#0088FF"
-
-# flutter (Dart constants)
-node D:\Claude-Plugins\cupertino-forge\scripts\build-tokens.mjs --out lib\apple_ui\theme --targets dart
-```
-
-Generated files (never edit by hand):
-
-| File | Contents |
-|---|---|
-| `cupertino.tokens.css` | `--cf-*` variables for light, dark, dark elevated (`data-cf-elevated`), increased contrast, reduce transparency, reduce motion, iOS vs macOS semantics (`data-cf-platform`) |
-| `cupertino.theme.css` | Tailwind v4 `@theme` mapping: `text-label`, `bg-bg-grouped`, `text-body`, `rounded-card`, `shadow-popover`, `ease-snappy`, plus utilities `squircle`, `glass`, `glass-large`, `glass-clear`, `glass-menu`, `focus-ring`, `emphasized`, `tabular`, `hairline-b`, `hairline-t` |
-| `cupertino.tokens.ts` | `cf` object, `springs`, `spring('snappy')` helper for motion |
-| `apple_tokens.dart` | `AppleSystemColors`, `AppleIOSColors`, `AppleMacOSColors`, `AppleSprings`, `AppleTypeIOS`, `AppleTypeMacOS`, `AppleSpacing`, `AppleRadiusIOS`, `AppleRadiusMacOS`, `AppleLayout` |
-
-Springs are converted from Apple's duration + bounce model (stiffness = (2π/d)², damping = 4π(1−b)/d). For CSS only transitions, each spring is sampled into a `linear()` easing curve (`--cf-ease-<name>`, `--cf-dur-<name>`).
-
-To change a value: edit the token JSON in the plugin, rebuild in the project, never patch generated files.
-
----
-
-## 8. Platform adapters
-
-### 8.1 Web: Next.js + Tailwind v4 + shadcn (`apple-web`)
-
-Setup (done by `/apple-init`):
-
-1. `npm i motion @radix-ui/react-dialog @radix-ui/react-popover @radix-ui/react-dropdown-menu @radix-ui/react-context-menu @radix-ui/react-switch @radix-ui/react-slider @radix-ui/react-tooltip @radix-ui/react-toggle-group clsx tailwind-merge lucide-react @phosphor-icons/react @fontsource-variable/inter`
-2. Build tokens into `src/styles/cupertino`.
-3. Copy `assets/lib/*` to `src/lib/cupertino/`, `assets/components/apple/*` to `src/components/apple/`, `assets/styles/cupertino.base.css` to `src/styles/cupertino/`.
-4. `app/globals.css`:
+1. **Install dependencies:**
+   ```bash
+   npm i motion @radix-ui/react-dialog @radix-ui/react-popover @radix-ui/react-dropdown-menu @radix-ui/react-context-menu @radix-ui/react-switch @radix-ui/react-slider @radix-ui/react-tooltip @radix-ui/react-toggle-group clsx tailwind-merge lucide-react @phosphor-icons/react @fontsource-variable/inter
+   ```
+2. **Generate tokens & copy assets:**
+   ```bash
+   node "<PLUGIN_PATH>/scripts/build-tokens.mjs" --out src/styles/cupertino --targets css,tailwind,ts
+   ```
+   Copy `skills/apple-web/assets/lib/*` -> `src/lib/cupertino/`, `skills/apple-web/assets/components/apple/*` -> `src/components/apple/`, and `skills/apple-web/assets/styles/cupertino.base.css` -> `src/styles/cupertino/`.
+3. **Import order in `src/app/globals.css`:**
    ```css
    @import "tailwindcss";
    @import "@fontsource-variable/inter";
@@ -408,251 +146,256 @@ Setup (done by `/apple-init`):
    @import "../styles/cupertino/cupertino.theme.css";
    @import "../styles/cupertino/cupertino.base.css";
    ```
-5. Wrap the app in `<CupertinoRoot style="..." appearance="system" glassIntensity={0.5} sounds={false}>`. Add `viewport-fit=cover` to the viewport meta.
+4. **Zero-FOUC root layout (`src/app/layout.tsx`) — verified from `theme-script.ts` & `root.tsx`:**
+   ```tsx
+   import { CupertinoThemeScript } from '@/lib/cupertino/theme-script';
+   import { CupertinoRoot } from '@/components/apple/root';
 
-Primitives (`src/components/apple`):
+   export default function RootLayout({ children }: { children: React.ReactNode }) {
+     return (
+       <html lang="en" suppressHydrationWarning>
+         <head>
+           <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+           <CupertinoThemeScript />
+         </head>
+         <body>
+           <CupertinoRoot style="adaptive" appearance="system" glassIntensity={0.5} sounds={false}>
+             {children}
+           </CupertinoRoot>
+         </body>
+       </html>
+     );
+   }
+   ```
+   `CupertinoThemeScript` injects `CF_THEME_INIT_SCRIPT` synchronously before first paint (setting `data-theme`, `data-contrast`, and `data-transparency`). `CupertinoRoot` wraps the tree in `<MotionConfig reducedMotion={reducedMotion ? 'always' : 'user'}>`, mounts `<TooltipPrimitive.Provider>`, exposes `setAppearance` / `setTransparency` / `setContrast` via `useCupertino()`, and tracks `prefers-reduced-motion`.
+5. **Core Web Primitives (`src/components/apple/`):** `CupertinoRoot`, `Glass`, `GlassGroup`, `ScrollEdge`, `Squircle`, `Icon`, `Button`, `IconButton`, `NavBar`, `LargeTitle`, `BarButton`, `BarButtonGroup`, `Toolbar`, `ToolbarGroup`, `TabBar`, `List`, `ListSection`, `ListRow`, `SettingsIcon`, `Toggle`, `Slider`, `SegmentedControl`, `Stepper`, `TextField`, `SearchField`, `Sheet` (GPU `transform` drag + scroll-top handoff + focus return), `Alert` / `ConfirmationDialog` (focus return on `Esc`), `Menu`, `ContextMenu`, `Popover`, `Tooltip`, `ActivityIndicator`, `ProgressBar`, `Hud`, `EmptyState`, `MacWindow`, `TrafficLights`, `MacToolbar*`, `MacSidebar*`, `MacButton`, `Checkbox`, `RadioGroup`, `MacTextField`, `MacTable`.
 
-| File | Exports |
-|---|---|
-| root.tsx | CupertinoRoot, useCupertino |
-| glass.tsx | Glass, GlassGroup, ScrollEdge |
-| squircle.tsx | Squircle |
-| icon.tsx | Icon |
-| button.tsx | Button (prominentGlass, glass, filled, tinted, gray, plain, destructive, destructiveFilled; mini..xl), IconButton |
-| nav.tsx | NavBar, LargeTitle, BarButton, BarButtonGroup, Toolbar, ToolbarGroup |
-| tab-bar.tsx | TabBar (floating glass, minimizes on scroll, optional search button) |
-| list.tsx | List, ListSection, ListRow, SettingsIcon |
-| controls.tsx | Toggle, Slider, SegmentedControl, Stepper |
-| fields.tsx | TextField, SearchField |
-| sheet.tsx | Sheet (medium and large detents, drag to dismiss) |
-| alert.tsx | Alert, ConfirmationDialog |
-| menu.tsx | Menu, MenuItem, MenuSection, SubMenu, ContextMenu |
-| popover.tsx | Popover, Tooltip |
-| feedback.tsx | ActivityIndicator, useDelayedFlag, ProgressBar, Hud, EmptyState |
-| mac.tsx | MacWindow, TrafficLights, MacToolbarTitle, MacToolbarSpacer, MacToolbarGroup, MacToolbarItem, MacSidebarSection, MacSidebarRow, MacButton, Checkbox, RadioGroup, MacTextField, MacTable |
+### 3.3 Flutter (`skills/apple-flutter`)
 
-Libs (`src/lib/cupertino`): `cn.ts`, `haptics.ts` (Android vibrate, iOS Safari 18+ switch trick, desktop no-op), `sounds.ts` (Web Audio synthesized, off by default), `squircle.ts` (path generator for browsers without `corner-shape`), `platform.ts`.
+1. **Generate Dart tokens & copy widgets:**
+   ```bash
+   node "<PLUGIN_PATH>/scripts/build-tokens.mjs" --out lib/apple_ui/theme --targets dart
+   ```
+   Copy `skills/apple-flutter/assets/lib/apple_ui/*` -> `lib/apple_ui/`. Never import `package:flutter/material.dart`.
+2. **Root app (`lib/main.dart`) — verified from `cf_app.dart`:**
+   ```dart
+   import 'package:flutter/cupertino.dart';
+   import 'apple_ui/cf_app.dart';
+   import 'apple_ui/theme/apple_tokens.dart';
 
-Full props and examples: `skills/apple-web/references/components-web.md`.
+   void main() => runApp(const MyApp());
 
-Verified: strict TypeScript typecheck passes; rendered in Chrome (iOS light, dark, alert, macOS window).
+   class MyApp extends StatelessWidget {
+     const MyApp({super.key});
+     @override
+     Widget build(BuildContext context) {
+       return const CfApp(
+         style: CfStyle.adaptive,
+         accent: AppleSystemColors.blue,
+         glassIntensity: 0.5,
+         reduceTransparency: false,
+         sounds: false,
+         haptics: true,
+         home: HomeScreen(),
+       );
+     }
+   }
+   ```
+   `CfApp` applies `SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge)` once in `initState`, enforces single-pass Dynamic Type via `MediaQuery.withClampedTextScaling(maxScaleFactor: mac ? 1.0 : 3.1)` (`3.1` on iOS, `1.0` on macOS), and exposes `context.cf` / `CfScope`.
+3. **Impeller `BackdropGroup` for sibling glass pills:** Wrap non-overlapping glass toolbar items in `BackdropGroup(child: ...)` and pass `CfGlass(grouped: true, ...)` so Impeller shares one backdrop pass (outer shadows remain unclipped outside `ClipPath`).
+4. **Full Flutter Widget Catalog (`lib/apple_ui/`):** `CfApp`, `CfScope`, `CfElevated`, `SquircleBorder`, `CfSquircle`, `CfGlass`, `CfScrollEdge`, `animateSpring`, `CfPageRoute` (documented `CupertinoPageRoute` approximation), `CfScrollPhysics`, `CfPressable` (`PointerDeviceKind`), `CfHaptics`, `CfSounds`, `CfButton`, `CfIconButton`, `CfLargeTitleScaffold` (`ValueNotifier` scroll opacity), `CfBarButtonGroup`, `CfTabBar`, `CfList`, `CfListSection`, `CfListRow`, `CfSettingsIcon`, `CfToggle`, `CfSegmented`, `CfSlider`, `CfTextField`, `CfSearchField`, `CfMenuItem` / `showCfMenu` / `showCfPopover`, `CfActivityIndicator`, `CfProgressBar`, `showCfSheet`, `showCfAlert`.
+5. **Native Haptics Plugins:**
+   - **iOS:** Copy `skills/apple-flutter/assets/ios/AppleHapticsPlugin.swift` into `ios/Runner/` and register in `AppDelegate.swift` (`AppleHapticsPlugin.register(with: controller.binaryMessenger)`) for `UINotificationFeedbackGenerator` (`success`/`warning`/`error`) and `UIImpactFeedbackGenerator`.
+   - **Android:** Copy `skills/apple-flutter/assets/android/AppleHapticsPlugin.kt` into `android/app/src/main/kotlin/<package>/` and register in `MainActivity`.
 
-### 8.2 Flutter (`apple-flutter`)
+### 3.4 Tauri 2 + Rust (`skills/apple-tauri`)
 
-Setup:
+Complete Web setup ([Section 3.2](#32-web-nextjs--react--tailwind-v4--shadcnui)) for the frontend, then configure the native Rust shell:
 
-1. Build tokens to `lib/apple_ui/theme/apple_tokens.dart`.
-2. Copy `assets/lib/apple_ui/` into the project's `lib/apple_ui/`.
-3. pubspec: `cupertino_icons`, `audioplayers` (only if sounds), Inter font for Android, Windows, Linux (download from the rsms/inter GitHub release). Never add SF fonts.
-4. App root: `CfApp(...)` instead of `MaterialApp`.
-5. Android haptics: copy `assets/android/AppleHapticsPlugin.kt` to `android/app/src/main/kotlin/<package>/` and register in `MainActivity` (instructions in the file header).
-6. Run `flutter analyze` and fix API drift.
-
-Widgets: `CfApp`, `CfScope`, `context.cf` (colors and `context.cf.type` text styles), `CfElevated`, `SquircleBorder`, `CfSquircle`, `CfGlass`, `CfScrollEdge`, `animateSpring`, `CfPageRoute`, `CfScrollPhysics`, `CfPressable`, `CfHaptics`, `CfSounds`, `CfButton`, `CfIconButton`, `CfLargeTitleScaffold`, `CfBarButtonGroup`, `CfTabBar`, `CfList`, `CfListSection`, `CfListRow`, `CfSettingsIcon`, `CfToggle`, `CfSegmented`, `showCfSheet`, `showCfAlert`.
-
-Examples: `skills/apple-flutter/references/widgets-flutter.md`.
-
-Status: written for Flutter 3.29+ (uses `CupertinoSheetRoute`, `Color.withValues`), **not compiled during plugin build**. The first `flutter analyze` may need small API fixes. Keep visual values unchanged when fixing.
-
-### 8.3 Tauri 2 + Rust (`apple-tauri`)
-
-Frontend = web adapter (do section 8.1 too). Native shell:
-
-1. Merge `assets/Cargo-snippet.toml` (tauri with `macos-private-api`, `window-vibrancy = "0.7"`, `tauri-plugin-window-state`).
-2. Merge `assets/tauri.conf.snippet.json` (transparent window, Overlay titlebar, hidden title, traffic lights at x 16 y 26, `macOSPrivateApi: true`).
-3. Copy `apple_window.rs` and `apple_menu.rs` into `src-tauri/src/`, wire them as in `lib-snippet.rs`.
-4. Frontend: `<MacWindow customChrome={!isMac} active={focused}>`.
-
-| OS | Result |
-|---|---|
-| macOS 26+ | native traffic lights, Liquid Glass window material (`apply_liquid_glass`), uniform radius |
-| macOS 13 to 15 | sidebar vibrancy fallback |
-| Windows 11 | Mica background; custom macOS traffic lights if `windowsChrome: "mac"` |
-| Linux | decorations off when `windowsChrome: "mac"` |
-
-`apple_menu.rs` builds the standard menu bar (App, File, Edit, View, Window, Help) and forwards clicks to the frontend as a `menu` event.
-
-Status: `window-vibrancy` 0.7.1 API verified against the crate source; Rust not compiled during plugin build. Run `cargo check` first.
-
----
-
-## 9. The design rules in short (from apple-design-core)
-
-Full detail lives in the skill. These are the non negotiables:
-
-1. Content layer is calm and opaque; controls float above it in Liquid Glass. Never glass on cards, rows or backgrounds. Never glass on glass.
-2. Every text node uses a named style (largeTitle .. caption2) with Apple tracking. iOS body 17, macOS body 13.
-3. Only semantic colors. One accent (system blue #0088FF by default). Labels on glass are monochrome.
-4. Squircle (continuous) corners everywhere; concentric nesting (inner radius = outer minus padding); capsules for buttons, fields, toggles.
-5. Spacing only from the 4pt scale; margins 16 (iOS) and 20 (macOS); hit targets 44 (iOS) and 28 (macOS).
-6. No shadows on iOS content; elevation tokens only on floating things.
-7. All motion is springs; instant press feedback; interruptible; reduced motion respected.
-8. Haptics per `feedback.json`; no buzz on every button; sounds off unless enabled.
-9. Native navigation: tab bar + push + sheets on iOS; sidebar + toolbar + menu bar on macOS. Never hamburger menus.
-10. Every screen ships empty, loading and error states.
-11. Light, dark, increased contrast and reduce transparency all work.
-12. Copy: title case buttons, verbs, no Yes/No alerts, no exclamation marks.
-
-### 9.1 Definition of Done
-
-- `.apple-design.json` exists, adapter skill read.
-- Generated tokens imported; no raw values in touched files (except `cf-ignore` lines).
-- Named text styles and semantic colors only.
-- Glass only in the functional layer.
-- Squircle and concentric shapes.
-- Press, hover (pointer only), focus ring, disabled, selected states.
-- Springs and reduced motion.
-- Light, dark, increased contrast, reduce transparency checked.
-- Hit targets met.
-- Empty, loading, error states.
-- Copy rules followed.
-- Lint passes.
-- Reviewer agent run for visual work.
-
-### 9.2 Compliance report (must be printed at the end of every UI task)
-
-```
-Apple Design Compliance
-Platform: <web|flutter|tauri>   Style: <ios|macos|adaptive>
-Screens/components touched: <list>
-Tokens: OK | <violations>
-Typography: OK | <issues>
-Color and dark mode: OK | <issues>
-Glass and materials: OK | <issues>
-Shape and concentricity: OK | <issues>
-Motion and feedback: OK | <issues>
-States (press, hover, focus, disabled, empty, loading, error): OK | <issues>
-Accessibility: OK | <issues>
-Lint: PASS | FAIL (<count>)
-Deviations from Apple rules (with reason): <none | list>
-Values marked estimate that this work depends on: <list or none>
-```
+1. **Generate Rust tokens:**
+   ```bash
+   node "<PLUGIN_PATH>/scripts/build-tokens.mjs" --out src-tauri/src --targets rust
+   ```
+   Emits `apple_tokens.rs` (`WINDOW_CORNER_RADIUS: f64 = 16.0` measured in Apple Figma macOS 27 kit, traffic lights, sidebar/toolbar heights, colors).
+2. **`src-tauri/Cargo.toml` (verified from `skills/apple-tauri/assets/Cargo-snippet.toml`):**
+   ```toml
+   [dependencies]
+   tauri = { version = "2", features = ["macos-private-api"] } # direct only; for mac-app-store use: tauri = "2"
+   window-vibrancy = "0.8" # LiquidGlassOptions::new(...).radius(...)
+   tauri-plugin-window-state = "2"
+   serde = { version = "1", features = ["derive"] }
+   serde_json = "1"
+   ```
+3. **Config snippet by distribution:**
+   - `"distribution": "direct"` -> merge `skills/apple-tauri/assets/tauri.conf.snippet.json` (`macOSPrivateApi: true`, `transparent: true`).
+   - `"distribution": "mac-app-store"` -> merge `skills/apple-tauri/assets/tauri.conf.mas.snippet.json` (`macOSPrivateApi: false`, `transparent: false` — avoids Mac App Store private API rejection).
+4. **Wire `src-tauri/src/lib.rs` (verified from `skills/apple-tauri/assets/src-tauri/src/lib-snippet.rs` & `skills/apple-tauri/assets/src-tauri/src/apple_window.rs`):**
+   Copy `skills/apple-tauri/assets/src-tauri/src/apple_config.rs`, `skills/apple-tauri/assets/src-tauri/src/apple_menu.rs`, and `skills/apple-tauri/assets/src-tauri/src/apple_window.rs` into your project's `src-tauri/src/`. `lib.rs` loads `.apple-design.json` via `AppleDesignConfig::from_json(include_str!("../../.apple-design.json"))`, exposes `get_apple_design_config`, builds the native Menu Bar (`App`, `File`, `Edit`, `View`, `Window`, `Help` with dynamic `"Show Sidebar"` / `"Hide Sidebar"` toggling), and calls `apple_window::apply_apple_window(&win, cfg.inner())` (which uses `apply_liquid_glass` with `LiquidGlassOptions` in `Direct` mode, `apply_vibrancy(Sidebar)` in `MacAppStore` mode or macOS <= 15, and `apply_mica` on Windows 11).
 
 ---
 
-## 10. Verification tools
+## 4. Complete CLI, Scripts & QA Reference
 
-### 10.1 Reviewer agent
+Every command, flag, and exit code below was verified directly from the script source files:
 
-Use after building or changing UI:
+### 4.1 `scripts/verify-plugin.mjs` (`/apple-doctor`)
+- **Command:**
+  ```bash
+  node scripts/verify-plugin.mjs [--json]
+  ```
+- **Checks:** `.claude-plugin/plugin.json` manifest, `23/23` core runtime files, `9` token JSON schemas (`$meta`), all `${CLAUDE_PLUGIN_ROOT}/...` path references, `9` synthesized `.wav` assets, lint hook smoke test (`session` + `prompt`), token builder smoke test, and optional toolchain probes (`node`, `python` + Playwright, Node `qa/node_modules/playwright`, `flutter`, `cargo`).
+- **Exit codes:** `0` = zero `FAIL` checks (missing optional toolchains report `NOT RUN`, never `FAIL`); `1` = 1+ `FAIL` checks.
 
-```
-Use the apple-design-reviewer agent on http://localhost:3000/settings (style ios, screens: Settings)
-```
+### 4.2 `scripts/build-tokens.mjs`
+- **Command:**
+  ```bash
+  node scripts/build-tokens.mjs --out <dir> [--targets css,tailwind,ts,dart,rust,json,estimates] [--tokens <tokensDir>] [--accent "#0088FF"] [--write-estimates <file>]
+  ```
+- **Defaults & Outputs:** Defaults to `--targets css,tailwind,ts,dart`, `--tokens <plugin>/tokens`, `--out <cwd>`. Emits `cupertino.tokens.css`, `cupertino.theme.css`, `cupertino.tokens.ts`, `apple_tokens.dart`, `apple_tokens.rs`, `cupertino.tokens.resolved.json`, and `ESTIMATES.md` (written to `--write-estimates` or `<out>/ESTIMATES.md`).
+- **Exit codes:** `0` = success; non-zero on invalid JSON or color parse error.
 
-It captures screenshots (390 and 1100 widths, light and dark) with `scripts/capture.py`, checks 10 areas (structure, typography, color, material, shape, spacing, icons, states, motion, copy), and returns a score. **Under 85 = not done.**
+### 4.3 `scripts/contrast-check.mjs`
+- **Command:**
+  ```bash
+  node scripts/contrast-check.mjs [--accent "#0088FF"] [--accent-dark "#0091FF"] [--size 17] [--bold] [--strict-text]
+  ```
+- **Thresholds (Official Apple HIG Accessibility, WCAG 2.1/2.2 `0.04045` linearization):** `<= 17pt` regular text requires `4.5:1`; `>= 18pt`, `--bold`, or non-text glyphs require `3.0:1`. Auto-pairs known Apple system colors (`#0088FF` -> `#0091FF` dark) when `--accent-dark` is omitted. Supports `#RGB`, `#RRGGBB`, and `#RRGGBB@alpha`.
+- **Exit codes:** `0` = zero blocking failures (and default no-arg audit mode without `--accent` exits `0`); `1` = invalid hex or 1+ blocking failures when `--accent` is supplied (small-text advisories become blocking only with `--strict-text`).
 
-### 10.2 Screenshots manually
+### 4.4 `scripts/capture.py`
+- **Command:**
+  ```bash
+  # Standard (4 images: 390 & 1100 x light & dark, Chromium)
+  python scripts/capture.py --url http://127.0.0.1:3000 --out qa/out
 
-```powershell
-python D:\Claude-Plugins\cupertino-forge\scripts\capture.py --url http://localhost:3000 --out .cf-review --widths 390,1100 --themes light,dark
-```
+  # Full 72-image accessibility & cross-engine matrix (2 themes x 2 contrasts x 2 transparencies x 3 viewports x 3 engines)
+  python scripts/capture.py --url http://127.0.0.1:3000 --matrix --out qa/out
+  ```
+- **Flags & Behavior:** `--url` (required), `--out` (default `qa/out`), `--matrix`, `--widths` (default `390,1100`), `--themes` (default `light,dark`), `--contrasts` (default `normal`; supports `normal,more`), `--transparencies` (default `normal`; supports `normal,reduce`), `--engines` (default `chromium`; supports `chromium,webkit,firefox`), `--chrome <path>`, `--full`, `--dry-run`, `--allow-over-100`. Prints exact planned count before launching browsers, logs missing engines as `NOT RUN (<engine>: <reason>)`, and applies `data-theme`/`data-contrast`/`data-transparency` plus CDP media emulation (`qa/out/` is gitignored).
+- **Exit codes:** `0` = completed (missing engines reported `NOT RUN`); `2` = planned capture count exceeds 100 without `--allow-over-100`.
 
-### 10.3 Pixel diff against an Apple kit reference
+### 4.5 `scripts/pixel-diff.mjs` (Optional Legacy Helper)
+- **Command:**
+  ```bash
+  node scripts/pixel-diff.mjs <ours.png> <reference.png> [--out diff.png] [--threshold 0.1]
+  ```
+- **Notes:** `/apple-audit --reference <dir>` intentionally uses **AI visual comparison** (not pixel-diff) because glass surfaces and estimated geometry produce noisy pixel deltas — see `qa/REFERENCE-WORKFLOW.md`.
+- **Exit codes:** `0` = mismatch `<= 5%`; `2` = mismatch `> 5%`; `1` = missing CLI arguments.
 
-```powershell
-node D:\Claude-Plugins\cupertino-forge\scripts\pixel-diff.mjs ours.png apple-ref.png --out diff.png
-```
+### 4.6 `scripts/synth-sounds.py`
+- **Command:**
+  ```bash
+  python scripts/synth-sounds.py [out_dir]
+  ```
+- **Behavior:** Defaults `out_dir` to `../assets/sounds` (requires `numpy`). Re-synthesizes all 9 original 44.1 kHz 16-bit mono WAV files (`tap`, `toggle-on`, `toggle-off`, `tick`, `success`, `error`, `send`, `refresh`, `keyboard`).
+- **Exit codes:** `0` = all 9 WAV files written; non-zero if `numpy` is missing or write fails.
 
-Prints mismatch percent; exit 2 above 5 percent. Installs `pixelmatch` and `pngjs` on first run.
+### 4.7 `scripts/package-plugin.mjs`
+- **Command:**
+  ```bash
+  node scripts/package-plugin.mjs [--out <zipPath>]
+  ```
+- **Behavior:** Defaults output to `_upgrade/scratch/cupertino-forge-v<version>.zip`. Zero-dependency pure Node ZIP writer (CRC32 + Deflate, POSIX forward slashes). Packages **only** runtime allowlist (`.claude-plugin/`, `agents/`, `assets/`, `commands/`, `hooks/`, `qa/` excluding `node_modules`/`references`/`out`, `scripts/`, `skills/`, `templates/`, `tokens/`, `README.md`, `GUIDE.md`, `CHANGELOG.md`, `LICENSE` if present, `.gitattributes`). Strictly excludes `_upgrade/`, `_upgrade00-inputs/`, `.git/`, `tests/`, `node_modules/`, `dist/`, `build/`, `target/`, `.dart_tool/`, `qa/references/`, `qa/out/`, and `*.log`.
+- **Exit codes:** `0` = clean package with `0` forbidden entries; `1` = forbidden entry detected.
 
-### 10.4 Contrast
+### 4.8 `hooks/scripts/lint.mjs`
+- **Command:**
+  ```bash
+  # CLI mode
+  node hooks/scripts/lint.mjs [--all] [--root <dir>] [--json] [file1 file2 ...]
 
-```powershell
-node D:\Claude-Plugins\cupertino-forge\scripts\contrast-check.mjs --accent "#5B3DF5"
-```
+  # Hook mode (invoked automatically by Claude Code hooks/hooks.json via stdin JSON)
+  node hooks/scripts/lint.mjs --hook session|prompt|post|stop
+  ```
+- **Behavior:** Only active in hook mode when `.apple-design.json` exists in or above the working directory. Add inline `cf-ignore` ONLY for justified cases (e.g., fixed macOS traffic-light colors) and list every exception in the Compliance Report.
+- **Exit codes:** CLI mode: `0` (0 errors), `1` (1+ errors). Hook mode: `0` (pass / advisory warnings), `2` (`post` or `stop` blocking errors).
 
-Text needs 4.5:1, glyphs 3:1, in light and dark.
+### 4.9 `qa/computed-style-audit.mjs`
+- **Command:**
+  ```bash
+  node qa/computed-style-audit.mjs --url <url-or-file> [--tokens <resolved.json>] [--platform ios|macos] [--theme light|dark] [--accent "#0088FF"] [--json] [--out <file>]
+  ```
+- **Checks (12):** `font-size`, `letter-spacing`, `border-radius`, `spacing-grid`, `hit-target`, `contrast`, `glass-budget`, `glass-translucency`, `focus-ring`, `raw-color`, `easing`, `reduced-motion`. Reads all thresholds from `cupertino.tokens.resolved.json` (auto-built if `--tokens` omitted).
+- **Exit codes:** `0` = 0 FAIL (may contain `NOT RUN`); `1` = 1+ FAIL; `2` = CLI usage or target load error.
 
-### 10.5 Audit
-
-`/apple-audit` writes `apple-audit-report.md` with 15 layer scores, verdict (90+ Apple grade, 75 to 89 Close, 50 to 74 Apple-ish, under 50 Not Apple), top 10 fixes and missing states.
+### 4.10 `qa/ux-keyboard.mjs`
+- **Command:**
+  ```bash
+  node qa/ux-keyboard.mjs --url <url-or-file> [--browser chromium|webkit|firefox|all] [--theme light|dark|both] [--json] [--out <file>]
+  ```
+- **Checks (6):** `no-positive-tabindex`, `tab-order-and-no-trap`, `focus-ring`, `modal-focus-trap-esc-return`, `roving-focus-ltr-rtl`, `enter-space-activation`. Missing browser engine reports `NOT RUN (<reason>)`.
+- **Exit codes:** `0` = 0 FAIL (may contain `NOT RUN`); `1` = 1+ FAIL or runtime page load error; `2` = missing `--url` CLI usage error.
 
 ---
 
-## 11. Keeping it current (`/apple-sync`)
+## 5. Quality Gates (G1-G7), Scorecard & Reference Audit Workflow
 
-Run after each WWDC or Apple kit update:
+### 5.1 Blocking Quality Gates
 
-1. The `apple-spec-researcher` agent finds the newest kits on developer.apple.com/design/resources, exports tokens from the Sketch kits (Export Design Tokens: Color Variables, Layer Styles, Text Styles, DTCG format), reads HIG `.md` pages (append `.md` to any HIG URL), and diffs against `tokens/*.json` using `tokens/source/` as the old baseline.
-2. You confirm the diff.
-3. Tokens update; `estimate` values replaced where verified.
-4. `foundations/15-version-diff.md` gets a dated entry.
-5. Generated files rebuild in the project; lint and typecheck rerun.
-
-Kit links used for iOS 27 / macOS 27:
-- iOS 27 kit (Sketch): https://www.sketch.com/s/04c24d8b-38fb-4afb-8836-36617e022f02
-- macOS 27 kit (Sketch): https://www.sketch.com/s/57153a31-3379-4737-8ac6-dbfd6525f052
-
-Save new raw exports into `tokens/source/` with the release in the filename (for example `apple-ios-28-ui-kit.tokens.json`) and keep the old ones.
-
----
-
-## 12. Licensing rules (must follow)
-
-- **SF Pro, SF Mono, New York fonts**: licensed only for Apple platform apps. Never bundle or load font files. On Apple devices call the system font (web `-apple-system, system-ui`; Flutter default Cupertino font on iOS and macOS). Elsewhere use Inter with the tracking compensation in `typography.json`.
-- **SF Symbols**: Apple platforms only. Use the mapping in `tokens/icons.json` (Lucide, Phosphor, CupertinoIcons).
-- **Apple system sounds**: never ship. Use the plugin's synthesized sounds.
-- **Apple kits**: values are references; do not ship their artwork, device frames, wallpapers, logos or Apple app icons.
-- Do not use Apple trademarks in user facing product names.
-
----
-
-## 13. Troubleshooting
-
-| Problem | Cause | Fix |
+| Gate | Command / Check | Blocks If... |
 |---|---|---|
-| Commands not visible | plugin not installed or not reloaded | `/plugin`, reinstall `cupertino-forge@zerofounder-local`, restart |
-| `marketplace add` fails | wrong path or missing `.claude-plugin\marketplace.json` | check `D:\Claude-Plugins\cupertino-forge\.claude-plugin\` |
-| Hooks do nothing | no `.apple-design.json` in the project | run `/apple-init` |
-| Hook error "node not found" | Node not on PATH | install Node 18+, restart terminal and Claude Code |
-| Every edit blocked | real violations | fix with tokens; read the message; `cf-ignore` only with a reason |
-| Stop hook keeps blocking | errors in changed files | run the linter with `--all`, fix all errors |
-| Tailwind classes like `text-body` do nothing | theme not imported or wrong order | import order in globals.css (section 8.1) |
-| Glass looks flat in Firefox or Safari | lens refraction is Chromium only | expected; blur and rim still render |
-| Corners look circular in Safari | `corner-shape` unsupported | use `Squircle` component (SVG clip fallback) |
-| Fonts look wide on Windows | Inter instead of SF | expected; tracking compensation applied by `CupertinoRoot` |
-| `flutter analyze` errors in apple_ui | Flutter API drift | fix API calls, keep values |
-| `cargo check` errors | Tauri or window-vibrancy version drift | align versions with `Cargo-snippet.toml` |
-| `capture.py` fails | Playwright or Chrome missing | `pip install playwright`, install Chrome |
-| Sounds silent on web | sounds false, or no user gesture yet, or user setting off | set `sounds: true`; sounds start after first interaction |
+| **G1. Plugin Doctor** | `node scripts/verify-plugin.mjs` | Any check `FAIL` |
+| **G2. Contrast** | `node scripts/contrast-check.mjs --accent "<hex>"` | Any blocking contrast failure |
+| **G3. Static Lint** | `node hooks/scripts/lint.mjs --all --root .` | Exit `!= 0` |
+| **G4. Build / Analyzer** | `tsc --noEmit` / `npm run build` / `flutter analyze && flutter test` / `cargo check` | Any compile, type, analyzer, or test failure |
+| **G5. Runtime DOM Audit** | `node qa/computed-style-audit.mjs --url <url> --platform <ios\|macos>` | Any unaccepted `FAIL` |
+| **G6. Keyboard UX** | `node qa/ux-keyboard.mjs --url <url> --browser all --theme both` | Any keyboard/focus `FAIL` |
+| **G7. Design Review** | `apple-design-reviewer` (`visual` + `behavior`) or `/apple-audit` | Rule-Conformance `< 85` or unresolved `Blocking` item |
+
+Any gate that cannot run MUST be reported as `NOT RUN (<exact reason>)` — never `PASS` or `OK`.
+
+### 5.2 Two-Part Audit Scorecard & `--reference <dir>`
+
+`/apple-audit` (`skills/apple-design-audit/SKILL.md` + `references/scorecard.md`) separates two independent scores:
+- **Part A — Rule-Conformance (`0–100`):** 15 layers scored against Apple rules (`90+` Apple grade, `75–89` Close, `50–74` Apple-ish, `< 50` Not Apple).
+- **Part B — Fidelity (`0–100` or `N/A (no reference)`):** Evaluated **only** when `/apple-audit --reference <dir>` points to a folder containing local PNG/JPG references (`design-kit-static` or `real-device`). When omitted or empty, the report MUST output `Fidelity: N/A (no reference)` with zero fidelity claims.
+
+### 5.3 Two-Mode `apple-design-reviewer` (`agents/apple-design-reviewer.md`)
+
+Invoke the single reviewer agent in either or both modes:
+- **`visual` mode:** Reviews `qa/out/` screenshots against Apple structure, typography, color, material, shape, spacing, and icon rules; compares side-by-side (AI visual comparison) if `--reference <dir>` has images; tags estimate-backed remarks `estimate-based`.
+- **`behavior` mode:** Reviews source code plus `computed-style-audit.mjs` and `ux-keyboard.mjs` outputs for states, keyboard/focus traps, roving focus, spring motion, haptics, and UX copy.
 
 ---
 
-## 14. Known limitations (be honest about these)
+## 6. Extending & Maintaining the Plugin
 
-1. Some numbers are not published by Apple (control heights, some radii, blur radii, tab bar height, macOS 27 window radius). They are tagged `estimate` and listed in reports. Verify with the kit's Inspect panel or `/apple-sync`.
-2. Sketch token export drops inner versus outer shadow flags and blend modes. `materials.json` keeps Apple's raw stacks for reference, and the code uses tuned recipes that reproduce the look.
-3. True Liquid Glass refraction is GPU native on Apple OSes. Web gets SVG lens refraction in Chromium only; Flutter uses blur + saturation + rim light (native glass via platform views is optional on iOS 26+).
-4. Highest platform parity is achieved on Apple platforms via native APIs (and real SF system fonts). On Web, Flutter, and Tauri (Windows, Android, Linux), `cupertino-forge` provides documented visual approximation (e.g., Inter with tracking compensation) paired with 100% Apple design psychology, spatial hierarchy, motion discipline, and UX.
-5. Web, Flutter, and Tauri harnesses live in `tests/harness/{web,flutter,tauri}/` and can be verified locally whenever Node/Playwright, Flutter, and Rust `cargo` are installed (absent toolchains are reported as `NOT RUN` by `/apple-doctor`).
-6. iOS Safari web haptics are limited to the switch trick (one pulse type).
+1. **Editing or adding tokens:** Always edit `tokens/*.json` (never generated outputs), preserve `$class`/`$source`/`$url`/`$platform`, then rebuild the checked-in Flutter token asset (Web and Tauri token outputs are generated per target project / gitignored inside `tests/harness/`) and regenerate `tokens/ESTIMATES.md`:
+   ```bash
+   node scripts/build-tokens.mjs --out skills/apple-flutter/assets/lib/apple_ui/theme --targets dart --write-estimates tokens/ESTIMATES.md
+   ```
+   To also verify all targets locally in a scratch folder, pass `--out _upgrade/scratch/tokens-check --targets css,tailwind,ts,dart,rust,json,estimates`.
+2. **Running the regression & harness suites:**
+   ```bash
+   node scripts/verify-plugin.mjs
+   node --test tests/*.test.mjs
+   ```
+   Reproducible platform harnesses live in `tests/harness/{web,flutter,tauri}/` (see [`tests/harness/README.md`](tests/harness/README.md)) and seeded QA defect fixtures live in `tests/seeded-defects/`.
+3. **Building a clean release ZIP:**
+   ```bash
+   node scripts/package-plugin.mjs
+   # Produces _upgrade/scratch/cupertino-forge-v2.0.0.zip (160 runtime files, 0 forbidden entries)
+   ```
 
 ---
 
-## 15. Instructions for Claude Code when maintaining this plugin
+## 7. Troubleshooting, Windows Gotchas & FAQ
 
-- Edit `tokens/*.json` for values, never generated files. Keep `$source` tags accurate (`kit-ios27`, `kit-macos27`, `hig`, `estimate`).
-- When adding a primitive: follow the component template (Anatomy, Metrics, States, Motion, Feedback, Accessibility, Do and Don't), add it to the adapter's catalog table and references doc, typecheck, and render test.
-- When adding a lint rule: add it to `webRules` or `dartRules` in `lint.mjs`, test with one violating and one clean file, update section 6.1 of this guide and the count in README.
-- Keep `SKILL.md` files short and directive; put detail in `references/`.
-- After changes: `claude plugin validate D:\Claude-Plugins\cupertino-forge`, then reinstall the plugin.
-- Bump `version` in `.claude-plugin/plugin.json` for every release and log it in `foundations/15-version-diff.md`.
+### 7.1 Windows-Specific Gotchas
 
----
+- **`python` vs `python3`:** On Windows 11, `python3.exe` is often the Microsoft Store alias (exit `9009`). Always use `python` on Windows (`python3` on macOS/Linux).
+- **Line endings (CRLF):** `.gitattributes` and `lint.mjs` normalize `\r?\n` and unquote `git status --porcelain` paths cleanly on Windows.
+- **Playwright WebKit vs real Safari:** Playwright's Windows WebKit build verifies layout/DOM/CSS rules, but real macOS/iOS Safari renders native `SF Pro` and CoreAnimation compositing. Also note Python Playwright (`webkit-2104`/`firefox-1466`) and Node `qa/node_modules/playwright` (`webkit-2388`/`firefox-1572`) maintain separate browser revisions; missing binaries report `NOT RUN`.
+- **macOS cross-compile limits:** Tauri `apply_liquid_glass` / `apply_vibrancy` branches are `#[cfg(target_os = "macos")]` and compile/run on macOS hosts; Windows `cargo check` / `cargo test --lib` validates shared Rust config, menu, tokens, and Windows Mica paths.
 
-## 16. One page cheat sheet
+### 7.2 Common Errors & Fixes
 
-```
-INSTALL     /plugin marketplace add D:\Claude-Plugins\cupertino-forge
-            /plugin install cupertino-forge@zerofounder-local   (restart)
-PROJECT     /apple-init [web|flutter|tauri] [ios|macos|adaptive] [accent]
-BUILD       /apple-screen <screen>   /apple-component <component>
-CHECK       /apple-audit   |   apple-design-reviewer agent   |   lint.mjs --all
-UPDATE      /apple-sync
-TOKENS      node scripts/build-tokens.mjs --out <dir> --targets css,tailwind,ts | dart
-RULE #1     no raw values: tokens + primitives only
-RULE #2     glass only for controls, never content, never stacked
-RULE #3     squircle + concentric, springs only, one accent
-DONE        lint PASS + reviewer 85+ + Compliance report printed
-```
+| Symptom | Root Cause | Fix |
+|---|---|---|
+| `lint.mjs` blocks edits with exit `2` | Real Apple rule violation (raw hex, `rounded-md`, `ease-in-out`, off-scale font size, Material widget) | Replace with generated token or adapter primitive; use `cf-ignore` only for justified exceptions listed in the Compliance Report |
+| `contrast-check.mjs` prints 3 `WARN` lines on `#0088FF` | Official Apple System Blue (`3.52:1` on white) is below `4.5:1` for `<=17pt` regular text | Expected advisory (`0 blocking failures`). Use filled white-on-accent capsules, `>=18pt`/bold text, or `lightHC`/`darkHC` variants for small accent text (see `qa/ACCESSIBILITY-TRADEOFFS.md`) |
+| Mac App Store rejects Tauri build for private API | `"distribution": "direct"` enables `macOSPrivateApi: true` | Switch `.apple-design.json` to `"distribution": "mac-app-store"`, remove `"macos-private-api"` from `Cargo.toml`, and merge `skills/apple-tauri/assets/tauri.conf.mas.snippet.json` |
+| Flutter text appears 2× oversized under Dynamic Type | Manual `MediaQuery.textScalerOf(context).scale(...)` called inside a widget | Remove manual scaling; `CfApp` + `CfType` apply single-pass `MediaQuery.withClampedTextScaling(maxScaleFactor: mac ? 1.0 : 3.1)` (`lint.mjs` flags manual `textScaler.scale(` as an error) |
+| `ux-keyboard.mjs` reports WebKit/Firefox `NOT RUN` | Node Playwright (`qa/node_modules/playwright`) lacks matching browser binaries | Run `npx playwright install webkit firefox` inside `qa/`, or keep honest `NOT RUN` status in reports |
+| `capture.py` fails on Windows with exit `9009` | Invoked `python3` (Windows Store alias) instead of `python` | Run `python scripts/capture.py ...` and ensure `pip install playwright` is installed |
+| Glass looks opaque or flat | `prefers-reduced-transparency: reduce` or `data-transparency="reduce"` is active, or Firefox/Safari is rendering without Chromium SVG lens | Expected accessibility behavior in reduced-transparency mode; in normal mode on Firefox/Safari, blur + specular rim still render cleanly |
