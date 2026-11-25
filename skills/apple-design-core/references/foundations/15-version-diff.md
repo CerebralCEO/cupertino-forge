@@ -19,7 +19,7 @@ Baseline: iOS 26 and macOS 26 Tahoe introduced Liquid Glass (WWDC 2025 `[officia
 1. **Liquid Glass intensity slider (`[inferred]`):** Settings continuous slider between clear and tinted/more opaque; plugin models `--cf-glass-intensity` (`0..1`, default `0.5` `[estimate]`).
 2. **Better readability (`[inferred]`/`[estimate]`):** More uniform refraction, improved diffusion and contrast; tuned recipes use stronger tint than iOS 26.
 3. **macOS uniform toolbars (`[inferred]`):** Toolbar items sit on a consistent bar behind them for legibility.
-4. **macOS uniform window corner radius (`[estimate]`):** Secondary press reports `~12 pt` uniform window radius replacing Tahoe `16–26 pt` (`[estimate]` until measured on macOS 27 hardware).
+4. **macOS uniform window corner radius (`[measured]`):** Apple macOS 27 Figma kit (`585:3372`, `4363:18479`, `4365:31678`) measures **`16 pt`** (`cornerSmoothing: 0.6`) across Window BG and composed windows (superseding earlier `~12 pt` secondary press reports).
 5. **Community hardware radius/safe-area `$alt` notes (`[inferred/community]`):** Community `ScreenCorners` / `screens.guide` report `62pt` display radius (16 Pro/17 Pro), `18pt` (iPad Pro OLED), and `59pt` safe-area top (iPhone 15/16); kept out of primary kit tokens (`55pt`/`30pt`/`62pt`) until official confirmation.
 
 ## Things that are old and must not appear
@@ -36,3 +36,5 @@ Run `/apple-sync` after each WWDC and each kit update. Record the diff here with
 |---|---|---|
 | 2026-11-21 | iOS 27 and macOS 27 Sketch kits, HIG | Initial token sync |
 | 2026-11-25 | Official Apple DocC (62 pages), Sketch kits, WWDC 2026 press | Reconciled provenance (`[official]`/`[measured]`/`[inferred]`/`[estimate]`), added Oct 2026 HIG deltas & conflicts ledger |
+| 2026-11-25 | Apple iOS 27 & macOS 27 Figma UI kits (read-only `use_figma`) | Measured `cornerSmoothing: 0.6` (178 nodes), promoted 9 estimate groups to `[measured]` (79→70 estimates), updated `radiusMacOS` (`window`/`sheet` 16, `alert`/`popover` 10, `menuItemHighlight` 8) |
+| 2026-11-26 | `cupertino-forge` v2.0.0 release | Final sync across foundations/components/commands, `/apple-redesign`, `workflows/use-flow.md`, Google Antigravity `AGENTS.apple.md` bridge, clean packager |

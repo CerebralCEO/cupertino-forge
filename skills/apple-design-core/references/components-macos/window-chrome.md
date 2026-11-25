@@ -4,7 +4,7 @@ Applies to Tauri apps with `style: macos` and to web apps rendering a desktop ap
 
 ## Window
 
-- **Corner radius:** uniform `12` `[estimate]` (macOS 27 secondary press `[inferred]` vs Tahoe `16–26pt`). Use the native window when possible (Tauri decorations on macOS with `titleBarStyle: "Overlay"` keeps real corners, shadow, resize, full screen `[official]`).
+- **Corner radius:** uniform `16` `[measured]` (Apple Figma macOS 27 kit nodes `585:3372`, `4363:18479`, `cornerSmoothing: 0.6`). Use the native window when possible (Tauri decorations on macOS with `titleBarStyle: "Overlay"` keeps real corners, shadow, resize, full screen `[official]`).
 - **Background:** `windowBackground` token (`#FFFFFF` / `#1E1E1E` `[measured]` kit).
 - **Window states (`[official]`):** `Active` (key/main), `Inactive`, `Minimized`. Shadow swaps cleanly between `shadow-window-active` when focused and `shadow-window-inactive` when unfocused (for custom chrome windows; native windows get it free). Active/inactive traffic lights follow `#000@0.1` (light) / `#FFF@0.15` (dark) (`[official]`/`[measured]`).
 - **Minimum size:** `480 × 320` `[estimate]`; support continuous fluid resizing and remember size and position between launches (`[official]`).

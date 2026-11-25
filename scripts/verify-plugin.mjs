@@ -41,6 +41,7 @@ const requiredFiles = [
   path.join('scripts', 'contrast-check.mjs'),
   path.join('scripts', 'capture.py'),
   path.join('scripts', 'pixel-diff.mjs'),
+  path.join('scripts', 'package-plugin.mjs'),
   path.join('scripts', 'synth-sounds.py'),
   path.join('hooks', 'hooks.json'),
   path.join('hooks', 'scripts', 'lint.mjs'),

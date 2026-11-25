@@ -1,6 +1,13 @@
-# cupertino-forge
+# cupertino-forge (v2.0.0)
 
 Apple iOS 27 and macOS 27 (Liquid Glass) design system for Claude Code, Google Antigravity, and cross-IDE workflows. On Apple platforms, native APIs deliver maximum parity; on Web (Next.js + shadcn), Flutter, and Tauri 2, `cupertino-forge` enforces documented visual approximation paired with 100% Apple design psychology, spatial hierarchy, motion discipline, and UX.
+
+## What's New in v2.0.0
+- **Figma & Sketch-measured tokens (`tokens/*.json` + `tokens/ESTIMATES.md`):** Reconciled against Official Apple HIG DocC, Apple Sketch kits, and Apple iOS 27 / macOS 27 Figma kits (`cornerSmoothing: 0.6`, macOS window/sheet `16pt`, alert/popover `10pt`, menu highlight `8pt`, iOS toggle/slider/stepper/textField/searchField/alert/sheet, macOS controlSizes/menu — reducing estimated token groups to `70`).
+- **Existing Project Redesign Engine:** 5-section [`redesign-playbook.md`](skills/apple-design-core/references/patterns/redesign-playbook.md) + `/apple-redesign` command.
+- **Canonical Master Use-Flow & Antigravity Bridge:** [`workflows/use-flow.md`](skills/apple-design-core/references/workflows/use-flow.md) + portable [`templates/AGENTS.apple.md`](templates/AGENTS.apple.md) for Google Antigravity and cross-IDE workflows without Claude hooks.
+- **Expanded Platform Adapters:** Web pre-hydration zero-FOUC theme script, `Squircle` mask+shadow, GPU Sheet drag, LTR/RTL roving focus; new Flutter widgets (`CfTextField`, `CfSearchField`, `CfSlider`, `CfMenu`, `CfProgressBar`, `CfActivityIndicator`, `BackdropGroup`, native iOS/Android haptics); Tauri 2 Direct vs Mac App Store (`macOSPrivateApi: false`) distribution modes + `.apple-design.json` Rust bridge.
+- **Deterministic QA & Doctor:** `/apple-doctor` (`scripts/verify-plugin.mjs`), Playwright `qa/computed-style-audit.mjs`, `qa/ux-keyboard.mjs`, 72-image `scripts/capture.py --matrix`, two-mode `apple-design-reviewer` (`visual` + `behavior`), `/apple-audit --reference <dir>`, and clean cross-platform packager (`scripts/package-plugin.mjs`).
 
 ## Install (Windows, macOS, Linux)
 

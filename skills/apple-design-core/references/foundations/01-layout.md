@@ -25,15 +25,18 @@ All numbers come from `tokens/layout.json`. Values carry `[official]`, `[measure
 | Inline title | headline 17 semibold `[official]`, centered |
 | Bar buttons | 44 circles or 44 tall capsules of glass, grouped (`[official]` min hit target) |
 | Tab bar | floating glass capsule, sits above home indicator, about 62 tall `[estimate]`, 20 from sides `[estimate]`, max 5 tabs on iPhone `[official]`; `.tabBarMinimizeBehavior(.onScrollDown)` + `Tab(role: .search)` `[official]` |
-| Search | capsule glass, 44 tall `[estimate]`, trailing standalone tab / bottom on iPhone (iOS 26+) |
-| List row | min 52 `[estimate]` (44 minimum accessible `[official]`), subtitle row 64 `[estimate]`, leading inset 16 `[estimate]` |
+| Search | capsule glass, 44 tall `[measured]` (`48pt` bottom variant in iOS 27 Figma kit), trailing standalone tab / bottom on iPhone (iOS 26+) |
+| List row | min 52 `[estimate]` (44 minimum accessible `[official]`; Regular 52 / Tall 68 in iOS 27 Figma kit), leading inset 16 `[estimate]` |
 | Settings style row icon | 29 square, radius 7, separator inset 60 `[estimate]` |
 | Inset grouped section | 16 from sides, radius 26 `[estimate]`, 20 gap between sections |
-| Sheet grabber | 36 by 5, 5 from top `[estimate]` |
-| Alert | 300 wide, 20 padding `[estimate]` |
-| Buttons | mini 28, small 32, medium 36, large 50, extra large 56 `[estimate]` (note: HIG publishes 28/32/44/52/64 specifically for visionOS) |
-| Toggle | 64 by 28 track, 38 by 24 knob `[estimate]` (legacy <=18 UISwitch was 51 by 31 `[inferred]`) |
-| Segmented control | 36 tall `[estimate]` |
+| Sheet grabber | 60 by 4, 6 from top; floating inset at medium detent 6 `[measured]` (Apple Figma iOS 27 kit) |
+| Alert | 300 wide, 14 padding, button height 48 `[measured]` (Apple Figma iOS 27 kit) |
+| Buttons | mini 28, small 32, medium 36, large 50, extra large 56 `[estimate]` (iOS 27 Figma kit defines 3 sizes: Small 28, Medium 34, Large 50; HIG publishes 28/32/44/52/64 for visionOS) |
+| Toggle | 64 by 28 track, 38 by 24 knob, inset 2 `[measured]` (Apple Figma iOS 27 kit; legacy <=18 UISwitch was 51 by 31 `[inferred]`) |
+| Slider | track height 6, knob 38 by 24 `[measured]` (Apple Figma iOS 27 kit) |
+| Stepper | 92 by 32 `[measured]` (Apple Figma iOS 27 kit) |
+| Text field | 52 tall, 16 horizontal padding `[measured]` (Apple Figma iOS 27 kit) |
+| Segmented control | 36 tall `[estimate]` (iOS 27 Figma kit: Small 32, Large 50, Toolbar 36) |
 | Hit target | 44 by 44 recommended, 28 by 28 absolute minimum `[official]`; add ~12pt padding around bezeled or ~24pt around bezel-less controls `[official]` |
 
 ### iOS screen skeleton
@@ -66,8 +69,8 @@ home indicator
 | Split view divider | 1pt (`thin` divider style `[official]`) |
 | Inspector | 240 to 320, default 280, trailing `[estimate]` |
 | Content padding | 20 `[estimate]` |
-| Control heights | mini 16, small 20, regular 24, large 28, extra large 36 `[estimate]` |
-| Menu item | 24 tall, 10 side padding, menu 5 outer padding `[estimate]` |
+| Control heights | mini 16, small 20, regular 24, large 28, extra large 36 `[measured]` (Apple Figma macOS 27 kit) |
+| Menu item | 24 tall, 10 side padding, menu 5 outer padding, separator 11 `[measured]` (Apple Figma macOS 27 kit) |
 | Table row | 24 (32 large), header 28 `[estimate]` |
 | Hit target | 28 by 28 recommended, 20 minimum `[official]` (do not shrink/move layout when Mac touch display is active) |
 

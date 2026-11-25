@@ -211,12 +211,12 @@ abstract final class AppleRadiusIOS {
   static const double deviceDisplay = 55;
 }
 abstract final class AppleRadiusMacOS {
-  static const double window = 12;
-  static const double sheet = 12;
-  static const double alert = 16;
-  static const double popover = 16;
+  static const double window = 16;
+  static const double sheet = 16;
+  static const double alert = 10;
+  static const double popover = 10;
   static const double menu = 12;
-  static const double menuItemHighlight = 6;
+  static const double menuItemHighlight = 8;
   static const double tooltip = 6;
   static const double sidebarRowSelection = 8;
   static const double pushButtonLarge = 8;

@@ -11,7 +11,7 @@ Read `apple-design-core` first. The frontend is a web app: ALSO load `apple-web`
 
 1. Frontend: follow `apple-web` setup (tokens, primitives, `CupertinoRoot` with `style` from `.apple-design.json`, usually `macos`).
 2. Generate Rust token constants from `tokens/*.json`:
-   `node ${CLAUDE_PLUGIN_ROOT}/scripts/build-tokens.mjs --out src-tauri/src --targets rust --accent <accent>` → emits `apple_tokens.rs` (`WINDOW_CORNER_RADIUS` `[estimate]`, traffic light geometry, minimum size, hex colors).
+   `node ${CLAUDE_PLUGIN_ROOT}/scripts/build-tokens.mjs --out src-tauri/src --targets rust --accent <accent>` → emits `apple_tokens.rs` (`WINDOW_CORNER_RADIUS` `16.0` `[measured]`, traffic light geometry, minimum size, hex colors).
 3. Rust deps in `src-tauri/Cargo.toml`: see `assets/Cargo-snippet.toml` (`window-vibrancy = "0.8"`, `serde`, `serde_json`, `tauri-plugin-window-state = "2"`, plus `features = ["macos-private-api"]` ONLY when `.apple-design.json` has `"distribution": "direct"`).
 4. Copy `assets/src-tauri/src/apple_config.rs`, `apple_window.rs`, and `apple_menu.rs` into `src-tauri/src/` and wire them in `lib.rs` as shown in `assets/src-tauri/src/lib-snippet.rs` (reads `.apple-design.json` at compile/setup time via `AppleDesignConfig::from_json` and exposes `get_apple_design_config` to the frontend).
 5. Merge config by distribution target:
@@ -30,7 +30,7 @@ Read `apple-design-core` first. The frontend is a web app: ALSO load `apple-web`
 
 | Capability | macOS Direct (`window-vibrancy 0.8`) | macOS MAS (`macOSPrivateApi: false`) | Windows 11 (`WebView2`) | Linux |
 |---|---|---|---|---|
-| Window Liquid Glass (`NSGlassEffectView`) | **Native** (`apply_liquid_glass` via `LiquidGlassOptions` on macOS 26+, radius from token `[estimate]`) | **Not possible** cleanly with transparent private SPI; **Approximation** via `apply_vibrancy(Sidebar)` + web CSS glass | **Approximation** (`apply_mica` dark/light + web CSS `.cf-glass`) | **Approximation** (compositor + web CSS `.cf-glass`) |
+| Window Liquid Glass (`NSGlassEffectView`) | **Native** (`apply_liquid_glass` via `LiquidGlassOptions` on macOS 26+, `16.0` radius from token `[measured]`) | **Not possible** cleanly with transparent private SPI; **Approximation** via `apply_vibrancy(Sidebar)` + web CSS glass | **Approximation** (`apply_mica` dark/light + web CSS `.cf-glass`) | **Approximation** (compositor + web CSS `.cf-glass`) |
 | Window chrome & traffic lights | **Native** (`titleBarStyle: Overlay`, native corners & shadow) | **Native** (`titleBarStyle: Overlay`) | **Approximation** (`decorations: false` + `MacWindow` `TrafficLights`, or native caption buttons via `windowsChrome`) | **Approximation** (`decorations: false` + `TrafficLights`) |
 | Menu bar & shortcuts | **Native** (`apple_menu.rs`: App, File, Edit, View, Window, Help + dynamic Show/Hide labels + `CmdOrCtrl`) | **Native** | **Approximation** (attached window menu or hidden) | **Approximation** |
 | System font (`SF Pro`) | **Native** (`WKWebView` `-apple-system`) | **Native** | **Approximation** (`Inter` variable + `Segoe UI` fallback) | **Approximation** (`Inter` fallback) |

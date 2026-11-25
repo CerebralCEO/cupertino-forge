@@ -1,6 +1,6 @@
 # macOS components: controls
 
-Control sizes (`[estimate]`, macOS 26 and 27; `Oct 2026` touch-display rule: keep layout stable `[official]`): mini `16`, small `20`, regular `24`, large `28`, extra large `36`. Default is `regular`. Labels use `body` (`13` `[official]`) for `regular` and `large`, `subheadline` (`11`) for `small`.
+Control sizes (`[measured]`, Apple Figma macOS 27 kit; `Oct 2026` touch-display rule: keep layout stable `[official]`): mini `16`, small `20`, regular `24`, large `28`, extra large `36`. Default is `regular`. Labels use `body` (`13` `[official]`) for `regular` and `large`, `subheadline` (`11`) for `small`.
 
 Fills from the macOS 27 kit (`tokens/source/apple-macos-27-ui-kit.tokens.json` `[measured]`): bordered idle `#000000@0.08` (light) / `#FFFFFF@0.07` (dark), pressed `16%`, disabled `4%`. On glass (toolbars, popovers) use `overGlass` fills (two layers `[measured]`).
 

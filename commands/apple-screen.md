@@ -12,6 +12,6 @@ Build this screen: $ARGUMENTS
 3. Plan in a short outline before coding: navigation (bar, title, actions), content structure (sections, rows, cards), the single primary action, states (empty, loading, error), and which primitives you will use. No new primitives unless the catalog lacks one; if so, build it inside the primitives folder following the component template and tokens.
 4. Implement using only tokens and primitives. Text styles for every text node, semantic colors only, squircle and concentric shapes, springs for motion, haptics per feedback.json.
 5. Add the empty, loading and error states from `patterns/states.md`.
-6. Run the lint (`node ${CLAUDE_PLUGIN_ROOT}/hooks/scripts/lint.mjs --all`) and the typecheck or analyzer.
-7. If a dev server can run, launch the `apple-design-reviewer` agent on the screen (light and dark, iOS width 390 or macOS width 1100).
-8. Print the Apple Design Compliance report.
+6. Run the blocking Quality Gates from `references/workflows/use-flow.md`: static lint (`node "${CLAUDE_PLUGIN_ROOT}/hooks/scripts/lint.mjs" --all`), platform typecheck/analyzer, and when a URL is available `node "${CLAUDE_PLUGIN_ROOT}/qa/computed-style-audit.mjs"` + `node "${CLAUDE_PLUGIN_ROOT}/qa/ux-keyboard.mjs"`.
+7. If a dev server can run, launch the `apple-design-reviewer` agent (`visual` + `behavior` modes) on the screen; mark any unavailable gate `NOT RUN (<reason>)`.
+8. Print the Apple Design Compliance report (`apple-design-core` section 7).

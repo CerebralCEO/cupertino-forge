@@ -9,17 +9,17 @@
 | Item | Value |
 |---|---|
 | Plugin name | `cupertino-forge` |
-| Version | 1.0.0 |
+| Version | 2.0.0 |
 | Owner | ZeroFounder (Rahat) |
 | Location on disk | `D:\Claude-Plugins\cupertino-forge` |
 | Local marketplace name | `zerofounder-local` |
 | Install id | `cupertino-forge@zerofounder-local` |
-| OS | Windows 11 (PowerShell), Node 18+ required |
+| OS | Windows 11 (PowerShell), macOS, Linux — Node 18+ required |
 | Design target | Apple iOS 27 and macOS 27 (Liquid Glass era, WWDC 2026) |
 | Supported stacks | Next.js + Tailwind v4 + shadcn/ui (web), Flutter (Android, iOS, macOS, Windows, Linux), Tauri 2 + Rust (desktop) |
-| Source of design values | Apple iOS 27 and macOS 27 UI kits (Sketch, Export Design Tokens, Nov 2026) + Apple HIG tables |
+| Source of design values | Apple iOS 27 & macOS 27 Sketch & Figma UI kits + Official Apple HIG DocC tables (`$class: official / measured / inferred / estimated`) |
 
-**Goal of the plugin:** whatever app is built (Flutter mobile app, Next.js web app, Tauri desktop app), its design, typography, color, buttons, materials, shadows, corner radius, hover and press states, animation, haptics and optional UI sounds must look and feel as if Apple's own designers made it, using the latest iOS 27 / macOS 27 style. The plugin does not just describe this; it **enforces** it with hooks.
+**Goal of the plugin:** deliver maximum parity via native APIs on Apple platforms, and documented visual approximation paired with **100% Apple design psychology, spatial hierarchy, motion discipline, and UX** on Web (Next.js), Flutter, and Tauri 2 — enforced via Claude Code hooks or Google Antigravity manual quality gates (`workflows/use-flow.md`).
 
 ---
 

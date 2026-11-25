@@ -1,6 +1,6 @@
 # 06 Elevation and layering
 
-Source of truth: `tokens/elevation.json` (macOS 27 kit window, panel, menu, sliderKnob `[measured]`; knob, raised, popover, sheet, toast `[estimate]`).
+Source of truth: `tokens/elevation.json` (macOS 27 kit window, panel, menu, sliderKnob `[measured]`; knob & popover keep cross-platform `[estimate]` with Sketch/Figma `$kitReference` `[measured-kit-reference]`; raised, sheet, toast `[estimate]`).
 
 ## Layer stack (bottom to top)
 

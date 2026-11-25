@@ -2,7 +2,16 @@
 
 All notable changes to `cupertino-forge` are documented in this file.
 
-## Unreleased — `upgrade/apple-dna-v2` (Phase 0 & Phase 1)
+## v2.0.0 — 2026-11-26 (`cupertino-forge` Apple DNA v2 Release)
+
+Major cross-platform release unifying official Apple HIG DocC tables, Apple iOS 27 / macOS 27 Sketch & Figma kit measurements, deterministic Playwright/Flutter/Tauri verification harnesses, an Existing Project Redesign Engine, Canonical Master Use-Flow, Google Antigravity cross-IDE bridge, and clean release packaging.
+
+### Phase 4 — Final Sync, Release v2.0.0 & Clean Packaging (2026-11-26)
+- **Version bump to `2.0.0`:** Updated `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, `README.md`, and `GUIDE.md`.
+- **Synced all foundation, macOS component, Tauri, and command docs with Phase 3c/3e measurements:** Updated `01-layout.md`, `05-shape.md`, `06-elevation.md`, `15-version-diff.md`, `components-macos/{window-chrome,presentation,controls}.md`, `skills/apple-tauri/SKILL.md`, and `commands/{apple-screen,apple-component,apple-sync}.md`; regenerated `skills/apple-flutter/assets/lib/apple_ui/theme/apple_tokens.dart`.
+- **Honest parity audit:** Audited all manifests, `SKILL.md` files, `README.md`, and `GUIDE.md` — removed overstated "indistinguishable" / "look and feel exactly like Apple" wording in favor of explicit native parity vs cross-platform documented visual approximation + 100% Apple design psychology, spatial hierarchy, motion discipline, and UX.
+- **Added clean cross-platform packager (`scripts/package-plugin.mjs`):** Zero-dependency Node ZIP builder emitting `cupertino-forge-v2.0.0.zip` containing only runtime plugin files (strictly excluding `_upgrade/`, `_upgrade00-inputs/`, `.git/`, `tests/`, `qa/node_modules/`, `qa/references/`, `qa/out/`, and `*.log`).
+- **Closed Phase 4 Merge Closure (`_upgrade/03-merge/MERGE-REPORT.md`):** Recorded full final verification proofs across Node, Web (Chromium/WebKit/Firefox), Flutter, Tauri, and remaining 70 estimated token checklist for physical Mac/iPhone validation.
 
 ### Phase 0 — Runtime Verification, Compliance Integrity & Confirmed Bug Fixes
 - **Added `/apple-doctor` (`commands/apple-doctor.md`) & `scripts/verify-plugin.mjs`**: Cross-platform runtime validator (Windows, macOS, Linux via `path.join` and `process.execPath`) checking manifest, `${CLAUDE_PLUGIN_ROOT}/...` resolution (`32` paths), `tokens/*.json`, `lint.mjs` hooks, `build-tokens.mjs`, sound WAVs, and optional Python/Playwright probing (`NOT RUN` when missing instead of false `OK`).

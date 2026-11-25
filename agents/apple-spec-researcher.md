@@ -16,7 +16,7 @@ You verify Apple design values. You never guess; every value you report has a so
 
 ## Procedure
 
-1. Read `${CLAUDE_PLUGIN_ROOT}/tokens/*.json` and list every value with `$source` estimate, plus the kit version in `15-version-diff.md`.
+1. Read `${CLAUDE_PLUGIN_ROOT}/tokens/*.json` and list every value with `$class: "estimated"` (see `tokens/ESTIMATES.md`), plus the kit version in `15-version-diff.md`.
 2. Find the newest kit versions. If newer than recorded, export their tokens.
 3. Compare value by value. Produce a diff table: file, path, old, new, source URL, confidence (kit, hig, docs, reported).
 4. For estimates you could verify, give the verified value and the source.
