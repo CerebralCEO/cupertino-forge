@@ -58,7 +58,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(function 
         'relative inline-flex select-none items-center justify-center whitespace-nowrap rounded-capsule outline-none',
         'focus-visible:focus-ring disabled:opacity-40',
         sizeCls[size],
-        !isGlass && variantCls[variant],
+        variantCls[variant],
         isGlass && 'cf-glass',
         fullWidth && 'w-full',
         // extend the hit area to at least 44 (iOS) for mini and small sizes
@@ -80,21 +80,22 @@ export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEl
   size?: 'small' | 'medium' | 'large';
 }
 
-const iconSize = { small: 'size-8', medium: 'size-11', large: 'size-[50px]' } as const;
+const iconSize = { small: 'size-8', medium: 'size-11', large: 'size-[var(--cf-icon-btn-lg)]' } as const;
 
 /** Icon only button: 44 glass circle by default (bar buttons, close, more). */
 export const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(function IconButton(
-  { label, icon, variant = 'glass', size = 'medium', className, ...rest },
+  { label, icon, variant = 'glass', size = 'medium', type = 'button', className, ...rest },
   ref
 ) {
   const glass = variant === 'glass' || variant === 'prominentGlass';
   return (
     <button
       ref={ref}
+      type={type}
       aria-label={label}
       title={label}
       className={cn(
-        'relative inline-flex shrink-0 items-center justify-center rounded-full text-[19px] outline-none focus-visible:focus-ring disabled:opacity-40',
+        'relative inline-flex shrink-0 items-center justify-center rounded-full text-[length:var(--cf-glyph-bar)] outline-none focus-visible:focus-ring disabled:opacity-40',
         iconSize[size],
         glass ? 'cf-glass' : variant === 'gray' ? 'bg-fill-3 text-label cf-press' : 'text-accent cf-press-plain',
         variant === 'glass' && 'text-label-glass',

@@ -7,16 +7,20 @@ All primitives are client components in `src/components/apple`. Verified with Re
 ```tsx
 // app/layout.tsx
 import { CupertinoRoot } from '@/components/apple/root';
+import { CupertinoThemeScript } from '@/lib/cupertino/theme-script';
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" /></head>
-      <body><CupertinoRoot style="adaptive" appearance="system" glassIntensity={0.5} sounds={false}>{children}</CupertinoRoot></body>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <CupertinoThemeScript />
+      </head>
+      <body><CupertinoRoot style="adaptive" appearance="system" transparency="system" contrast="system" glassIntensity={0.5} sounds={false}>{children}</CupertinoRoot></body>
     </html>
   );
 }
 ```
-Use values from `.apple-design.json`. `useCupertino()` returns `{ platform, theme, reducedMotion, squircleNative, setAppearance }`.
+Use values from `.apple-design.json`. `useCupertino()` returns `{ platform, theme, reducedMotion, squircleNative, resolvedTransparency, resolvedContrast, setAppearance, setTransparency, setContrast }`. Provide an explicit in-app Reduce Transparency setting via `setTransparency('reduce')` because Safari lacks `prefers-reduced-transparency`.
 
 ## Glass
 
@@ -75,7 +79,7 @@ Page content needs bottom padding for the tab bar: `pb-[calc(var(--cf-tabbar-hei
 ## Presentation
 
 ```tsx
-<Sheet open={o} onOpenChange={setO} title="New Note" detents={['medium','large']}
+<Sheet open={o} onOpenChange={setO} title="New Note" detents={['medium','large']} modal={true}
   leading={<Button variant="plain" onClick={() => setO(false)}>Cancel</Button>}
   trailing={<IconButton label="Done" variant="prominentGlass" icon={<Check size={20}/>} onClick={save} />}>
   ...

@@ -25,6 +25,24 @@
   --sidebar-foreground: var(--cf-label);
   --sidebar-primary: var(--cf-accent);
   --sidebar-border: var(--cf-separator);
+
+  /* ---------- component-local layout & glyph scale tokens ---------- */
+  --cf-menu-ios-w: 250px;
+  --cf-mac-btn-min-w: 72px;
+  --cf-icon-btn-lg: var(--cf-control-large);
+  --cf-empty-max-w: var(--cf-alert-w);
+  --cf-empty-glyph-size: 56px;
+  --cf-glyph-bar: 19px;
+  --cf-glyph-tab: 24px;
+  --cf-glyph-search: 22px;
+  --cf-glyph-mac: 16px;
+  --cf-glyph-mac-menu: 15px;
+  --cf-glyph-settings: 17px;
+  --cf-stepper-divider-h: 18px;
+}
+
+:root[data-cf-platform="macos"] {
+  --cf-empty-glyph-size: 48px;
 }
 
 /* ---------- base ---------- */
@@ -45,7 +63,7 @@
   html[data-cf-font="inter"] {
     font-feature-settings: 'cv11', 'ss01', 'ss03';
   }
-  html[data-cf-font="inter"] body { letter-spacing: -0.01em; }
+  html[data-cf-font="inter"]:not(:lang(bn)):not(:lang(ar)):not(:lang(he)) body { letter-spacing: -0.01em; }
 
   body {
     margin: 0;
@@ -87,7 +105,10 @@
   -webkit-backdrop-filter: var(--cf-glass-filter);
   backdrop-filter: var(--cf-glass-filter);
   box-shadow: var(--cf-glass-shadow);
-  transform: translateZ(0);
+}
+.cf-glass[data-pressable="true"],
+.cf-glass[data-lens="true"] {
+  will-change: transform;
 }
 .cf-glass[data-variant="clear"] { background: var(--cf-glass-clear-bg); -webkit-backdrop-filter: var(--cf-glass-clear-filter); backdrop-filter: var(--cf-glass-clear-filter); box-shadow: var(--cf-glass-clear-shadow); }
 .cf-glass[data-variant="large"] { background: var(--cf-glass-large-bg); -webkit-backdrop-filter: var(--cf-glass-large-filter); backdrop-filter: var(--cf-glass-large-filter); box-shadow: var(--cf-glass-shadow); }
@@ -95,6 +116,19 @@
 .cf-glass[data-variant="tinted"] {
   background: color-mix(in srgb, var(--cf-accent) 85%, transparent);
   color: var(--cf-accent-contrast);
+}
+/* Inner active selection capsule inside TabBar (single backdrop layer, no nested blur) */
+.cf-glass-capsule-active {
+  background: color-mix(in srgb, var(--cf-glass-bg) 78%, var(--cf-bg) 22%);
+  box-shadow: inset 0 0.5px 0 rgb(255 255 255 / 0.45), 0 1px 3px rgb(0 0 0 / 0.08);
+}
+:root[data-theme="dark"] .cf-glass-capsule-active {
+  background: color-mix(in srgb, var(--cf-glass-bg) 70%, var(--cf-label) 14%);
+  box-shadow: inset 0 0.5px 0 rgb(255 255 255 / 0.22), 0 1px 3px rgb(0 0 0 / 0.25);
+}
+:root[data-transparency="reduce"] .cf-glass-capsule-active {
+  background: var(--cf-fill-3);
+  box-shadow: none;
 }
 /* Specular sheen: a soft diagonal highlight that sells the glass */
 .cf-glass::before {
@@ -106,7 +140,7 @@
   mix-blend-mode: plus-lighter;
   z-index: -1;
 }
-:root[data-theme="dark"] .cf-glass::before { background: linear-gradient(135deg, rgb(255 255 255 / 0.10) 0%, rgb(255 255 255 / 0) 40%); }
+:root[data-theme="dark"] .cf-glass::before { background: linear-gradient(135deg, rgb(255 255 255 / calc(0.14 * var(--cf-glass-intensity) + 0.03)) 0%, rgb(255 255 255 / 0) 40%); }
 /* Chromium only lens refraction, enabled per element with data-lens */
 @supports (backdrop-filter: url(#cf-lens)) {
   .cf-glass[data-lens="true"] {
@@ -137,7 +171,12 @@
 
 }
 
+@keyframes cf-spin { to { transform: rotate(360deg); } }
+
 /* ---------- reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   .cf-glass[data-pressable="true"]:active, .cf-press:active, .cf-press-card:active { transform: none; }
 }
+:root[data-reduced-motion="true"] .cf-glass[data-pressable="true"]:active,
+:root[data-reduced-motion="true"] .cf-press:active,
+:root[data-reduced-motion="true"] .cf-press-card:active { transform: none; }

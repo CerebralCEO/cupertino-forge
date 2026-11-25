@@ -48,6 +48,12 @@ export function squirclePath({ width: w, height: h, radius, smoothing = 0.6 }: S
   ].join(' ');
 }
 
+export function squircleMaskDataUrl({ width: w, height: h, radius, smoothing = 0.6 }: SquircleOptions): string {
+  const path = squirclePath({ width: w, height: h, radius, smoothing });
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><path d="${path}" fill="black"/></svg>`;
+  return `url("data:image/svg+xml;utf8,${encodeURIComponent(svg)}")`;
+}
+
 export function supportsCornerShape(): boolean {
   return typeof CSS !== 'undefined' && CSS.supports?.('corner-shape', 'squircle') === true;
 }

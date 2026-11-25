@@ -23,7 +23,7 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(func
     <div className="w-full">
       {mac && label && <label htmlFor={id} className="mb-1 block text-body text-label">{label}</label>}
       <div className={cn('relative flex items-center',
-        inList ? 'min-h-[52px] px-lg' :
+        inList ? 'min-h-[var(--cf-row-min-h)] px-lg' :
         mac ? 'squircle h-[var(--cf-control-regular)] rounded-text-field bg-field px-1.5 shadow-[0_0_0_0.5px_var(--cf-field-border)] focus-within:focus-ring' :
               'squircle h-11 rounded-text-field-rounded bg-fill-3 px-lg')}>
         <input

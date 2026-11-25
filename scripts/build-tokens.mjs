@@ -188,6 +188,21 @@ function buildCSS() {
     put('tabbar-height', `${layout.ios.tabBar.height}px`);
     const btn = layout.ios.button;
     for (const s of ['mini', 'small', 'medium', 'large', 'extraLarge']) put(`control-${kebab(s)}`, `${btn[s]}px`);
+    // component geometry tokens
+    put('hairline', '0.5px');
+    put('alert-w', `${layout.ios.alert.width}px`);
+    put('stepper-w', `${layout.ios.stepper.width}px`);
+    put('row-min-h', `${layout.ios.listRow.minHeight}px`);
+    put('row-sep-inset', `${layout.ios.listRow.leadingInset}px`);
+    put('row-sep-inset-icon', `${layout.ios.listRow.separatorLeadingInsetWithIcon}px`);
+    put('settings-icon-size', `${layout.ios.listRow.iconSize}px`);
+    put('grabber-w', `${layout.ios.sheet.grabber.width}px`);
+    put('grabber-h', `${layout.ios.sheet.grabber.height}px`);
+    put('grabber-mt', `${layout.ios.sheet.grabber.topInset}px`);
+    put('inspector-w', `${layout.macos.inspector.defaultWidth}px`);
+    put('traffic-gap', `${layout.macos.trafficLights.gap}px`);
+    put('menu-pad', `${layout.macos.menu.outerPadding}px`);
+    put('menu-min-w', `${layout.macos.menu.minWidth}px`);
     // motion
     for (const [k, sp] of entries(motion.springs)) {
       const { linear, ms } = springToLinear(sp);
@@ -254,6 +269,7 @@ function buildCSS() {
     const cs = layout.macos.controlSizes;
     for (const s of ['mini', 'small', 'regular', 'large', 'extraLarge']) put(`control-${kebab(s)}`, `${cs[s]}px`);
     put('control-medium', `${cs.regular}px`);
+    put('alert-w', '260px');
   };
   block(':root[data-cf-platform="macos"]', () => { mode(sem.macos, 'light'); macTypo(); });
   block(':root[data-cf-platform="macos"][data-theme="dark"]', () => mode(sem.macos, 'dark'));
@@ -297,9 +313,11 @@ function buildCSS() {
   block(':root[data-transparency="reduce"]', rt);
 
   // Reduce motion: collapse springs to fades
+  const rmVars = () => { for (const [k] of entries(motion.springs)) { put(`ease-${kebab(k)}`, 'linear(0, 1)'); put(`dur-${kebab(k)}`, '200ms'); } };
   L.push('@media (prefers-reduced-motion: reduce) {');
-  block(':root', () => { for (const [k] of entries(motion.springs)) { put(`ease-${kebab(k)}`, 'linear(0, 1)'); put(`dur-${kebab(k)}`, '200ms'); } });
+  block(':root', rmVars);
   L.push('}');
+  block(':root[data-reduced-motion="true"]', rmVars);
 
   // Non-Latin script protection (Indic matras & cursive Arabic break under negative SF tracking)
   L.push(':lang(bn), :lang(ar), :lang(he) { letter-spacing: 0 !important; }');

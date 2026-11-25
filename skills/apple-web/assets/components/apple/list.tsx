@@ -23,7 +23,7 @@ export function ListSection({ header, footer, children }: { header?: React.React
     <section className={cn(style === 'insetGrouped' && 'px-lg')}>
       {header && <h2 className={cn('pb-sm text-headline text-label', style === 'insetGrouped' ? 'px-lg' : 'px-lg pt-lg')}>{header}</h2>}
       {style === 'insetGrouped' ? (
-        <Squircle radius="list-section-inset-grouped" className="overflow-hidden bg-bg-grouped-2" as="section">
+        <Squircle radius="list-section-inset-grouped" className="overflow-hidden bg-bg-grouped-2" as="div">
           <ul role="list">{rows.map((r, i) => <RowWrap key={i} last={i === rows.length - 1}>{r}</RowWrap>)}</ul>
         </Squircle>
       ) : (
@@ -60,11 +60,12 @@ export function ListRow({ title, subtitle, value, leading, accessory = 'none', o
   return (
     <Comp
       href={href}
+      type={Comp === 'button' ? 'button' : undefined}
       onClick={onPress}
       disabled={Comp === 'button' ? disabled : undefined}
       className={cn(
         'group relative flex w-full items-center gap-md px-lg text-left outline-none',
-        subtitle ? 'min-h-16 py-2' : 'min-h-[52px] py-2.5',
+        subtitle ? 'min-h-16 py-2' : 'min-h-[var(--cf-row-min-h)] py-2.5',
         tappable && 'transition-colors duration-[250ms] active:bg-fill-4 active:duration-0 focus-visible:bg-fill-4',
         disabled && 'opacity-40'
       )}
@@ -79,7 +80,11 @@ export function ListRow({ title, subtitle, value, leading, accessory = 'none', o
       {accessory === 'checkmark' && <Check aria-label="Selected" size={20} strokeWidth={2.5} className="shrink-0 text-accent" />}
       {React.isValidElement(accessory) && accessory}
       {!last && (
-        <span aria-hidden className="absolute bottom-0 right-0 h-[0.5px] bg-separator" style={{ left: hasIcon ? 57 : 16 }} />
+        <span
+          aria-hidden
+          className="absolute bottom-0 h-[var(--cf-hairline)] bg-separator"
+          style={{ insetInlineStart: hasIcon ? 'var(--cf-row-sep-inset-icon)' : 'var(--cf-row-sep-inset)', insetInlineEnd: 0 }}
+        />
       )}
     </Comp>
   );
@@ -88,7 +93,7 @@ export function ListRow({ title, subtitle, value, leading, accessory = 'none', o
 /** Settings style 29pt squircle icon with white glyph on a system color. Settings screens only. */
 export function SettingsIcon({ color, children }: { color: 'red' | 'orange' | 'yellow' | 'green' | 'mint' | 'teal' | 'cyan' | 'blue' | 'indigo' | 'purple' | 'pink' | 'brown' | 'gray'; children: React.ReactNode }) {
   return (
-    <span className="squircle flex size-[29px] items-center justify-center rounded-settings-icon text-[17px] text-white" style={{ background: `var(--cf-${color})` }}>
+    <span className="squircle flex size-[var(--cf-settings-icon-size)] items-center justify-center rounded-settings-icon text-[length:var(--cf-glyph-settings)] text-white" style={{ background: `var(--cf-${color})` }}>
       {children}
     </span>
   );

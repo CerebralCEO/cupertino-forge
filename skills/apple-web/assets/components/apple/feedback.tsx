@@ -14,7 +14,6 @@ export function ActivityIndicator({ size = 'medium', className, label = 'Loading
           <rect key={i} x="11" y="2" width="2.2" height="6" rx="1.1" fill="currentColor" opacity={0.25 + (i / 8) * 0.75} transform={`rotate(${i * 45} 12 12)`} />
         ))}
       </svg>
-      <style>{'@keyframes cf-spin{to{transform:rotate(360deg)}}'}</style>
     </span>
   );
 }
@@ -65,8 +64,8 @@ export interface EmptyStateProps { icon: React.ReactNode; title: string; message
 /** Centered empty, error or no results state (patterns/states.md). */
 export function EmptyState({ icon, title, message, action, className }: EmptyStateProps) {
   return (
-    <div className={cn('mx-auto flex min-h-[50dvh] max-w-[300px] flex-col items-center justify-center gap-2 px-lg text-center', className)}>
-      <div className="mb-2 text-[56px] text-label-3 [:root[data-cf-platform=macos]_&]:text-[48px]">{icon}</div>
+    <div className={cn('mx-auto flex min-h-[50dvh] max-w-[var(--cf-empty-max-w)] flex-col items-center justify-center gap-2 px-lg text-center', className)}>
+      <div className="mb-2 text-[length:var(--cf-empty-glyph-size)] text-label-3">{icon}</div>
       <h2 className="text-title2 emphasized text-label">{title}</h2>
       {message && <p className="text-body text-label-2">{message}</p>}
       {action && <div className="mt-3">{action}</div>}

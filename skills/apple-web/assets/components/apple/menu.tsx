@@ -35,7 +35,7 @@ const MenuPanel = React.forwardRef<HTMLDivElement, { children: React.ReactNode }
       animate={{ opacity: 1, scale: 1 }}
       transition={mac ? { duration: 0.1 } : spring('popover')}
       style={{ transformOrigin: 'var(--radix-dropdown-menu-content-transform-origin, var(--radix-context-menu-content-transform-origin))' }}
-      className={cn('cf-glass squircle z-40 overflow-hidden outline-none', mac ? 'min-w-[180px] rounded-menu p-[5px]' : 'w-[250px] rounded-menu py-1')}
+      className={cn('cf-glass squircle z-40 overflow-hidden outline-none', mac ? 'min-w-[var(--cf-menu-min-w)] rounded-menu p-[var(--cf-menu-pad)]' : 'w-[var(--cf-menu-ios-w)] rounded-menu py-1')}
     >
       {children}
     </motion.div>
@@ -54,11 +54,11 @@ export function MenuItem({ label, icon, shortcut, destructive, checked, disabled
               'h-11 gap-3 px-lg text-body data-[highlighted]:bg-fill-4',
         destructive ? 'text-red' : 'text-label', disabled && 'text-label-3')}>
       {mac && <span className="w-3.5 shrink-0">{checked && <Check size={13} strokeWidth={2.5} />}</span>}
-      {mac && icon && <span className="shrink-0 text-[15px]">{icon}</span>}
+      {mac && icon && <span className="shrink-0 text-[length:var(--cf-glyph-mac-menu)]">{icon}</span>}
       {!mac && checked && <Check size={17} strokeWidth={2.5} className="shrink-0" />}
       <span className="flex-1 truncate">{label}</span>
       {mac && shortcut && <span className="text-label-2 [[data-highlighted]_&]:text-white">{shortcut}</span>}
-      {!mac && icon && <span className="shrink-0 text-[19px]">{icon}</span>}
+      {!mac && icon && <span className="shrink-0 text-[length:var(--cf-glyph-bar)]">{icon}</span>}
     </DM.Item>
   );
 }
@@ -68,7 +68,7 @@ export function MenuSection({ children }: { children: React.ReactNode }) {
   return (
     <>
       <DM.Group>{children}</DM.Group>
-      <DM.Separator className={cn(platform === 'macos' ? 'mx-2.5 my-1 h-[0.5px] bg-separator' : 'my-1 h-2 bg-fill-4')} />
+      <DM.Separator className={cn('last:hidden', platform === 'macos' ? 'mx-2.5 my-1 h-[var(--cf-hairline)] bg-separator' : 'my-1 h-2 bg-fill-4')} />
     </>
   );
 }

@@ -31,13 +31,13 @@ export function Alert({ open, onOpenChange, title, message, actions, icon }: Ale
               <motion.div className="fixed inset-0 z-[60] bg-scrim" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.15 }} />
             </Dialog.Overlay>
             <Dialog.Content asChild forceMount role="alertdialog"
-              onKeyDown={(e) => { if (e.key === 'Enter') { const d = actions.find((a) => a.role === 'default'); if (d) { d.onPress?.(); onOpenChange(false); } } }}>
+              onKeyDown={(e) => { if (e.key === 'Enter' && !(e.target instanceof HTMLButtonElement)) { const d = actions.find((a) => a.role === 'default'); if (d) { d.onPress?.(); onOpenChange(false); } } }}>
               <motion.div
                 data-cf-elevated data-variant="large"
                 initial={{ opacity: 0, scale: 1.08 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, transition: { duration: 0.15 } }}
                 transition={spring('popover')}
-                className={cn('cf-glass squircle fixed left-1/2 top-1/2 z-[60] flex -translate-x-1/2 -translate-y-1/2 flex-col p-xl text-center outline-none',
-                  mac ? 'w-[260px] rounded-alert gap-md' : 'w-[300px] rounded-alert gap-lg')}
+                className={cn('cf-glass squircle fixed left-1/2 top-1/2 z-[60] flex w-[var(--cf-alert-w)] -translate-x-1/2 -translate-y-1/2 flex-col p-xl text-center outline-none rounded-alert',
+                  mac ? 'gap-md' : 'gap-lg')}
               >
                 {mac && icon && <div className="mx-auto size-16">{icon}</div>}
                 <div className="flex flex-col gap-1">
@@ -46,7 +46,7 @@ export function Alert({ open, onOpenChange, title, message, actions, icon }: Ale
                 </div>
                 <div className={cn('flex gap-sm', stacked ? 'flex-col' : 'flex-row')}>
                   {ordered.map((a) => (
-                    <button key={a.label}
+                    <button key={a.label} type="button"
                       autoFocus={a.role === 'default'}
                       onClick={() => { a.onPress?.(); onOpenChange(false); }}
                       className={cn('cf-press flex flex-1 items-center justify-center rounded-capsule text-body outline-none focus-visible:focus-ring',
@@ -83,11 +83,11 @@ export function ConfirmationDialog({ open, onOpenChange, title, actions }: { ope
                 <div className="cf-glass squircle overflow-hidden rounded-alert" data-variant="large">
                   {title && <Dialog.Title className="px-lg py-3 text-center text-footnote text-label-2">{title}</Dialog.Title>}
                   {rest.map((a) => (
-                    <button key={a.label} onClick={() => { a.onPress?.(); onOpenChange(false); }}
+                    <button key={a.label} type="button" onClick={() => { a.onPress?.(); onOpenChange(false); }}
                       className={cn('flex h-14 w-full items-center justify-center text-body active:bg-fill-4', 'shadow-[inset_0_0.5px_0_var(--cf-separator)]', a.role === 'destructive' ? 'text-red' : 'text-accent')}>{a.label}</button>
                   ))}
                 </div>
-                <button onClick={() => { cancel.onPress?.(); onOpenChange(false); }} className="cf-glass squircle h-14 rounded-alert text-body emphasized text-accent" data-variant="large">{cancel.label}</button>
+                <button type="button" onClick={() => { cancel.onPress?.(); onOpenChange(false); }} className="cf-glass squircle h-14 rounded-alert text-body emphasized text-accent" data-variant="large">{cancel.label}</button>
               </motion.div>
             </Dialog.Content>
           </Dialog.Portal>

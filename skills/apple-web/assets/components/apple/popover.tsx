@@ -31,18 +31,16 @@ export function Popover({ trigger, children, side = 'bottom', className }: { tri
   );
 }
 
-/** macOS tooltip: 1000ms delay, small rect, caption1. Every icon only toolbar button gets one. */
+/** macOS tooltip: 1000ms delay (provided at CupertinoRoot), small rect, caption1. Every icon only toolbar button gets one. */
 export function Tooltip({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <T.Provider delayDuration={1000}>
-      <T.Root>
-        <T.Trigger asChild>{children}</T.Trigger>
-        <T.Portal>
-          <T.Content sideOffset={6} data-cf-elevated className="squircle z-[70] rounded-tooltip bg-bg-3 px-2 py-1 text-caption1 text-label shadow-popover">
-            {label}
-          </T.Content>
-        </T.Portal>
-      </T.Root>
-    </T.Provider>
+    <T.Root>
+      <T.Trigger asChild>{children}</T.Trigger>
+      <T.Portal>
+        <T.Content sideOffset={6} data-cf-elevated className="squircle z-[70] rounded-tooltip bg-bg-3 px-2 py-1 text-caption1 text-label shadow-popover">
+          {label}
+        </T.Content>
+      </T.Portal>
+    </T.Root>
   );
 }

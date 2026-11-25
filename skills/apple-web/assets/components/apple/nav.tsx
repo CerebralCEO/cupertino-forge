@@ -32,14 +32,20 @@ export function NavBar({ title, large = true, back, leading, trailing, scrollRef
       <ScrollEdge edges={['top']} />
       <header className="fixed inset-x-0 top-0 z-20 pt-[env(safe-area-inset-top)]">
         <div className="relative mx-auto flex h-[var(--cf-bar-height)] items-center justify-between px-lg">
-          <div className="flex min-w-[44px] items-center gap-sm">
+          <div className="flex min-w-11 items-center gap-sm">
             {back && <IconButton label={back.label} icon={<ChevronLeft strokeWidth={2.25} size={22} />} onClick={back.onBack} />}
             {leading}
           </div>
-          <motion.h1 style={{ opacity: inlineOpacity }} className="pointer-events-none absolute left-1/2 max-w-[60%] -translate-x-1/2 truncate text-headline text-label">
-            {title}
-          </motion.h1>
-          <div className="flex min-w-[44px] items-center justify-end gap-sm">{trailing}</div>
+          {large ? (
+            <motion.span aria-hidden style={{ opacity: inlineOpacity }} className="pointer-events-none absolute left-1/2 max-w-[60%] -translate-x-1/2 truncate text-headline text-label">
+              {title}
+            </motion.span>
+          ) : (
+            <motion.h1 style={{ opacity: inlineOpacity }} className="pointer-events-none absolute left-1/2 max-w-[60%] -translate-x-1/2 truncate text-headline text-label">
+              {title}
+            </motion.h1>
+          )}
+          <div className="flex min-w-11 items-center justify-end gap-sm">{trailing}</div>
         </div>
       </header>
       <div aria-hidden className="h-[calc(env(safe-area-inset-top)+var(--cf-bar-height))]" />
@@ -75,8 +81,8 @@ export function BarButtonGroup({ children, label }: { children: React.ReactNode;
 /** Icon inside a BarButtonGroup (no own glass). */
 export function BarButton({ label, icon, onClick, disabled }: { label: string; icon: React.ReactNode; onClick?: () => void; disabled?: boolean }) {
   return (
-    <button aria-label={label} title={label} disabled={disabled} onClick={onClick}
-      className="cf-press flex size-11 items-center justify-center rounded-full text-[19px] text-label-glass outline-none focus-visible:focus-ring disabled:text-label-3">
+    <button type="button" aria-label={label} title={label} disabled={disabled} onClick={onClick}
+      className="cf-press flex size-11 items-center justify-center rounded-full text-[length:var(--cf-glyph-bar)] text-label-glass outline-none focus-visible:focus-ring disabled:text-label-3">
       {icon}
     </button>
   );
