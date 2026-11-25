@@ -17,6 +17,7 @@ abstract final class CfHaptics {
 
   static bool get _isAndroid => defaultTargetPlatform == TargetPlatform.android;
   static bool get _supported => enabled && (defaultTargetPlatform == TargetPlatform.iOS || _isAndroid);
+  static bool get supported => _supported;
 
   static Future<void> selection() async {
     if (!_supported) return;

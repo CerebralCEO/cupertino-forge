@@ -129,10 +129,11 @@
       "$value": 672,
       "$unit": "pt",
       "$source": "UIKit readableContentGuide typical max measure",
-      "$class": "Measured",
+      "$class": "Inferred",
       "$platform": "iPadOS / Web",
       "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
-      "$confidence": "med"
+      "$confidence": "med",
+      "$notes": "Re-audited: downgraded from Measured to Inferred (non-Apple-kit measurement)"
     }
   },
   "devicesAndSafeAreas": {
@@ -146,10 +147,11 @@
       },
       "$unit": "pt",
       "$source": "Apple iOS device specs",
-      "$class": "Measured",
+      "$class": "Inferred",
       "$platform": "iOS",
       "$url": "https://useyourloaf.com/blog/iphone-screen-resolutions/",
-      "$confidence": "high"
+      "$confidence": "high",
+      "$notes": "Re-audited: downgraded from Measured to Inferred (non-Apple-kit measurement)"
     },
     "iPhone15_16": {
       "$value": {
@@ -161,10 +163,11 @@
       },
       "$unit": "pt",
       "$source": "iPhone 15 / 16 / 16 Pro specs",
-      "$class": "Measured",
+      "$class": "Inferred",
       "$platform": "iOS",
       "$url": "https://screens.guide/",
-      "$confidence": "high"
+      "$confidence": "high",
+      "$notes": "Re-audited: downgraded from Measured to Inferred (non-Apple-kit measurement)"
     },
     "iPhone17_17Pro": {
       "$value": {
@@ -176,10 +179,11 @@
       },
       "$unit": "pt",
       "$source": "iPhone 17 / 17 Pro 6.3-inch specs",
-      "$class": "Measured",
+      "$class": "Inferred",
       "$platform": "iOS 26/27",
       "$url": "https://screens.guide/",
-      "$confidence": "high"
+      "$confidence": "high",
+      "$notes": "Re-audited: downgraded from Measured to Inferred (non-Apple-kit measurement)"
     },
     "iPhone17ProMax": {
       "$value": {
@@ -191,10 +195,11 @@
       },
       "$unit": "pt",
       "$source": "iPhone 17 Pro Max 6.9-inch specs",
-      "$class": "Measured",
+      "$class": "Inferred",
       "$platform": "iOS 26/27",
       "$url": "https://screens.guide/",
-      "$confidence": "high"
+      "$confidence": "high",
+      "$notes": "Re-audited: downgraded from Measured to Inferred (non-Apple-kit measurement)"
     },
     "iPadPro11": {
       "$value": {
@@ -206,10 +211,11 @@
       },
       "$unit": "pt",
       "$source": "iPad Pro 11-inch M4/M5",
-      "$class": "Measured",
+      "$class": "Inferred",
       "$platform": "iPadOS",
       "$url": "https://useyourloaf.com/",
-      "$confidence": "high"
+      "$confidence": "high",
+      "$notes": "Re-audited: downgraded from Measured to Inferred (non-Apple-kit measurement)"
     },
     "iPadPro13": {
       "$value": {
@@ -221,10 +227,11 @@
       },
       "$unit": "pt",
       "$source": "iPad Pro 13-inch M4/M5",
-      "$class": "Measured",
+      "$class": "Inferred",
       "$platform": "iPadOS",
       "$url": "https://useyourloaf.com/",
-      "$confidence": "high"
+      "$confidence": "high",
+      "$notes": "Re-audited: downgraded from Measured to Inferred (non-Apple-kit measurement)"
     }
   },
   "sizeClassBreakpoints": {

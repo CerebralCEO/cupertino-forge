@@ -167,10 +167,11 @@
       "$value": 0.55,
       "$unit": "coefficient",
       "$source": "Reverse-engineered UIScrollView overscroll constant",
-      "$class": "Measured",
+      "$class": "Inferred",
       "$platform": "iOS",
       "$url": "https://twitter.com/chpwn/status/285540192096497664",
-      "$confidence": "high"
+      "$confidence": "high",
+      "$notes": "Re-audited: downgraded from Measured to Inferred (non-Apple-kit measurement)"
     }
   },
   "transitions": {
@@ -178,10 +179,11 @@
       "$value": 0.3,
       "$unit": "viewport ratio",
       "$source": "Standard UINavigationController outgoing shift 30% trailing->leading",
-      "$class": "Measured",
+      "$class": "Inferred",
       "$platform": "iOS",
       "$url": "https://developer.apple.com/documentation/uikit/uinavigationcontroller",
-      "$confidence": "high"
+      "$confidence": "high",
+      "$notes": "Re-audited: downgraded from Measured to Inferred (non-Apple-kit measurement)"
     },
     "sheetDismissVelocity": {
       "$value": 600,

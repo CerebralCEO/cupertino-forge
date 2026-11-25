@@ -32,10 +32,10 @@ Apple HIG ([Playing haptics](https://developer.apple.com/design/human-interface-
 | `audio.watchos.encoding` | `64` (`HE-AAC`) | kbps | watchOS | Both | https://developer.apple.com/design/human-interface-guidelines/playing-audio | Official | high | Recommended bandwidth-efficient audio asset encoding |
 | `web.vibrate.selection` | `[8]` (light `[10]`, medium `[18]`, heavy `[28]`) | ms pattern | Android Chrome Web | Both | `tokens/feedback.json` | Estimated | med | `navigator.vibrate(...)`; no effect on iOS Safari or Desktop |
 | `web.vibrate.notification` | `success: [12,60,18]`, `warn: [20,80,20]`, `err: [25,50,25,50,25]` | ms pattern | Android Chrome Web | Both | `tokens/feedback.json` | Estimated | med | User-gesture gated |
-| `web.iosSafariHapticWorkaround` | `<input type="checkbox" switch>` hidden label `.click()` | DOM trick | iOS Safari 17.4–27 | Both | `tokens/feedback.json` | Measured | med | Unofficial Safari switch haptic trigger; only works synchronously inside user gesture |
+| `web.iosSafariHapticWorkaround` | `<input type="checkbox" switch>` hidden label `.click()` | DOM trick | iOS Safari 17.4–27 | Both | `tokens/feedback.json` | Inferred | med | Unofficial Safari switch haptic trigger; only works synchronously inside user gesture [Re-audited: Inferred from non-kit source] |
 | `sound.catalog.masterVolume` | `0.35` (`throttle: 40 ms`) | gain / ms | Web / Desktop | Both | `tokens/feedback.json` & `scripts/synth-sounds.py` | Estimated | high | Original 44.1 kHz 16-bit mono WAV synthesis; opt-in OFF by default |
-| `sound.synth.tap` | `4.5kHz bandnoise + 1.8kHz sine, 25ms, -14 dBFS` | WAV (0.06s) | Web / Desktop | Both | `scripts/synth-sounds.py` | Measured | high | Exact parameters verified from generator script; zero Apple copyright risk |
-| `sound.synth.toggle` | `on: 1.2kHz -> 2.4kHz (+18ms), off: reverse` | WAV (0.09s) | Web / Desktop | Both | `scripts/synth-sounds.py` | Measured | high | Verified in `scripts/synth-sounds.py:61-62` |
+| `sound.synth.tap` | `4.5kHz bandnoise + 1.8kHz sine, 25ms, -14 dBFS` | WAV (0.06s) | Web / Desktop | Both | `scripts/synth-sounds.py` | Inferred | high | Exact parameters verified from generator script; zero Apple copyright risk [Re-audited: Inferred from non-kit source] |
+| `sound.synth.toggle` | `on: 1.2kHz -> 2.4kHz (+18ms), off: reverse` | WAV (0.09s) | Web / Desktop | Both | `scripts/synth-sounds.py` | Inferred | high | Verified in `scripts/synth-sounds.py:61-62` [Re-audited: Inferred from non-kit source] |
 
 ---
 

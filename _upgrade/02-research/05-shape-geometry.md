@@ -19,13 +19,13 @@
 
 | Name | Value | Unit | Platform & OS version | Light/Dark | Source URL | Class | Confidence (high/med/low) | Notes |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `shape.continuous.figmaSmoothing` | `0.60` (`60%`) | ratio | Design Tools / All | Both | https://www.figma.com/blog/desperately-seeking-squircles/ | Measured | high | Industry benchmark matching Apple iOS UIKit bezier curve |
+| `shape.continuous.figmaSmoothing` | `0.60` (`60%`) | ratio | Design Tools / All | Both | https://www.figma.com/blog/desperately-seeking-squircles/ | Inferred | high | Industry benchmark matching Apple iOS UIKit bezier curve [Re-audited: Inferred from non-kit source] |
 | `shape.continuous.superellipseN` | `~5` (`quintic`) | exponent | All Apple | Both | https://grida.co/ | Inferred | med | CSS `corner-shape: squircle` equals `superellipse(2)` (`n=4`) |
 | `shape.concentric.formula` | `max(outer - padding, minimumInner)` (`min: 4`) | pt | iOS 26+ / macOS 26+ | Both | https://developer.apple.com/documentation/swiftui/concentricrectangle | Official | high | `UICornerConfiguration` on UIKit |
-| `shape.display.iPhone15_16` | `55` | pt | iOS 17–26 | Both | https://github.com/kylebshr/ScreenCorners | Measured | high | Measured via `_displayCornerRadius` private SPI (`ScreenCorners`) |
-| `shape.display.iPhone16Pro_17Pro` | `62` | pt | iOS 18–27 | Both | https://github.com/kylebshr/ScreenCorners | Measured | med | **Conflict**: Plugin `shape.json` had `55pt` for iPhone 17 Pro; ScreenCorners reports `62pt` for 16 Pro+ |
+| `shape.display.iPhone15_16` | `55` | pt | iOS 17–26 | Both | https://github.com/kylebshr/ScreenCorners | Inferred | high | Measured via `_displayCornerRadius` private SPI (`ScreenCorners`) [Re-audited: Inferred from non-kit source] |
+| `shape.display.iPhone16Pro_17Pro` | `62` | pt | iOS 18–27 | Both | https://github.com/kylebshr/ScreenCorners | Inferred | med | **Conflict**: Plugin `shape.json` had `55pt` for iPhone 17 Pro; ScreenCorners reports `62pt` for 16 Pro+ [Re-audited: Inferred from non-kit source] |
 | `shape.display.iPhoneSE3` | `0` | pt | iOS | Both | https://developer.apple.com/ | Official | high | Square hardware screen corners |
-| `shape.display.iPadPro_M4_M5` | `18` | pt | iPadOS 18–27 | Both | https://github.com/kylebshr/ScreenCorners | Measured | med | **Conflict**: Plugin `shape.json` had `30pt`; ScreenCorners measures `18pt` on OLED iPad Pro |
+| `shape.display.iPadPro_M4_M5` | `18` | pt | iPadOS 18–27 | Both | https://github.com/kylebshr/ScreenCorners | Inferred | med | **Conflict**: Plugin `shape.json` had `30pt`; ScreenCorners measures `18pt` on OLED iPad Pro [Re-audited: Inferred from non-kit source] |
 | `shape.appIcon.maskRatio` | `22.37` | % of icon size | iOS / macOS | Both | https://developer.apple.com/design/human-interface-guidelines/app-icons | Inferred | med | Never pre-clip 1024px icons; OS masks automatically |
 | `shape.ios.sheetFloating` | `38` | pt | iOS 26/27 | Both | `tokens/shape.json` | Estimated | med | Floating medium-detent sheet (`26pt` insetGrouped section/menu/popover; `22pt` card; `34pt` alert) |
 | `shape.macos.window` | `12` | pt | macOS 27 | Both | https://www.macrumors.com/ | Estimated | low | Secondary press uniform radius vs Tahoe `16–26pt`; needs macOS 27 window measurement |

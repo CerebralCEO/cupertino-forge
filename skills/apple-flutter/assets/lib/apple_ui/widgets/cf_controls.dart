@@ -35,8 +35,11 @@ class _CfToggleState extends State<CfToggle> with SingleTickerProviderStateMixin
     if (widget.onChanged == null) return;
     final v = !widget.value;
     widget.onChanged!(v);
-    CfHaptics.toggle(v);
-    CfSounds.play(v ? CfSound.toggleOn : CfSound.toggleOff);
+    if (CfHaptics.supported) {
+      CfHaptics.toggle(v);
+    } else {
+      CfSounds.play(v ? CfSound.toggleOn : CfSound.toggleOff);
+    }
   }
 
   @override

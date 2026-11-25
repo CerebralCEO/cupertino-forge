@@ -18,4 +18,5 @@
 | 14 | States | empty, loading (300ms delay), error per screen | each missing state minus 2 |
 | 15 | Accessibility and copy | contrast, targets, labels, keyboard, Apple voice | each failing contrast minus 1, Yes/No alerts minus 2 |
 
-Total = sum / 150 * 100, rounded.
+Total = sum of executed layers / (10 * executed_layers_count) * 100, rounded.
+If a check or layer could not run (e.g., runtime screenshots unavailable for Liquid Glass or motion verification), mark that layer `NOT RUN (<reason>)` and exclude it from the denominator rather than marking it `10` or `OK`.

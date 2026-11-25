@@ -120,19 +120,22 @@ Gradients on buttons, drop shadows on cards in iOS lists, colored icon circles e
 
 ## 7. Compliance Report (print this at the end of every UI task)
 
+Rule: NEVER report an unverified check as `OK`. Any step that could not run (e.g., visual screenshot capture, Playwright/Flutter runtime test) MUST state `NOT RUN (<reason>)`.
+
 ```
 Apple Design Compliance
 Platform: <web|flutter|tauri>   Style: <ios|macos|adaptive>
 Screens/components touched: <list>
-Tokens: OK | <violations>
-Typography: OK | <issues>
-Color and dark mode: OK | <issues>
-Glass and materials: OK | <issues>
-Shape and concentricity: OK | <issues>
-Motion and feedback: OK | <issues>
-States (press, hover, focus, disabled, empty, loading, error): OK | <issues>
-Accessibility: OK | <issues>
-Lint: PASS | FAIL (<count>)
+Tokens: OK | NOT RUN (<reason>) | <violations>
+Typography: OK | NOT RUN (<reason>) | <issues>
+Color and dark mode: OK | NOT RUN (<reason>) | <issues>
+Glass and materials: OK | NOT RUN (<reason>) | <issues>
+Shape and concentricity: OK | NOT RUN (<reason>) | <issues>
+Motion and feedback: OK | NOT RUN (<reason>) | <issues>
+States (press, hover, focus, disabled, empty, loading, error): OK | NOT RUN (<reason>) | <issues>
+Accessibility: OK | NOT RUN (<reason>) | <issues>
+Lint: PASS | FAIL (<count>) | NOT RUN (<reason>)
+Visual capture / reviewer: PASS | FAIL (<issues>) | NOT RUN (<reason>)
 Deviations from Apple rules (with reason): <none | list>
 Values marked estimate that this work depends on: <list or none>
 ```

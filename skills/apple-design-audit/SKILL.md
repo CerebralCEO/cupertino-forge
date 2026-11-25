@@ -11,7 +11,7 @@ Load `apple-design-core` first; the golden rules are the audit criteria.
 
 1. **Static scan:** `node ${CLAUDE_PLUGIN_ROOT}/hooks/scripts/lint.mjs --all --json`. Count findings per rule.
 2. **Structure read:** open the main screens. For each, note navigation pattern, primary action count, layer separation, background levels, states coverage.
-3. **Visual pass:** if the app runs, capture with `python3 ${CLAUDE_PLUGIN_ROOT}/scripts/capture.py --url <url>` and run the `apple-design-reviewer` agent per screen.
+3. **Visual pass:** if the app runs, capture with `python "${CLAUDE_PLUGIN_ROOT}/scripts/capture.py" --url <url>` (use `python3` on macOS/Linux if needed) and run the `apple-design-reviewer` agent per screen. If browser/runtime capture cannot execute, mark visual checks as `NOT RUN (<reason>)` — never report unrun checks as `OK`.
 4. **Score** with `references/scorecard.md`.
 5. **Write `apple-audit-report.md`** at the project root (format below) and ask before applying fixes.
 

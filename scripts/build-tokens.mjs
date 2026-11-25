@@ -171,6 +171,12 @@ function buildCSS() {
     for (const [k, v] of Object.entries(layout.spacing.names)) put(`space-${k}`, `${v}px`);
     const rI = shape.radiusIOS;
     for (const [k, v] of entries(rI)) if (typeof v === 'number') put(`radius-${kebab(k)}`, `${v}px`);
+    if (rI.deviceDisplay && typeof rI.deviceDisplay.iPhone17Pro === 'number') {
+      put('radius-device-display', `${rI.deviceDisplay.iPhone17Pro}px`);
+    }
+    const sheetFloat = typeof rI.sheetFloating === 'number' ? rI.sheetFloating : 38;
+    put('radius-sheet-floating', `${sheetFloat}px`);
+    put('radius-sheet', 'var(--cf-radius-sheet-floating)');
     put('radius-capsule', '9999px');
     put('hit', `${layout.hitTarget.ios}px`);
     put('margin', `${layout.ios.layoutMargins.compactWidth}px`);
@@ -185,6 +191,7 @@ function buildCSS() {
     }
     put('dur-fade', '200ms'); put('dur-color', '150ms');
     // elevation (light)
+    put('shadow-none', 'none');
     for (const [k, v] of entries(elev.levels)) if (v && typeof v === 'object' && v.light) put(`shadow-${kebab(k)}`, v.light);
     // glass
     const g = mat.liquidGlass.tuned;
@@ -201,7 +208,10 @@ function buildCSS() {
   const darkVars = () => {
     mode(sem.shared, 'dark'); mode(sem.ios, 'dark');
     put('accent', css(accent.dark));
-    for (const [k, v] of entries(elev.levels)) if (v && typeof v === 'object' && v.dark) put(`shadow-${kebab(k)}`, v.dark);
+    put('shadow-none', 'none');
+    for (const [k, v] of entries(elev.levels)) {
+      if (v && typeof v === 'object' && (v.dark || v.light)) put(`shadow-${kebab(k)}`, v.dark ?? v.light);
+    }
     const g = mat.liquidGlass.tuned;
     put('glass-bg', g.regular.dark.background); put('glass-filter', g.regular.dark.backdrop); put('glass-shadow', g.regular.dark.boxShadow);
     put('glass-clear-bg', g.clear.dark.background); put('glass-clear-filter', g.clear.dark.backdrop); put('glass-clear-shadow', g.clear.dark.boxShadow);
@@ -261,17 +271,24 @@ function buildCSS() {
   block(':root[data-contrast="more"]', hc('lightHC'));
   block(':root[data-contrast="more"][data-theme="dark"]', hc('darkHC'));
   L.push('@media (prefers-contrast: more) {');
-  block(':root:not([data-contrast="normal"])', hc('lightHC'));
+  block(':root:not([data-contrast="normal"]):not([data-theme="dark"])', hc('lightHC'));
+  block(':root[data-theme="dark"]:not([data-contrast="normal"])', hc('darkHC'));
   L.push('}');
   L.push('@media (prefers-contrast: more) and (prefers-color-scheme: dark) {');
   block(':root:not([data-contrast="normal"]):not([data-theme="light"])', hc('darkHC'));
   L.push('}');
 
   // Reduce transparency
+  const rt = () => {
+    put('glass-bg', 'var(--cf-glass-opaque)'); put('glass-filter', 'none');
+    put('glass-clear-bg', 'var(--cf-glass-opaque)'); put('glass-clear-filter', 'none');
+    put('glass-large-bg', 'var(--cf-glass-opaque)'); put('glass-large-filter', 'none');
+    put('glass-menu-bg', 'var(--cf-glass-opaque)'); put('glass-menu-filter', 'none');
+  };
   L.push('@media (prefers-reduced-transparency: reduce) {');
-  block(':root', () => { put('glass-bg', 'var(--cf-glass-opaque)'); put('glass-filter', 'none'); put('glass-clear-bg', 'var(--cf-glass-opaque)'); put('glass-clear-filter', 'none'); put('glass-large-filter', 'none'); put('glass-menu-filter', 'none'); });
+  block(':root:not([data-transparency="normal"])', rt);
   L.push('}');
-  block(':root[data-transparency="reduce"]', () => { put('glass-bg', 'var(--cf-glass-opaque)'); put('glass-filter', 'none'); put('glass-clear-bg', 'var(--cf-glass-opaque)'); put('glass-clear-filter', 'none'); });
+  block(':root[data-transparency="reduce"]', rt);
 
   // Reduce motion: collapse springs to fades
   L.push('@media (prefers-reduced-motion: reduce) {');
@@ -306,8 +323,12 @@ function buildTailwind() {
   }
   const radii = new Set([...entries(shape.radiusIOS), ...entries(shape.radiusMacOS)].filter(([, v]) => typeof v === 'number').map(([k]) => kebab(k)));
   for (const r of radii) L.push(`  --radius-${r}: var(--cf-radius-${r});`);
+  L.push('  --radius-device-display: var(--cf-radius-device-display);');
+  L.push('  --radius-sheet-floating: var(--cf-radius-sheet-floating);');
+  L.push('  --radius-sheet: var(--cf-radius-sheet);');
   L.push('  --radius-capsule: 9999px;');
   for (const k of Object.keys(layout.spacing.names)) L.push(`  --spacing-${k}: var(--cf-space-${k});`);
+  L.push('  --shadow-none: none;');
   for (const [k, v] of entries(elev.levels)) if (v && typeof v === 'object' && v.light) L.push(`  --shadow-${kebab(k)}: var(--cf-shadow-${kebab(k)});`);
   for (const k of Object.keys(motion.springs)) L.push(`  --ease-${kebab(k)}: var(--cf-ease-${kebab(k)});`);
   L.push('}');
@@ -403,6 +424,10 @@ function buildDart() {
   L.push('}');
   L.push('abstract final class AppleRadiusIOS {');
   for (const [k, v] of entries(shape.radiusIOS)) if (typeof v === 'number') L.push(`  static const double ${camel(k)} = ${v};`);
+  if (shape.radiusIOS.deviceDisplay && typeof shape.radiusIOS.deviceDisplay.iPhone17Pro === 'number') {
+    L.push(`  static const double deviceDisplay = ${shape.radiusIOS.deviceDisplay.iPhone17Pro};`);
+  }
+  L.push(`  static const double sheetFloating = ${typeof shape.radiusIOS.sheetFloating === 'number' ? shape.radiusIOS.sheetFloating : 38};`);
   L.push('}');
   L.push('abstract final class AppleRadiusMacOS {');
   for (const [k, v] of entries(shape.radiusMacOS)) if (typeof v === 'number') L.push(`  static const double ${camel(k)} = ${v};`);

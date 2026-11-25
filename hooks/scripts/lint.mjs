@@ -51,16 +51,16 @@ const webRules = [
   { id: 'tw-rounded', sev: 'error', re: /\brounded(?:-[trblse]{1,2})?-(?:sm|md|lg|xl|2xl|3xl|\[\d+(?:\.\d+)?px\])\b/, skipIf: /\bsquircle\b/, msg: 'Plain rounded corner. Use rounded-capsule, rounded-full, or a radius token (rounded-card) together with the squircle utility.' },
   { id: 'css-radius', sev: 'error', re: /border(?:-[a-z-]+)?-radius\s*:\s*\d+(?:\.\d+)?px/, skipIf: /corner-shape|9999px|50%/, msg: 'border-radius in px without corner-shape. Use var(--cf-radius-*) with corner-shape: squircle, or a capsule.' },
   { id: 'tw-shadow', sev: 'error', re: /\bshadow-(?:sm|md|lg|xl|2xl|inner)\b/, msg: 'Tailwind shadow. Use elevation tokens: shadow-popover, shadow-knob, shadow-raised, or none for content.' },
-  { id: 'css-shadow', sev: 'error', re: /box-shadow\s*:\s*(?!var\(|none|inherit)[^;]*\d+px/, msg: 'Hand written box-shadow. Use var(--cf-shadow-*) or var(--cf-glass-shadow).' },
+  { id: 'css-shadow', sev: 'error', re: /box-shadow\s*:(?!\s*(?:var\(|(?:none|inherit|initial|unset)\b))[^;]*\d+px/, msg: 'Hand written box-shadow. Use var(--cf-shadow-*) or var(--cf-glass-shadow).' },
   { id: 'easing', sev: 'error', re: /\b(?:ease-in-out|ease-in|ease-out|ease-linear)\b|transition[^;:\n]*:\s*[^;]*\b(?:ease|ease-in-out|linear)\b|ease\s*:\s*['"](?:easeInOut|easeIn|easeOut|linear)['"]|cubic-bezier\(/, msg: 'Non spring easing. Use spring tokens: transition={spring("snappy")} or ease-snappy / var(--cf-ease-snappy) with var(--cf-dur-snappy).' },
   { id: 'tw-text-size', sev: 'error', re: /\btext-(?:xs|sm|base|lg|xl|[2-9]xl|\[\d+(?:\.\d+)?(?:px|rem)\])\b/, msg: 'Off scale text size. Use a named text style class: text-body, text-headline, text-footnote, text-large-title ...' },
   { id: 'css-font-size', sev: 'error', re: /font-size\s*:\s*\d+(?:\.\d+)?(?:px|rem|pt)/, msg: 'Raw font-size. Use var(--cf-text-<style>-size) and its line height and tracking.' },
-  { id: 'font-family', sev: 'error', re: /font-family\s*:\s*(?!var\(|inherit)['"]?(?:Roboto|Arial|Helvetica|Inter|Open Sans|Poppins|Montserrat|Lato|system-ui)/i, msg: 'Literal font-family. Use var(--cf-font) (system font on Apple devices, Inter elsewhere).' },
+  { id: 'font-family', sev: 'error', re: /font-family\s*:(?!\s*(?:var\(|inherit\b))\s*['"]?(?:Roboto|Arial|Helvetica|Inter|Open Sans|Poppins|Montserrat|Lato|system-ui)/i, msg: 'Literal font-family. Use var(--cf-font) (system font on Apple devices, Inter elsewhere).' },
   { id: 'thin-weight', sev: 'error', re: /\bfont-(?:thin|extralight|light)\b|font-weight\s*:\s*(?:100|200|300)\b/, msg: 'Light weights are not used for UI text. Use regular, medium, semibold, bold.' },
   { id: 'gradient-bg', sev: 'warn', re: /\bbg-gradient-to-|\bbg-linear-to-|linear-gradient\(/, skipIf: /mask|scroll-edge/, msg: 'Gradient. Apple controls and surfaces do not use decorative gradients.' },
   { id: 'hamburger', sev: 'error', re: /\b(?:Menu as Hamburger|HamburgerIcon|MenuIcon|<Menu\s+size)/, msg: 'Hamburger menu. Use a tab bar (iOS) or sidebar (iPad, macOS).' },
   { id: 'glass-border', sev: 'error', re: /border(?:-[a-z]+)?\s*:\s*1px\s+solid\s+rgba?\(\s*255\s*,\s*255\s*,\s*255/, msg: 'Dribbble style glass border. Use <Glass> or the glass utility (rim light comes from inset highlights).' },
-  { id: 'raw-backdrop', sev: 'error', re: /backdrop-filter\s*:\s*(?!var\()|\bbackdrop-blur(?:-\w+)?\b/, msg: 'Hand rolled backdrop blur. Use <Glass> or glass / glass-large / glass-clear utilities.' },
+  { id: 'raw-backdrop', sev: 'error', re: /backdrop-filter\s*:(?!\s*(?:var\(|(?:none|inherit|initial|unset)\b))|\bbackdrop-blur(?:-\w+)?\b/, msg: 'Hand rolled backdrop blur. Use <Glass> or glass / glass-large / glass-clear utilities.' },
   { id: 'emoji-icon', sev: 'warn', re: /[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/u, msg: 'Emoji in UI code. Use an SF Symbol equivalent mapped in tokens/icons.json.' },
 ];
 
@@ -119,7 +119,11 @@ function walk(dir, acc = []) {
 function changedFiles(root) {
   try {
     const out = execSync('git status --porcelain', { cwd: root, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] });
-    return out.split('\n').filter(Boolean).map((l) => path.join(root, l.slice(3).split(' -> ').pop()));
+    return out.split(/\r?\n/).filter(Boolean).map((l) => {
+      let rel = l.slice(3).split(' -> ').pop().trim();
+      if (rel.startsWith('"') && rel.endsWith('"')) rel = rel.slice(1, -1).replace(/\\"/g, '"');
+      return path.join(root, rel);
+    });
   } catch { return null; }
 }
 
@@ -206,5 +210,7 @@ if (flag('json')) {
 }
 const errs = findings.filter((f) => f.sev === 'error').length;
 const warns = findings.length - errs;
-process.stdout.write(`\ncupertino-forge lint: ${errs} error(s), ${warns} warning(s) in ${targets.length} file(s)\n`);
+if (!flag('json')) {
+  process.stdout.write(`\ncupertino-forge lint: ${errs} error(s), ${warns} warning(s) in ${targets.length} file(s)\n`);
+}
 process.exit(errs ? 1 : 0);

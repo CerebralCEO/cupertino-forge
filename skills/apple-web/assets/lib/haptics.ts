@@ -38,14 +38,18 @@ function iosSwitchTap(times: number) {
   for (let i = 0; i < times; i++) setTimeout(() => iosLabel?.click(), i * 70);
 }
 
-export function haptic(kind: HapticKind = 'selection') {
-  if (!enabled || typeof window === 'undefined') return;
-  if (window.matchMedia?.('(pointer: fine)').matches && !('ontouchstart' in window)) return; // desktop
+/** Plays a haptic pulse when supported and enabled. Returns true if a haptic fired (callers must not stack sound on top). */
+export function haptic(kind: HapticKind = 'selection'): boolean {
+  if (!enabled || typeof window === 'undefined') return false;
+  if (window.matchMedia?.('(pointer: fine)').matches && !('ontouchstart' in window)) return false; // desktop
   if (isIOS()) {
     // iOS only exposes one (selection like) haptic this way. Multi pulse for notifications.
     const times = kind === 'success' ? 2 : kind === 'error' ? 3 : kind === 'warning' ? 2 : 1;
     iosSwitchTap(times);
-    return;
+    return true;
   }
-  if ('vibrate' in navigator) navigator.vibrate(patterns[kind]);
+  if ('vibrate' in navigator && typeof navigator.vibrate === 'function') {
+    return navigator.vibrate(patterns[kind]) !== false;
+  }
+  return false;
 }

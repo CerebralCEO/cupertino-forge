@@ -50,10 +50,11 @@
       "$value": 44,
       "$unit": "pt",
       "$source": "Classic UIKit UINavigationBar compact portrait height",
-      "$class": "Measured",
+      "$class": "Inferred",
       "$platform": "iOS",
       "$url": "https://developer.apple.com/design/human-interface-guidelines/toolbars",
-      "$confidence": "high"
+      "$confidence": "high",
+      "$notes": "Re-audited: downgraded from Measured to Inferred (non-Apple-kit measurement)"
     },
     "largeTitleExtraHeight": {
       "$value": 52,
@@ -193,10 +194,11 @@
       },
       "$unit": "pt",
       "$source": "Pre-iOS 26 UISwitch native intrinsicContentSize",
-      "$class": "Measured",
+      "$class": "Inferred",
       "$platform": "iOS <=18",
       "$url": "https://developer.apple.com/documentation/uikit/uiswitch",
-      "$confidence": "high"
+      "$confidence": "high",
+      "$notes": "Re-audited: downgraded from Measured to Inferred (non-Apple-kit measurement)"
     }
   },
   "alert": {

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Render cupertino-forge's ORIGINAL UI sounds to WAV (44.1 kHz, 16 bit mono).
 These are synthesized from scratch per tokens/feedback.json specs; they contain no Apple audio.
-Usage: python3 synth-sounds.py [out_dir]   (default: ../assets/sounds)
+Usage: python synth-sounds.py [out_dir]   (default: ../assets/sounds; use `python3` on macOS/Linux if needed)
 Requires: numpy
 """
 import os, sys, wave

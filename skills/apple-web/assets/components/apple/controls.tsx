@@ -26,7 +26,7 @@ export function Toggle({ checked, onCheckedChange, label, disabled, color = 'acc
       checked={checked}
       disabled={disabled}
       aria-label={label}
-      onCheckedChange={(v) => { onCheckedChange(v); haptic('selection'); playSound(v ? 'toggle-on' : 'toggle-off'); }}
+      onCheckedChange={(v) => { onCheckedChange(v); if (!haptic('selection')) playSound(v ? 'toggle-on' : 'toggle-off'); }}
       onPointerDown={() => setPressed(true)}
       onPointerUp={() => setPressed(false)}
       onPointerLeave={() => setPressed(false)}

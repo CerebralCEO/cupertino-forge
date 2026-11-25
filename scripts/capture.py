@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Capture review screenshots of a running app at Apple widths and themes.
 
-Usage: python3 capture.py --url http://localhost:3000/settings --out .cf-review \
+Usage: python capture.py --url http://localhost:3000/settings --out .cf-review \
           [--widths 390,1100] [--themes light,dark] [--chrome /path/to/chrome]
+          # Use `python3` on macOS/Linux if `python` is not aliased.
 Requires: pip install playwright ; a local Chrome or Chromium (or `playwright install chromium`).
 Sets data-theme on <html> after load so CupertinoRoot apps switch theme deterministically.
 """
@@ -14,8 +15,15 @@ def find_chrome(explicit):
     for c in ["google-chrome", "chromium", "chromium-browser", "chrome", "msedge"]:
         p = shutil.which(c)
         if p: return p
-    for p in [r"C:\Program Files\Google\Chrome\Application\chrome.exe", "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"]:
-        if os.path.exists(p): return p
+    candidates = [
+        r"C:\Program Files\Google\Chrome\Application\chrome.exe",
+        r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe",
+        os.path.join(os.environ.get("LOCALAPPDATA", ""), r"Google\Chrome\Application\chrome.exe"),
+        r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe",
+        "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    ]
+    for p in candidates:
+        if p and os.path.exists(p): return p
     return None
 
 async def main(a):

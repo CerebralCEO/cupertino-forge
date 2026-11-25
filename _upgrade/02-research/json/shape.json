@@ -13,10 +13,11 @@
       "$value": 0.6,
       "$unit": "ratio",
       "$source": "Figma 60% corner smoothing matching Apple continuous corner",
-      "$class": "Measured",
+      "$class": "Inferred",
       "$platform": "All",
       "$url": "https://www.figma.com/blog/desperately-seeking-squircles/",
-      "$confidence": "high"
+      "$confidence": "high",
+      "$notes": "Re-audited: downgraded from Measured to Inferred (non-Apple-kit measurement)"
     },
     "superellipseApproxN": {
       "$value": 5,
@@ -73,20 +74,21 @@
       "$value": 62,
       "$unit": "pt",
       "$source": "Hardware display corner radius (~55-62pt depending on model/sampling; 16 Pro/17 Pro reported 62pt)",
-      "$class": "Measured",
+      "$class": "Inferred",
       "$platform": "iOS",
       "$url": "https://github.com/kylebshr/ScreenCorners",
       "$confidence": "high",
-      "$notes": "Plugin previously had 55pt for iPhone 17 Pro and 62pt for Air; confirm on physical hardware"
+      "$notes": "Plugin previously had 55pt for iPhone 17 Pro and 62pt for Air; confirm on physical hardware; Re-audited: downgraded from Measured to Inferred (non-Apple-kit measurement)"
     },
     "iPhone15_16": {
       "$value": 55,
       "$unit": "pt",
       "$source": "ScreenCorners / UIScreen._displayCornerRadius",
-      "$class": "Measured",
+      "$class": "Inferred",
       "$platform": "iOS",
       "$url": "https://github.com/kylebshr/ScreenCorners",
-      "$confidence": "high"
+      "$confidence": "high",
+      "$notes": "Re-audited: downgraded from Measured to Inferred (non-Apple-kit measurement)"
     },
     "iPhoneSE3": {
       "$value": 0,
@@ -101,11 +103,11 @@
       "$value": 18,
       "$unit": "pt",
       "$source": "iPad Pro Liquid Retina / Tandem OLED display corner radius",
-      "$class": "Measured",
+      "$class": "Inferred",
       "$platform": "iPadOS",
       "$url": "https://github.com/kylebshr/ScreenCorners",
       "$confidence": "high",
-      "$notes": "Plugin previously had 30pt; measured community value is 18pt"
+      "$notes": "Plugin previously had 30pt; measured community value is 18pt; Re-audited: downgraded from Measured to Inferred (non-Apple-kit measurement)"
     }
   },
   "componentRadii": {
