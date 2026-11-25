@@ -1,0 +1,23 @@
+{
+  "$comment": "Merge into src-tauri/tauri.conf.json for distribution='mac-app-store'. Disables macOSPrivateApi and transparent private hooks so App Review accepts the binary (https://tauri.app/distribute/app-store/).",
+  "app": {
+    "macOSPrivateApi": false,
+    "windows": [
+      {
+        "label": "main",
+        "title": "",
+        "width": 1100,
+        "height": 720,
+        "minWidth": 480,
+        "minHeight": 320,
+        "transparent": false,
+        "decorations": true,
+        "titleBarStyle": "Overlay",
+        "hiddenTitle": true,
+        "trafficLightPosition": { "x": 16, "y": 26 },
+        "theme": null,
+        "center": true
+      }
+    ]
+  }
+}

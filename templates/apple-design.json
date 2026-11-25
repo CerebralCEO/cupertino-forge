@@ -8,6 +8,7 @@
   "sounds": false,
   "haptics": true,
   "windowsChrome": "mac",
+  "distribution": "direct",
   "tokensOut": "src/styles/cupertino",
   "appleRelease": "iOS 27 / macOS 27"
 }

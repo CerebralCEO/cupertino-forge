@@ -1,40 +1,55 @@
 //! cupertino-forge: native window material and chrome for Apple style Tauri 2 apps.
-//! macOS 26+: Liquid Glass (NSGlassEffectView) via window-vibrancy apply_liquid_glass.
-//! macOS older: NSVisualEffectView sidebar vibrancy. Windows 11: Mica. Linux: nothing.
+//! Target API: window-vibrancy 0.8.x (LiquidGlassOptions on macOS 26+ when distribution=direct,
+//! public NSVisualEffectView vibrancy fallback when mac-app-store or macOS <=15).
+//! Windows 11: Mica + optional custom chrome. Linux: optional decorations off.
 
 use tauri::{Runtime, WebviewWindow};
 
-/// Values from tokens/shape.json (radiusMacOS.window) and layout.json (traffic lights).
-pub const WINDOW_RADIUS: f64 = 12.0;
-pub const TRAFFIC_LIGHT_X: f64 = 16.0;
-pub const TRAFFIC_LIGHT_Y: f64 = 26.0;
+use crate::apple_config::AppleDesignConfig;
 
-#[derive(Clone, Copy, PartialEq, Eq)]
-pub enum WindowsChrome {
-    /// keep native Windows caption buttons
-    Native,
-    /// custom macOS traffic lights drawn by the web MacWindow (decorations off)
-    Mac,
-}
+pub fn apply_apple_window<R: Runtime>(window: &WebviewWindow<R>, config: &AppleDesignConfig) {
+    let radius = config.resolved_window_radius();
+    let _ = radius;
 
-pub fn apply_apple_window<R: Runtime>(window: &WebviewWindow<R>, windows_chrome: WindowsChrome) {
     #[cfg(target_os = "macos")]
     {
-        let _ = windows_chrome;
-        use window_vibrancy::{apply_liquid_glass, apply_vibrancy, NSGlassEffectViewStyle, NSVisualEffectMaterial, NSVisualEffectState};
-        // Try Liquid Glass first (macOS 26+), fall back to sidebar vibrancy.
-        let glass = apply_liquid_glass(window, NSGlassEffectViewStyle::Regular, None, Some(WINDOW_RADIUS));
-        if glass.is_err() {
-            let _ = apply_vibrancy(window, NSVisualEffectMaterial::Sidebar, Some(NSVisualEffectState::FollowsWindowActiveState), Some(WINDOW_RADIUS));
+        use crate::apple_config::Distribution;
+        use window_vibrancy::{
+            apply_liquid_glass, apply_vibrancy, LiquidGlassOptions, NSGlassEffectViewStyle,
+            NSVisualEffectMaterial, NSVisualEffectState,
+        };
+        match config.distribution {
+            Distribution::Direct => {
+                // Liquid Glass (macOS 26+) via window-vibrancy 0.8 builder API; fallback to sidebar vibrancy.
+                let opts = LiquidGlassOptions::new(NSGlassEffectViewStyle::Regular).radius(radius);
+                if apply_liquid_glass(window, opts).is_err() {
+                    let _ = apply_vibrancy(
+                        window,
+                        NSVisualEffectMaterial::Sidebar,
+                        Some(NSVisualEffectState::FollowsWindowActiveState),
+                        Some(radius),
+                    );
+                }
+            }
+            Distribution::MacAppStore => {
+                // Public API vibrancy fallback for Mac App Store builds (no private API transparency).
+                let _ = apply_vibrancy(
+                    window,
+                    NSVisualEffectMaterial::Sidebar,
+                    Some(NSVisualEffectState::FollowsWindowActiveState),
+                    Some(radius),
+                );
+            }
         }
     }
 
     #[cfg(target_os = "windows")]
     {
+        use crate::apple_config::WindowsChrome;
         use window_vibrancy::apply_mica;
         let dark = matches!(window.theme(), Ok(tauri::Theme::Dark));
         let _ = apply_mica(window, Some(dark));
-        if windows_chrome == WindowsChrome::Mac {
+        if config.windows_chrome == WindowsChrome::Mac {
             let _ = window.set_decorations(false);
             let _ = window.set_shadow(true);
         }
@@ -42,7 +57,8 @@ pub fn apply_apple_window<R: Runtime>(window: &WebviewWindow<R>, windows_chrome:
 
     #[cfg(target_os = "linux")]
     {
-        if windows_chrome == WindowsChrome::Mac {
+        use crate::apple_config::WindowsChrome;
+        if config.windows_chrome == WindowsChrome::Mac {
             let _ = window.set_decorations(false);
         }
     }

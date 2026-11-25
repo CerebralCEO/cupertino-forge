@@ -1,5 +1,11 @@
 # Merge into src-tauri/Cargo.toml
+# Choose Tauri features by distribution target in .apple-design.json:
+# - distribution = "direct": enable "macos-private-api" for transparent window + Liquid Glass
+# - distribution = "mac-app-store": omit "macos-private-api" to avoid Mac App Store private API rejection
+
 [dependencies]
-tauri = { version = "2", features = ["macos-private-api"] }
-window-vibrancy = "0.7"
+tauri = { version = "2", features = ["macos-private-api"] } # direct distribution; for mac-app-store use: tauri = "2"
+window-vibrancy = "0.8" # verified 0.8.1: LiquidGlassOptions::new(...).radius(...)
 tauri-plugin-window-state = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"

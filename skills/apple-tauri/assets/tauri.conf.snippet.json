@@ -1,5 +1,5 @@
 {
-  "$comment": "Merge into src-tauri/tauri.conf.json. macOS: overlay titlebar keeps native corners, shadow and traffic lights. Windows and Linux: apple_window.rs turns decorations off at runtime when windowsChrome is mac.",
+  "$comment": "Merge into src-tauri/tauri.conf.json for distribution='direct'. Uses macOSPrivateApi: true for transparent window + NSGlassEffectView Liquid Glass. For Mac App Store builds, use tauri.conf.mas.snippet.json instead.",
   "app": {
     "macOSPrivateApi": true,
     "windows": [
