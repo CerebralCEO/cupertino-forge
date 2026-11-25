@@ -17,4 +17,4 @@ Follow these steps exactly and in order.
 6. **Sounds**: if enabled, copy `${CLAUDE_PLUGIN_ROOT}/assets/sounds/*.wav` for Flutter and Tauri targets (web synthesizes in code).
 7. **CLAUDE.md**: append the block from `${CLAUDE_PLUGIN_ROOT}/templates/CLAUDE.apple.md` to the project's CLAUDE.md (create it if missing). Do not duplicate if already present.
 8. **Verify**: run the project's typecheck or `flutter analyze`, then `node ${CLAUDE_PLUGIN_ROOT}/hooks/scripts/lint.mjs --all`. Fix setup errors.
-9. **Report** in 5 lines: what was installed, where tokens live, which primitives are available, how to rebuild tokens, and the next command to try (`/apple-screen <description>`).
+9. **Report** in 5 lines: what was installed, where tokens live, which primitives are available, how to rebuild tokens, and the next command per `skills/apple-design-core/references/workflows/use-flow.md` (`/apple-screen <description>` for greenfield screens, or `/apple-redesign <path>` for converting existing screens).

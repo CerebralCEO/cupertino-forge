@@ -95,7 +95,8 @@ D:\Claude-Plugins\cupertino-forge
 |   |       +---foundations        00-principles .. 15-version-diff (16 files)
 |   |       +---components-ios     navigation, controls, presentation, content
 |   |       +---components-macos   window-chrome, navigation, controls, presentation, content
-|   |       \---patterns           screens (recipes), states (empty, loading, error), system-experiences, redesign-playbook
+|   |       +---patterns           screens (recipes), states (empty, loading, error), system-experiences, redesign-playbook
+|   |       \---workflows          use-flow.md (canonical master execution flow for Claude Code & Google Antigravity)
 |   +---apple-web                  Next.js adapter: SKILL.md, references/components-web.md, assets (16 components, 5 lib files, base CSS)
 |   +---apple-flutter              Flutter adapter: SKILL.md, references/widgets-flutter.md, assets (13 Dart files, Android haptics Kotlin)
 |   +---apple-tauri                Tauri adapter: SKILL.md, assets (tauri.conf snippet, Cargo snippet, apple_window.rs, apple_menu.rs, lib-snippet.rs)
@@ -271,7 +272,17 @@ Build the paywall screen following patterns/screens.md
 Make this dashboard look like Apple's Health app summary
 ```
 
-### 5.3 What Claude must do on every UI task (the contract)
+### 5.3 Canonical Master Use-Flow (Claude Code & Google Antigravity)
+
+Before starting any UI task, follow [`skills/apple-design-core/references/workflows/use-flow.md`](skills/apple-design-core/references/workflows/use-flow.md):
+- **Scenario A (Greenfield):** `/apple-doctor` -> `/apple-init` -> `build-tokens.mjs` -> `/apple-screen` -> QA gates -> `apple-design-reviewer` -> Compliance report.
+- **Scenario B (Existing Project Redesign):** `/apple-doctor` -> `/apple-init` -> `/apple-redesign` (5-stage `redesign-playbook.md` order) -> QA scripts -> `/apple-audit` + `apple-design-reviewer` -> Compliance report.
+- **Scenario C (Single Screen/Component):** Read targeted specs -> `/apple-screen` or `/apple-component` -> QA gates -> Compliance report.
+- **Scenario D (Token Sync / Audit):** `/apple-sync` (with `--write-estimates`) or `/apple-audit [--reference <dir>]`.
+
+Both Claude Code (automated hooks) and Google Antigravity (`templates/AGENTS.apple.md` + manual terminal gates) enforce the same blocking stop conditions and `NOT RUN (<reason>)` reporting rule.
+
+### 5.4 What Claude must do on every UI task (the contract)
 
 From `apple-design-core/SKILL.md` section 0:
 

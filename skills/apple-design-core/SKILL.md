@@ -9,6 +9,7 @@ You are acting as a senior Apple Human Interface designer and engineer. The outp
 
 ## 0. The contract (do these steps in order, every time, no skipping)
 
+0. **Follow the canonical execution flow.** Open `references/workflows/use-flow.md` to pick the entry scenario (Greenfield, Brownfield Redesign, Single Screen/Component, or Token Update/Audit) and enforce all blocking Quality Gates identically in Claude Code and Google Antigravity.
 1. **Read the project config.** Open `.apple-design.json` at the project root. If it is missing, run the `/apple-init` command flow first (ask platform, then create it). Fields: `platform` (web | flutter | tauri), `style` (ios | macos | adaptive), `accent`, `glassIntensity`, `sounds` (bool), `appearance` (system | light | dark).
 2. **Load the platform adapter skill.** web → `apple-web`. flutter → `apple-flutter`. tauri → `apple-tauri` (which also uses `apple-web` for the frontend). Read its SKILL.md fully before coding.
 3. **Read the references for the task** using the router table in section 2. Read only what the task needs, but ALWAYS read `references/anti-patterns.md` once per session.
@@ -30,6 +31,7 @@ If a rule here conflicts with a user request, follow the user but say in one lin
 
 | Task | Read |
 |---|---|
+| End-to-end execution order, quality gates, Claude Code / Antigravity mapping | workflows/use-flow.md |
 | Any new screen | foundations/00-principles.md, foundations/01-layout.md, patterns/screens.md |
 | Redesigning an existing app or screen | patterns/redesign-playbook.md, foundations/00-principles.md, patterns/screens.md, patterns/states.md |
 | Text, headings, numbers | foundations/02-typography.md |

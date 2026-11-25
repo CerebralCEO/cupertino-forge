@@ -8,6 +8,8 @@
 
 ## 1. Mandatory Reading Order
 
+**Start here every session:** Read `<PLUGIN_PATH>/skills/apple-design-core/references/workflows/use-flow.md` first to select the entry scenario (Greenfield, Brownfield Redesign, Single Screen/Component, or Token Update/Audit) and follow its exact serial steps and blocking Quality Gates.
+
 ### Building a new screen or component
 1. Read `.apple-design.json` (`platform`, `style`, `accent`, `glassIntensity`, `sounds`, `appearance`).
 2. Read `<PLUGIN_PATH>/skills/apple-design-core/SKILL.md` (contract + 25 golden rules + router).

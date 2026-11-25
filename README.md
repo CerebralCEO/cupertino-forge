@@ -19,6 +19,12 @@ Apple iOS 27 and macOS 27 (Liquid Glass) design system for Claude Code, Google A
 2. Copy [`templates/AGENTS.apple.md`](templates/AGENTS.apple.md) into your project's `.agent/rules/cupertino-forge.md` (Google Antigravity) or project-root `AGENTS.md`, and update `<PLUGIN_PATH>` to your local clone path.
 3. Create `.apple-design.json` from `templates/apple-design.json` and run the terminal verification commands listed in `AGENTS.apple.md` (`build-tokens.mjs`, `lint.mjs`, `contrast-check.mjs`, `computed-style-audit.mjs`, `ux-keyboard.mjs`) after UI edits.
 
+## Master Use-Flow (Claude Code & Google Antigravity)
+
+Every task follows the single canonical workflow in [`skills/apple-design-core/references/workflows/use-flow.md`](skills/apple-design-core/references/workflows/use-flow.md):
+1. **Pick scenario:** Greenfield (`/apple-doctor` -> `/apple-init` -> `/apple-screen`), Brownfield Redesign (`/apple-doctor` -> `/apple-init` -> `/apple-redesign` -> `/apple-audit`), Single Screen/Component (`/apple-screen` or `/apple-component`), or Token Sync/Audit (`/apple-sync` or `/apple-audit`).
+2. **Enforce Quality Gates:** `verify-plugin.mjs`, `contrast-check.mjs`, `lint.mjs`, platform build/analyzer (`tsc` / `flutter analyze` / `cargo check`), `qa/computed-style-audit.mjs`, `qa/ux-keyboard.mjs`, and `apple-design-reviewer` (`visual` + `behavior`), marking any unavailable gate `NOT RUN (<reason>)`.
+
 ## Use
 
 ```
