@@ -122,9 +122,9 @@
       "px": 1
     },
     "rule": "Apple almost never draws visible borders around content. Separation comes from material, background level, and spacing. Never add a 1px gray border to cards or inputs on iOS.",
-    "$source": "estimated hairline 0.5px",
-    "$class": "estimated",
-    "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+    "$source": "Apple iOS 27 Sketch Kit (Nov 2026) Controls.Light.Knobs - Toggle.03 - Clicked - Glow.borders.1 (0.5px) & .borders.0 (1px); Apple macOS 27 Sketch Kit (Nov 2026) Panels.Dark.borders.0 (1px) & Global.Focus Ring.borders.1 (1px)",
+    "$class": "measured",
+    "$url": "tokens/source/apple-ios-27-ui-kit.tokens.json & apple-macos-27-ui-kit.tokens.json",
     "$platform": "All"
   }
 }

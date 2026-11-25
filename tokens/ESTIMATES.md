@@ -4,7 +4,7 @@
 
 These token entries carry `$class: "estimated"` (not published numerically by Apple HIG or Sketch token exports), `$class: "inferred/community"` (community SPI benchmarks kept out of primary official/kit tokens per merge Rule 1), or `$status: "needs-device-verification"`. List relevant items in the Compliance Report (`Values marked estimate`).
 
-## 1. Estimated Tokens (80 groups/entries)
+## 1. Estimated Tokens (79 groups/entries)
 
 | Token File | Path | Sample Value | Class | Source Note |
 |---|---|---|---|---|
@@ -84,7 +84,6 @@ These token entries carry `$class: "estimated"` (not published numerically by Ap
 | `motion.json` | `symbolEffects` | `{ bounce: scale 1 to 1.2 to 1 with snappy spring, pulse: opacity 1 to 0.5 loop 1s, replace: old symbol scales to 0.6 and fades while new scales from 0.6, 250ms, wiggle: rotate -8 to 8 deg 3 times, ... }` | `estimated` | estimated CSS/SVG timing approximations of SF Symbols animations |
 | `shape.json` | `radiusIOS` | `{ deviceDisplay: [...], sheet: device display radius when full height at the bottom edge; 38 when floating at medium detent with 8 inset, alert: 34, actionSheet: 34, ... }` | `estimated` | estimated (primary deviceDisplay preserved at 55/30 per Rule 1; community 62/18 in $alt) |
 | `shape.json` | `radiusMacOS` | `{ window: 12, windowNote: macOS 27 uses one uniform window radius for all apps. Tahoe used 16 to 26 depending on toolbar. Verify exact value against the kit Windows page before shipping., sheet: 12, alert: 16, ... }` | `estimated` | estimated (macOS 27 uniform window 12pt press report; unverified on device) |
-| `shape.json` | `borders` | `{ hairline: [...], control: [...], rule: Apple almost never draws visible borders around content. Separation comes from material, background level, and spacing. Never add a 1px gray border to cards or inputs on iOS. }` | `estimated` | estimated hairline 0.5px |
 | `typography.json` | `fallbackCompensation` | `{ inter: [...] }` | `estimated` | estimated Inter width compensation |
 | `typography.json` | `nonLatin.banglaLineHeightScale` | `{ min: 1.35, max: 1.5 }` | `estimated` | estimated |
 | `typography.json` | `nonLatin.banglaExpansionPercent` | `{ min: 20, max: 30 }` | `estimated` | estimated |
