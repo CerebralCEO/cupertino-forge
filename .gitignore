@@ -7,6 +7,8 @@ target/
 .dart_tool/
 build/
 qa/node_modules/
+qa/references/
+_upgrade/04-extras/assets/
 tests/harness/web/src/styles/cupertino/
 tests/harness/tauri/src-tauri/gen/
 tests/harness/tauri/src-tauri/Cargo.lock

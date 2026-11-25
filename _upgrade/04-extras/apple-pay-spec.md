@@ -1,0 +1,11 @@
+# Apple Pay Specification (HIG)
+
+| Name | Value | Unit | Platform & OS version | Light/Dark | Source URL | Class | Confidence | Notes |
+|---|---|---|---|---|---|---|---|---|
+| `applePay.minButtonPlain` | Width `>= 100` pt (`200px @2x`), Height `>= 30` pt (`60px @2x`) | pt / px | iOS, iPadOS, macOS, Web (updated June 8, 2026) | Both | https://developer.apple.com/design/human-interface-guidelines/apple-pay | Official | high | Plain `"Apple Pay"` button without verb prefix |
+| `applePay.minButtonAction` | Width `>= 140` pt (`280px @2x`), Height `>= 30` pt (`60px @2x`) | pt / px | iOS, iPadOS, macOS, Web (updated June 8, 2026) | Both | https://developer.apple.com/design/human-interface-guidelines/apple-pay | Official | high | `"Book/Buy/Check Out/Donate/Set Up/Subscribe with Apple Pay"` |
+| `applePay.minMarginAndClearSpace` | `>= 1/10` of button/mark height | ratio | All | Both | https://developer.apple.com/design/human-interface-guidelines/apple-pay | Official | high | Mark must never share border with another graphic or button |
+| `applePay.webIconSize` | `60 × 60` pt (`120×120 @2x`, `180×180 @3x`) | pt / px | Web / Safari | Both | https://developer.apple.com/design/human-interface-guidelines/apple-pay | Official | high | Displayed during web payment authorization sheet |
+| `applePay.apiOnlyRule` | Always use Apple-provided API (`PKPaymentButton` / Apple Pay JS) — never draw custom Apple Pay button | policy | All | Both | https://developer.apple.com/design/human-interface-guidelines/apple-pay | Official | high | Corner radius may be adjusted to match sibling buttons |
+| `applePay.markNotButton` | Apple Pay mark communicates acceptance only — never use as a clickable payment button | policy | All | Both | https://developer.apple.com/design/human-interface-guidelines/apple-pay | Official | high | Only height may be scaled (equal to or larger than sibling marks) |
+| `applePay.availabilityRule` | Hide Apple Pay if device/browser unsupported; make primary when credentials available; never disable/dim button | policy | All | Both | https://developer.apple.com/design/human-interface-guidelines/apple-pay | Official | high | Explain missing size/color options after tap instead of disabling |
