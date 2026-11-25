@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Seeded Keyboard Defects</title>
+    <style>
+      body { font-family: system-ui, sans-serif; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+      button { min-height: 44px; min-width: 44px; padding: 8px 16px; }
+      .no-ring:focus, .no-ring:focus-visible { outline: none; box-shadow: none; }
+      .custom-btn { display: inline-block; padding: 8px 16px; border: 1px solid #888; cursor: pointer; }
+      #broken-modal { display: none; padding: 16px; border: 1px solid #333; background: #fff; }
+      #broken-modal.open { display: block; }
+    </style>
+  </head>
+  <body>
+    <!-- Blind Defect #2 (no rule): No skip-to-main-content link before nav -->
+    <nav aria-label="Primary"><a href="#section">Nav Link</a></nav>
+
+    <!-- Known Defect #1: positive tabindex > 0 -->
+    <button type="button" tabindex="5" data-defect="kb-1">Positive Tabindex (5)</button>
+
+    <!-- Known Defect #2: outline: none without focus ring -->
+    <button type="button" class="no-ring" data-defect="kb-2">No Focus Ring</button>
+
+    <!-- Known Defect #3: Modal without focus trap or Escape dismiss -->
+    <button type="button" data-ux-modal-trigger="true" id="btn-broken-modal" data-defect="kb-3" onclick="document.getElementById('broken-modal').classList.add('open')">Open Broken Modal</button>
+    <div id="broken-modal" role="dialog" aria-modal="true" aria-label="Broken Dialog">
+      <p>Dialog with no focus trap and no Escape handler</p>
+      <button type="button" onclick="document.getElementById('broken-modal').classList.remove('open')">Close</button>
+    </div>
+
+    <!-- Known Defect #4: Broken tablist ignoring Arrow/Home/End keys -->
+    <div role="tablist" aria-label="Broken Tabs" data-defect="kb-4">
+      <button type="button" role="tab" aria-selected="true" tabindex="0">Tab One</button>
+      <button type="button" role="tab" aria-selected="false" tabindex="-1">Tab Two</button>
+    </div>
+
+    <!-- Known Defect #5: Custom div role="button" without Enter/Space keydown handler -->
+    <div role="button" tabindex="0" class="custom-btn" data-defect="kb-5" onclick="this.dataset.activated='true'">Broken Custom Button</div>
+
+    <!-- Blind Defect #1 (no rule): Invalid input missing aria-describedby link to error message -->
+    <label for="email-in">Email</label>
+    <input id="email-in" type="email" aria-invalid="true" data-defect="kb-blind-1" />
+    <span id="email-err">Invalid email address</span>
+  </body>
+</html>

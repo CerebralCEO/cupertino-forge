@@ -18,7 +18,19 @@ export interface AlertProps { open: boolean; onOpenChange: (o: boolean) => void;
 export function Alert({ open, onOpenChange, title, message, actions, icon }: AlertProps) {
   const { platform } = useCupertino();
   const mac = platform === 'macos';
-  React.useEffect(() => { if (open && actions.some((a) => a.role === 'destructive')) haptic('warning'); }, [open]); // eslint-disable-line react-hooks/exhaustive-deps
+  const prevFocusRef = React.useRef<HTMLElement | null>(null);
+  const wasOpenRef = React.useRef(false);
+  React.useEffect(() => {
+    if (open && !wasOpenRef.current) {
+      prevFocusRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    } else if (!open && wasOpenRef.current) {
+      const target = prevFocusRef.current;
+      prevFocusRef.current = null;
+      if (target && target.isConnected) requestAnimationFrame(() => target.focus());
+    }
+    wasOpenRef.current = open;
+    if (open && actions.some((a) => a.role === 'destructive')) haptic('warning');
+  }, [open]); // eslint-disable-line react-hooks/exhaustive-deps
   const stacked = mac || actions.length > 2;
   const ordered = mac ? [...actions].sort((a, b) => (a.role === 'default' ? -1 : b.role === 'default' ? 1 : 0)) : actions;
 

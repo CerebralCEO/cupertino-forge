@@ -39,3 +39,14 @@
 | ১৭ | ডার্ক মোডে হার্ডকোডেড সাদা বর্ডার (`border: 1px solid white;`) | **Missed** | **Missed** | **Known Gap** | `lint.mjs`-এর `glass-border` শুধু `rgba?(255,255,255` খোঁজে, আর `computed-style-audit.mjs` এখনো `borderColor` অডিট করে না। |
 
 **সামগ্রিক সৎ ফলাফল (১৭টি ডিফেক্ট):** `12 / 17` Detected (`9/9` মূল + `3/3` বিদ্যমান-নিয়ম blind + **`0/5` সত্যিকারের নিয়ম-বহির্ভূত blind**)।
+
+---
+
+## ৪. UX কীবোর্ড Blind পরীক্ষা (`tests/seeded-defects/keyboard.html` — Phase 3b-lite)
+
+`qa/ux-keyboard.mjs` চালালে ৫টি জানা কীবোর্ড ডিফেক্টের **৫/৫টিই ধরা পড়েছে** (`no-positive-tabindex`, `tab-order-and-no-trap`, `focus-ring`, `modal-focus-trap-esc-return`, `roving-focus-ltr-rtl`, `enter-space-activation`), কিন্তু যে ২টি কীবোর্ড/অ্যাক্সেসিবিলিটি ভুলের জন্য কোনো নিয়ম লেখা হয়নি, সেগুলো ধরা পড়েনি (**`0 / 2` Known Gaps**):
+
+| # | Blind কীবোর্ড ডিফেক্ট (`tests/seeded-defects/keyboard.html`) | `qa/ux-keyboard.mjs` | ফলাফল | Known Gap কারণ |
+|---|---|---|---|---|
+| kb-blind-1 | `aria-invalid="true"` ইনপুটে এরর মেসেজের সাথে `aria-describedby` যুক্ত নেই | **Missed** | **Known Gap** | `ux-keyboard.mjs` ফর্ম ভ্যালিডেশন `aria-describedby` রেফারেন্স লিংক যাচাই করে না। |
+| kb-blind-2 | ন্যাভিগেশনের আগে "Skip to main content" লিংক অনুপস্থিত | **Missed** | **Known Gap** | `ux-keyboard.mjs` ল্যান্ডমার্ক স্কিপ-লিংক উপস্থিতি যাচাই করে না। |

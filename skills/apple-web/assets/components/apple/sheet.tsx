@@ -38,7 +38,19 @@ export function Sheet({ open, onOpenChange, title, leading, trailing, detents = 
   const drag = useDragControls();
   const scrollRef = React.useRef<HTMLDivElement>(null);
   const pointerStartY = React.useRef<number | null>(null);
-  React.useEffect(() => { if (open) setDetent(initialDetent ?? detents[0]); }, [open]); // eslint-disable-line react-hooks/exhaustive-deps
+  const prevFocusRef = React.useRef<HTMLElement | null>(null);
+  const wasOpenRef = React.useRef(false);
+  React.useEffect(() => {
+    if (open && !wasOpenRef.current) {
+      prevFocusRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+      setDetent(initialDetent ?? detents[0]);
+    } else if (!open && wasOpenRef.current) {
+      const target = prevFocusRef.current;
+      prevFocusRef.current = null;
+      if (target && target.isConnected) requestAnimationFrame(() => target.focus());
+    }
+    wasOpenRef.current = open;
+  }, [open]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const onDragEnd = (_: unknown, info: PanInfo) => {
     const h = (window.innerHeight * DETENT_VH[detent]) / 100;
