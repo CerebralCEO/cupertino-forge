@@ -33,26 +33,28 @@ Implementation:
 | Shared element / Zoom | SwiftUI `NavigationTransition.zoom` + `matchedTransitionSource` (`[official]`) / `matchedGeometryEffect`; Web View Transitions API / `layoutId`; Flutter `Hero` | Yes | 200ms crossfade |
 | Sheet present | slides from bottom with spring sheet; scrim fades; drag dismiss velocity 600 pt/s or 40% distance `[estimate]` | Yes | 200ms crossfade, bounce 0 |
 | Alert | scale 1.08 to 1 and opacity 0 to 1, spring popover; dismiss opacity 150ms `[estimate]` | Yes | 200ms crossfade, no scale |
-| Menu / popover | grows from source button: scale 0.6 to 1 anchored at source, spring popover; close scale 0.8 and fade 180ms `[estimate]` | Yes | 200ms crossfade |
+| Menu / popover | morphs out of glass button: scale 0.6 to 1 with opacity, anchored at source, spring popover; close scale 0.8 and fade 180ms `[estimate]` | Yes | 200ms crossfade |
 | Context menu | target lifts 1.04, background blurs 20, menu springs in `[estimate]` | Yes | 200ms crossfade, no blur animation |
-| Tab switch | content crossfade 150ms `[estimate]`; selection capsule slides with snappy | Yes | 150ms crossfade only |
-| Tab bar minimize | `.tabBarMinimizeBehavior(.onScrollDown)` `[official]` + glassMorph `[estimate]` | Yes | instant/200ms crossfade |
-| Toggle / Segmented | knob snappy, knob stretches 1.25 `[estimate]`, track color crossfade 150ms | Yes | instant/150ms color crossfade, bounce 0 |
+| Tab switch | content crossfade 150ms (no slide) `[estimate]`; selection capsule slides with snappy | Yes | 150ms crossfade only |
+| Tab bar minimize | shrinks on scroll down, restores on scroll up (`.tabBarMinimizeBehavior(.onScrollDown)` `[official]`), spring glassMorph `[estimate]` | Yes | instant/200ms crossfade |
+| Toggle | knob snaps with snappy, stretches 1.25 `[estimate]` while pressed, track color crossfade 150ms | Yes | instant/150ms color crossfade, bounce 0 |
+| Segmented | indicator slides with snappy, stretches while dragging `[estimate]` | Yes | instant/150ms crossfade, bounce 0 |
 | List row tap | highlight appears 0ms, fades out 250ms `[estimate]` | Yes | 200ms fade |
 | Expand / collapse | height and opacity smooth; chevron rotates 90 deg snappy `[estimate]` | Yes | 200ms crossfade |
-| Drag and drop | lift 1.03–1.05, follow interactive, drop snappy + rigid haptic `[estimate]` | Yes | no overshoot, bounce 0 |
+| Drag and drop | lift 1.03–1.05 with shadow, follow interactive, drop snappy + rigid haptic `[estimate]` | Yes | no overshoot, bounce 0 |
 | Pull to refresh | rubber band (`c=0.55` `[inferred]`), spinner after threshold + light haptic | Yes | spinner fade 200ms |
 
 ## Gestures
 
-- Track finger 1:1 (`interactive` spring), hand off velocity to settle spring.
+- Track finger 1:1 (`interactive` spring), hand off velocity to settle spring. Never snap without velocity.
+- Every animation can be interrupted mid flight by a new gesture.
 - Rubber band past edges: offset = (1 - 1 / ((x * 0.55 / d) + 1)) * d (`[inferred]`).
 - Scroll deceleration: `0.998` per ms (`normal`), `0.99` (`fast`) (`UIScrollView.DecelerationRate` `[official]`).
 - Input modality (`[official]` HIG Motion): Liquid Glass responds with stronger emphasis on touch than on trackpad/mouse (`1.08–1.12` vs `1.02` `[inferred]`).
 
 ## Reduced motion
 
-Replace x/y/z slides, scales, and blur transitions (`Avoid animating into and out of blurs` `[official]`) with 200ms crossfades (`[inferred]`), set bounce 0, disable parallax and glass wobble. CSS swaps automatically under `prefers-reduced-motion`; Web React MUST wrap root in `<MotionConfig reducedMotion="user">` (`[official]`); Flutter checks `MediaQuery.disableAnimationsOf(context)`.
+Replace x/y/z slides, scales, and blur transitions (`Avoid animating into and out of blurs` `[official]`) with 200ms crossfades (`[inferred]`), set bounce 0, disable parallax and glass wobble, keep state feedback. CSS swaps automatically under `prefers-reduced-motion`; Web React MUST wrap root in `<MotionConfig reducedMotion="user">` (`[official]`); Flutter checks `MediaQuery.disableAnimationsOf(context)`.
 
 ## Do not
 

@@ -24,7 +24,7 @@ All numbers come from `tokens/layout.json`. Values carry `[official]`, `[measure
 | Large title | largeTitle emphasized (34 bold `[official]`), leading 16 `[estimate]` |
 | Inline title | headline 17 semibold `[official]`, centered |
 | Bar buttons | 44 circles or 44 tall capsules of glass, grouped (`[official]` min hit target) |
-| Tab bar | floating glass capsule, about 62 tall `[estimate]`, 20 from sides `[estimate]`, max 5 tabs on iPhone `[official]`; `.tabBarMinimizeBehavior(.onScrollDown)` + `Tab(role: .search)` `[official]` |
+| Tab bar | floating glass capsule, sits above home indicator, about 62 tall `[estimate]`, 20 from sides `[estimate]`, max 5 tabs on iPhone `[official]`; `.tabBarMinimizeBehavior(.onScrollDown)` + `Tab(role: .search)` `[official]` |
 | Search | capsule glass, 44 tall `[estimate]`, trailing standalone tab / bottom on iPhone (iOS 26+) |
 | List row | min 52 `[estimate]` (44 minimum accessible `[official]`), subtitle row 64 `[estimate]`, leading inset 16 `[estimate]` |
 | Settings style row icon | 29 square, radius 7, separator inset 60 `[estimate]` |
