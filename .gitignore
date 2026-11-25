@@ -1,4 +1,5 @@
 _upgrade/scratch/
+_upgrade/05-figma-geometry/raw/
 node_modules/
 dist/
 !tests/harness/tauri/dist/
