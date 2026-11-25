@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Seeded Defects Fixture</title>
+    <link rel="stylesheet" href="./src/styles/cupertino/cupertino.tokens.css" />
+    <link rel="stylesheet" href="../../skills/apple-web/assets/styles/cupertino.base.css" />
+    <link rel="stylesheet" href="./defects.css" />
+  </head>
+  <body>
+    <h1 id="clean-heading" style="font-size: var(--cf-text-title1-size); letter-spacing: var(--cf-text-title1-tracking);">Seeded Defects Suite</h1>
+
+    <p class="defect-font-size" data-defect="1">Defect 1: Off-scale font-size (23px)</p>
+    <p class="defect-raw-hex" data-defect="2">Defect 2: Raw hex color (#123456)</p>
+    <button type="button" class="cf-clean-btn defect-small-target" data-defect="3">X</button>
+    <button type="button" class="cf-clean-btn defect-no-focus" data-defect="4">No Focus Ring</button>
+    <button type="button" class="cf-clean-btn defect-ease-timing" data-defect="5">Ease Transition</button>
+    <div class="defect-bad-radius" data-defect="6">Defect 6: Wrong radius 15px</div>
+    <p class="defect-low-contrast" data-defect="7">Defect 7: Low contrast text</p>
+    <div class="cf-glass defect-solid-glass" data-defect="8">Defect 8: Solid background on cf-glass</div>
+    <div class="defect-ignores-reduced-motion" data-defect="9">Defect 9: Ignores prefers-reduced-motion</div>
+  </body>
+</html>

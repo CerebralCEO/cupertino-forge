@@ -1,0 +1,9 @@
+{
+  "name": "cupertino-forge-qa",
+  "private": true,
+  "type": "module",
+  "description": "Isolated QA tooling dependencies for cupertino-forge (never copied into user projects).",
+  "devDependencies": {
+    "playwright": "^1.52.0"
+  }
+}

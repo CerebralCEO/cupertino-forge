@@ -1,0 +1,97 @@
+/* Deliberately broken styles for QA seeded-defect verification (9 planted defects). */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  font-family: var(--cf-font);
+  font-size: var(--cf-text-body-size);
+  line-height: var(--cf-text-body-line);
+  letter-spacing: var(--cf-text-body-tracking);
+  color: var(--cf-label);
+  background-color: var(--cf-bg);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+button.cf-clean-btn {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 8px 16px;
+  border: 0;
+  border-radius: 9999px;
+  background-color: var(--cf-fill-3);
+  color: var(--cf-label);
+  font-size: var(--cf-text-body-size);
+  letter-spacing: var(--cf-text-body-tracking);
+}
+
+/* Defect 1: Off-scale font-size */
+.defect-font-size {
+  font-size: 23px;
+}
+
+/* Defect 2: Raw hex color */
+.defect-raw-hex {
+  color: #123456;
+}
+
+/* Defect 3: Small hit target (< 44x44 iOS) */
+.defect-small-target {
+  min-width: 30px !important;
+  min-height: 30px !important;
+  width: 30px;
+  height: 30px;
+  padding: 0 !important;
+}
+
+/* Defect 4: outline: none without focus-visible replacement */
+.defect-no-focus:focus,
+.defect-no-focus:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Defect 5: ease timing function */
+.defect-ease-timing {
+  transition: transform 250ms ease;
+}
+
+/* Defect 6: Wrong off-token border-radius (15px, circular without squircle) */
+.defect-bad-radius {
+  width: 200px;
+  height: 80px;
+  padding: 12px;
+  background-color: var(--cf-bg-2);
+  border-radius: 15px;
+}
+
+/* Defect 7: Low contrast text (~2.85:1 on #FFFFFF) */
+.defect-low-contrast {
+  color: #999999;
+  background-color: #FFFFFF;
+  padding: 8px;
+}
+
+/* Defect 8: Solid background override on .cf-glass (uses valid token to isolate glass-clobber defect) */
+.defect-solid-glass {
+  padding: 12px;
+  border-radius: var(--cf-radius-card);
+  background: var(--cf-bg) !important;
+}
+
+/* Defect 9: Ignores prefers-reduced-motion (uses spring linear(...) curve to isolate reduced-motion gap) */
+@keyframes cf-defect-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.defect-ignores-reduced-motion {
+  padding: 12px;
+  background-color: var(--cf-bg-2);
+  animation: cf-defect-spin 1.2s linear(0, 0.5, 1) infinite !important;
+}

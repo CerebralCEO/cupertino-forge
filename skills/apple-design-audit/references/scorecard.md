@@ -1,22 +1,43 @@
-# Audit scorecard (15 layers, 0 to 10 each, total scaled to 100)
+# Audit Scorecard — Two-Part Model (Rule-Conformance + Fidelity)
 
-| # | Layer | 10 means | Common deductions |
-|---|---|---|---|
-| 1 | Tokens | zero raw values outside generated files | each raw hex, px radius, shadow, easing: minus 1 |
-| 2 | Navigation pattern | tab bar or sidebar, push stacks, sheets, native positions | hamburger minus 5, web navbar minus 4 |
-| 3 | Hierarchy | one primary action, at most 3 type levels per group | two prominent buttons minus 3 |
-| 4 | Typography | named styles, correct tracking and leading, system font on Apple | off scale sizes minus 1 each, light weights minus 2 |
-| 5 | Color | semantic only, one accent, labels on glass monochrome | palette classes minus 1 each, #007AFF minus 2 |
-| 6 | Dark mode | elevated surfaces, all tokens flip, images adapted | hardcoded light colors minus 2 each |
-| 7 | Liquid Glass | functional layer only, no stacking, scroll edge effect | glass on cards minus 3, white glass borders minus 3 |
-| 8 | Shape | squircle, concentric, capsules | circular corners minus 3, non concentric nesting minus 2 |
-| 9 | Spacing and layout | 4 grid, correct margins, safe areas | off grid minus 1 each, edge collisions minus 2 |
-| 10 | Elevation | shadows only on floating things, hairline edges | card shadows on iOS minus 3 |
-| 11 | Iconography | SF metaphors, matched weight, one family | mixed families minus 3, emoji minus 3 |
-| 12 | Interaction states | press instant, hover pointer only, focus ring, disabled | missing press minus 3, ripple minus 4 |
-| 13 | Motion and feedback | springs, interruptible, reduced motion, right haptics | ease curves minus 2, haptic on every tap minus 2 |
-| 14 | States | empty, loading (300ms delay), error per screen | each missing state minus 2 |
-| 15 | Accessibility and copy | contrast, targets, labels, keyboard, Apple voice | each failing contrast minus 1, Yes/No alerts minus 2 |
+Every `/apple-audit` report MUST keep **Part A (Rule-Conformance)** and **Part B (Fidelity)** strictly separate. Never combine reference-image visual similarity with deterministic rule conformance into a single blended number.
 
-Total = sum of executed layers / (10 * executed_layers_count) * 100, rounded.
-If a check or layer could not run (e.g., runtime screenshots unavailable for Liquid Glass or motion verification), mark that layer `NOT RUN (<reason>)` and exclude it from the denominator rather than marking it `10` or `OK`.
+If any automated tool or check could not run (e.g., Playwright unavailable or no live URL), mark it `NOT RUN (<reason>)` and exclude it from the denominator — **never** report `10` or `OK` for unrun checks.
+
+---
+
+## Part A: Rule-Conformance (`0–100`)
+
+Measured deterministically from static lint (`hooks/scripts/lint.mjs`), runtime DOM audit (`qa/computed-style-audit.mjs` against `cupertino.tokens.resolved.json`), and structural screen inspection across 15 layers (`0–10` per executed layer).
+
+| # | Layer | 10 means | Deductions & Automated Signal | Token Basis |
+|---|---|---|---|---|
+| 1 | Tokens | Zero raw values outside generated files | Static lint (`raw-hex`, `tw-palette`, `css-radius`, `css-shadow`, `css-font-size`) + DOM `raw-color` (`-1` each) | `measured` |
+| 2 | Navigation pattern | Tab bar or sidebar, push stacks, native positions | Hamburger (`lint: hamburger`, `-5`), web top navbar (`-4`), missing native bar (`-3`) | `official` |
+| 3 | Hierarchy | One primary action, <=3 type levels per group | Multiple prominent CTAs (`-3`), flat contrast (`-2`) | `official` |
+| 4 | Typography | On-scale named sizes, exact tracking, non-Latin `0`, no thin UI weights | DOM `font-size`, `letter-spacing`, lint `font-family`/`thin-weight` (`-1` off-scale, `-2` thin weight/broken tracking) | `measured` / `official` |
+| 5 | Color | Semantic tokens, single accent, monochrome glass labels | Static `tw-palette`/`raw-color-fn` + DOM `raw-color` (`-1` each, `-2` `#007AFF`) | `measured` / `official` |
+| 6 | Dark mode | Elevated surfaces, zero-FOUC theme init, adapted assets | Hardcoded light colors or missing `darkElevated` (`-2` each) | `measured` |
+| 7 | Liquid Glass | Functional layer only, `<=6` simultaneous blurs, reduce-transparency fallback | Structural glass-on-cards (`-3`), white glass border (`-3`), DOM `glass-budget` (`-1`, **`estimate-based`**) | `official` + `estimate-based` |
+| 8 | Shape | Squircle corners, concentric nesting, capsule buttons | Static `tw-rounded`/`css-radius` + DOM `border-radius` (`-2` non-token radius, `-2` non-concentric) | `official` / `measured` |
+| 9 | Spacing & layout | 4pt spacing rhythm, safe margins, readable width | DOM `spacing-grid` (**`estimate-based`**, `-1` off-grid), edge collisions (`-2`) | `estimate-based` + `official` |
+| 10 | Elevation | Shadows only on floating layers, hairline dividers | Static `tw-shadow`/`css-shadow`, card shadows on iOS (`-3`) | `measured` |
+| 11 | Iconography | SF symbol metaphors, matched weight, one family | `emoji-icon` warning (`-3`), mixed icon families (`-3`) | `official` |
+| 12 | Interaction states | Press instant, hover pointer-only, `:focus-visible` ring, disabled state | DOM `focus-ring` fail (`-3`), Material ripple (`-4`), missing press (`-3`) | `official` |
+| 13 | Motion & feedback | Springs only (`linear(...)` / physics), interruptible, reduced-motion honored, intentional haptics | Static `easing` + DOM `easing` (**`estimate-based`**, `-2`), wrong haptics (`-2`) | `estimate-based` |
+| 14 | States | Empty, loading (`300ms` delay), error coverage per view | Each missing state (`-2`) | `official` |
+| 15 | Accessibility & copy | Contrast (`4.5:1` / `3:1`), hit targets (`44px`/`28px`), semantic roles, specific verbs | DOM `contrast` (`-2` fail), DOM `hit-target` (`-2` small target), vague Yes/No alerts (`-2`) | `official` |
+
+**Part A Calculation:**
+`Rule-Conformance Score = round((sum of executed layer scores / (10 * count of executed layers)) * 100)`
+Verdicts: `90–100 Apple grade`, `75–89 Close`, `50–74 Apple-ish`, `< 50 Not Apple`.
+Note explicitly in the report which deductions came from **`estimate-based`** rules (`spacing-grid`, `glass-budget`, `easing`).
+
+---
+
+## Part B: Fidelity (`0–100` or `N/A (no reference)`)
+
+Evaluates perceptual and layout closeness **only when a reference screenshot or design mock is provided** (via `--reference`, introduced in Phase 3b):
+
+- If **no reference image** is supplied: output **`Fidelity: N/A (no reference)`**.
+- If **a reference image** is supplied: compare layout structure, SSIM (`>= 0.92`, `estimate-based`), and CIEDE2000 swatch color accuracy (`<= 2.0`, `official`). Keep Part B scores separate from Part A.
