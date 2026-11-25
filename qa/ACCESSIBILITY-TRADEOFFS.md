@@ -6,7 +6,9 @@
 
 ## 1. Tint Opacity Provenance (`tokens/materials.json`)
 
-- **`liquidGlass.tuned.tinted.alpha` (`0.85` → `0.90`):** Source in `tokens/materials.json` is **`$class: "estimated"`** (`$source: "estimated"`, not an Apple Sketch kit measurement). Raised from `0.85` to `0.90` (`$note` added in `tokens/materials.json`) because `85%` `#0088FF` over `#FFFFFF` measured **`2.94:1`** (`< 3.0:1` Apple HIG bold/large minimum). At `90%` it reaches **`3.13:1`** while staying translucent (`< 0.95`).
+- **`liquidGlass.tuned.tinted.alpha` (`0.85` → `0.90`):** Source in `tokens/materials.json` is **`$class: "estimated"`** (`$source: "estimated"`, not an Apple Sketch kit measurement). Raised from `0.85` to `0.90` (`$note` added in `tokens/materials.json`) because `85%` `#0088FF` over `#FFFFFF` measured **`2.94:1`**. At `90%` it reaches **`3.13:1`** while staying translucent (`< 0.95`) — **3:1 পাস; 4.5:1 নয়; HIG bold-সংজ্ঞা অযাচাই**.
+  - **Dark-mode trade-off:** Raising tinted glass alpha `0.85 → 0.90` lowered black-background (`#000000`) contrast from **`4.69:1` → `4.25:1`** (dropping below `4.5:1`), improving light mode at a slight dark-mode cost. *Feasibility:* Separate light/dark alpha tokens (`--cf-glass-tinted-alpha`: `0.90` in `:root`, `0.85` in `:root[data-theme="dark"]`) are straightforward to support in CSS/Dart/TS without changing semantic names.
+  - **HIG "Bold" definition (`unverified`):** Apple HIG Accessibility (`https://developer.apple.com/design/human-interface-guidelines/accessibility`, DocC JSON checked) specifies `Up to 17 pts / All -> 4.5:1`, `18 pts / All -> 3:1`, and `All / Bold -> 3:1`, without defining a numeric CSS weight cutoff (`600` Semibold vs `700` Bold). Because `prominentGlass` small buttons render at `15px` `weight: 600` (Semibold), treating `600` as HIG "Bold" is **unverified**.
 - **`Button` `variant="tinted"` (`15%` → `12%` in `button.tsx`):** Estimated CSS `color-mix()` fill (not a kit token). Lowered from `15%` (`2.94:1` for `#0088FF` text on `#FFFFFF`) to `12%` (`3.05:1 >= 3.0:1`).
 - **Official Apple Secondary Label (`labelIOS.secondary.light` = `#3C3C43@0.6`):** Measured directly from the Apple iOS 27 Sketch Kit (`$class: "measured"`). Over `#FFFFFF`, composited contrast is **`3.44:1`** (`< 4.5:1` WCAG AA normal text, raised to `#3C3C43@0.8` ≈ `5.8:1` in High Contrast mode). This token is **not** altered; `qa/computed-style-audit.mjs` reports it as a non-blocking **advisory** (shown in `scoreDisplay`, e.g., `100 (3 advisories)`) as long as contrast stays `>= 3.0:1`.
 - **Official Apple macOS System Blue Selection / Default Button (`#FFFFFF` on `#0088FF`, 13pt regular):** Measured from the Apple macOS 27 Sketch Kit (`$class: "measured"`). Contrast is **`3.52:1`** (`>= 3.0:1` HIG large/bold/UI floor, below `4.5:1` WCAG AA 13pt normal text). Token is **not** altered; in `--platform macos`, `qa/computed-style-audit.mjs` reports it as a non-blocking **advisory** (shown in `scoreDisplay`, e.g., `100 (6 advisories)`).
@@ -15,7 +17,7 @@
 
 ## 2. `prominentGlass` (`#FFFFFF` bold label on tinted `#0088FF` glass) Across Backgrounds
 
-Measured in headless Chromium (`color-mix(in srgb, #0088FF 90%, transparent)` vs previous `85%`, `15px` `weight: 600` bold — HIG bold/large threshold `>= 3.0:1`, regular small text threshold `>= 4.5:1`):
+Measured in headless Chromium (`color-mix(in srgb, #0088FF 90%, transparent)` vs previous `85%`, `15px` `weight: 600` — **3:1 পাস; 4.5:1 নয়; HIG bold-সংজ্ঞা অযাচাই**):
 
 | Underlying Background | Hex | Composited RGB (`90%`) | Contrast (`90%`) | Contrast (`85%` prev.) | vs `>= 3.0:1` (Bold/Large) | vs `>= 4.5:1` (Small Regular) |
 |---|---|---|---|---|---|---|

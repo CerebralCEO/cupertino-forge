@@ -17,7 +17,7 @@
 
 `vite build` + `vite preview` সার্ভারে আসল `<CupertinoRoot>`, `<Glass>`, `<Squircle>`, `<Sheet>`, `<TabBar>`, `<SegmentedControl>`, `<Toggle>`, ও `<Alert>` রেন্ডার করে Playwright দিয়ে Chromium, **Playwright WebKit (`Version/18.2 Safari/605.1.15` — real Apple Safari নয়, Playwright WebKit ইঞ্জিন)** ও **Firefox (`Gecko/132.0`)** তিন ইঞ্জিনেই **৭/৭** চেক চালানো হয়েছে।
 
-> **সংশোধনী (Phase 3a অডিটে ধরা পড়া `@source` হার্নেস বাগ):** প্রাথমিক Phase 2a রান (`45.56 kB` CSS)-এ হার্নেসের `src/app.css`-এ `@source "../../../skills/apple-web/assets"` (৪ ধাপের বদলে ৩ ধাপ) থাকায় অর্ধেক Tailwind utility CSS জেনারেট হয়েছিল। Phase 3a-তে `@source "../../../../skills/apple-web/assets"` ঠিক করার পর পূর্ণ CSS (`67.73 kB`, `gzip: 12.93 kB`)-এ তিনটি ব্রাউজারেই পুনরায় যাচাই চালানো হয়েছে:
+> **সংশোধনী (Phase 3a অডিটে ধরা পড়া `@source` হার্নেস বাগ):** Phase 2a-র আগের WebKit/Firefox ৭/৭ অসম্পূর্ণ CSS-এ (`45.56 kB`) চলেছিল; নতুন ফল নিচে। হার্নেসের `src/app.css`-এ `@source "../../../skills/apple-web/assets"` (৪ ধাপের বদলে ৩ ধাপ) ঠিক করে পূর্ণ CSS (`67.73 kB`, `gzip: 12.93 kB`)-এ তিনটি ব্রাউজারেই পুনরায় যাচাই চালানো হয়েছে:
 > - **Chromium (পূর্ণ `67.73 kB` CSS):** **7 / 7 PASS** (Sheet `height: 793.36px` = সঠিক `94dvh`)
 > - **Playwright WebKit (পূর্ণ `67.73 kB` CSS):** **7 / 7 PASS** (`height: 793.36px`, `top: 396.50px`)
 > - **Playwright Firefox (পূর্ণ `67.73 kB` CSS):** **7 / 7 PASS** (`height: 793.35px`, `top: 396.67px`)
