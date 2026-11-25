@@ -1,8 +1,0 @@
-TITLE: NSGlassEffectView
-URL: https://developer.apple.com/documentation/appkit/nsglasseffectview
-
-ABSTRACT: A view that embeds its content view in a dynamic glass effect.
-DECL: class NSGlassEffectView
-
-TOPIC SECTION: Instance Properties
-  doc://com.apple.appkit/documentation/AppKit/NSGlassEffectView/contentView, doc://com.apple.appkit/documentation/AppKit/NSGlassEffectView/cornerRadius, doc://com.apple.appkit/documentation/AppKit/NSGlassEffectView/effectIsInteractive, doc://com.apple.appkit/documentation/AppKit/NSGlassEffectView/style-swift.property, doc://com.apple.appkit/documentation/AppKit/NSGlassEffectView/tintColor
