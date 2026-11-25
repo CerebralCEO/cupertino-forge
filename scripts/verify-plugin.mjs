@@ -142,22 +142,64 @@ try {
   fs.rmSync(tmpDir, { recursive: true, force: true });
 }
 
-// 8. Python & Playwright optional probe (report NOT RUN when missing rather than failing or lying OK)
-const pythonCandidates = process.platform === 'win32' ? [['python'], ['py', '-3']] : [['python3'], ['python']];
+// 8. Harness & QA toolchain probes (always PASS or NOT RUN — never FAIL when optional tools are absent)
+const isWin = process.platform === 'win32';
+const probeCmd = (cmds, args) => {
+  for (const cmd of cmds) {
+    const r = spawnSync(cmd[0], [...cmd.slice(1), ...args], {
+      encoding: 'utf8',
+      shell: isWin && cmd[0].endsWith('.bat'),
+    });
+    if (r.status === 0) return { cmd: cmd.join(' '), out: (r.stdout || r.stderr || '').trim() };
+  }
+  return null;
+};
+
+record('harness-node', 'PASS', `${process.version} (${process.execPath})`);
+
+const pythonCandidates = isWin ? [['python'], ['py', '-3']] : [['python3'], ['python']];
 let pyCmd = null;
 for (const cmd of pythonCandidates) {
   const r = spawnSync(cmd[0], [...cmd.slice(1), '--version'], { encoding: 'utf8' });
   if (r.status === 0) { pyCmd = cmd; break; }
 }
+let hasPyPlaywright = false;
 if (!pyCmd) {
   record('python-playwright-capture', 'NOT RUN', 'Python runtime unavailable on PATH (Windows Store python3 alias skipped)');
 } else {
   const pw = spawnSync(pyCmd[0], [...pyCmd.slice(1), '-c', 'import playwright; print("ok")'], { encoding: 'utf8' });
   if (pw.status === 0) {
+    hasPyPlaywright = true;
     record('python-playwright-capture', 'PASS', `${pyCmd.join(' ')} + playwright importable`);
   } else {
     record('python-playwright-capture', 'NOT RUN', `${pyCmd.join(' ')} found, playwright package not installed`);
   }
+}
+
+const qaPwDir = path.join(root, 'qa', 'node_modules', 'playwright');
+const hasNodePlaywright = fs.existsSync(qaPwDir);
+if (hasNodePlaywright || hasPyPlaywright) {
+  const parts = [];
+  if (hasPyPlaywright) parts.push(`python (${pyCmd.join(' ')})`);
+  if (hasNodePlaywright) parts.push('node (qa/node_modules/playwright)');
+  record('harness-playwright', 'PASS', parts.join(' + '));
+} else {
+  record('harness-playwright', 'NOT RUN', 'Playwright missing (run npm install in qa/ or pip install playwright)');
+}
+
+const flutterRes = probeCmd(isWin ? [['flutter.bat'], ['flutter']] : [['flutter']], ['--version']);
+if (flutterRes) {
+  const firstLine = flutterRes.out.split(/\r?\n/)[0] || 'flutter';
+  record('harness-flutter', 'PASS', firstLine);
+} else {
+  record('harness-flutter', 'NOT RUN', 'Flutter SDK not found on PATH');
+}
+
+const cargoRes = probeCmd([['cargo']], ['--version']);
+if (cargoRes) {
+  record('harness-cargo', 'PASS', cargoRes.out.split(/\r?\n/)[0] || 'cargo');
+} else {
+  record('harness-cargo', 'NOT RUN', 'Rust cargo toolchain not found on PATH');
 }
 
 const fails = results.filter((r) => r.status === 'FAIL').length;

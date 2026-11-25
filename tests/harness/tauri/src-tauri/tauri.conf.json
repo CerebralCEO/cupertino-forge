@@ -1,0 +1,31 @@
+{
+  "productName": "CupertinoCheck",
+  "version": "0.1.0",
+  "identifier": "dev.cupertino.check",
+  "build": {
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "macOSPrivateApi": true,
+    "windows": [
+      {
+        "label": "main",
+        "title": "",
+        "width": 1100,
+        "height": 720,
+        "minWidth": 480,
+        "minHeight": 320,
+        "transparent": true,
+        "decorations": true,
+        "titleBarStyle": "Overlay",
+        "hiddenTitle": true,
+        "trafficLightPosition": { "x": 16, "y": 26 },
+        "theme": null,
+        "center": true
+      }
+    ]
+  },
+  "bundle": {
+    "icon": ["icons/icon.png"]
+  }
+}

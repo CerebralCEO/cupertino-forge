@@ -1,4 +1,4 @@
-# Phase 2a Real TSX Type-Check, React Mount (Chromium + WebKit) ও Diff Audit রিপোর্ট
+# Phase 2a Real TSX Type-Check, React Mount (Chromium + Playwright WebKit) ও Diff Audit রিপোর্ট
 
 **শাখা (Branch):** `upgrade/apple-dna-v2`  
 **স্ক্র্যাচ হার্নেস (gitignored):** `_upgrade/scratch/tsx-check/` (`React 19.1`, `Motion 12.15`, `Radix UI`, `Tailwind CSS v4`, `Vite 6`, `TypeScript 5.8 strict`)
@@ -13,9 +13,9 @@
 
 ---
 
-## ২. রিয়েল মাউন্টেড React (Vite Production Build) Playwright যাচাই — Chromium ও WebKit
+## ২. রিয়েল মাউন্টেড React (Vite Production Build) Playwright যাচাই — Chromium ও Playwright WebKit
 
-`vite build` (`2130 modules`, CSS `99.30 kB`, JS `572.98 kB`) + `vite preview` সার্ভারে আসল `<CupertinoRoot>`, `<Glass>`, `<Squircle>`, `<Sheet>`, `<TabBar>`, `<SegmentedControl>`, `<Toggle>`, ও `<Alert>` রেন্ডার করে Playwright দিয়ে Chromium ও **WebKit (`Version/18.2 Safari/605.1.15`)** উভয়েই **৭/৭** চেক চালানো হয়েছে।
+`vite build` (`2130 modules`, CSS `99.30 kB`, JS `572.98 kB`) + `vite preview` সার্ভারে আসল `<CupertinoRoot>`, `<Glass>`, `<Squircle>`, `<Sheet>`, `<TabBar>`, `<SegmentedControl>`, `<Toggle>`, ও `<Alert>` রেন্ডার করে Playwright দিয়ে Chromium ও **Playwright WebKit (`Version/18.2 Safari/605.1.15` — real Apple Safari নয়, Playwright WebKit ইঞ্জিন)** উভয়েই **৭/৭** চেক চালানো হয়েছে।
 
 ### ২.১ ধরা পড়া ও প্লাগিনে সরাসরি ঠিক করা ২টি বাস্তব রানটাইম বাগ
 
@@ -24,9 +24,9 @@
 | ১ | **WebKit `-webkit-backdrop-filter` blur ড্রপ বাগ:** Playwright WebKit-এ unprefixed `backdrop-filter` সাপোর্টেড নয় (`CSS.supports('backdrop-filter', ...)` = `false`), এবং WebKit CSS পার্সার `-webkit-backdrop-filter: var(--cf-glass-filter)` দিলে কম্পিউটেড ফিল্টার `'none'` করে ফেলে। তাছাড়া Tailwind v4-এর LightningCSS `@supports not (backdrop-filter: blur(1px))`-কে `@supports not ((-webkit-backdrop-filter:...) or (backdrop-filter:...))`-এ রূপান্তর করে অকার্যকর করে দিচ্ছিল। | [`scripts/build-tokens.mjs`](file:///D:/Claude-Plugins/cupertino-forge/scripts/build-tokens.mjs) | Tailwind v4 ব্যবহৃত WebKit-এক্সক্লুসিভ ফিচার কুয়েরি `@supports (-webkit-hyphens: none)` ব্লকে `tokens/materials.json` থেকে সরাসরি `.cf-glass`, `clear`, `large`, `menu` (লাইট ও ডার্ক) লিটারাল `-webkit-backdrop-filter` ও `[data-transparency="reduce"]` / `[data-contrast="more"]`-এ `none` ওভাররাইড জেনারেট করা হয়েছে। |
 | ২ | **`Sheet` মিডিয়াম ডিটেন্টে পরপর ২য় ড্র্যাগ আটকে যাওয়া:** `large` → `medium` ডিটেন্ট বদলের পর `animate={{ y: '42dvh' }}` ও `dragConstraints` একই `motion.div`-এ থাকায় `medium` থেকে নিচে ড্র্যাগ করলে `y` ওপরে লাফিয়ে উঠছিল (`top: 397 → 223`) বা ড্র্যাগ কাজ করছিল না। | [`sheet.tsx`](file:///D:/Claude-Plugins/cupertino-forge/skills/apple-web/assets/components/apple/sheet.tsx) | বাইরের `motion.div`-এ শুধু ডিটেন্ট/ওপেন/ক্লোজ `y` (`42dvh` / `0%` / `100%`) রাখা হয়েছে এবং ভেতরের ড্র্যাগেবল `motion.div`-কে `y: 0`-তে `dragSnapToOrigin` দিয়ে আলাদা করা হয়েছে। এতে Chromium ও WebKit দুটোতেই `large -> medium` স্ক্রল হ্যান্ডঅফ এবং `medium -> dismiss` ড্র্যাগ ১:১ কাজ করে। |
 
-### ২.২ Chromium ও WebKit ফলাফল (`7/7 PASS` উভয় ব্রাউজারে)
+### ২.২ Chromium ও Playwright WebKit ফলাফল (`7/7 PASS` উভয় ব্রাউজারে)
 
-| # | যাচাইকৃত দৃশ্যকল্প | Chromium ফলাফল | WebKit (`Safari 18.2 / 605.1.15`) ফলাফল |
+| # | যাচাইকৃত দৃশ্যকল্প | Chromium ফলাফল | Playwright WebKit (UA Safari 18.2 — real Safari নয়) ফলাফল |
 |---|---|---|---|
 | ১ | ডার্ক মোড প্রথম পেইন্টে zero-FOUC (`CF_THEME_INIT_SCRIPT`) | **PASS** — React মাউন্টের আগেই `themeBeforeReact: 'dark'`, `bgColor: 'rgb(0, 0, 0)'` | **PASS** — `themeBeforeReact: 'dark'`, `bgColor: 'rgb(0, 0, 0)'` |
 | ২ | ইন-অ্যাপ `setTransparency('reduce')` দিয়ে আসল `<Glass>` solid হওয়া | **PASS** — `dataset: 'reduce'`, `bf: 'none'`, `bg: 'rgb(38, 38, 38)'` | **PASS** — `dataset: 'reduce'`, `bf: 'none'`, `bg: 'rgb(38, 38, 38)'` |
@@ -86,8 +86,8 @@
 ## ৫. সর্বশেষ পূর্ণ টেস্ট ও ভেরিফিকেশন রান (সব ফিক্সের পর)
 
 - `npx tsc --noEmit` (`_upgrade/scratch/tsx-check/`): **0 errors** (২২টি ফাইল)
-- `vite build` + Chromium Playwright (`verify_mounted.py --browser chromium`): **7 / 7 PASS**
-- `vite build` + WebKit Playwright (`verify_mounted.py --browser webkit`): **7 / 7 PASS**
+- `vite build` + Playwright Chromium (`verify_mounted.py --browser chromium`): **7 / 7 PASS**
+- `vite build` + Playwright WebKit (`verify_mounted.py --browser webkit` — *Playwright WebKit UA Safari 18.2, real Safari নয়*): **7 / 7 PASS**
 - `node --test tests/*.test.mjs`: **11 / 11 PASS**
 - `node scripts/verify-plugin.mjs`: **8 PASS, 0 NOT RUN, 0 FAIL**
 - `node scripts/contrast-check.mjs --accent "#0088FF"`: **0 blocking failures**

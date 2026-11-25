@@ -1,0 +1,11 @@
+{
+  "platform": "tauri",
+  "style": "macos",
+  "accent": "#0088FF",
+  "appearance": "system",
+  "glassIntensity": 0.5,
+  "sounds": false,
+  "haptics": false,
+  "windowsChrome": "mac",
+  "distribution": "direct"
+}
