@@ -2,6 +2,15 @@
 
 All notable changes to `cupertino-forge` are documented in this file.
 
+## v2.1.0 — 2026-11-26 (Zero-Config Auto-Bootstrap & Global Antigravity Trigger)
+
+Eliminates manual setup friction across both Claude Code and Google Antigravity with a single-command cross-platform project bootstrapper and safe non-destructive initialization.
+
+- **Added Zero-Config Auto-Bootstrapper (`scripts/setup-project.mjs`):** Zero-dependency Node ESM CLI (`--target <dir> [--platform ios|macos|adaptive|auto] [--mode new|redesign|auto] [--ide antigravity|claude|both] [--force] [--dry-run] [--json]`) that auto-detects Web (Next.js/React/Vite), Flutter, or Tauri 2 stacks and `new` vs `redesign` modes, generates `.apple-design.json`, dynamically injects the live plugin path into `.agent/rules/cupertino-forge.md` (zero `<PLUGIN_PATH>` placeholders), safely appends `CLAUDE.md` without duplicating, builds tokens via `scripts/build-tokens.mjs`, copies adapter starter primitives without overwriting existing user files unless `--force` is specified, and prints Scenario A / Scenario B next steps.
+- **Wired Commands to Auto-Bootstrapper:** Updated `commands/apple-init.md` and `commands/apple-redesign.md` so Step 1 executes `node "${CLAUDE_PLUGIN_ROOT}/scripts/setup-project.mjs" --target .` (with `--mode redesign` in `/apple-redesign`).
+- **Updated Doctor & Regression Coverage:** Added `scripts/setup-project.mjs` to `scripts/verify-plugin.mjs` core runtime validation (`24/24` files) and added `tests/setup-project-regression.test.mjs` covering Web redesign, Flutter new, Tauri redesign, `--dry-run`, `--force`, non-overwrite safety, safe `CLAUDE.md` append, and empty-dir exit `2`.
+- **Updated Documentation & Release Packaging (`v2.1.0`):** Updated `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, `README.md`, and `GUIDE.md` (`Section 4.11`) for the 1-command auto-bootstrap workflow and rebuilt `cupertino-forge-v2.1.0.zip`.
+
 ## v2.0.0 — 2026-11-26 (`cupertino-forge` Apple DNA v2 Release)
 
 Major cross-platform release unifying official Apple HIG DocC tables, Apple iOS 27 / macOS 27 Sketch & Figma kit measurements, deterministic Playwright/Flutter/Tauri verification harnesses, an Existing Project Redesign Engine, Canonical Master Use-Flow, Google Antigravity cross-IDE bridge, and clean release packaging.

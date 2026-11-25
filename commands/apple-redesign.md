@@ -9,7 +9,7 @@ Target: $ARGUMENTS (default: the active screen or project UI)
 
 Follow these steps in order:
 
-1. **Detect stack & target style:** Read `.apple-design.json` at the project root. If missing, detect the stack (`package.json` with next/react/vite -> `web`, `pubspec.yaml` -> `flutter`, `src-tauri/` -> `tauri`) and run the `/apple-init` setup flow first before modifying screens.
+1. **Zero-config bootstrap & stack detection:** Run `node "${CLAUDE_PLUGIN_ROOT}/scripts/setup-project.mjs" --target . --mode redesign` (safe: skips existing files unless `--force` is passed). Confirm `.apple-design.json`, tokens, and starter adapter primitives exist before modifying screens.
 2. **Load core references & adapter:**
    - Read `${CLAUDE_PLUGIN_ROOT}/skills/apple-design-core/SKILL.md`
    - Read `${CLAUDE_PLUGIN_ROOT}/skills/apple-design-core/references/patterns/redesign-playbook.md`

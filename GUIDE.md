@@ -1,7 +1,7 @@
-# cupertino-forge v2.0.0 — Complete Engineering Reference Manual
+# cupertino-forge v2.1.0 — Complete Engineering Reference Manual
 
 > **Audience:** Human engineers and AI coding agents (Claude Code, Google Antigravity, Cursor, Windsurf).
-> When this manual and a source code/token file disagree, the source file wins. All paths, flags, exit codes, and code snippets below are verified directly against `cupertino-forge@2.0.0`.
+> When this manual and a source code/token file disagree, the source file wins. All paths, flags, exit codes, and code snippets below are verified directly against `cupertino-forge@2.1.0`.
 
 ---
 
@@ -87,7 +87,7 @@ This section is synced 1:1 with [`skills/apple-design-core/references/workflows/
 
 | Mechanism | Claude Code | Google Antigravity / Cross-IDE (`AGENTS.apple.md`) |
 |---|---|---|
-| **Path variable** | `${CLAUDE_PLUGIN_ROOT}` (auto-resolved) | `<PLUGIN_PATH>` set inside `.agent/rules/cupertino-forge.md` or project-root `AGENTS.md` (copied from `templates/AGENTS.apple.md`) |
+| **Path variable & auto-bootstrap** | `${CLAUDE_PLUGIN_ROOT}` (auto-resolved); `/apple-init` runs `scripts/setup-project.mjs --target .` | One-command `node "<PLUGIN_PATH>/scripts/setup-project.mjs" --target .` auto-resolves the exact plugin path into `.agent/rules/cupertino-forge.md` (no manual `<PLUGIN_PATH>` replacement needed) |
 | **Session & prompt rules** | `templates/CLAUDE.apple.md` + `hooks/hooks.json` (`SessionStart`, `UserPromptSubmit`) | `.agent/rules/cupertino-forge.md` or `AGENTS.md` loaded automatically; start every session with `workflows/use-flow.md` |
 | **Commands** | Slash commands (`/apple-init`, `/apple-screen`, `/apple-redesign`, `/apple-component`, `/apple-audit`, `/apple-doctor`, `/apple-sync`) | Open `<PLUGIN_PATH>/commands/<name>.md` and execute steps verbatim |
 | **Post-edit lint** | Automatic `PostToolUse` hook (`lint.mjs --hook post`, blocks with exit `2`) | Manual terminal run after UI edits: `node "<PLUGIN_PATH>/hooks/scripts/lint.mjs" --all --root .` |
@@ -243,7 +243,7 @@ Every command, flag, and exit code below was verified directly from the script s
   ```bash
   node scripts/verify-plugin.mjs [--json]
   ```
-- **Checks:** `.claude-plugin/plugin.json` manifest, `23/23` core runtime files, `9` token JSON schemas (`$meta`), all `${CLAUDE_PLUGIN_ROOT}/...` path references, `9` synthesized `.wav` assets, lint hook smoke test (`session` + `prompt`), token builder smoke test, and optional toolchain probes (`node`, `python` + Playwright, Node `qa/node_modules/playwright`, `flutter`, `cargo`).
+- **Checks:** `.claude-plugin/plugin.json` manifest, `24/24` core runtime files (including `scripts/setup-project.mjs`), `9` token JSON schemas (`$meta`), all `${CLAUDE_PLUGIN_ROOT}/...` path references, `9` synthesized `.wav` assets, lint hook smoke test (`session` + `prompt`), token builder smoke test, and optional toolchain probes (`node`, `python` + Playwright, Node `qa/node_modules/playwright`, `flutter`, `cargo`).
 - **Exit codes:** `0` = zero `FAIL` checks (missing optional toolchains report `NOT RUN`, never `FAIL`); `1` = 1+ `FAIL` checks.
 
 ### 4.2 `scripts/build-tokens.mjs`
@@ -326,6 +326,14 @@ Every command, flag, and exit code below was verified directly from the script s
 - **Checks (6):** `no-positive-tabindex`, `tab-order-and-no-trap`, `focus-ring`, `modal-focus-trap-esc-return`, `roving-focus-ltr-rtl`, `enter-space-activation`. Missing browser engine reports `NOT RUN (<reason>)`.
 - **Exit codes:** `0` = 0 FAIL (may contain `NOT RUN`); `1` = 1+ FAIL or runtime page load error; `2` = missing `--url` CLI usage error.
 
+### 4.11 `scripts/setup-project.mjs` (Zero-Config Auto-Bootstrapper)
+- **Command:**
+  ```bash
+  node scripts/setup-project.mjs --target <dir> [--platform ios|macos|adaptive|auto] [--mode new|redesign|auto] [--ide antigravity|claude|both] [--force] [--dry-run] [--json]
+  ```
+- **Behavior:** Auto-detects target stack (`web` via `package.json` with `next`/`react`/`react-dom`/`vite`, `flutter` via `pubspec.yaml`, or `tauri` via `src-tauri/Cargo.toml`) and mode (`new` vs `redesign` based on existing UI source files). Writes `.apple-design.json`, resolves its own absolute plugin path dynamically via `import.meta.url` to create `.agent/rules/cupertino-forge.md` (zero `<PLUGIN_PATH>` placeholders left behind) and/or safely append the `cupertino-forge` section to `CLAUDE.md` (idempotent; skips if already present), runs `scripts/build-tokens.mjs` through a temp staging directory, and copies adapter starter primitives. Never overwrites existing user files unless `--force` is passed; `--dry-run` simulates all file operations without modifying `--target`. Prints exact next-step handoff (`Scenario A` vs `Scenario B` in `workflows/use-flow.md`).
+- **Exit codes:** `0` = bootstrap (or `--dry-run`) succeeded; `1` = runtime / token build failure; `2` = CLI usage error, missing target directory, or undetected/conflicting stack.
+
 ---
 
 ## 5. Quality Gates (G1-G7), Scorecard & Reference Audit Workflow
@@ -374,7 +382,7 @@ Invoke the single reviewer agent in either or both modes:
 3. **Building a clean release ZIP:**
    ```bash
    node scripts/package-plugin.mjs
-   # Produces _upgrade/scratch/cupertino-forge-v2.0.0.zip (160 runtime files, 0 forbidden entries)
+   # Produces _upgrade/scratch/cupertino-forge-v2.1.0.zip (161 runtime files, 0 forbidden entries)
    ```
 
 ---

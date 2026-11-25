@@ -1,4 +1,4 @@
-# cupertino-forge (v2.0.0)
+# cupertino-forge (v2.1.0)
 
 **Apple iOS 27 & macOS 27 (Liquid Glass) Design System for Claude Code, Google Antigravity, and Cross-IDE Agentic Workflows.**
 
@@ -25,7 +25,7 @@
 
 ```text
 cupertino-forge/
-├── .claude-plugin/     Plugin manifest (plugin.json v2.0.0) & local marketplace.json
+├── .claude-plugin/     Plugin manifest (plugin.json v2.1.0) & local marketplace.json
 ├── commands/           7 slash commands (doctor, init, screen, component, redesign, audit, sync)
 ├── agents/             2 specialist agents (apple-design-reviewer [visual|behavior], apple-spec-researcher)
 ├── skills/
@@ -35,12 +35,12 @@ cupertino-forge/
 │   ├── apple-tauri/         Tauri 2 Rust bridge (apple_config.rs, apple_window.rs, apple_menu.rs, MAS/Direct configs)
 │   └── apple-design-audit/  Two-part audit skill (Rule-Conformance 0-100 + Fidelity) & 15-layer scorecard
 ├── tokens/             Single source of truth (9 JSON files + source/ kit exports + auto-generated ESTIMATES.md)
-├── scripts/            Token builder, plugin doctor, contrast check, capture matrix, pixel-diff, sound synth, ZIP packager
+├── scripts/            Zero-config project bootstrapper (setup-project.mjs), token builder, doctor, contrast check, capture matrix, pixel-diff, sound synth, ZIP packager
 ├── qa/                 Playwright runtime DOM auditor (computed-style-audit.mjs), keyboard UX auditor (ux-keyboard.mjs), QA docs
 ├── hooks/              Claude Code hooks.json (SessionStart, UserPromptSubmit, PostToolUse, Stop) + lint.mjs
 ├── templates/          apple-design.json (template for .apple-design.json), CLAUDE.apple.md (Claude Code), AGENTS.apple.md (Google Antigravity)
 ├── assets/sounds/      9 original synthesized WAV UI sounds (zero Apple audio)
-└── tests/              15 zero-dependency Node regression tests, seeded defect pages, & reproducible web/flutter/tauri harnesses
+└── tests/              16 zero-dependency Node regression tests, seeded defect pages, & reproducible web/flutter/tauri harnesses
 ```
 
 ---
@@ -56,7 +56,7 @@ cupertino-forge/
 1. Build a clean release ZIP (optional if installing directly from clone):
    ```bash
    node scripts/package-plugin.mjs
-   # Output: _upgrade/scratch/cupertino-forge-v2.0.0.zip
+   # Output: _upgrade/scratch/cupertino-forge-v2.1.0.zip
    ```
 2. Unzip or keep the repository at a stable path (e.g., `D:\Claude-Plugins\cupertino-forge` or `~/cupertino-forge`).
 3. Inside Claude Code:
@@ -68,18 +68,18 @@ cupertino-forge/
    ```text
    /apple-doctor
    ```
-5. Inside any project root, run `/apple-init web ios` (or `flutter macos`, `tauri adaptive "#0088FF"`).
+5. Inside any project root, run `/apple-init` (which automatically executes `scripts/setup-project.mjs --target .` to detect Web/Flutter/Tauri, generate tokens, copy primitives, and wire rules without overwriting existing user files).
 
-### Option B — Google Antigravity, Cursor, Windsurf & Generic Agentic IDEs (No Claude Hooks)
+### Option B — Google Antigravity, Cursor, Windsurf & Generic Agentic IDEs (1-Command Zero-Config Bootstrap)
 
 1. Clone or unzip `cupertino-forge` to a stable folder (e.g., `D:\Claude-Plugins\cupertino-forge`).
-2. Copy [`templates/AGENTS.apple.md`](templates/AGENTS.apple.md) into your target project at:
-   - `.agent/rules/cupertino-forge.md` (**Google Antigravity** workspace rule), or
-   - `AGENTS.md` at the project root (generic agentic IDEs).
-3. Replace `<PLUGIN_PATH>` inside that copied file with your local clone path, and copy [`templates/apple-design.json`](templates/apple-design.json) to `.apple-design.json` at the project root.
-4. Run the manual terminal verification loop after UI edits (covers token generation plus Quality Gates G2, G3, G5, and G6; also run platform build G4 and visual/behavior review G7 per [`GUIDE.md`](GUIDE.md#5-quality-gates-g1-g7-scorecard--reference-audit-workflow)):
+2. Run **one command** from your target project root — it auto-detects `web`, `flutter`, or `tauri`, detects `new` vs `redesign`, generates `.apple-design.json`, builds tokens, copies adapter primitives (never overwriting existing files unless `--force`), and writes `.agent/rules/cupertino-forge.md` with your exact local plugin path (zero manual `<PLUGIN_PATH>` editing):
    ```bash
-   node "<PLUGIN_PATH>/scripts/build-tokens.mjs" --out src/styles/cupertino --targets css,tailwind,ts
+   node "<PLUGIN_PATH>/scripts/setup-project.mjs" --target .
+   ```
+   *(Use `--dry-run` to preview changes first, `--ide antigravity|claude|both` to control IDE rule generation, or `--mode new|redesign` to override detection.)*
+3. Run the manual terminal verification loop after UI edits (covers Quality Gates G2, G3, G5, and G6; also run platform build G4 and visual/behavior review G7 per [`GUIDE.md`](GUIDE.md#5-quality-gates-g1-g7-scorecard--reference-audit-workflow)):
+   ```bash
    node "<PLUGIN_PATH>/scripts/contrast-check.mjs" --accent "#0088FF"
    node "<PLUGIN_PATH>/hooks/scripts/lint.mjs" --all --root .
    node "<PLUGIN_PATH>/qa/computed-style-audit.mjs" --url http://127.0.0.1:3000 --platform ios
@@ -129,6 +129,9 @@ flowchart TD
 All flags below are verified directly from the script source files:
 
 ```bash
+# Zero-config project auto-bootstrapper (auto-detects stack/mode, tokens, starter assets & IDE rules)
+node scripts/setup-project.mjs --target <dir> [--platform ios|macos|adaptive|auto] [--mode new|redesign|auto] [--ide antigravity|claude|both] [--force] [--dry-run] [--json]
+
 # Plugin doctor & toolchain probe
 node scripts/verify-plugin.mjs [--json]
 
@@ -150,7 +153,7 @@ node qa/ux-keyboard.mjs --url <url-or-file> [--browser chromium|webkit|firefox|a
 # Screenshot capture (standard 4 images or --matrix 72-image accessibility/engine matrix)
 python scripts/capture.py --url <url> --out qa/out [--matrix] [--widths 390,1100] [--themes light,dark] [--dry-run]
 
-# Build clean v2.0.0 release ZIP (0 forbidden folders)
+# Build clean v2.1.0 release ZIP (0 forbidden folders)
 node scripts/package-plugin.mjs [--out <zipPath>]
 ```
 
