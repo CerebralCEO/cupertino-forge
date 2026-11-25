@@ -22,9 +22,24 @@
 
 ---
 
-## ২. ফিক্সের পর চূড়ান্ত ফলাফল (Clean Mounted App)
+## ২. ফিক্সের পর চূড়ান্ত ফলাফল (Clean iOS App — `/`)
 
-- **Playwright Chromium (`verify_mounted.py`):** **7 / 7 PASS** (কোনো রিগ্রেশন নেই)
-- **Light Mode (`computed-style-audit.mjs --theme light`):** **12 / 12 PASS** (`score: 100`, **0 false positives**, ৩টি অফিশিয়াল secondary-label advisory)
-- **Dark Mode (`computed-style-audit.mjs --theme dark`):** **12 / 12 PASS** (`score: 100`, **0 false positives**)
+- **Playwright Chromium / WebKit / Firefox (`verify_mounted.py`, পূর্ণ `67.77 kB` CSS):** **7 / 7 PASS** (তিন ব্রাউজারেই)
+- **Light Mode (`--platform ios --theme light`):** **12 / 12 PASS** (`scoreDisplay: 100 (3 advisories)`, **0 false positives**)
+- **Dark Mode (`--platform ios --theme dark`):** **12 / 12 PASS** (`scoreDisplay: 100`, **0 false positives**)
 - **Static Lint (`hooks/scripts/lint.mjs`):** **0 error(s), 0 warning(s)**
+
+---
+
+## ৩. macOS Clean Page অডিট (`/?view=mac`, `--platform mac`, Light ও Dark)
+
+ওভারফিটিং যাচাই করতে [`tests/harness/web/src/App.tsx`](file:///D:/Claude-Plugins/cupertino-forge/tests/harness/web/src/App.tsx)-এ `MacWindow` (Sidebar, Toolbar, Inspector, `MacButton`, `Checkbox`, `RadioGroup`, `MacTable`) দিয়ে একটি আলাদা পরিষ্কার macOS পাতা (`/?view=mac`) যোগ করে `--platform mac` মোডে Light ও Dark-এ অডিট চালানো হয়েছে।
+
+| # | Finding (`--platform mac`) | মোড | রায় | কী করা হয়েছে |
+|---|---|---|---|---|
+| ১ | `focus-ring`: `MacTable` কলাম হেডার বাটনে ফোকাস রিং নেই (২টি) | Light + Dark | **`real bug` (plugin)** | [`mac.tsx`](file:///D:/Claude-Plugins/cupertino-forge/skills/apple-web/assets/components/apple/mac.tsx) লাইন ১৮৫-এ `shadow-[inset_-0.5px_0_0_var(--cf-separator)]` বেস `:focus-visible` শ্যাডো ঢেকে দিচ্ছিল ও `focus-visible:focus-ring` অনুপস্থিত ছিল। `outline-none focus-visible:focus-ring` যোগ করে ঠিক করা হয়েছে। |
+| ২ | `hit-target`: `MacButton` (`72×24px`) ও `Checkbox`/`RadioGroup` (`16×16px`) বনাম `>= 28px` | Light + Dark | **`false positive` (macOS audit)** | `tokens/layout.json`-এ macOS পয়েন্টারের অফিশিয়াল ন্যূনতম ক্লিকেবল ফ্লোর `hitTarget.macosMinimumClickable = 20px` (macOS regular button = `24px`), এবং `Checkbox`/`RadioGroup` `<label>`-এর ভেতরে থাকায় পুরো লেবেলই ক্লিকেবল (`>= 20px`)। শুধু `platform === 'macos'`-এর জন্য `macosMinimumClickable` ও `<label>` হিট-বক্স (এবং `mac.tsx` লেবেলে `min-h-5`) যুক্ত করা হয়েছে — iOS `44px` নিয়ম অপরিবর্তিত। |
+| ৩ | `contrast`: সিলেক্টেড `MacSidebarRow`, `MacTable` রো ও `MacButton variant="default"`-এ `#FFFFFF` on `#0088FF` (`3.52:1`, `13px weight 400`) | Light + Dark | **`false positive` (Apple HIG trade-off)** | `#0088FF` ও `#FFFFFF` Apple macOS 27 Sketch Kit-এর অফিশিয়াল টোকেন (`>= 3.0:1`)। টোকেন না বদলে [`qa/ACCESSIBILITY-TRADEOFFS.md`](file:///D:/Claude-Plugins/cupertino-forge/qa/ACCESSIBILITY-TRADEOFFS.md)-এ নথিভুক্ত করা হয়েছে এবং শুধু `platform === 'macos'`-এ নন-ব্লকিং `advisory` হিসেবে দেখানো হয়েছে। |
+
+- **macOS Light (`--platform mac --theme light`):** **12 / 12 PASS** (`scoreDisplay: 100 (6 advisories)`, **0 false positives**)
+- **macOS Dark (`--platform mac --theme dark`):** **12 / 12 PASS** (`scoreDisplay: 100 (5 advisories)`, **0 false positives**)

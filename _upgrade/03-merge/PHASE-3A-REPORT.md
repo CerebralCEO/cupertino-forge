@@ -26,16 +26,16 @@
 আসল মাউন্টেড Vite প্রোডাকশন অ্যাপে (`tests/harness/web/`, যেখানে কোনো ইচ্ছাকৃত ভুল নেই) `qa/computed-style-audit.mjs` ও `hooks/scripts/lint.mjs` চালিয়ে প্রতিটি finding ট্রায়াজ করা হয়েছে — পূর্ণ টেবিল দেখুন [`_upgrade/03-merge/FALSE-POSITIVE-CHECK.md`](file:///D:/Claude-Plugins/cupertino-forge/_upgrade/03-merge/FALSE-POSITIVE-CHECK.md)-এ।
 
 - **ধরা পড়া ও ঠিক করা আসল প্লাগিন/হার্নেস বাগ:**
-  1. [`tests/harness/web/src/app.css`](file:///D:/Claude-Plugins/cupertino-forge/tests/harness/web/src/app.css): `@source` রিলেটিভ পাথ ৩ ধাপের বদলে ৪ ধাপ (`../../../../skills/apple-web/assets`) ঠিক করা হয়েছে।
-  2. [`cupertino.base.css`](file:///D:/Claude-Plugins/cupertino-forge/skills/apple-web/assets/styles/cupertino.base.css): `.cf-press` ও `.cf-press-plain`-এ `opacity 200ms` টাইমিং ফাংশন ছাড়া থাকায় ব্রাউজার ডিফল্ট `ease` হচ্ছিল → `var(--cf-dur-color) var(--cf-ease-release)` করা হয়েছে; tinted glass `85%` (`2.94:1 < 3:1`) → `90%` (`3.17:1`) করা হয়েছে।
-  3. [`button.tsx`](file:///D:/Claude-Plugins/cupertino-forge/skills/apple-web/assets/components/apple/button.tsx): `tinted` বাটন `15%` (`2.94:1 < 3:1`) → `12%` (`3.05:1`) করা হয়েছে।
-  4. [`controls.tsx`](file:///D:/Claude-Plugins/cupertino-forge/skills/apple-web/assets/components/apple/controls.tsx): iOS `Toggle`, `Stepper`, ও `SegmentedControl`-এ `::after` টাচ হিট-এরিয়া এক্সটেন্ডার যোগ করে `44px` হিট-টার্গেট পূরণ করা হয়েছে।
-  5. [`fields.tsx`](file:///D:/Claude-Plugins/cupertino-forge/skills/apple-web/assets/components/apple/fields.tsx): `SearchField` `<input>`-এ `h-full` (`44px`) এবং `px-3.5` (`14px`) → `px-4` (`16px`) করা হয়েছে।
-- **ধরা পড়া ও ঠিক করা অডিট False Positive:**
-  1. `parseCssColor`-এ CSS Color 4 `color(srgb r g b / a)` পার্সিং যোগ (`color-mix()` আউটপুটে ভুল `1.00:1` বন্ধ)।
-  2. `hit-target`-এ `position: absolute` `::after`/`::before` হিট-এরিয়া এক্সটেন্ডার (`effectiveHitRect`) গণনা যোগ।
-  3. `contrast`-এ Apple iOS 27 Sketch Kit-এর অফিশিয়াল `labelIOS.secondary.light` (`#3C3C43@0.6` = `3.44:1 >= 3.0:1`) টোকেনকে নন-ব্লকিং `advisory` করা হয়েছে (`< 3.0:1` বা অন্য যেকোনো কালার `< 4.5:1` হলে এখনো `FAIL`)।
-- **চূড়ান্ত Clean App ফলাফল:** Light Mode **12/12 PASS (score 100, 0 false positives)**, Dark Mode **12/12 PASS (score 100, 0 false positives)**, Chromium mounted React **7/7 PASS**, `lint.mjs` **0 error(s), 0 warning(s)**।
+  1. [`tests/harness/web/src/app.css`](file:///D:/Claude-Plugins/cupertino-forge/tests/harness/web/src/app.css): `@source` রিলেটিভ পাথ ৩ ধাপের বদলে ৪ ধাপ (`../../../../skills/apple-web/assets`) ঠিক করা হয়েছে। (রিপো-ব্যাপী `grep` করে নিশ্চিত হওয়া গেছে `/apple-init`, `README.md`, বা `skills/`-এ এই ভুল নেই।) পূর্ণ `67.77 kB` CSS-এ **Chromium**, **Playwright WebKit**, ও **Firefox** তিন ইঞ্জিনেই `verify_mounted.py` পুনরায় **7/7 PASS** ([`PHASE-2A-VERIFICATION.md`](file:///D:/Claude-Plugins/cupertino-forge/_upgrade/03-merge/PHASE-2A-VERIFICATION.md))।
+  2. [`cupertino.base.css`](file:///D:/Claude-Plugins/cupertino-forge/skills/apple-web/assets/styles/cupertino.base.css): `.cf-press` ও `.cf-press-plain`-এ `opacity 200ms` ডিফল্ট `ease` → `var(--cf-dur-color) var(--cf-ease-release)`; tinted glass `85%` (`2.94:1`) → `90%` (`3.13:1`) — `tokens/materials.json`-এ `$class: "estimated"` নিশ্চিত করে `$note` যোগ করা হয়েছে এবং ৪টি ব্যাকগ্রাউন্ডে (`#FFFFFF`, `#000000`, `#0A2540`, `#FFD600`) মেপে [`qa/ACCESSIBILITY-TRADEOFFS.md`](file:///D:/Claude-Plugins/cupertino-forge/qa/ACCESSIBILITY-TRADEOFFS.md)-এ টেবিল দেওয়া হয়েছে।
+  3. [`button.tsx`](file:///D:/Claude-Plugins/cupertino-forge/skills/apple-web/assets/components/apple/button.tsx): `tinted` (`estimated`) `15%` (`2.94:1`) → `12%` (`3.05:1`)।
+  4. [`controls.tsx`](file:///D:/Claude-Plugins/cupertino-forge/skills/apple-web/assets/components/apple/controls.tsx): iOS `Toggle`, `Stepper`, ও `SegmentedControl`-এ `::after` টাচ হিট-এরিয়া এক্সটেন্ডার (`44px`)।
+  5. [`fields.tsx`](file:///D:/Claude-Plugins/cupertino-forge/skills/apple-web/assets/components/apple/fields.tsx): `SearchField` `<input>`-এ `h-full` (`44px`) এবং `px-3.5` → `px-4` (`16px`)।
+  6. [`mac.tsx`](file:///D:/Claude-Plugins/cupertino-forge/skills/apple-web/assets/components/apple/mac.tsx): `MacTable` কলাম হেডারে অনুপস্থিত `outline-none focus-visible:focus-ring` যোগ ও `Checkbox`/`RadioGroup` লেবেলে `min-h-5`।
+- **চূড়ান্ত Clean App ফলাফল (iOS `/` ও macOS `/?view=mac`):**
+  - iOS Light: **12/12 PASS (`100 (3 advisories)`)** | iOS Dark: **12/12 PASS (`100`)**
+  - macOS Light (`--platform mac`): **12/12 PASS (`100 (6 advisories)`)** | macOS Dark (`--platform mac`): **12/12 PASS (`100 (5 advisories)`)**
+  - Chromium / WebKit / Firefox mounted React: **7/7 PASS** | `lint.mjs`: **0 error(s), 0 warning(s)**।
 
 ---
 
@@ -64,6 +64,10 @@
 | ১০ | ভুল `letter-spacing` (`3px` on `17px` body) | *Missed* | **Detected** (`letter-spacing`: `3.00px @ 17px`, expected `-0.44px`) | **Detected** |
 | ১১ | ৪pt-গ্রিড-বহির্ভূত spacing (`padding: 13px`) | *Missed* | **Detected** (`spacing-grid` [**`estimate-based`**]: `paddingTop: 13px`) | **Detected** |
 | ১২ | `.cf-glass`-এর ওপর কম-কন্ট্রাস্ট টেক্সট (`var(--cf-label-glass-3)` `#BFBFBF` on light glass) | *Missed* | **Detected** (`contrast`: `1.84:1 < 4.5:1`) | **Detected** |
+
+### ৩.৩ সত্যিকারের ৫টি নিয়ম-বহির্ভূত Blind ডিফেক্ট (`0 / 5 Detected` — `5 / 5 Known Gaps`)
+
+`grep` করে নিয়ম নেই নিশ্চিত হয়ে `tests/seeded-defects/`-এ ৫টি নতুন ভুল (`#13` ভুল `font-family` অর্ডার `'Segoe UI', -apple-system`, `#14` আইকন-টেক্সট baseline অমিল, `#15` ভুল z-order গ্লাসের ওপর কনটেন্ট, `#16` স্ক্রল কনটেইনারে `overscroll-behavior` অনুপস্থিত, `#17` ডার্ক মোডে `border: 1px solid white`) চালানো হয়েছে: `lint.mjs` এবং `computed-style-audit.mjs` (Light ও Dark) কোনোটিই এদের ধরেনি (**`0 / 5`**; মোট `12 / 17`)। কোনো নতুন রুল না বানিয়ে সবগুলো [`QA-GAPS.md`](file:///D:/Claude-Plugins/cupertino-forge/_upgrade/03-merge/QA-GAPS.md)-এ Known Gap হিসেবে নথিভুক্ত আছে।
 
 ---
 

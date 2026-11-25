@@ -141,7 +141,7 @@ export const MacButton = React.forwardRef<HTMLButtonElement, React.ButtonHTMLAtt
 
 export function Checkbox({ checked, onChange, label, mixed, disabled }: { checked: boolean; onChange: (v: boolean) => void; label: string; mixed?: boolean; disabled?: boolean }) {
   return (
-    <label className={cn('inline-flex items-center gap-1.5 text-body text-label', disabled && 'opacity-40')}>
+    <label className={cn('inline-flex min-h-5 items-center gap-1.5 text-body text-label', disabled && 'opacity-40')}>
       <button type="button" role="checkbox" aria-checked={mixed ? 'mixed' : checked} disabled={disabled} onClick={() => onChange(!checked)}
         className={cn('squircle flex size-4 items-center justify-center rounded-checkbox outline-none focus-visible:focus-ring',
           checked || mixed ? 'bg-accent text-white' : 'bg-field shadow-[inset_0_0_0_0.5px_var(--cf-label-4)]')}>
@@ -156,7 +156,7 @@ export function RadioGroup<T extends string>({ value, onChange, options, label }
   return (
     <div role="radiogroup" aria-label={label} className="flex flex-col gap-sm">
       {options.map((o) => (
-        <label key={o.value} className="inline-flex items-center gap-1.5 text-body text-label">
+        <label key={o.value} className="inline-flex min-h-5 items-center gap-1.5 text-body text-label">
           <button type="button" role="radio" aria-checked={o.value === value} onClick={() => onChange(o.value)}
             className={cn('flex size-4 items-center justify-center rounded-full outline-none focus-visible:focus-ring', o.value === value ? 'bg-accent' : 'bg-field shadow-[inset_0_0_0_0.5px_var(--cf-label-4)]')}>
             {o.value === value && <span className="size-1.5 rounded-full bg-white" />}
@@ -182,7 +182,7 @@ export function MacTable<R extends { id: string }>({ columns, rows, selected, on
       <div role="row" className="sticky top-0 z-10 flex h-7 items-center bg-bg hairline-b">
         {columns.map((c) => (
           <button key={c.key} type="button" role="columnheader" onClick={() => onSort?.(c.key)}
-            className={cn('flex h-full items-center gap-1 px-2.5 text-subheadline emphasized text-label-2 shadow-[inset_-0.5px_0_0_var(--cf-separator)]', c.align === 'end' && 'justify-end')}
+            className={cn('flex h-full items-center gap-1 px-2.5 text-subheadline emphasized text-label-2 shadow-[inset_-0.5px_0_0_var(--cf-separator)] outline-none focus-visible:focus-ring', c.align === 'end' && 'justify-end')}
             style={{ width: c.width, flex: c.width ? undefined : 1 }}>
             {c.title}
             {sort?.key === c.key && (sort.dir === 'asc' ? <ChevronUp size={10} strokeWidth={3} /> : <ChevronDown size={10} strokeWidth={3} />)}

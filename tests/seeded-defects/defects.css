@@ -114,3 +114,60 @@ button.cf-clean-btn {
   border-radius: var(--cf-radius-card);
   color: var(--cf-label-glass-3);
 }
+
+/* Truly blind defects (#13–#17): grep-verified ZERO rules exist in lint.mjs or computed-style-audit.mjs */
+/* Defect 13: Wrong font-family fallback order (Segoe UI before -apple-system) */
+.defect-wrong-font-order {
+  font-family: 'Segoe UI', -apple-system, sans-serif;
+}
+
+/* Defect 14: Icon and text baseline misalignment */
+.defect-icon-misaligned {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.defect-icon-misaligned .icon-dot {
+  margin-top: 8px;
+  width: 12px;
+  height: 12px;
+  border-radius: 9999px;
+  background-color: var(--cf-accent);
+  display: inline-block;
+}
+
+/* Defect 15: Wrong z-order (content stacked above .cf-glass functional layer) */
+.defect-z-wrap {
+  position: relative;
+  height: 64px;
+}
+.defect-z-glass {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  padding: 12px;
+  border-radius: var(--cf-radius-card);
+}
+.defect-z-content-on-top {
+  position: absolute;
+  top: 8px;
+  left: 16px;
+  z-index: 20;
+  padding: 8px;
+  background-color: var(--cf-bg-2);
+}
+
+/* Defect 16: Scroll container missing overscroll-behavior */
+.defect-no-overscroll {
+  height: 80px;
+  overflow-y: auto;
+  padding: 8px;
+  background-color: var(--cf-bg-2);
+}
+
+/* Defect 17: Hardcoded white border in dark mode (non-glass element) */
+.defect-dark-white-border {
+  padding: 12px;
+  background-color: var(--cf-bg-2);
+  border: 1px solid white;
+}

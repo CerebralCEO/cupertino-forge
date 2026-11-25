@@ -22,4 +22,20 @@
 2. **Reduced-Motion ইন্টারঅ্যাকশন কভারেজ সীমা:**
    - `computed-style-audit.mjs`-এর `reduced-motion` পাস idle অবস্থা ও প্রথম ৩টি দৃশ্যমান pressable কন্ট্রোলে hover/press পরীক্ষা করে। যেসব মোশন কেবল গভীর ফর্ম সাবমিট, ড্র্যাগ জেসচার বা নির্দিষ্ট স্টেট-মেশিন ট্রিগার ছাড়া চালু হয় না (যেমন কোনো কাস্টম ড্র্যাগ অ্যানিমেশন), সেগুলো স্বয়ংক্রিয়ভাবে ট্রিগার নাও হতে পারে।
 3. **Self-Authored Fixture Upper-Bound সীমাবদ্ধতা:**
-   - [`tests/seeded-defects/`](file:///D:/Claude-Plugins/cupertino-forge/tests/seeded-defects/index.html) ফিক্সচারটি অডিটরের লেখক নিজেই তৈরি করেছে; তাই `12/12` ডিটেকশন রেটকে প্রকৃত অজানা প্রোজেক্টের গ্যারান্টি না ভেবে **ওপরের সীমা (upper bound)** হিসেবে দেখতে হবে।
+   - [`tests/seeded-defects/`](file:///D:/Claude-Plugins/cupertino-forge/tests/seeded-defects/index.html) ফিক্সচারটি অডিটরের লেখক নিজেই তৈরি করেছে; তাই নিয়ম-আওতাভুক্ত ডিফেক্টে `12/12` রেটকে প্রকৃত অজানা প্রোজেক্টের গ্যারান্টি না ভেবে **ওপরের সীমা (upper bound)** হিসেবে দেখতে হবে।
+
+---
+
+## ৩. সত্যিকারের Blind পরীক্ষা — ৫টি নিয়ম-বহির্ভূত ডিফেক্ট (`0 / 5 Detected`, `5 / 5 Known Gaps`)
+
+`qa/computed-style-audit.mjs` এবং `hooks/scripts/lint.mjs`-এ `grep` করে নিশ্চিত হওয়া গেছে যে নিচের ৫টি ভুলের কোনোটির জন্যই কোনো নিয়ম নেই। [`tests/seeded-defects/`](file:///D:/Claude-Plugins/cupertino-forge/tests/seeded-defects/index.html)-এ এগুলো (`data-defect="13"` থেকে `"17"`) ঢুকিয়ে `lint.mjs` এবং `computed-style-audit.mjs` (Light ও Dark) চালানো হয়েছে — **কোনো নতুন নিয়ম বানানো হয়নি**:
+
+| # | Blind ডিফেক্ট (`tests/seeded-defects/`) | `lint.mjs` | `computed-style-audit.mjs` (Light & Dark) | ফলাফল | Known Gap কারণ |
+|---|---|---|---|---|---|
+| ১৩ | ভুল `font-family` ফলব্যাক ক্রম (`'Segoe UI', -apple-system, sans-serif`) | **Missed** | **Missed** | **Known Gap** | `lint.mjs` কেবল `Roboto/Arial/Inter/...` ম্যাচ করে (`Segoe UI` নয়) এবং DOM অডিটে `font-family` ফলব্যাক অর্ডার চেক নেই। |
+| ১৪ | আইকন ও টেক্সটের baseline অমিল (`align-items: flex-start` + `margin-top: 8px`) | **Missed** | **Missed** | **Known Gap** | আইকন বনাম টেক্সট ভার্টিকাল সেন্টার/বেসলাইন অ্যালাইনমেন্ট মাপার কোনো জ্যামিতিক নিয়ম নেই। |
+| ১৫ | ভুল z-order (`.cf-glass` `z-index: 1`-এর ওপরে কনটেন্ট `z-index: 20`) | **Missed** | **Missed** | **Known Gap** | ফাংশনাল গ্লাস লেয়ার ও কনটেন্ট লেয়ারের স্ট্যাকিং কনটেক্সট / z-index তুলনা করার নিয়ম নেই। |
+| ১৬ | স্ক্রল কনটেইনারে `overscroll-behavior` অনুপস্থিত (`overflow-y: auto`) | **Missed** | **Missed** | **Known Gap** | স্ক্রল কনটেইনারে `overscroll-behavior: contain/none` যাচাইয়ের কোনো নিয়ম নেই। |
+| ১৭ | ডার্ক মোডে হার্ডকোডেড সাদা বর্ডার (`border: 1px solid white;`) | **Missed** | **Missed** | **Known Gap** | `lint.mjs`-এর `glass-border` শুধু `rgba?(255,255,255` খোঁজে, আর `computed-style-audit.mjs` এখনো `borderColor` অডিট করে না। |
+
+**সামগ্রিক সৎ ফলাফল (১৭টি ডিফেক্ট):** `12 / 17` Detected (`9/9` মূল + `3/3` বিদ্যমান-নিয়ম blind + **`0/5` সত্যিকারের নিয়ম-বহির্ভূত blind**)।

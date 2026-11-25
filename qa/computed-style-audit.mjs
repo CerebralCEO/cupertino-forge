@@ -26,7 +26,10 @@ function parseArgs(argv) {
     if (a === '--json') opts.json = true;
     else if (a === '--url') opts.url = argv[++i];
     else if (a === '--tokens') opts.tokens = argv[++i];
-    else if (a === '--platform') opts.platform = argv[++i];
+    else if (a === '--platform') {
+      const p = argv[++i];
+      opts.platform = p === 'mac' ? 'macos' : p;
+    }
     else if (a === '--accent') opts.accent = argv[++i];
     else if (a === '--out') opts.out = argv[++i];
     else if (a === '--theme') opts.theme = argv[++i];
@@ -244,6 +247,17 @@ async function runAudit(targetUrl, tokens, platform, theme) {
             Math.abs(t.a - c.a) <= 0.05
         );
 
+      const accentTokens = [
+        parseTokenHex(tok.$meta?.accent?.light),
+        parseTokenHex(tok.$meta?.accent?.dark),
+      ].filter(Boolean);
+
+      const isWhiteOnOfficialAccent = (fgC, bgC) =>
+        fgC.r >= 250 && fgC.g >= 250 && fgC.b >= 250 &&
+        accentTokens.some(
+          (t) => Math.abs(t.r - bgC.r) <= 3 && Math.abs(t.g - bgC.g) <= 3 && Math.abs(t.b - bgC.b) <= 3
+        );
+
       const matchesTokenColor = (cssStr) => {
         const c = parseCssColor(cssStr);
         if (!c) return true;
@@ -296,9 +310,20 @@ async function runAudit(targetUrl, tokens, platform, theme) {
         return acc;
       };
 
-      const effectiveHitRect = (el, rect) => {
+      const effectiveHitRect = (el, rect, platMode) => {
         let w = rect.width;
         let h = rect.height;
+        if (platMode === 'macos') {
+          const role = el.getAttribute('role') || '';
+          if (role === 'checkbox' || role === 'radio') {
+            const lbl = el.closest('label');
+            if (lbl) {
+              const lr = lbl.getBoundingClientRect();
+              w = Math.max(w, lr.width);
+              h = Math.max(h, lr.height);
+            }
+          }
+        }
         for (const pseudo of ['::after', '::before']) {
           const pcs = getComputedStyle(el, pseudo);
           if (!pcs || pcs.content === 'none' || pcs.content === 'normal') continue;
@@ -356,7 +381,9 @@ async function runAudit(targetUrl, tokens, platform, theme) {
       collectRadii(shapeObj);
 
       const spacingScale = new Set(tok.layout.spacing.scale || []);
-      const hitMin = plat === 'macos' ? tok.layout.hitTarget.macos : tok.layout.hitTarget.ios;
+      const hitMin = plat === 'macos'
+        ? (tok.layout.hitTarget.macosMinimumClickable ?? tok.layout.hitTarget.macos)
+        : tok.layout.hitTarget.ios;
       const glassBudgetMax = tok.materials.perfBudget?.maxSimultaneousBackdrop ?? 6;
       const maxFocusSize = 18;
       const boldWeightMin = 600;
@@ -437,6 +464,12 @@ async function runAudit(targetUrl, tokens, platform, theme) {
                   actual: `${ratio.toFixed(2)}:1 (official Apple secondary label token)`,
                   expected: `>= 4.5:1 (HC raises to lightHC/darkHC)`,
                 });
+              } else if (plat === 'macos' && isWhiteOnOfficialAccent(effFg, bg) && ratio >= 3.0) {
+                contrastAdvisories.push({
+                  selector: sel,
+                  actual: `${ratio.toFixed(2)}:1 (white on official Apple system accent)`,
+                  expected: `>= 4.5:1 (macOS 13pt regular selection/button trade-off)`,
+                });
               } else {
                 contrastViolations.push({
                   selector: sel,
@@ -494,7 +527,7 @@ async function runAudit(targetUrl, tokens, platform, theme) {
           (interactiveRe.test(el.tagName) && el.getAttribute('type') !== 'hidden' && (el.tagName !== 'A' || el.hasAttribute('href'))) ||
           ['button', 'tab', 'switch', 'checkbox', 'radio', 'menuitem'].includes(role);
         if (isInteractive && !el.closest('p')) {
-          const hit = effectiveHitRect(el, rect);
+          const hit = effectiveHitRect(el, rect, plat);
           if (hit.width + 0.5 < hitMin || hit.height + 0.5 < hitMin) {
             hitViolations.push({
               selector: sel,
@@ -765,14 +798,16 @@ async function runAudit(targetUrl, tokens, platform, theme) {
 
     const passCount = checks.filter((c) => c.status === 'PASS').length;
     const failCount = checks.filter((c) => c.status === 'FAIL').length;
+    const totalAdvisories = checks.reduce((sum, c) => sum + (c.advisories?.length || 0), 0);
     const score = Math.round((passCount / checks.length) * 100);
+    const scoreDisplay = totalAdvisories > 0 ? `${score} (${totalAdvisories} advisories)` : `${score}`;
 
     return {
       url: targetUrl,
       engine: engineName,
       platform,
       accent: tokens.$meta?.accent || null,
-      summary: { pass: passCount, fail: failCount, notRun: 0, score },
+      summary: { pass: passCount, fail: failCount, notRun: 0, advisories: totalAdvisories, score, scoreDisplay },
       checks,
     };
   } finally {
@@ -786,7 +821,7 @@ function formatMarkdown(report) {
     ``,
     `- **URL:** ${report.url}`,
     `- **Platform:** \`${report.platform}\`${report.engine ? ` (${report.engine})` : ''}`,
-    `- **Score (Rule-Conformance DOM):** ${report.summary.score === null ? 'N/A (NOT RUN)' : `${report.summary.score}/100`} (${report.summary.pass} PASS, ${report.summary.fail} FAIL, ${report.summary.notRun} NOT RUN)`,
+    `- **Score (Rule-Conformance DOM):** ${report.summary.score === null ? 'N/A (NOT RUN)' : `${report.summary.scoreDisplay ?? report.summary.score}/100`} (${report.summary.pass} PASS, ${report.summary.fail} FAIL, ${report.summary.notRun} NOT RUN${report.summary.advisories ? `, ${report.summary.advisories} advisories` : ''})`,
     ``,
     `| Check | Status | Basis | Detail | Token Source |`,
     `|---|---|---|---|---|`,

@@ -248,8 +248,9 @@
         }
       },
       "tinted": {
-        "$usage": "Primary action only. Background is accent at 0.85 alpha over the regular glass recipe, label white. Pressed adds white 0.1 overlay (kit: prominent clicked overlay).",
-        "alpha": 0.85
+        "$usage": "Primary action only. Background is accent at 0.90 alpha over the regular glass recipe, label white. Pressed adds white 0.1 overlay (kit: prominent clicked overlay).",
+        "alpha": 0.90,
+        "$note": "Raised from estimated 0.85 to 0.90 (and non-glass Button tinted variant lowered from estimated 15% to 12%) after light-mode DOM contrast audit measured 2.94:1 (< 3.0:1 HIG bold/large floor) for #0088FF over #FFFFFF; at 0.90 / 12% contrast is 3.17:1 / 3.05:1 while keeping glass translucent (< 0.95)."
       },
       "large": {
         "$usage": "Sidebars, sheets, popovers, alerts. More opaque for legibility.",

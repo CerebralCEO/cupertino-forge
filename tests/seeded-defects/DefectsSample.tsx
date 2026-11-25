@@ -14,6 +14,11 @@ export function DefectsSample() {
       <p style={{ letterSpacing: '3px' }}>Defect 10: Wrong letter-spacing</p>
       <div style={{ padding: '13px' }}>Defect 11: Off-4pt-grid padding</div>
       <div className="cf-glass text-label-glass-3">Defect 12: Low contrast on glass</div>
+      <p style={{ fontFamily: "'Segoe UI', -apple-system, sans-serif" }}>Defect 13: Wrong font order</p>
+      <div className="flex items-start gap-2"><span className="mt-2 inline-block size-3 rounded-full bg-accent" /><span>Defect 14: Misaligned icon</span></div>
+      <div className="relative"><div className="cf-glass z-[1]">Glass</div><div className="z-20 bg-bg-2">Content on top</div></div>
+      <div className="h-20 overflow-y-auto">Defect 16: Missing overscroll-behavior</div>
+      <div style={{ border: '1px solid white' }} className="bg-bg-2">Defect 17: White border in dark mode</div>
     </main>
   );
 }

@@ -201,7 +201,78 @@ function Harness() {
   );
 }
 
+function MacHarness() {
+  const [selectedRow, setSelectedRow] = React.useState('inbox');
+  const [checked, setChecked] = React.useState(true);
+  const [radio, setRadio] = React.useState<'a' | 'b'>('a');
+  const [tableSel, setTableSel] = React.useState<string[]>(['1']);
+
+  return (
+    <MacWindow
+      sidebar={
+        <MacSidebarSection title="Favorites">
+          <MacSidebarRow label="Inbox" icon={<House size={15} />} selected={selectedRow === 'inbox'} onSelect={() => setSelectedRow('inbox')} badge={4} />
+          <MacSidebarRow label="Explore" icon={<Compass size={15} />} selected={selectedRow === 'explore'} onSelect={() => setSelectedRow('explore')} />
+          <MacSidebarRow label="Alerts" icon={<Bell size={15} />} selected={selectedRow === 'alerts'} onSelect={() => setSelectedRow('alerts')} />
+        </MacSidebarSection>
+      }
+      toolbar={
+        <>
+          <MacToolbarTitle title="Workspace" subtitle="macOS 27 Harness" />
+          <MacToolbarSpacer />
+          <MacToolbarGroup label="Actions">
+            <MacToolbarItem label="Home" icon={<House size={15} />} active />
+            <MacToolbarItem label="Search" icon={<Search size={15} />} />
+          </MacToolbarGroup>
+        </>
+      }
+      inspector={
+        <div className="flex flex-col gap-md">
+          <span className="text-headline text-label">Inspector</span>
+          <Checkbox checked={checked} onChange={setChecked} label="Sync iCloud" />
+          <RadioGroup
+            label="Mode"
+            value={radio}
+            onChange={setRadio}
+            options={[
+              { value: 'a', label: 'Automatic' },
+              { value: 'b', label: 'Manual' },
+            ]}
+          />
+          <div className="flex gap-sm">
+            <MacButton variant="default">Save</MacButton>
+            <MacButton variant="bordered">Cancel</MacButton>
+          </div>
+        </div>
+      }
+    >
+      <div className="p-lg">
+        <MacTable
+          columns={[
+            { key: 'name', title: 'Name' },
+            { key: 'kind', title: 'Kind', width: 120 },
+          ]}
+          rows={[
+            { id: '1', name: 'Design Spec.fig', kind: 'Document' },
+            { id: '2', name: 'Tokens.json', kind: 'JSON' },
+          ]}
+          selected={tableSel}
+          onSelect={setTableSel}
+        />
+      </div>
+    </MacWindow>
+  );
+}
+
 export function App() {
+  const isMacView = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('view') === 'mac';
+  if (isMacView) {
+    return (
+      <CupertinoRoot style="macos" appearance="system" glassIntensity={0.5}>
+        <MacHarness />
+      </CupertinoRoot>
+    );
+  }
   return (
     <CupertinoRoot style="ios" appearance="system" glassIntensity={0.5}>
       <Harness />
