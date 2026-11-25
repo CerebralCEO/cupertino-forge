@@ -128,10 +128,11 @@
     },
     "searchField": {
       "height": 44,
+      "heightBottomVariant": 48,
       "style": "capsule glass at bottom on iPhone (iOS 26+), top in iPad sidebars",
       "placeholderStyle": "body",
-      "$source": "estimated",
-      "$class": "estimated",
+      "$source": "Apple Figma kit iOS 27, nodes 5565:33301 & 5840:30472 (48pt variant 5565:35246), 2026-11-25",
+      "$class": "measured",
       "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
       "$platform": "iOS 27"
     },
@@ -160,30 +161,41 @@
     },
     "sheet": {
       "grabber": {
-        "width": 36,
-        "height": 5,
-        "topInset": 5,
+        "width": 60,
+        "height": 4,
+        "topInset": 6,
         "color": "fillIOS.primary"
       },
       "detents": [
         "medium (about 50 percent)",
         "large"
       ],
-      "floatingInsetAtMedium": 8,
-      "$source": "estimated",
-      "$class": "estimated",
+      "floatingInsetAtMedium": 6,
+      "$source": "Apple Figma kit iOS 27, nodes 5827:57545, 10525:1687 & 10525:1635, 2026-11-25",
+      "$class": "measured",
+      "$previous": {
+        "grabber": {
+          "width": 36,
+          "height": 5,
+          "topInset": 5
+        },
+        "floatingInsetAtMedium": 8
+      },
       "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
       "$platform": "iOS 27"
     },
     "alert": {
       "width": 300,
-      "padding": 20,
+      "padding": 14,
       "titleStyle": "headline",
       "messageStyle": "footnote",
       "buttonHeight": 48,
       "buttonStyle": "capsule glass buttons, primary tinted",
-      "$source": "estimated",
-      "$class": "estimated",
+      "$source": "Apple Figma kit iOS 27, nodes 65:57149, 61:67601 & 5446:6658, 2026-11-25",
+      "$class": "measured",
+      "$previous": {
+        "padding": 20
+      },
       "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
       "$platform": "iOS 27"
     },
@@ -214,8 +226,8 @@
       "knobWidth": 38,
       "knobHeight": 24,
       "knobInset": 2,
-      "$source": "estimated",
-      "$class": "estimated",
+      "$source": "Apple Figma kit iOS 27, nodes 10456:1252 & I5433:20197;508:70021, 2026-11-25",
+      "$class": "measured",
       "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
       "$platform": "iOS 27"
     },
@@ -223,8 +235,8 @@
       "trackHeight": 6,
       "knobWidth": 38,
       "knobHeight": 24,
-      "$source": "estimated",
-      "$class": "estimated",
+      "$source": "Apple Figma kit iOS 27, nodes 5428:5504 & 5437:1568, 2026-11-25",
+      "$class": "measured",
       "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
       "$platform": "iOS 27"
     },
@@ -238,10 +250,13 @@
       "$platform": "iOS 27"
     },
     "stepper": {
-      "width": 94,
+      "width": 92,
       "height": 32,
-      "$source": "estimated",
-      "$class": "estimated",
+      "$source": "Apple Figma kit iOS 27, nodes 5415:17699 & 29:56851, 2026-11-25",
+      "$class": "measured",
+      "$previous": {
+        "width": 94
+      },
       "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
       "$platform": "iOS 27"
     },
@@ -254,11 +269,14 @@
       "$platform": "iOS 27"
     },
     "textField": {
-      "height": 44,
+      "height": 52,
       "horizontalPadding": 16,
       "background": "fillIOS.tertiary on grouped, secondary background on plain",
-      "$source": "estimated",
-      "$class": "estimated",
+      "$source": "Apple Figma kit iOS 27, node 553:23061, 2026-11-25",
+      "$class": "measured",
+      "$previous": {
+        "height": 44
+      },
       "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
       "$platform": "iOS 27"
     },
@@ -319,7 +337,8 @@
       "defaultWidth": 280
     },
     "controlSizes": {
-      "$source": "estimate macOS 26 and 27",
+      "$source": "Apple Figma kit macOS 27, nodes 4348:11337/11331/11313/11319/11321 & 4341:2332, 2026-11-25",
+      "$class": "measured",
       "mini": 16,
       "small": 20,
       "regular": 24,
@@ -342,11 +361,15 @@
       "itemHeight": 24,
       "itemHorizontalPadding": 10,
       "outerPadding": 5,
-      "separatorHeight": 9,
+      "separatorHeight": 11,
       "minWidth": 180,
       "labelStyle": "body",
       "shortcutStyle": "body secondary",
-      "$source": "estimate"
+      "$source": "Apple Figma kit macOS 27, nodes 240:7945, 483:8811 & 4353:3152, 2026-11-25",
+      "$class": "measured",
+      "$previous": {
+        "separatorHeight": 9
+      }
     },
     "table": {
       "rowHeight": 24,

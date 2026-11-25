@@ -24,8 +24,8 @@ test('build-tokens.mjs emits device-display/sheet radii, elevation tokens, dark-
     const est = fs.readFileSync(estPath, 'utf8');
     const btSource = fs.readFileSync(buildScript, 'utf8');
 
-    // Phase 1 checks: Rust, JSON, ESTIMATES.md, non-Latin zero tracking, zero hardcoded hex in build-tokens.mjs
-    assert.match(rust, /pub const WINDOW_CORNER_RADIUS: f64 = 12\.0;/);
+    // Phase 1/3c checks: Rust (window radius 16.0 measured in Apple Figma macOS 27), JSON, ESTIMATES.md, non-Latin zero tracking, zero hardcoded hex in build-tokens.mjs
+    assert.match(rust, /pub const WINDOW_CORNER_RADIUS: f64 = 16\.0;/);
     assert.match(rust, /pub const TRAFFIC_LIGHT_X: f64 = 16\.0;/);
     assert.equal(resolved.materials.intensityCurve.default, 0.5);
     assert.match(css, /:lang\(bn\), :lang\(ar\), :lang\(he\) \{ letter-spacing: 0 !important; \}/);

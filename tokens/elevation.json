@@ -25,10 +25,12 @@
       "$platform": "All",
       "$kitReference": {
         "$class": "measured-kit-reference",
-        "$source": "Apple iOS 27 Sketch Kit Controls.Light.Knobs - Toggle.01 - Idle.shadows & macOS 27 Over-Glass.Light.Knobs - Toggle.01 - Idle.shadows",
+        "$source": "Apple iOS 27 Sketch Kit Controls.Light.Knobs - Toggle.01 - Idle.shadows & macOS 27 Figma Kit node I478:1094;475:568;4348:11314 (2026-11-25)",
         "iosLight": "0 3px 36px rgba(0,0,0,0.05)",
+        "macosFigmaToggleKnob": "0 3px 36px rgba(0,0,0,0.05)",
+        "iosFigmaSliderKnob": "0 6px 13px rgba(0,0,0,0.12), 0 0.5px 4px rgba(0,0,0,0.12)",
         "macosOverGlassLight": "0 0 44px rgba(0,0,0,0.1) (+ 5 rim/highlight layers)",
-        "$note": "Kept primary estimate pending visual check; Sketch token export may omit blend-mode/inner layers."
+        "$note": "Kept primary estimate; visually verified in Phase 3b-lite that single 0 3px 36px @0.05 shadow renders flat on Web without Apple's blend-mode rim layers."
       }
     },
     "sliderKnob": {
@@ -54,10 +56,11 @@
       "$platform": "All",
       "$kitReference": {
         "$class": "measured-kit-reference",
-        "$source": "Apple macOS 27 Sketch Kit Panels.Light.shadows, Panels.Dark.shadows & Panels.Dark.borders.0",
+        "$source": "Apple macOS 27 Sketch Kit Panels & Apple iOS 27 Figma Kit Popovers node 61:65449 (2026-11-25)",
         "macosPanelLight": "0 5px 20px rgba(0,0,0,0.3)",
         "macosPanelDark": "0 16px 33px rgba(0,0,0,0.4), 0 0 1px rgba(0,0,0,0.8) + 1px solid rgba(255,255,255,0.2)",
-        "$note": "Different component (macOS Panel vs general cross-platform Popover); primary estimate preserved."
+        "iosFigmaPopover": "0 10px 100px rgba(0,0,0,0.3)",
+        "$note": "Platform/component divergence (macOS Panel vs iOS iPad Popover vs cross-platform Popover); primary estimate preserved."
       }
     },
     "menu": {

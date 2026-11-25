@@ -29,3 +29,24 @@ All notable changes to `cupertino-forge` are documented in this file.
 ### Phase 3b-lite — Estimate Resolution Promotion
 - **Promoted `tokens/shape.json :: borders` (`0.5px` hairline, `1px` control) from `estimated` to `measured`**: Verified directly against Apple iOS 27 Sketch Kit (`Controls.Light.Knobs - Toggle.03 - Clicked - Glow.borders.1` = `0.5px`, `.borders.0` = `1px`) and macOS 27 Sketch Kit (`Panels.Dark.borders.0` = `1px`, `Global.Focus Ring.borders.1` = `1px`).
 - **Preserved `tokens/elevation.json :: levels.knob` & `levels.popover` as `estimated`**: Recorded Apple Sketch kit values under `$kitReference` (`$class: "measured-kit-reference"`) without overwriting primary cross-platform values (different component for macOS Panels vs Popover; iOS kit toggle knob shadow `0 3px 36px rgba(0,0,0,0.05)` appears flat/invisible in light/dark CSS without Sketch's dropped layers).
+
+### Phase 3c — Figma Kit Geometry Measurement (iOS 27 & macOS 27, 2026-11-25)
+- **Promoted to `$class: "measured"` (confirmed values):**
+  - `shape.json :: continuousCorner.smoothing`: `0.6` (from `inferred` -> `measured`; 178 nodes across iOS 27 & macOS 27 Figma kits, e.g. `585:3372`, `5473:20461`).
+  - `layout.json :: ios.toggle`: `64×28`, knob `38×24`, inset `2` (iOS 27 nodes `10456:1252`, `I5433:20197;508:70021`).
+  - `layout.json :: ios.slider`: `trackHeight: 6`, knob `38×24` (iOS 27 nodes `5428:5504`, `5437:1568`).
+  - `layout.json :: ios.searchField`: `height: 44` (`48pt` bottom variant noted; iOS 27 nodes `5565:33301`, `5840:30472`, `5565:35246`).
+  - `layout.json :: macos.controlSizes`: `mini: 16, small: 20, regular: 24, large: 28, extraLarge: 36` (macOS 27 nodes `4348:11337/11331/11313/11319/11321`, `4341:2332`).
+- **Updated & promoted to `$class: "measured"` (contradicted values, `$previous` preserved):**
+  - `layout.json :: ios.stepper.width`: `94` -> `92` (iOS 27 nodes `5415:17699`, `29:56851`).
+  - `layout.json :: ios.textField.height`: `44` -> `52` (iOS 27 node `553:23061`; `horizontalPadding: 16` confirmed).
+  - `layout.json :: ios.alert.padding`: `20` -> `14` (iOS 27 nodes `65:57149`, `61:67601`; `width: 300`, `buttonHeight: 48` confirmed on `5446:6658`).
+  - `layout.json :: ios.sheet`: `grabber` `36×5 (topInset 5)` -> `60×4 (topInset 6)`, `floatingInsetAtMedium` `8` -> `6` (iOS 27 nodes `5827:57545`, `10525:1687`, `10525:1635`).
+  - `layout.json :: macos.menu.separatorHeight`: `9` -> `11` (macOS 27 node `4353:3152`; `itemHeight: 24` on `240:7945`, `outerPadding: 5` on `483:8811`).
+- **Updated 5 unambiguous subfields in `shape.json :: radiusMacOS` (outer group kept `estimated`):**
+  - `window`: `12` -> `16` (macOS 27 nodes `585:3372`, `4363:18479`).
+  - `sheet`: `12` -> `16` (macOS 27 nodes `121:11423`, `4358:15436`).
+  - `alert`: `16` -> `10` (macOS 27 nodes `121:11254`, `121:11240`).
+  - `popover`: `16` -> `10` (macOS 27 nodes `4336:13293`, `4336:13305`).
+  - `menuItemHighlight`: `6` -> `8` (macOS 27 nodes `685:23691`, `685:23678`).
+- **Updated `$kitReference` in `tokens/elevation.json`:** Added Figma node references for `levels.knob` (`I478:1094;475:568;4348:11314`, `5437:1568`) and `levels.popover` (`61:65449`); primary estimates preserved.

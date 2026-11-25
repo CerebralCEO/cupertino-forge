@@ -4,7 +4,7 @@
 
 These token entries carry `$class: "estimated"` (not published numerically by Apple HIG or Sketch token exports), `$class: "inferred/community"` (community SPI benchmarks kept out of primary official/kit tokens per merge Rule 1), or `$status: "needs-device-verification"`. List relevant items in the Compliance Report (`Values marked estimate`).
 
-## 1. Estimated Tokens (79 groups/entries)
+## 1. Estimated Tokens (70 groups/entries)
 
 | Token File | Path | Sample Value | Class | Source Note |
 |---|---|---|---|---|
@@ -32,23 +32,14 @@ These token entries carry `$class: "estimated"` (not published numerically by Ap
 | `layout.json` | `ios.safeArea` | `{ topDynamicIsland: 62, topNotch: 47, topSE: 20, bottomHomeIndicator: 34, ... }` | `estimated` | estimated (primary 62pt preserved per Rule 1; see $alt for community 59pt iPhone 15/16) |
 | `layout.json` | `ios.toolbar` | `{ height: 44, itemGlassGroupHeight: 44, bottomInsetFromSafeArea: 0 }` | `estimated` | estimated |
 | `layout.json` | `ios.tabBar` | `{ style: floating capsule of Liquid Glass, separated from screen edges, height: 62, sideInset: 20, bottomGapAboveHomeIndicator: 0, ... }` | `estimated` | estimated |
-| `layout.json` | `ios.searchField` | `{ height: 44, style: capsule glass at bottom on iPhone (iOS 26+), top in iPad sidebars, placeholderStyle: body }` | `estimated` | estimated |
 | `layout.json` | `ios.listRow` | `{ minHeight: 52, minHeightCompact: 44, subtitleRow: 64, leadingInset: 16, ... }` | `estimated` | estimated |
 | `layout.json` | `ios.listSection` | `{ insetGroupedSideInset: 16, headerStyle: headline sentence case, footerStyle: footnote secondary label, gapBetweenSections: 20 }` | `estimated` | estimated |
-| `layout.json` | `ios.sheet` | `{ grabber: [...], detents: [...], floatingInsetAtMedium: 8 }` | `estimated` | estimated |
-| `layout.json` | `ios.alert` | `{ width: 300, padding: 20, titleStyle: headline, messageStyle: footnote, ... }` | `estimated` | estimated |
 | `layout.json` | `ios.button` | `{ mini: 28, small: 32, medium: 36, large: 50, ... }` | `estimated` | estimated |
-| `layout.json` | `ios.toggle` | `{ width: 64, height: 28, knobWidth: 38, knobHeight: 24, ... }` | `estimated` | estimated |
-| `layout.json` | `ios.slider` | `{ trackHeight: 6, knobWidth: 38, knobHeight: 24 }` | `estimated` | estimated |
 | `layout.json` | `ios.segmentedControl` | `{ height: 36, selectedInset: 2, labelStyle: subheadline emphasized when selected }` | `estimated` | estimated |
-| `layout.json` | `ios.stepper` | `{ width: 94, height: 32 }` | `estimated` | estimated |
 | `layout.json` | `ios.pageControl` | `{ dot: 8, gap: 9 }` | `estimated` | estimated |
-| `layout.json` | `ios.textField` | `{ height: 44, horizontalPadding: 16, background: fillIOS.tertiary on grouped, secondary background on plain }` | `estimated` | estimated |
 | `layout.json` | `macos` | `{ windowMinimum: [...], titlebarHeight: 32, toolbarHeight: 52, toolbarHeightCompact: 38, ... }` | `estimated` | estimated (menuBar 24pt & splitView divider 1pt official HIG) |
 | `layout.json` | `macos.trafficLights` | `{ diameter: 14, gap: 9, leadingInset: 16, centerYFromTop: 26, ... }` | `estimated` | estimate macOS 26 and 27 |
 | `layout.json` | `macos.sidebar` | `{ minWidth: 180, defaultWidth: 220, maxWidth: 320, rowHeight: 32, ... }` | `estimated` | estimate; macOS 27 sidebars are edge to edge, not floating |
-| `layout.json` | `macos.controlSizes` | `{ mini: 16, small: 20, regular: 24, large: 28, ... }` | `estimated` | estimate macOS 26 and 27 |
-| `layout.json` | `macos.menu` | `{ itemHeight: 24, itemHorizontalPadding: 10, outerPadding: 5, separatorHeight: 9, ... }` | `estimated` | estimate |
 | `layout.json` | `zIndex` | `{ content: 0, scrollEdge: 10, bars: 20, floatingButton: 30, ... }` | `estimated` | estimated |
 | `materials.json` | `liquidGlass.engine` | `{ blurPx: [...], saturate: 1.8, brightnessLight: 1.05, brightnessDark: 0.9, ... }` | `estimated` | estimated |
 | `materials.json` | `liquidGlass.pressBehavior` | `{ onTouchDown: glass element scales to 1.08 to 1.12 with a spring (response 0.3, damping 0.7) and its highlight brightens; content below shows a soft glow, onRelease: springs back to 1.0, trackpadOrMouse: subdued: scale 1.02, no glow }` | `estimated` | HIG Motion qualitative + estimated numeric scale |
@@ -83,7 +74,7 @@ These token entries carry `$class: "estimated"` (not published numerically by Ap
 | `motion.json` | `hover` | `{ macOSToolbarItem: [...], macOSListRow: no hover background except in sidebars and menus, menuItem: [...], iPadPointer: [...], ... }` | `estimated` | estimated |
 | `motion.json` | `symbolEffects` | `{ bounce: scale 1 to 1.2 to 1 with snappy spring, pulse: opacity 1 to 0.5 loop 1s, replace: old symbol scales to 0.6 and fades while new scales from 0.6, 250ms, wiggle: rotate -8 to 8 deg 3 times, ... }` | `estimated` | estimated CSS/SVG timing approximations of SF Symbols animations |
 | `shape.json` | `radiusIOS` | `{ deviceDisplay: [...], sheet: device display radius when full height at the bottom edge; 38 when floating at medium detent with 8 inset, alert: 34, actionSheet: 34, ... }` | `estimated` | estimated (primary deviceDisplay preserved at 55/30 per Rule 1; community 62/18 in $alt) |
-| `shape.json` | `radiusMacOS` | `{ window: 12, windowNote: macOS 27 uses one uniform window radius for all apps. Tahoe used 16 to 26 depending on toolbar. Verify exact value against the kit Windows page before shipping., sheet: 12, alert: 16, ... }` | `estimated` | estimated (macOS 27 uniform window 12pt press report; unverified on device) |
+| `shape.json` | `radiusMacOS` | `{ window: 16, windowNote: Measured 16pt (cornerSmoothing 0.6) across all Window BG and Windows - Composed variants in Apple Figma kit macOS 27 (nodes 585:3372, 4363:18479, 4365:31678)., sheet: 16, alert: 10, ... }` | `estimated` | Apple Figma kit macOS 27 (window/sheet 16pt nodes 585:3372, 121:11423; alert 10pt 121:11254; popover 10pt 4336:13305; menuItemHighlight 8pt 685:23691, 2026-11-25) + estimated remaining subfields |
 | `typography.json` | `fallbackCompensation` | `{ inter: [...] }` | `estimated` | estimated Inter width compensation |
 | `typography.json` | `nonLatin.banglaLineHeightScale` | `{ min: 1.35, max: 1.5 }` | `estimated` | estimated |
 | `typography.json` | `nonLatin.banglaExpansionPercent` | `{ min: 20, max: 30 }` | `estimated` | estimated |

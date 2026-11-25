@@ -14,8 +14,11 @@
     "cssCornerShape": "squircle",
     "cssSuperellipseK": 2,
     "note": "A continuous corner of radius R visually reads smaller than a circular corner of radius R. Do not shrink R to compensate.",
-    "$source": "inferred smoothing 0.6 / superellipse n~5; CSS corner-shape official baseline",
-    "$class": "inferred",
+    "$source": "Apple Figma kit iOS 27 & macOS 27 (0.6 across 178 nodes, e.g. macOS 585:3372, 4341:2332; iOS 5473:20461, 10456:1252), 2026-11-25",
+    "$class": "measured",
+    "$previous": {
+      "$class": "inferred"
+    },
     "$url": "https://developer.apple.com/documentation/swiftui/concentricrectangle",
     "$platform": "All"
   },
@@ -87,14 +90,21 @@
     "sheetFloating": 38
   },
   "radiusMacOS": {
-    "$source": "estimated (macOS 27 uniform window 12pt press report; unverified on device)",
-    "window": 12,
-    "windowNote": "macOS 27 uses one uniform window radius for all apps. Tahoe used 16 to 26 depending on toolbar. Verify exact value against the kit Windows page before shipping.",
-    "sheet": 12,
-    "alert": 16,
-    "popover": 16,
+    "$source": "Apple Figma kit macOS 27 (window/sheet 16pt nodes 585:3372, 121:11423; alert 10pt 121:11254; popover 10pt 4336:13305; menuItemHighlight 8pt 685:23691, 2026-11-25) + estimated remaining subfields",
+    "window": 16,
+    "windowNote": "Measured 16pt (cornerSmoothing 0.6) across all Window BG and Windows - Composed variants in Apple Figma kit macOS 27 (nodes 585:3372, 4363:18479, 4365:31678).",
+    "sheet": 16,
+    "alert": 10,
+    "popover": 10,
     "menu": 12,
-    "menuItemHighlight": 6,
+    "menuItemHighlight": 8,
+    "$previous": {
+      "window": 12,
+      "sheet": 12,
+      "alert": 16,
+      "popover": 16,
+      "menuItemHighlight": 6
+    },
     "tooltip": 6,
     "sidebarRowSelection": 8,
     "pushButtonRegular": "capsule on Liquid Glass toolbars; 6 in content area",
