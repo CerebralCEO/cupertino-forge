@@ -45,6 +45,9 @@ const requiredFiles = [
   path.join('hooks', 'hooks.json'),
   path.join('hooks', 'scripts', 'lint.mjs'),
   path.join('commands', 'apple-doctor.md'),
+  path.join('commands', 'apple-redesign.md'),
+  path.join('templates', 'AGENTS.apple.md'),
+  path.join('skills', 'apple-design-core', 'references', 'patterns', 'redesign-playbook.md'),
   path.join('agents', 'apple-design-reviewer.md'),
 ];
 const missingCore = requiredFiles.filter((rel) => !fs.existsSync(path.join(root, rel)));

@@ -50,3 +50,9 @@ All notable changes to `cupertino-forge` are documented in this file.
   - `popover`: `16` -> `10` (macOS 27 nodes `4336:13293`, `4336:13305`).
   - `menuItemHighlight`: `6` -> `8` (macOS 27 nodes `685:23691`, `685:23678`).
 - **Updated `$kitReference` in `tokens/elevation.json`:** Added Figma node references for `levels.knob` (`I478:1094;475:568;4348:11314`, `5437:1568`) and `levels.popover` (`61:65449`); primary estimates preserved.
+
+### Phase 3d — Existing Project Redesign Engine & Google Antigravity Bridge (2026-11-26)
+- **Added Existing Project Redesign Playbook (`skills/apple-design-core/references/patterns/redesign-playbook.md`):** 5-section engineering guide covering Deconstruction & IA Audit, Psychology & Philosophy Mapping, iOS/macOS Pattern Translation Matrix, Motion & Micro-interaction Upgrade Checklist, and Platform-Specific Conversion Order (Web, Flutter, Tauri).
+- **Added `/apple-redesign` command (`commands/apple-redesign.md`) & router entry (`skills/apple-design-core/SKILL.md`):** Workflow command for detecting stack/style, loading `redesign-playbook.md`, converting screens in order, and running static/runtime QA audits.
+- **Added Google Antigravity & Cross-IDE Bridge (`templates/AGENTS.apple.md`):** Portable rule template for `.agent/rules/` or project-root `AGENTS.md` with `<PLUGIN_PATH>` routing and manual terminal verification commands (`build-tokens.mjs`, `lint.mjs`, `contrast-check.mjs`, `computed-style-audit.mjs`, `ux-keyboard.mjs`) replacing Claude Code hooks.
+- **Updated `README.md`, `GUIDE.md`, and `scripts/verify-plugin.mjs`:** Documented Google Antigravity setup, `/apple-redesign`, honest cross-platform parity framing, and added the 3 new Phase 3d artifacts to `verify-plugin.mjs` core runtime validation (`21/21` files).

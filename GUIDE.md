@@ -69,8 +69,10 @@ D:\Claude-Plugins\cupertino-forge
 +---commands                       slash commands
 |       apple-init.md              install the system into a project
 |       apple-screen.md            build a full screen
+|       apple-redesign.md          convert an existing project/screen using redesign-playbook.md
 |       apple-component.md         build or restyle one component
-|       apple-audit.md             score an existing app and list fixes
+|       apple-audit.md             score an existing app and list fixes (--reference optional)
+|       apple-doctor.md            verify plugin integrity and local toolchains
 |       apple-sync.md              update tokens after WWDC or a kit update
 |
 +---hooks
@@ -93,7 +95,7 @@ D:\Claude-Plugins\cupertino-forge
 |   |       +---foundations        00-principles .. 15-version-diff (16 files)
 |   |       +---components-ios     navigation, controls, presentation, content
 |   |       +---components-macos   window-chrome, navigation, controls, presentation, content
-|   |       \---patterns           screens (recipes), states (empty, loading, error)
+|   |       \---patterns           screens (recipes), states (empty, loading, error), system-experiences, redesign-playbook
 |   +---apple-web                  Next.js adapter: SKILL.md, references/components-web.md, assets (16 components, 5 lib files, base CSS)
 |   +---apple-flutter              Flutter adapter: SKILL.md, references/widgets-flutter.md, assets (13 Dart files, Android haptics Kotlin)
 |   +---apple-tauri                Tauri adapter: SKILL.md, assets (tauri.conf snippet, Cargo snippet, apple_window.rs, apple_menu.rs, lib-snippet.rs)
@@ -102,6 +104,7 @@ D:\Claude-Plugins\cupertino-forge
 +---templates
 |       apple-design.json          template for the per project config .apple-design.json
 |       CLAUDE.apple.md            block appended to a project's CLAUDE.md by /apple-init
+|       AGENTS.apple.md            portable rule template for Google Antigravity (.agent/rules/) & cross-IDE AGENTS.md
 |
 \---tokens
         color.json                 system colors (light, dark, increased contrast), labels, fills, backgrounds, macOS control fills, focus ring
@@ -165,6 +168,23 @@ Notes:
 - Do not move or rename `D:\Claude-Plugins\cupertino-forge` after installing. If it moves, run `/plugin marketplace remove zerofounder-local` and add it again from the new path.
 - After editing any plugin file, run `/plugin` and reinstall or restart Claude Code so changes load.
 - `${CLAUDE_PLUGIN_ROOT}` inside plugin files always resolves to the installed plugin folder. Use it in commands instead of hardcoded paths.
+
+### 3.5 Using cupertino-forge in Google Antigravity (or other IDEs without Claude hooks)
+
+Google Antigravity and other agentic IDEs do not run Claude Code's `CLAUDE_PLUGIN_ROOT` hooks automatically. Use the portable bridge template instead:
+
+1. Copy `D:\Claude-Plugins\cupertino-forge\templates\AGENTS.apple.md` into your target project at either:
+   - `.agent/rules/cupertino-forge.md` (Google Antigravity workspace rule), or
+   - `AGENTS.md` at the project root.
+2. Edit the `<PLUGIN_PATH>` line inside that copied file to match your local clone path (e.g., `D:\Claude-Plugins\cupertino-forge`).
+3. Create `.apple-design.json` at the project root from `templates/apple-design.json`.
+4. After each UI edit, run the manual verification scripts from the terminal (the agent is instructed to run these in `AGENTS.apple.md`):
+   ```powershell
+   node D:\Claude-Plugins\cupertino-forge\scripts\build-tokens.mjs --out src\styles\cupertino --targets css,tailwind,ts
+   node D:\Claude-Plugins\cupertino-forge\hooks\scripts\lint.mjs --all --root .
+   node D:\Claude-Plugins\cupertino-forge\scripts\contrast-check.mjs --accent "#0088FF"
+   node D:\Claude-Plugins\cupertino-forge\qa\computed-style-audit.mjs --url http://127.0.0.1:3000 --platform ios
+   ```
 
 ---
 
@@ -232,8 +252,10 @@ What it does, in order:
 |---|---|---|
 | `/apple-init [stack] [style] [accent]` | first time in a project | config, tokens, primitives, CLAUDE.md block |
 | `/apple-screen <description>` | building a whole screen | screen with all states + Compliance report |
+| `/apple-redesign [path or 'whole project'] [style]` | converting an existing app/screen to Apple 27 | deconstruction plan, converted screens via `redesign-playbook.md`, QA checks + Compliance report |
 | `/apple-component <description>` | one component (or restyling one) | component with all states, usage example |
-| `/apple-audit [path or URL]` | checking an existing app | `apple-audit-report.md` with score 0 to 100 and top fixes |
+| `/apple-audit [path or URL] [--reference <dir>]` | checking an existing app | `apple-audit-report.md` with Rule-Conformance (`0-100`), Fidelity (`N/A` without reference), and top fixes |
+| `/apple-doctor` | checking plugin health & local toolchains | `PASS` / `NOT RUN` / `FAIL` summary |
 | `/apple-sync` | after WWDC or a new Apple kit | token diff, updated tokens, rebuilt files |
 
 After `/apple-init`, normal prompts work too ("build the onboarding flow", "make the settings page"). The hooks make Claude load the skills automatically.
@@ -591,8 +613,8 @@ Save new raw exports into `tokens/source/` with the release in the filename (for
 1. Some numbers are not published by Apple (control heights, some radii, blur radii, tab bar height, macOS 27 window radius). They are tagged `estimate` and listed in reports. Verify with the kit's Inspect panel or `/apple-sync`.
 2. Sketch token export drops inner versus outer shadow flags and blend modes. `materials.json` keeps Apple's raw stacks for reference, and the code uses tuned recipes that reproduce the look.
 3. True Liquid Glass refraction is GPU native on Apple OSes. Web gets SVG lens refraction in Chromium only; Flutter uses blur + saturation + rim light (native glass via platform views is optional on iOS 26+).
-4. Pixel perfect parity is achievable on Apple devices (real SF font). On Windows, Android and Linux, Inter replaces SF, so text is extremely close but not identical.
-5. Web primitives are tested; Flutter and Rust code are written but not compiled in the build environment.
+4. Highest platform parity is achieved on Apple platforms via native APIs (and real SF system fonts). On Web, Flutter, and Tauri (Windows, Android, Linux), `cupertino-forge` provides documented visual approximation (e.g., Inter with tracking compensation) paired with 100% Apple design psychology, spatial hierarchy, motion discipline, and UX.
+5. Web, Flutter, and Tauri harnesses live in `tests/harness/{web,flutter,tauri}/` and can be verified locally whenever Node/Playwright, Flutter, and Rust `cargo` are installed (absent toolchains are reported as `NOT RUN` by `/apple-doctor`).
 6. iOS Safari web haptics are limited to the switch trick (one pulse type).
 
 ---

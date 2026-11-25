@@ -31,6 +31,7 @@ If a rule here conflicts with a user request, follow the user but say in one lin
 | Task | Read |
 |---|---|
 | Any new screen | foundations/00-principles.md, foundations/01-layout.md, patterns/screens.md |
+| Redesigning an existing app or screen | patterns/redesign-playbook.md, foundations/00-principles.md, patterns/screens.md, patterns/states.md |
 | Text, headings, numbers | foundations/02-typography.md |
 | Colors, theming, dark mode | foundations/03-color.md, foundations/13-dark-mode.md |
 | Bars, floating controls, translucency | foundations/04-liquid-glass.md |

@@ -1,26 +1,34 @@
 # cupertino-forge
 
-Apple iOS 27 and macOS 27 (Liquid Glass) design system as a Claude Code plugin. Any project, any stack (Next.js + shadcn, Flutter, Tauri 2), same Apple result.
+Apple iOS 27 and macOS 27 (Liquid Glass) design system for Claude Code, Google Antigravity, and cross-IDE workflows. On Apple platforms, native APIs deliver maximum parity; on Web (Next.js + shadcn), Flutter, and Tauri 2, `cupertino-forge` enforces documented visual approximation paired with 100% Apple design psychology, spatial hierarchy, motion discipline, and UX.
 
 ## Install (Windows, macOS, Linux)
 
-1. Unzip to a stable folder, for example `D:\Projects\cupertino-forge`.
+### Claude Code
+1. Clone or unzip to a stable folder, for example `D:\Claude-Plugins\cupertino-forge`.
 2. In Claude Code:
    ```
-   /plugin marketplace add D:\Projects\cupertino-forge
+   /plugin marketplace add D:\Claude-Plugins\cupertino-forge
    /plugin install cupertino-forge@zerofounder-local
    ```
    Restart Claude Code when asked.
-3. Requirements: Node 18+ (hooks and token builder). Optional: Python 3 with `playwright` for screenshots, `numpy` to re-render sounds.
+3. Requirements: Node 18+ (hooks, linter, token builder). Optional: Python 3 with `playwright` (screenshots), Node `playwright` in `qa/` (runtime DOM & keyboard audits), `numpy` (sound re-synthesis).
+
+### Google Antigravity & Other IDEs (No Claude Hooks Required)
+1. Clone `cupertino-forge` to a stable local folder (e.g., `D:\Claude-Plugins\cupertino-forge`).
+2. Copy [`templates/AGENTS.apple.md`](templates/AGENTS.apple.md) into your project's `.agent/rules/cupertino-forge.md` (Google Antigravity) or project-root `AGENTS.md`, and update `<PLUGIN_PATH>` to your local clone path.
+3. Create `.apple-design.json` from `templates/apple-design.json` and run the terminal verification commands listed in `AGENTS.apple.md` (`build-tokens.mjs`, `lint.mjs`, `contrast-check.mjs`, `computed-style-audit.mjs`, `ux-keyboard.mjs`) after UI edits.
 
 ## Use
 
 ```
 /apple-init web ios            # or: flutter macos, tauri adaptive "#5B3DF5"
 /apple-screen settings screen with account, notifications and appearance
+/apple-redesign src/app/dashboard ios   # convert an existing screen/project to Apple 27
 /apple-component floating action toolbar for the photo editor
-/apple-audit                   # score an existing app and get fixes
-/apple-sync                    # after WWDC or a kit update
+/apple-audit [--reference <dir>]        # score an existing app and get fixes
+/apple-doctor                           # verify plugin health & local toolchains
+/apple-sync                             # after WWDC or a kit update
 ```
 
 After `/apple-init`, just prompt normally ("build the onboarding flow"). The SessionStart and UserPromptSubmit hooks remind Claude to load the skills, the PostToolUse hook blocks off-spec code, and the Stop hook refuses to finish while violations remain.
@@ -36,9 +44,11 @@ After `/apple-init`, just prompt normally ("build the onboarding flow"). The Ses
 | skills/apple-flutter | CfApp, SquircleBorder, CfGlass, springs, haptics (with Android native constants), sounds, widgets. |
 | skills/apple-tauri | Native macOS glass and vibrancy, Windows Mica, traffic lights, standard menu bar. |
 | skills/apple-design-audit | 15 layer scorecard and report. |
-| commands/ | apple-init, apple-screen, apple-component, apple-audit, apple-sync. |
-| agents/ | apple-design-reviewer (visual QA), apple-spec-researcher (keeps tokens current). |
-| hooks/ | Lint enforcement (28 rules for web and Dart), session and prompt reminders, stop gate. |
+| commands/ | apple-init, apple-screen, apple-redesign, apple-component, apple-audit, apple-doctor, apple-sync. |
+| templates/ | `apple-design.json`, `CLAUDE.apple.md` (Claude Code), `AGENTS.apple.md` (Google Antigravity / cross-IDE bridge). |
+| agents/ | apple-design-reviewer (visual + behavior QA), apple-spec-researcher (keeps tokens current). |
+| hooks/ | Lint enforcement (web and Dart), session and prompt reminders, stop gate. |
+| qa/ | Runtime Playwright DOM audit (`computed-style-audit.mjs`), keyboard UX audit (`ux-keyboard.mjs`), reference & estimate docs. |
 | assets/sounds | Original synthesized UI sounds (no Apple audio). |
 
 ## Legal & Licensing
@@ -49,6 +59,6 @@ After `/apple-init`, just prompt normally ("build the onboarding flow"). The Ses
 
 ## Verification status
 
-- Web primitives: TypeScript strict typecheck passes; rendered in Chrome (iOS light, dark, alert; macOS window) during build.
-- Lint and hooks: tested with violating and clean files (blocks with exit 2, passes clean code).
-- Dart and Rust assets: written for Flutter 3.29+ and Tauri 2 with window-vibrancy 0.7.1 (API checked against crate source) but not compiled in the build environment. Run `flutter analyze` / `cargo check` once after install.
+- Plugin doctor (`node scripts/verify-plugin.mjs`) and unit/regression suite (`node --test tests/*.test.mjs`): automated across tokens, lint, contrast, runtime DOM audit, and keyboard UX audit.
+- Web harness (`tests/harness/web`): Vite production build verified across Chromium, WebKit, and Firefox (`verify_mounted.py` 7/7) plus `computed-style-audit.mjs` and `ux-keyboard.mjs`.
+- Flutter (`tests/harness/flutter`) and Tauri (`tests/harness/tauri`) harnesses: verified with `flutter analyze`, `flutter test`, and `cargo check` when those SDKs are installed (reported `NOT RUN` by `/apple-doctor` when absent).
