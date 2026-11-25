@@ -41,9 +41,11 @@ After `/apple-init`, just prompt normally ("build the onboarding flow"). The Ses
 | hooks/ | Lint enforcement (28 rules for web and Dart), session and prompt reminders, stop gate. |
 | assets/sounds | Original synthesized UI sounds (no Apple audio). |
 
-## Licensing notes
+## Legal & Licensing
 
-SF fonts, SF Symbols and Apple system sounds are not included and must not be bundled. On Apple devices the system font renders SF legally; elsewhere Inter is used with tracking compensation. Icons map to Lucide, Phosphor or CupertinoIcons.
+- **No Apple assets redistributed:** `cupertino-forge` does **not** ship, bundle, or redistribute Apple Design Resources (`.sketch`/`.fig` kits, exported UI PNGs, hardware frames, or brand button artwork), SF font files, SF Symbols, or Apple system sounds. It contains only independently documented HIG rules, measurements, and cross-platform implementation code.
+- **System fonts & icons:** On Apple devices the system font renders San Francisco legally via system font stacks; elsewhere Inter is used with tracking compensation. Icons map to Lucide, Phosphor, or CupertinoIcons.
+- **Brand-constrained controls:** Apple Pay, Tap to Pay on iPhone, Add to Apple Wallet, and Sign in with Apple must always use Apple's official APIs or unmodified official artwork downloaded directly from Apple (`skills/apple-design-core/references/extras/brand-constrained.md`).
 
 ## Verification status
 

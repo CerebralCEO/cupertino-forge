@@ -41,4 +41,5 @@ Read once per session. The lint hook detects the ones marked (lint).
 | Pointer cursor on every button (macOS style) | web feel | default arrow |
 | Window chrome mimicked on Windows with fake traffic lights in a native titlebar app | confusing | in Tauri use custom titlebar with traffic lights only when style is macos and decorations are off |
 | SF font files or Apple icons bundled | license violation | system font calls, mapped icon sets |
+| Hand-drawn Apple Pay or Sign in with Apple buttons (`[official]`) | trademark & App Review violation | always use official Apple components/APIs (`PKPaymentButton`, `ASAuthorizationAppleIDButton`, or official JS SDKs); see `references/extras/brand-constrained.md` |
 | #007AFF blue, 10pt grouped radius, glued tab bar | iOS 18 era | iOS 27 tokens |

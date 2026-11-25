@@ -34,7 +34,10 @@ SF Symbols supports four rendering modes (**Monochrome**, **Hierarchical**, **Pa
 
 ## Layered App Icons (`[official]`)
 
-iOS, iPadOS, macOS (`1024×1024 px` Square input `[official]`), and watchOS (`1088×1088 px` `[official]`) app icons use layered `.icon` artwork authored in Icon Composer (`Oct 28, 2026` HIG format options `[official]`). Provide 6 appearance variants (`default`, `dark`, `clear light`, `clear dark`, `tinted light`, `tinted dark` `[official]`), including for alternate app icons; let the OS apply squircle masking, shadows, refraction, and specular highlights.
+- **Canvas & Grid:** `1024×1024 px` full-bleed square input for iOS, iPadOS, and macOS (`26–27` `[official]`, https://developer.apple.com/design/human-interface-guidelines/app-icons). The OS automatically applies the continuous squircle mask (historical mask ratio `~22.37%`, `[inferred]`, `version: unknown` for iOS 27 delta) — never pre-round corners or bake drop shadows/specular highlights/feathered edges `[official]`.
+- **Icon Composer Layers:** Author layered `.icon` artwork (opaque full-bleed background + `1+` foreground layers; Oct 28, 2026 HIG adds non-layered vs Icon Composer format guidance `[official]`) so the system renders dynamic Liquid Glass refraction, blur, and inter-layer shadows `[official]`.
+- **6 Appearances:** Provide `default`, `dark`, `clear light`, `clear dark`, `tinted light`, and `tinted dark` variants (`[official]`). Alternate app icons on iOS/iPadOS MUST also supply dark, clear, and tinted variants `[official]`.
+- **Content Rules:** Prefer bold simple illustrations over photos or UI replicas; never depict copyrighted Apple hardware products `[official]`.
 
 ## RTL & Localization (`[official]`)
 

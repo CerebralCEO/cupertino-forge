@@ -47,7 +47,8 @@ If a rule here conflicts with a user request, follow the user but say in one lin
 | Localization, RTL, Bangla/Arabic | foundations/16-localization-rtl.md |
 | iOS style components | components-ios/navigation.md, controls.md, presentation.md, content.md |
 | macOS style components | components-macos/window-chrome.md, navigation.md, controls.md, presentation.md, content.md |
-| Empty, loading, error, onboarding, settings, forms, search | patterns/screens.md, patterns/states.md |
+| Empty, loading, error, onboarding, settings, forms, search, tips, Live Activities | patterns/screens.md, patterns/states.md, patterns/system-experiences.md |
+| Specialized Apple framework UI (Wallet, HealthKit, App Clips, HomeKit, AR, iMessage, App Shortcuts, Tap to Pay, Brand-constrained buttons) | references/extras/ |
 
 All paths are relative to this skill folder. Token JSON lives in the plugin root `tokens/` folder (`${CLAUDE_PLUGIN_ROOT}/tokens`).
 
