@@ -114,7 +114,7 @@
 .cf-glass[data-variant="large"] { background: var(--cf-glass-large-bg); -webkit-backdrop-filter: var(--cf-glass-large-filter); backdrop-filter: var(--cf-glass-large-filter); box-shadow: var(--cf-glass-shadow); }
 .cf-glass[data-variant="menu"] { background: var(--cf-glass-menu-bg); -webkit-backdrop-filter: var(--cf-glass-menu-filter); backdrop-filter: var(--cf-glass-menu-filter); box-shadow: var(--cf-glass-menu-shadow); }
 .cf-glass[data-variant="tinted"] {
-  background: color-mix(in srgb, var(--cf-accent) 85%, transparent);
+  background: color-mix(in srgb, var(--cf-accent) 90%, transparent);
   color: var(--cf-accent-contrast);
 }
 /* Inner active selection capsule inside TabBar (single backdrop layer, no nested blur) */
@@ -163,10 +163,10 @@
 .cf-scroll-edge-bottom { bottom: 0; height: calc(64px + env(safe-area-inset-bottom)); background: linear-gradient(to top, color-mix(in srgb, var(--cf-bg) 70%, transparent), transparent); mask-image: linear-gradient(to top, #000 40%, transparent); }
 
 /* ---------- press states for non glass elements ---------- */
-.cf-press { transition: transform var(--cf-dur-release) var(--cf-ease-release), opacity 200ms; }
+.cf-press { transition: transform var(--cf-dur-release) var(--cf-ease-release), opacity var(--cf-dur-color) var(--cf-ease-release); }
 .cf-press:active { transform: scale(0.97); transition: transform var(--cf-dur-press) var(--cf-ease-press); }
 .cf-press-plain:active { opacity: 0.35; transition: none; }
-.cf-press-plain { transition: opacity 200ms; }
+.cf-press-plain { transition: opacity var(--cf-dur-color) var(--cf-ease-release); }
 .cf-press-card:active { transform: scale(0.98); }
 
 }

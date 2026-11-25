@@ -23,14 +23,14 @@ test('verify-plugin.mjs reports harness toolchains as PASS or NOT RUN (never FAI
   }
 });
 
-test('computed-style-audit.mjs passes 10/10 on a clean token-compliant HTML page and detects 7 catchable seeded defects', () => {
+test('computed-style-audit.mjs passes 12/12 on clean HTML, stays silent on reduce-transparency glass, and detects all 12 seeded defects', () => {
   const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'cf-qa-reg-'));
   try {
     const tokenOut = path.join(tmpDir, 'cupertino');
     const bt = spawnSync(process.execPath, [buildScript, '--out', tokenOut, '--targets', 'css,json', '--accent', '#0088FF'], { encoding: 'utf8' });
     assert.equal(bt.status, 0, bt.stderr || bt.stdout);
 
-    // Ensure seeded-defects also has fresh generated CSS if running on a clean checkout
+    // Ensure seeded-defects also has fresh generated CSS on a clean checkout
     const seededCssOut = path.join(root, 'tests', 'seeded-defects', 'src', 'styles', 'cupertino');
     const btSeeded = spawnSync(process.execPath, [buildScript, '--out', seededCssOut, '--targets', 'css,json', '--accent', '#0088FF'], { encoding: 'utf8' });
     assert.equal(btSeeded.status, 0, btSeeded.stderr || btSeeded.stdout);
@@ -93,13 +93,12 @@ test('computed-style-audit.mjs passes 10/10 on a clean token-compliant HTML page
     const cleanReport = JSON.parse(cleanRun.stdout);
     const anyNotRun = cleanReport.checks.some((c) => c.status === 'NOT RUN');
     if (anyNotRun) {
-      // Optional browser unavailable -> must explicitly report NOT RUN, never fake PASS
       assert.equal(cleanReport.summary.notRun, cleanReport.checks.length);
       return;
     }
 
     assert.equal(cleanRun.status, 0, `Clean page failed: ${cleanRun.stdout}`);
-    assert.equal(cleanReport.summary.pass, 10);
+    assert.equal(cleanReport.summary.pass, 12);
     assert.equal(cleanReport.summary.fail, 0);
 
     // Check estimate-based tagging
@@ -108,7 +107,35 @@ test('computed-style-audit.mjs passes 10/10 on a clean token-compliant HTML page
       assert.equal(c.basis, 'estimate-based', `${estId} must be tagged estimate-based`);
     }
 
-    // Run on seeded defects fixture
+    // Verify glass-translucency stays silent when data-transparency="reduce" is explicitly active
+    const reduceTransHtml = path.join(tmpDir, 'reduce-trans.html');
+    fs.writeFileSync(
+      reduceTransHtml,
+      `<!doctype html>
+<html lang="en" data-transparency="reduce">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="./cupertino/cupertino.tokens.css" />
+  <style>
+    * { box-sizing: border-box; margin: 0; }
+    body { padding: 16px; background-color: var(--cf-bg); color: var(--cf-label); font-size: var(--cf-text-body-size); letter-spacing: var(--cf-text-body-tracking); }
+    .cf-glass { padding: 12px; border-radius: var(--cf-radius-card); background: var(--cf-glass-bg); }
+  </style>
+</head>
+<body><div class="cf-glass">Solid fallback expected</div></body>
+</html>`,
+      'utf8'
+    );
+    const rtRun = spawnSync(
+      process.execPath,
+      [auditScript, '--url', reduceTransHtml, '--tokens', resolvedJson, '--platform', 'ios', '--json'],
+      { encoding: 'utf8' }
+    );
+    assert.equal(rtRun.status, 0, `reduce-transparency solid glass must NOT fail: ${rtRun.stdout}`);
+    const rtReport = JSON.parse(rtRun.stdout);
+    assert.equal(rtReport.checks.find((x) => x.id === 'glass-translucency').status, 'PASS');
+
+    // Run on seeded defects fixture (original 9 + 3 unplanned blind defects)
     const seededHtml = path.join(root, 'tests', 'seeded-defects', 'index.html');
     const defectRun = spawnSync(
       process.execPath,
@@ -117,10 +144,24 @@ test('computed-style-audit.mjs passes 10/10 on a clean token-compliant HTML page
     );
     assert.equal(defectRun.status, 1, `Expected exit 1 on seeded defects, got ${defectRun.status}`);
     const defectReport = JSON.parse(defectRun.stdout);
-    for (const expectedFail of ['font-size', 'raw-color', 'hit-target', 'focus-ring', 'easing', 'border-radius', 'contrast']) {
+    for (const expectedFail of [
+      'font-size',
+      'letter-spacing',
+      'border-radius',
+      'spacing-grid',
+      'hit-target',
+      'contrast',
+      'glass-translucency',
+      'focus-ring',
+      'raw-color',
+      'easing',
+      'reduced-motion',
+    ]) {
       const c = defectReport.checks.find((x) => x.id === expectedFail);
       assert.equal(c.status, 'FAIL', `Expected ${expectedFail} to FAIL on seeded-defects`);
     }
+    const contrastCheck = defectReport.checks.find((x) => x.id === 'contrast');
+    assert.ok(contrastCheck.violations.length >= 2, 'contrast must catch both #7 (#999999 on #FFF) and #12 (low-contrast on glass)');
   } finally {
     fs.rmSync(tmpDir, { recursive: true, force: true });
   }

@@ -95,3 +95,22 @@ button.cf-clean-btn {
   background-color: var(--cf-bg-2);
   animation: cf-defect-spin 1.2s linear(0, 0.5, 1) infinite !important;
 }
+
+/* Unplanned blind defects (#10–#12) added without adding any custom rules */
+/* Defect 10: Wrong letter-spacing */
+.defect-bad-tracking {
+  letter-spacing: 3px;
+}
+
+/* Defect 11: Off-4pt-grid spacing */
+.defect-off-grid-spacing {
+  padding: 13px;
+  background-color: var(--cf-bg-2);
+}
+
+/* Defect 12: Low-contrast text on glass (valid token label-glass-3 #BFBFBF on light glass) */
+.defect-low-contrast-glass {
+  padding: 12px;
+  border-radius: var(--cf-radius-card);
+  color: var(--cf-label-glass-3);
+}

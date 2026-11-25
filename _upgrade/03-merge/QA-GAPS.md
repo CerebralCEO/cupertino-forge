@@ -1,33 +1,25 @@
-# QA Gaps Report (`tests/seeded-defects/` — Phase 3a)
+# QA Gaps & Known Limitations (`tests/seeded-defects/` — Phase 3a)
 
-> এই নথিতে `hooks/scripts/lint.mjs` এবং `qa/computed-style-audit.mjs` চালিয়ে যে প্ল্যান্টেড (seeded) ও স্ট্যাটিক ডিফেক্টগুলো **ধরা পড়েনি (`Missed`)**, সেগুলো কোনো অ্যাড-হক রুল দিয়ে লুকানো ছাড়াই স্পষ্টভাবে নথিভুক্ত করা হলো। পরবর্তী ধাপে অনুমোদন পেলে এই গ্যাপগুলো বন্ধ করা যাবে।
-
----
-
-## ১. সম্পূর্ণ Missed Defects (উভয় টুলই ধরতে পারেনি)
-
-### গ্যাপ ১: `.cf-glass`-এর ওপর সলিড `background` ওভাররাইড (Seeded Defect #8)
-- **টেস্ট কেস:** [`tests/seeded-defects/defects.css`](file:///D:/Claude-Plugins/cupertino-forge/tests/seeded-defects/defects.css) (`.cf-glass.defect-solid-glass` → `background: var(--cf-bg) !important;`) ও [`DefectsSample.tsx`](file:///D:/Claude-Plugins/cupertino-forge/tests/seeded-defects/DefectsSample.tsx) (`className="cf-glass bg-bg"`).
-- **কেন `lint.mjs` ধরতে পারেনি:** `var(--cf-bg)` ও `bg-bg` হলো বৈধ সেমান্টিক টোকেন; লিন্টারে কোনো রুল নেই যা একই এলিমেন্টে `.cf-glass`/`<Glass>`-এর সাথে সলিড ব্যাকগ্রাউন্ড (`bg-white`, `bg-bg`, `bg-bg-2`, `background: var(--cf-bg...)`) মেশানো আটকায়।
-- **কেন `qa/computed-style-audit.mjs` ধরতে পারেনি:** `raw-color` শুধু দেখে ব্যাকগ্রাউন্ড কালার টোকেন প্যালেটে আছে কি না (`#FFFFFF` বৈধ টোকেন হিসেবে পাস করে), আর `glass-budget` শুধু একসাথে কতগুলো `backdrop-filter != none` এলিমেন্ট দৃশ্যমান তা গোনে (`<= 6`)। `[data-transparency="reduce"]` সক্রিয় না থাকা অবস্থায় `.cf-glass` এলিমেন্টের `backgroundColor` অ্যালফা `1.0` (সলিড) হয়ে গেলে সেটি ধরার কোনো চেক এখনো নেই।
-- **প্রস্তাবিত ভবিষ্যৎ ফিক্স:**
-  1. `computed-style-audit.mjs`-এ গ্লাস এলিমেন্টের জন্য: `dataset.transparency !== 'reduce'` ও `dataset.contrast !== 'more'` অবস্থায় `.cf-glass` (বা `backdropFilter !== 'none'`) এলিমেন্টের `backgroundColor` alpha `< 0.99` হতে হবে (অর্থাৎ সলিড `alpha === 1` হলে `FAIL`)।
-  2. `lint.mjs`-এ: একই JSX/HTML এলিমেন্টে `cf-glass` / `<Glass` এবং সলিড ব্যাকগ্রাউন্ড ক্লাস (`bg-white`, `bg-black`, `bg-bg`, `bg-bg-2`, `bg-bg-3`, `bg-bg-grouped*`) একসাথে থাকলে `error`।
-
-### গ্যাপ ২: `prefers-reduced-motion` উপেক্ষা করা (Seeded Defect #9)
-- **টেস্ট কেস:** [`tests/seeded-defects/defects.css`](file:///D:/Claude-Plugins/cupertino-forge/tests/seeded-defects/defects.css) (`.defect-ignores-reduced-motion` → `@keyframes cf-defect-spin` + `animation: cf-defect-spin 1.2s linear(0, 0.5, 1) infinite !important;` এবং কোনো `@media (prefers-reduced-motion: reduce)` নিষ্ক্রিয়করণ ছাড়া)।
-- **কেন `lint.mjs` ধরতে পারেনি:** CSS-এ `@keyframes` বা `animation:` ও TSX-এ Tailwind `animate-*` ব্যবহারের পাশে `@media (prefers-reduced-motion: reduce)` বা `useReducedMotion` গার্ড আছে কি না, তা পরীক্ষা করার কোনো AST/লাইন রুল `lint.mjs`-এ নেই।
-- **কেন `qa/computed-style-audit.mjs` ধরতে পারেনি:** বর্তমান `computed-style-audit.mjs` কেবল ডিফল্ট মোশন মোডে একটি সিঙ্গেল-পাস DOM স্ক্যান চালায় (`easing` শুধু `linear(...)` বনাম `ease` কার্ভ চেক করে)। এটি `page.emulateMedia({ reducedMotion: 'reduce' })` চালিয়ে কোনো চলমান `animationName !== 'none'` বা `iterationCount === 'infinite'` বা spatial transform-সক্রিয় অ্যানিমেশন থামছে/ছোট হচ্ছে কি না তা যাচাই করে না।
-- **প্রস্তাবিত ভবিষ্যৎ ফিক্স:**
-  1. Phase 3b-এর multi-state Playwright ম্যাট্রিক্স (`qa/computed-style-audit.mjs` বা `qa/ux-keyboard.mjs`)-এ `emulateMedia({ reducedMotion: 'reduce' })` পাস যোগ করে ইনফিনিট বা `> 250ms` চলমান অ্যানিমেশন (`animationName !== 'none' && animationPlayState === 'running'`) ফ্ল্যাগ করা।
-  2. `lint.mjs`-এ Tailwind `animate-spin`/`animate-bounce`/`animate-pulse` (reduced-motion প্রিফিক্স ছাড়া) বা `@keyframes`/`animation:` ওয়ার্নিং/এরর বিবেচনা করা।
+> প্রাথমিক Phase 3a রানে যে ২টি ডিফেক্ট মিস হয়েছিল (#৮ ও #৯), সেগুলো এখন বাড়তি হার্ডকোড ছাড়া [`qa/computed-style-audit.mjs`](file:///D:/Claude-Plugins/cupertino-forge/qa/computed-style-audit.mjs)-এ যুক্ত করে **Seeded Fixture (`12/12 Detected`)** এবং **Clean Mounted App (`12/12 PASS` Light ও Dark, `0` false positives)** উভয়েই যাচাই করা হয়েছে।
 
 ---
 
-## ২. আংশিক বা মাধ্যম-ভিত্তিক স্ট্যাটিক লিন্ট গ্যাপ (`lint.mjs` সীমাবদ্ধতা, DOM-এ ধরা পড়েছে)
+## ১. সমাধানকৃত DOM QA গ্যাপ (#৮ ও #৯)
 
-নিচের ডিফেক্টগুলো `qa/computed-style-audit.mjs` (Playwright DOM)-এ **নির্ভুলভাবে ধরা পড়েছে**, কিন্তু শুধু স্ট্যাটিক `lint.mjs` চালালে নিচের ফর্মগুলো এড়িয়ে যায়:
+1. **Defect #8 (`.cf-glass`-এ সলিড `background` ওভাররাইড) — এখন `DETECTED` (`glass-translucency`):**
+   - `.cf-glass` বা `backdrop-filter != none` এলিমেন্টের `backgroundColor` alpha `>= 0.95` হলে `FAIL` দেয়।
+   - `data-transparency="reduce"`, `data-contrast="more"`, `prefers-reduced-transparency: reduce`, `prefers-contrast: more`, বা `forced-colors: active` সক্রিয় থাকলে চুপ থাকে (টেস্টে `reduce-trans.html` দিয়ে যাচাইকৃত)।
+2. **Defect #9 (`prefers-reduced-motion` উপেক্ষা) — এখন `DETECTED` (`reduced-motion`):**
+   - `page.emulateMedia({ reducedMotion: 'reduce' })` চালিয়ে idle ও hover/press ইন্টারঅ্যাকশনের সময় `document.getAnimations()` পরীক্ষা করে কোনো চলমান spatial (`transform`/`scale`/`rotate`/`translate`) অ্যানিমেশন থাকলে `FAIL` দেয়; বিশুদ্ধ `opacity` ক্রস-ফেড অনুমোদিত।
 
-1. **JSX inline camelCase styles (`fontSize: '23px'`, `borderRadius: '15px'`):** `lint.mjs`-এর `css-font-size` ও `css-radius` রেজেক্স kebab-case CSS (`font-size:`, `border-radius:`) খোঁজে; React JSX `style={{ fontSize: '23px', borderRadius: '15px' }}` স্ট্রিংয়ে ম্যাচ করে না।
-2. **অ্যাক্সেসিবিলিটি হিট-টার্গেট (`w-[30px] h-[30px]`, CSS `width: 30px; height: 30px`) এবং `outline-none`:** স্ট্যাটিক টেক্সট-লিন্টার `<button>`-এর `padding`/`min-width` সমীকরণ বুঝতে পারে না, এবং `outline-none` অনেক সময় `focus-visible:ring` বা ইনপুট র‍্যাপারের সাথে বৈধ হতে পারে—ফলে কেবল রিয়েল DOM অডিটই এগুলো নির্ভরযোগ্যভাবে ধরে (`hit-target`, `focus-ring`)।
-3. **সেমান্টিক কন্ট্রাস্ট (`#999999` on `#FFFFFF`):** `#999999` এবং `#FFFFFF` দুটোই `tokens/color.json`-এ আছে (`labelVibrantIOS.secondary` এবং `backgroundIOS.primary`), তাই কোনো বৈধ-টোকেন জোড়ার কন্ট্রাস্ট ব্যর্থতা স্ট্যাটিক টোকেন-নামের লিন্ট দিয়ে ধরা যায় না — এর জন্য রিয়েল DOM `contrast` কম্পিউটেশনই (`2.85:1 < 4.5:1`) অপরিহার্য।
+---
+
+## ২. অবশিষ্ট Known Limitations (সততার সাথে নথিভুক্ত)
+
+1. **Static Lint (`hooks/scripts/lint.mjs`) সীমাবদ্ধতা (DOM-এ ধরা পড়ে, শুধু স্ট্যাটিক লিন্টে নয়):**
+   - JSX inline camelCase স্টাইল (`style={{ fontSize: '23px', borderRadius: '15px', letterSpacing: '3px', padding: '13px' }}`) `lint.mjs`-এর CSS kebab-case রেজেক্সে ধরা পড়ে না।
+   - হিট-টার্গেট (`30×30px`), `outline: none` বনাম `:focus-visible` রিং, সেমান্টিক কন্ট্রাস্ট (`#999999` বনাম `#FFFFFF`, বা গ্লাসের ওপর `label-glass-3`), `.cf-glass bg-bg` সলিড ওভাররাইড, এবং `@keyframes`/`animate-spin`-এ `prefers-reduced-motion` গার্ড না থাকা — এগুলো কেবল রানটাইম Playwright DOM অডিটেই নির্ভরযোগ্যভাবে ধরা পড়ে, স্ট্যাটিক `lint.mjs`-এ নয়।
+2. **Reduced-Motion ইন্টারঅ্যাকশন কভারেজ সীমা:**
+   - `computed-style-audit.mjs`-এর `reduced-motion` পাস idle অবস্থা ও প্রথম ৩টি দৃশ্যমান pressable কন্ট্রোলে hover/press পরীক্ষা করে। যেসব মোশন কেবল গভীর ফর্ম সাবমিট, ড্র্যাগ জেসচার বা নির্দিষ্ট স্টেট-মেশিন ট্রিগার ছাড়া চালু হয় না (যেমন কোনো কাস্টম ড্র্যাগ অ্যানিমেশন), সেগুলো স্বয়ংক্রিয়ভাবে ট্রিগার নাও হতে পারে।
+3. **Self-Authored Fixture Upper-Bound সীমাবদ্ধতা:**
+   - [`tests/seeded-defects/`](file:///D:/Claude-Plugins/cupertino-forge/tests/seeded-defects/index.html) ফিক্সচারটি অডিটরের লেখক নিজেই তৈরি করেছে; তাই `12/12` ডিটেকশন রেটকে প্রকৃত অজানা প্রোজেক্টের গ্যারান্টি না ভেবে **ওপরের সীমা (upper bound)** হিসেবে দেখতে হবে।

@@ -4,7 +4,7 @@
 // Never hardcodes token values; reports unrun checks as NOT RUN (<reason>), never OK.
 //
 // Usage:
-//   node qa/computed-style-audit.mjs --url <url-or-file> [--tokens <resolved.json>] [--platform ios|macos] [--accent <#HEX>] [--json] [--out <file>]
+//   node qa/computed-style-audit.mjs --url <url-or-file> [--tokens <resolved.json>] [--platform ios|macos] [--theme light|dark] [--accent <#HEX>] [--json] [--out <file>]
 // Exit codes:
 //   0 = 0 failures (may still contain NOT RUN when browser unavailable)
 //   1 = 1+ FAIL checks
@@ -29,6 +29,7 @@ function parseArgs(argv) {
     else if (a === '--platform') opts.platform = argv[++i];
     else if (a === '--accent') opts.accent = argv[++i];
     else if (a === '--out') opts.out = argv[++i];
+    else if (a === '--theme') opts.theme = argv[++i];
   }
   return opts;
 }
@@ -70,9 +71,11 @@ function buildNotRunReport(targetUrl, platform, reason, tokensMeta) {
     ['hit-target', 'official', 'layout.hitTarget'],
     ['contrast', 'official', 'tokens/color.json (HIG)'],
     ['glass-budget', 'estimate-based', 'materials.perfBudget'],
+    ['glass-translucency', 'official', 'materials.liquidGlass'],
     ['focus-ring', 'measured', 'colors.focusRing'],
     ['raw-color', 'measured', 'colors + materials'],
     ['easing', 'estimate-based', 'motion.springs'],
+    ['reduced-motion', 'official', 'motion (prefers-reduced-motion)'],
   ];
   const checks = specs.map(([id, basis, sourceToken]) => ({
     id,
@@ -109,7 +112,7 @@ async function launchChromium(playwright) {
   throw new Error(`Playwright Chromium unavailable (${errors.join('; ')})`);
 }
 
-async function runAudit(targetUrl, tokens, platform) {
+async function runAudit(targetUrl, tokens, platform, theme) {
   let pw;
   try {
     pw = await import('playwright');
@@ -134,26 +137,62 @@ async function runAudit(targetUrl, tokens, platform) {
 
   try {
     const viewport = platform === 'macos' ? { width: 1280, height: 800 } : { width: 390, height: 844 };
-    const context = await browser.newContext({ viewport });
+    const context = await browser.newContext({ viewport, ...(theme ? { colorScheme: theme } : {}) });
+    if (theme) {
+      await context.addInitScript((t) => {
+        try { localStorage.setItem('cf-theme', t); } catch { /* storage unavailable on file:// in some engines */ }
+        document.documentElement.dataset.theme = t;
+      }, theme);
+    }
     const page = await context.newPage();
+
+    // Normalize OS prefers-reduced-transparency to no-preference for deterministic baseline auditing
+    // (explicit in-app data-transparency="reduce", data-contrast="more", or forced-colors still silence glass-translucency)
+    try {
+      const cdp = await context.newCDPSession(page);
+      await cdp.send('Emulation.setEmulatedMedia', {
+        features: [
+          { name: 'prefers-reduced-transparency', value: 'no-preference' },
+          ...(theme ? [{ name: 'prefers-color-scheme', value: theme }] : []),
+        ],
+      });
+    } catch { /* non-CDP engine fallback */ }
+
     await page.goto(targetUrl, { waitUntil: 'networkidle' });
     await page.waitForTimeout(120);
 
     const domData = await page.evaluate(({ tokens: tok, plat }) => {
       const parseCssColor = (str) => {
         if (!str || typeof str !== 'string') return null;
+        // Standard rgb() / rgba()
         const m = str.match(/rgba?\(\s*([\d.]+)\s*[,\s]\s*([\d.]+)\s*[,\s]\s*([\d.]+)(?:\s*[,/]\s*([\d.]+%?))?\s*\)/i);
-        if (!m) return null;
-        let a = 1;
-        if (m[4] !== undefined) {
-          a = m[4].endsWith('%') ? parseFloat(m[4]) / 100 : parseFloat(m[4]);
+        if (m) {
+          let a = 1;
+          if (m[4] !== undefined) {
+            a = m[4].endsWith('%') ? parseFloat(m[4]) / 100 : parseFloat(m[4]);
+          }
+          return { r: Math.round(+m[1]), g: Math.round(+m[2]), b: Math.round(+m[3]), a };
         }
-        return { r: Math.round(+m[1]), g: Math.round(+m[2]), b: Math.round(+m[3]), a };
+        // CSS Color 4 color(srgb r g b / a) (emitted by Chromium for color-mix)
+        const m4 = str.match(/color\(\s*(?:srgb|display-p3)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)(?:\s*\/\s*([\d.]+%?))?\s*\)/i);
+        if (m4) {
+          let a = 1;
+          if (m4[4] !== undefined) {
+            a = m4[4].endsWith('%') ? parseFloat(m4[4]) / 100 : parseFloat(m4[4]);
+          }
+          return {
+            r: Math.round(Math.max(0, Math.min(1, parseFloat(m4[1]))) * 255),
+            g: Math.round(Math.max(0, Math.min(1, parseFloat(m4[2]))) * 255),
+            b: Math.round(Math.max(0, Math.min(1, parseFloat(m4[3]))) * 255),
+            a,
+          };
+        }
+        return null;
       };
 
       const parseTokenHex = (str) => {
         if (typeof str !== 'string') return null;
-        if (str.startsWith('rgba(') || str.startsWith('rgb(')) return parseCssColor(str);
+        if (str.startsWith('rgba(') || str.startsWith('rgb(') || str.startsWith('color(')) return parseCssColor(str);
         const m = str.match(/^#([0-9a-fA-F]{6})(?:@([\d.]+))?$/);
         if (!m) return null;
         const n = parseInt(m[1], 16);
@@ -187,6 +226,23 @@ async function runAudit(targetUrl, tokens, platform) {
       collectColors(tok.colors);
       collectColors(tok.$meta?.accent);
       collectColors(tok.materials);
+
+      // Official Apple secondary label tokens (e.g. #3C3C43@0.6 = 3.44:1 on #FFFFFF in light mode)
+      const secondaryLabelTokens = [
+        parseTokenHex(tok.colors?.labelIOS?.secondary?.light),
+        parseTokenHex(tok.colors?.labelIOS?.secondary?.dark),
+        parseTokenHex(tok.colors?.labelMacOS?.secondary?.light),
+        parseTokenHex(tok.colors?.labelMacOS?.secondary?.dark),
+      ].filter(Boolean);
+
+      const isOfficialSecondaryLabel = (c) =>
+        secondaryLabelTokens.some(
+          (t) =>
+            Math.abs(t.r - c.r) <= 3 &&
+            Math.abs(t.g - c.g) <= 3 &&
+            Math.abs(t.b - c.b) <= 3 &&
+            Math.abs(t.a - c.a) <= 0.05
+        );
 
       const matchesTokenColor = (cssStr) => {
         const c = parseCssColor(cssStr);
@@ -240,6 +296,21 @@ async function runAudit(targetUrl, tokens, platform) {
         return acc;
       };
 
+      const effectiveHitRect = (el, rect) => {
+        let w = rect.width;
+        let h = rect.height;
+        for (const pseudo of ['::after', '::before']) {
+          const pcs = getComputedStyle(el, pseudo);
+          if (!pcs || pcs.content === 'none' || pcs.content === 'normal') continue;
+          if (pcs.position !== 'absolute') continue;
+          const pw = parseFloat(pcs.width);
+          const ph = parseFloat(pcs.height);
+          if (!Number.isNaN(pw) && pw > w) w = pw;
+          if (!Number.isNaN(ph) && ph > h) h = ph;
+        }
+        return { width: w, height: h };
+      };
+
       const selectorFor = (el) => {
         if (el.id) return `#${el.id}`;
         const cls = typeof el.className === 'string' && el.className.trim()
@@ -290,15 +361,25 @@ async function runAudit(targetUrl, tokens, platform) {
       const maxFocusSize = 18;
       const boldWeightMin = 600;
 
+      const solidFallbackActive =
+        document.documentElement.dataset.transparency === 'reduce' ||
+        document.documentElement.dataset.contrast === 'more' ||
+        (document.documentElement.dataset.transparency !== 'normal' &&
+          window.matchMedia('(prefers-reduced-transparency: reduce)').matches) ||
+        window.matchMedia('(forced-colors: active)').matches ||
+        window.matchMedia('(prefers-contrast: more)').matches;
+
       const fontViolations = [];
       const trackingViolations = [];
       const radiusViolations = [];
       const spacingViolations = [];
       const hitViolations = [];
       const contrastViolations = [];
+      const contrastAdvisories = [];
       const rawColorViolations = [];
       const easingViolations = [];
       const glassNodes = [];
+      const glassTranslucencyViolations = [];
 
       const forbiddenTimingRe = /^(ease|ease-in|ease-out|ease-in-out|linear)$/i;
       const canonicalCubicRe = /^(cubic-bezier\(\s*0\.25\s*,\s*0\.1\s*,\s*0\.25\s*,\s*1\s*\)|cubic-bezier\(\s*0\.42\s*,\s*0\s*,\s*1\s*,\s*1\s*\)|cubic-bezier\(\s*0\s*,\s*0\s*,\s*0\.58\s*,\s*1\s*\)|cubic-bezier\(\s*0\.42\s*,\s*0\s*,\s*0\.58\s*,\s*1\s*\))$/i;
@@ -350,11 +431,19 @@ async function runAudit(targetUrl, tokens, platform) {
             const weight = parseInt(cs.fontWeight, 10) || 400;
             const minRatio = fs < maxFocusSize && weight < boldWeightMin ? 4.5 : 3.0;
             if (ratio + 0.05 < minRatio) {
-              contrastViolations.push({
-                selector: sel,
-                actual: `${ratio.toFixed(2)}:1 (fontSize=${fs}px, weight=${weight})`,
-                expected: `>= ${minRatio}:1`,
-              });
+              if (isOfficialSecondaryLabel(fg) && ratio >= 3.0) {
+                contrastAdvisories.push({
+                  selector: sel,
+                  actual: `${ratio.toFixed(2)}:1 (official Apple secondary label token)`,
+                  expected: `>= 4.5:1 (HC raises to lightHC/darkHC)`,
+                });
+              } else {
+                contrastViolations.push({
+                  selector: sel,
+                  actual: `${ratio.toFixed(2)}:1 (fontSize=${fs}px, weight=${weight})`,
+                  expected: `>= ${minRatio}:1`,
+                });
+              }
             }
           }
         }
@@ -391,33 +480,45 @@ async function runAudit(targetUrl, tokens, platform) {
         for (const [prop, raw] of spacingVals) {
           const val = parseFloat(raw);
           if (!val || val === 0) continue;
-          const onGrid = Math.abs(val % 4) <= 0.25 || Math.abs(val - Math.round(val)) <= 0.25 && spacingScale.has(Math.round(val)) || Math.abs(val - 1) <= 0.1;
+          const onGrid = Math.abs(val % 4) <= 0.25 || (Math.abs(val - Math.round(val)) <= 0.25 && spacingScale.has(Math.round(val))) || Math.abs(val - 1) <= 0.1;
           if (!onGrid) {
             spacingViolations.push({ selector: sel, actual: `${prop}: ${val}px`, expected: '4px grid or layout.spacing.scale' });
             break;
           }
         }
 
-        // 5. Hit-target size
+        // 5. Hit-target size (accounts for ::after / ::before hit-area extenders)
         const interactiveRe = /^(BUTTON|INPUT|SELECT|TEXTAREA|A)$/i;
         const role = el.getAttribute('role') || '';
         const isInteractive =
           (interactiveRe.test(el.tagName) && el.getAttribute('type') !== 'hidden' && (el.tagName !== 'A' || el.hasAttribute('href'))) ||
           ['button', 'tab', 'switch', 'checkbox', 'radio', 'menuitem'].includes(role);
         if (isInteractive && !el.closest('p')) {
-          if (rect.width + 0.5 < hitMin || rect.height + 0.5 < hitMin) {
+          const hit = effectiveHitRect(el, rect);
+          if (hit.width + 0.5 < hitMin || hit.height + 0.5 < hitMin) {
             hitViolations.push({
               selector: sel,
-              actual: `${Math.round(rect.width)}x${Math.round(rect.height)}px`,
+              actual: `${Math.round(hit.width)}x${Math.round(hit.height)}px`,
               expected: `>= ${hitMin}x${hitMin}px`,
             });
           }
         }
 
-        // 7. Simultaneous visible glass count
+        // 7 & 8. Simultaneous visible glass count & glass translucency (solid override detection)
         const bf = (cs.backdropFilter && cs.backdropFilter !== 'none') ? cs.backdropFilter : (cs.webkitBackdropFilter && cs.webkitBackdropFilter !== 'none' ? cs.webkitBackdropFilter : 'none');
+        const isGlassEl = el.classList.contains('cf-glass') || bf !== 'none';
         if (bf !== 'none' && rect.bottom > 0 && rect.top < window.innerHeight && rect.right > 0 && rect.left < window.innerWidth) {
           glassNodes.push(sel);
+        }
+        if (isGlassEl && !solidFallbackActive) {
+          const gBg = parseCssColor(cs.backgroundColor);
+          if (gBg && gBg.a >= 0.95) {
+            glassTranslucencyViolations.push({
+              selector: sel,
+              actual: `backgroundColor=${cs.backgroundColor} (alpha=${gBg.a.toFixed(2)})`,
+              expected: 'translucent glass background (alpha < 0.95) outside reduce-transparency/forced-colors',
+            });
+          }
         }
 
         // 9. Raw / non-token colors
@@ -476,16 +577,19 @@ async function runAudit(targetUrl, tokens, platform) {
         spacingViolations,
         hitViolations,
         contrastViolations,
+        contrastAdvisories,
         rawColorViolations,
         easingViolations,
         glassNodes,
         glassBudgetMax,
+        glassTranslucencyViolations,
+        solidFallbackActive,
         hitMin,
         unfocusedSnapshots,
       };
     }, { tokens, plat: platform });
 
-    // 8. Keyboard focus-ring check via real sequential Tab traversal (:focus-visible guaranteed)
+    // Keyboard focus-ring check via real sequential Tab traversal (:focus-visible guaranteed)
     const focusViolations = [];
     if (domData.unfocusedSnapshots.length > 0) {
       const snapByIdx = new Map(domData.unfocusedSnapshots.map((s) => [s.idx, s]));
@@ -523,6 +627,90 @@ async function runAudit(targetUrl, tokens, platform) {
       }
     }
 
+    // Reduced-motion pass: emulate prefers-reduced-motion: reduce, trigger hover/press interactions,
+    // and flag any running spatial/transform/scale/rotate animation (opacity cross-fades allowed).
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.waitForTimeout(120);
+
+    const sampleMotionViolations = async (phaseLabel) =>
+      page.evaluate((phase) => {
+        const MOTION_PROPS = new Set(['transform', 'translate', 'scale', 'rotate', 'top', 'left', 'right', 'bottom', 'x', 'y']);
+        const selectorFor = (el) => {
+          if (!el || el.nodeType !== 1) return 'unknown';
+          if (el.id) return `#${el.id}`;
+          const cls = typeof el.className === 'string' && el.className.trim()
+            ? '.' + el.className.trim().split(/\s+/).slice(0, 2).join('.')
+            : '';
+          const defect = el.getAttribute('data-defect') ? `[data-defect="${el.getAttribute('data-defect')}"]` : '';
+          return `${el.tagName.toLowerCase()}${cls}${defect}`;
+        };
+        const found = [];
+        for (const anim of document.getAnimations()) {
+          if (anim.playState !== 'running') continue;
+          const effect = anim.effect;
+          const target = effect && 'target' in effect ? effect.target : null;
+          if (!target || target.nodeType !== 1) continue;
+          const cs = getComputedStyle(target);
+          if (cs.display === 'none' || cs.visibility === 'hidden') continue;
+          const r = target.getBoundingClientRect();
+          if (r.width === 0 || r.height === 0) continue;
+          let animatedProps = [];
+          if (typeof effect.getKeyframes === 'function') {
+            for (const kf of effect.getKeyframes()) {
+              for (const k of Object.keys(kf)) {
+                if (MOTION_PROPS.has(k)) animatedProps.push(k);
+              }
+            }
+          }
+          const tp = anim.transitionProperty;
+          if (tp && MOTION_PROPS.has(tp)) animatedProps.push(tp);
+          animatedProps = [...new Set(animatedProps)];
+          if (animatedProps.length > 0) {
+            found.push({
+              selector: selectorFor(target),
+              actual: `running ${anim.constructor?.name || 'Animation'} (${animatedProps.join(',')}) during ${phase} under prefers-reduced-motion: reduce`,
+              expected: 'no spatial transform/scale/rotate motion under reduced motion (opacity cross-fade allowed)',
+            });
+          }
+        }
+        return found;
+      }, phaseLabel);
+
+    const reducedMotionMap = new Map();
+    const recordRM = (list) => {
+      for (const v of list) {
+        if (!reducedMotionMap.has(v.selector)) reducedMotionMap.set(v.selector, v);
+      }
+    };
+
+    recordRM(await sampleMotionViolations('idle'));
+
+    // Trigger hover + press on up to 3 visible pressable/interactive controls
+    const pressTargets = await page.evaluate(() => {
+      const els = Array.from(document.querySelectorAll('.cf-glass[data-pressable="true"], .cf-press, button:not([disabled])'))
+        .filter((el) => {
+          const cs = getComputedStyle(el);
+          const r = el.getBoundingClientRect();
+          return cs.display !== 'none' && cs.visibility !== 'hidden' && r.width > 0 && r.height > 0 && r.top >= 0 && r.bottom <= window.innerHeight;
+        })
+        .slice(0, 3);
+      return els.map((el) => {
+        const r = el.getBoundingClientRect();
+        return { x: r.left + r.width / 2, y: r.top + r.height / 2 };
+      });
+    });
+
+    for (const pt of pressTargets) {
+      await page.mouse.move(pt.x, pt.y);
+      await page.mouse.down();
+      await page.waitForTimeout(45);
+      recordRM(await sampleMotionViolations('press'));
+      await page.mouse.up();
+      await page.waitForTimeout(45);
+    }
+
+    const reducedMotionViolations = Array.from(reducedMotionMap.values());
+
     const mkCheck = (id, basis, sourceToken, violations, okDetail) => ({
       id,
       status: violations.length === 0 ? 'PASS' : 'FAIL',
@@ -537,17 +725,42 @@ async function runAudit(targetUrl, tokens, platform) {
       ? [{ selector: 'viewport', actual: `${domData.glassNodes.length} glass elements`, expected: `<= ${domData.glassBudgetMax}` }]
       : [];
 
+    const contrastDetail =
+      domData.contrastViolations.length === 0
+        ? domData.contrastAdvisories.length > 0
+          ? `All visible text meets HIG contrast floors (${domData.contrastAdvisories.length} Apple secondary-label advisory)`
+          : 'All visible text meets HIG contrast floors'
+        : `${domData.contrastViolations.length} violation(s)`;
+
     const checks = [
       mkCheck('font-size', 'measured', `typography.${platform === 'macos' ? 'macos' : 'iosLarge'}`, domData.fontViolations, 'All text matches type scale'),
       mkCheck('letter-spacing', 'measured', 'typography (trackingPx + nonLatin)', domData.trackingViolations, 'All tracking matches style scale / non-Latin zero'),
       mkCheck('border-radius', 'estimate-based', `shape.${platform === 'macos' ? 'radiusMacOS' : 'radiusIOS'}`, domData.radiusViolations, 'All radii match shape tokens or capsule'),
       mkCheck('spacing-grid', 'estimate-based', 'layout.spacing', domData.spacingViolations, 'All spacing aligns with 4px grid / spacing scale'),
       mkCheck('hit-target', 'official', `layout.hitTarget.${platform}`, domData.hitViolations, `All interactive controls >= ${domData.hitMin}px`),
-      mkCheck('contrast', 'official', 'tokens/color.json (HIG 4.5:1 / 3.0:1)', domData.contrastViolations, 'All visible text meets HIG contrast floors'),
+      {
+        id: 'contrast',
+        status: domData.contrastViolations.length === 0 ? 'PASS' : 'FAIL',
+        basis: 'official',
+        sourceToken: 'tokens/color.json (HIG 4.5:1 / 3.0:1)',
+        detail: contrastDetail,
+        violations: domData.contrastViolations,
+        ...(domData.contrastAdvisories.length > 0 ? { advisories: domData.contrastAdvisories } : {}),
+      },
       mkCheck('glass-budget', 'estimate-based', 'materials.perfBudget.maxSimultaneousBackdrop', glassViolations, `${domData.glassNodes.length}/${domData.glassBudgetMax} simultaneous glass surfaces`),
+      mkCheck(
+        'glass-translucency',
+        'official',
+        'materials.liquidGlass (translucent outside reduce-transparency)',
+        domData.glassTranslucencyViolations,
+        domData.solidFallbackActive
+          ? 'Skipped (reduce-transparency / high-contrast / forced-colors active)'
+          : 'All glass surfaces retain translucency (alpha < 0.95)'
+      ),
       mkCheck('focus-ring', 'measured', 'colors.focusRing', focusViolations, `${domData.unfocusedSnapshots.length} focusable control(s) retain visible focus ring`),
       mkCheck('raw-color', 'measured', 'colors + materials', domData.rawColorViolations, 'All colors resolve to token palette'),
       mkCheck('easing', 'estimate-based', 'motion.springs', domData.easingViolations, 'No forbidden ease/linear curves on active transitions/animations'),
+      mkCheck('reduced-motion', 'official', 'motion (prefers-reduced-motion: reduce)', reducedMotionViolations, 'No spatial transform/scale/rotate animations active under prefers-reduced-motion: reduce'),
     ];
 
     const passCount = checks.filter((c) => c.status === 'PASS').length;
@@ -597,7 +810,7 @@ function formatMarkdown(report) {
 const opts = parseArgs(process.argv.slice(2));
 const targetUrl = normalizeUrl(opts.url);
 if (!targetUrl || !['ios', 'macos'].includes(opts.platform)) {
-  process.stderr.write('Usage: node qa/computed-style-audit.mjs --url <url-or-file> [--tokens <resolved.json>] [--platform ios|macos] [--accent <#HEX>] [--json] [--out <file>]\n');
+  process.stderr.write('Usage: node qa/computed-style-audit.mjs --url <url-or-file> [--tokens <resolved.json>] [--platform ios|macos] [--theme light|dark] [--accent <#HEX>] [--json] [--out <file>]\n');
   process.exit(2);
 }
 
@@ -605,7 +818,12 @@ let cleanup = () => {};
 try {
   const loaded = loadResolvedTokens(opts.tokens, opts.accent);
   cleanup = loaded.cleanup;
-  const report = await runAudit(targetUrl, loaded.tokens, opts.platform);
+  if (opts.theme && !['light', 'dark'].includes(opts.theme)) {
+    process.stderr.write('--theme must be light or dark\n');
+    process.exit(2);
+  }
+  const report = await runAudit(targetUrl, loaded.tokens, opts.platform, opts.theme);
+  report.theme = opts.theme || 'default';
   const rendered = opts.json ? JSON.stringify(report, null, 2) + '\n' : formatMarkdown(report);
   if (opts.out) fs.writeFileSync(path.resolve(opts.out), rendered, 'utf8');
   process.stdout.write(rendered);

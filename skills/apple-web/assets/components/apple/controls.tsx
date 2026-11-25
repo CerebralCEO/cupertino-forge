@@ -32,6 +32,7 @@ export function Toggle({ checked, onCheckedChange, label, disabled, color = 'acc
       onPointerCancel={() => setPressed(false)}
       onPointerLeave={() => setPressed(false)}
       className={cn('relative shrink-0 rounded-capsule outline-none transition-colors duration-[var(--cf-dur-color)] focus-visible:focus-ring disabled:opacity-40',
+        !mac && "after:absolute after:-inset-y-2 after:inset-x-0 after:content-['']",
         checked ? (color === 'green' ? 'bg-green' : 'bg-accent') : 'bg-fill')}
       style={{ width: W, height: H }}
     >
@@ -131,7 +132,7 @@ export function SegmentedControl<T extends string>({ options, value, onChange, l
             tabIndex={active ? 0 : -1}
             onKeyDown={(e) => handleKeyDown(e, idx)}
             onClick={() => { if (!active) { onChange(o.value); haptic('selection'); } }}
-            className={cn('relative flex flex-1 items-center justify-center rounded-capsule px-3 text-subheadline outline-none focus-visible:focus-ring [:root[data-cf-platform=macos]_&]:text-body', active ? 'emphasized text-label' : 'text-label')}
+            className={cn("relative flex flex-1 items-center justify-center rounded-capsule px-3 text-subheadline outline-none focus-visible:focus-ring [:root[data-cf-platform=macos]_&]:text-body after:absolute after:-inset-y-1.5 after:inset-x-0 after:content-['']", active ? 'emphasized text-label' : 'text-label')}
           >
             {active && <motion.span layoutId={`seg-${id}`} transition={reducedMotion ? { duration: 0.15 } : spring('snappy')} className="absolute inset-0 rounded-capsule bg-bg shadow-knob [:root[data-theme=dark]_&]:bg-gray3" />}
             <span className="relative truncate">{o.label}</span>
@@ -147,9 +148,9 @@ export function Stepper({ value, onChange, min = 0, max = 99, step = 1, label }:
   const set = (v: number) => { const n = Math.max(min, Math.min(max, v)); if (n !== value) { onChange(n); haptic('selection'); } };
   return (
     <div role="group" aria-label={label} className="inline-flex h-8 w-[var(--cf-stepper-w)] items-center rounded-capsule bg-fill-3 text-label">
-      <button type="button" aria-label="Decrement" disabled={value <= min} onClick={() => set(value - step)} className="cf-press flex h-full flex-1 items-center justify-center rounded-l-capsule outline-none focus-visible:focus-ring disabled:text-label-3"><Minus size={18} strokeWidth={2.25} /></button>
+      <button type="button" aria-label="Decrement" disabled={value <= min} onClick={() => set(value - step)} className="cf-press relative flex h-full flex-1 items-center justify-center rounded-l-capsule outline-none focus-visible:focus-ring disabled:text-label-3 after:absolute after:-inset-y-1.5 after:inset-x-0 after:content-['']"><Minus size={18} strokeWidth={2.25} /></button>
       <span aria-hidden className="h-[var(--cf-stepper-divider-h)] w-[var(--cf-hairline)] bg-separator" />
-      <button type="button" aria-label="Increment" disabled={value >= max} onClick={() => set(value + step)} className="cf-press flex h-full flex-1 items-center justify-center rounded-r-capsule outline-none focus-visible:focus-ring disabled:text-label-3"><Plus size={18} strokeWidth={2.25} /></button>
+      <button type="button" aria-label="Increment" disabled={value >= max} onClick={() => set(value + step)} className="cf-press relative flex h-full flex-1 items-center justify-center rounded-r-capsule outline-none focus-visible:focus-ring disabled:text-label-3 after:absolute after:-inset-y-1.5 after:inset-x-0 after:content-['']"><Plus size={18} strokeWidth={2.25} /></button>
     </div>
   );
 }

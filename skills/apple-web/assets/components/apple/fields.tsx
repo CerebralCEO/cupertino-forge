@@ -53,14 +53,14 @@ export function SearchField({ value, onChange, placeholder = 'Search', onCancel,
   const [focused, setFocused] = React.useState(false);
   return (
     <div className="flex w-full items-center gap-md">
-      <div className={cn('flex h-11 flex-1 items-center gap-2 rounded-capsule px-3.5 text-label-2 [:root[data-cf-platform=macos]_&]:h-[var(--cf-control-regular)]',
+      <div className={cn('flex h-11 flex-1 items-center gap-2 rounded-capsule px-4 text-label-2 [:root[data-cf-platform=macos]_&]:h-[var(--cf-control-regular)]',
         glass ? 'cf-glass' : 'bg-fill-3')}>
         <Search aria-hidden size={18} strokeWidth={2.25} />
         <input
           type="search" role="searchbox" aria-label={placeholder} value={value} autoFocus={autoFocus}
           onChange={(e) => onChange(e.target.value)} onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}
           placeholder={placeholder}
-          className="w-full min-w-0 bg-transparent text-body text-label outline-none placeholder:text-placeholder [&::-webkit-search-cancel-button]:hidden"
+          className="h-full w-full min-w-0 bg-transparent text-body text-label outline-none placeholder:text-placeholder [&::-webkit-search-cancel-button]:hidden"
         />
         {value && (
           <button type="button" aria-label="Clear search" onClick={() => onChange('')} className="text-label-3">

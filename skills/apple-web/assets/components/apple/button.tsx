@@ -18,7 +18,7 @@ const variantCls: Record<ButtonVariant, string> = {
   prominentGlass: 'text-accent-contrast',
   glass: 'text-label-glass',
   filled: 'bg-accent text-accent-contrast cf-press',
-  tinted: 'bg-[color-mix(in_srgb,var(--cf-accent)_15%,transparent)] text-accent cf-press',
+  tinted: 'bg-[color-mix(in_srgb,var(--cf-accent)_12%,transparent)] text-accent cf-press',
   gray: 'bg-fill-3 text-label cf-press',
   plain: 'bg-transparent text-accent cf-press-plain px-0',
   destructive: 'bg-transparent text-red cf-press-plain px-0',

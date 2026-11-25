@@ -11,6 +11,9 @@ export function DefectsSample() {
       <p style={{ color: '#999999', backgroundColor: '#FFFFFF' }}>Low contrast</p>
       <div className="cf-glass bg-bg">Solid glass override</div>
       <div className="animate-spin">Ignores reduced motion</div>
+      <p style={{ letterSpacing: '3px' }}>Defect 10: Wrong letter-spacing</p>
+      <div style={{ padding: '13px' }}>Defect 11: Off-4pt-grid padding</div>
+      <div className="cf-glass text-label-glass-3">Defect 12: Low contrast on glass</div>
     </main>
   );
 }
