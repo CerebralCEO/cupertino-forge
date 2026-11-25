@@ -7,6 +7,7 @@ target/
 .dart_tool/
 build/
 qa/node_modules/
+qa/out/
 qa/references/
 _upgrade/04-extras/assets/
 tests/harness/web/src/styles/cupertino/

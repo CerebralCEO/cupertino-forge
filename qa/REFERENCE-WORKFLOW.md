@@ -44,10 +44,14 @@ For glass-dependent components (**`TabBar`, `Alert`, `Sheet`, `Menu`, `Toolbar`,
 
 ---
 
-## 5. Design Note: `/apple-audit --reference <dir>` (Deferred to Phase 3b)
+## 5. `/apple-audit --reference <dir>` & Why Pixel-Diff (`diff.mjs`) Is Intentionally Omitted
 
-When implemented in Phase 3b, `/apple-audit --reference <dir>` will:
-1. Read `<dir>` PNGs plus optional `reference-map.json` metadata (`referenceClass`, `platform`, `theme`).
-2. Keep **Part A (Rule-Conformance)** completely independent from **Part B (Fidelity)**.
-3. Route non-glass content screens through structural/perceptual diff (`SSIM` / `ΔE00`), and route glass-dependent components (`TabBar`, `Alert`, `Sheet`, `Menu`, `Toolbar`, `Sidebar`) through geometry + AI-review mode only.
-4. Report `Fidelity: N/A (no reference)` whenever `--reference` is omitted or `<dir>` is empty.
+`/apple-audit --reference <dir>` uses **AI visual comparison** (via `agents/apple-design-reviewer.md` in `visual` mode):
+1. Captures screenshots into gitignored `qa/out/` via `scripts/capture.py` (standard 4-image or `--matrix` 72-image capture).
+2. If `<dir>` contains PNG/JPG reference images (plus optional `reference-map.json` metadata with `referenceClass`, `platform`, `theme`), compares our captures side-by-side against those references in `visual` mode and scores **Part B (Fidelity)** separately from **Part A (Rule-Conformance)**.
+3. If `--reference` is omitted or `<dir>` has no images, outputs `Fidelity: N/A (no reference)` with zero fidelity claims.
+
+### Why `qa/diff.mjs` (Pixel-Diff) Is Not Built Right Now
+- **No reference images exist yet:** `qa/references/manual/` and `qa/references/device/` are empty, so a pixel-diff script would have no ground-truth inputs to validate against.
+- **Component geometry tokens are still estimates:** 77 component geometry values (heights, padding, corner radii) remain `$class: "estimated"` in `tokens/` (see `tokens/ESTIMATES.md`). Running pixel-diff against unmeasured geometry plus dynamic Liquid Glass refraction produces noisy, low-value pixel deltas rather than actionable signal.
+- Pixel-diff can be revisited only after real-device reference captures are available and geometry estimates are measured.

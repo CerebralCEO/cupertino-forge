@@ -14,13 +14,18 @@ Load `apple-design-core` first; the golden rules and token tables are the audit 
    node "${CLAUDE_PLUGIN_ROOT}/hooks/scripts/lint.mjs" --all --json
    ```
    Group findings by rule (`error` vs `warn`).
-2. **Deterministic DOM / Computed-Style audit (when a web build/URL is running or static HTML exists):**
+2. **Deterministic DOM & Keyboard UX audit (when a web build/URL is running or static HTML exists):**
    ```bash
    node "${CLAUDE_PLUGIN_ROOT}/qa/computed-style-audit.mjs" --url <url-or-file> --platform <ios|macos> --json
+   node "${CLAUDE_PLUGIN_ROOT}/qa/ux-keyboard.mjs" --url <url-or-file> --browser all --theme both --json
    ```
-   If `playwright` is unavailable in `qa/node_modules` or no running URL exists, mark DOM checks `NOT RUN (<reason>)` — **never** report `OK` for unrun checks. Tag any check backed by `$class: "estimated"` tokens (`spacing-grid`, `glass-budget`, `easing`) as `estimate-based`.
+   If `playwright` is unavailable in `qa/node_modules`, an engine binary is missing, or no running URL exists, mark those checks `NOT RUN (<reason>)` — **never** report `OK` for unrun checks. Tag any check backed by `$class: "estimated"` tokens (`spacing-grid`, `glass-budget`, `easing`, component geometry) as `estimate-based`.
 3. **Structure read:** open the main screens. Check navigation pattern, primary CTA count (`<= 1` prominent CTA), layer separation, dark elevated backgrounds, concentric geometry, and empty/loading/error states.
-4. **Visual pass & Reference Fidelity (optional):** if the app runs and visual screenshots are needed, capture via `python "${CLAUDE_PLUGIN_ROOT}/scripts/capture.py" --url <url>` (use `python3` on macOS/Linux if needed). Score **Part B (Fidelity)** only when a reference screenshot is explicitly supplied (`--reference`, Phase 3b); otherwise report `Fidelity: N/A (no reference)`. If runtime capture cannot execute, mark visual checks as `NOT RUN (<reason>)` — never report unrun checks as `OK`.
+4. **Visual pass & Reference Fidelity (`--reference <dir>`):**
+   - Capture screenshots into gitignored `qa/out/` via `python "${CLAUDE_PLUGIN_ROOT}/scripts/capture.py" --url <url> --out qa/out` (pass `--matrix` for the 72-image theme × contrast × transparency × viewport × engine matrix; use `python3` on macOS/Linux if needed).
+   - If `--reference <dir>` is supplied and `<dir>` contains PNG/JPG images, invoke `apple-design-reviewer` in **`visual`** mode to compare captured screens side-by-side (AI visual comparison; pixel-diff is intentionally omitted — see `qa/REFERENCE-WORKFLOW.md`) and score **Part B (Fidelity)**.
+   - If `--reference` is omitted or `<dir>` has no images, report `Fidelity: N/A (no reference)` and make **zero** fidelity claims.
+   - If runtime capture cannot execute, mark visual checks as `NOT RUN (<reason>)` — never report unrun checks as `OK`.
 5. **Score** using the two-part `references/scorecard.md`.
 6. **Write `apple-audit-report.md`** at the project root using the format below, then ask before applying fixes.
 
