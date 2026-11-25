@@ -62,3 +62,26 @@ test('lint.mjs handles Windows CRLF & PostToolUse hook blocking cleanly', () => 
     fs.rmSync(dir, { recursive: true, force: true });
   }
 });
+
+test('lint.mjs flags Dart manual textScaler.scale() and MediaQuery.navigationMode', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'cf-dart-reg-'));
+  try {
+    const dartFile = path.join(dir, 'sample.dart');
+    fs.writeFileSync(dartFile, [
+      'import \'package:flutter/widgets.dart\';',
+      'double badScale1(TextScaler textScaler) => textScaler.scale(17);',
+      'double badScale2(BuildContext ctx) => MediaQuery.textScalerOf(ctx).scale(17);',
+      'bool badMode(BuildContext ctx) => MediaQuery.of(ctx).navigationMode == NavigationMode.traditional;',
+    ].join('\n'));
+    const res = spawnSync(process.execPath, [lintScript, '--json', dartFile], { encoding: 'utf8' });
+    assert.equal(res.status, 1, 'manual-text-scale error must exit 1');
+    const findings = JSON.parse(res.stdout);
+    const scaleHits = findings.filter((f) => f.rule === 'manual-text-scale');
+    assert.equal(scaleHits.length, 2, 'must catch both textScaler.scale() and textScalerOf(ctx).scale()');
+    const byRule = Object.fromEntries(findings.map((f) => [f.rule, f.sev]));
+    assert.equal(byRule['manual-text-scale'], 'error');
+    assert.equal(byRule['navigation-mode'], 'warn');
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});

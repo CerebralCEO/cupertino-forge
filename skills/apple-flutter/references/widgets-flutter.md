@@ -42,7 +42,26 @@ class _S extends State<SettingsScreen> {
 
 ## Glass
 
-`CfGlass(variant: CfGlassVariant.regular, shape: StadiumBorder(), child: ...)`. Shapes: StadiumBorder (capsule), CircleBorder, SquircleBorder(radius: ...).
+`CfGlass(variant: CfGlassVariant.regular, shape: StadiumBorder(), grouped: false, child: ...)`. Shapes: `StadiumBorder` (capsule), `CircleBorder`, `SquircleBorder(radius: ...)`. Wrap non-overlapping sibling glass pills in a bar with `BackdropGroup` and pass `grouped: true` (Flutter `3.29+` Impeller optimization).
+
+## Controls, Fields & Progress
+
+```dart
+CfSlider(value: level, onChanged: setLevel, label: 'Volume', minIcon: Icon(CupertinoIcons.speaker), maxIcon: Icon(CupertinoIcons.speaker_3))
+CfTextField(label: 'Title', placeholder: 'Enter title', clearable: true, error: errText, onChanged: setText)
+CfSearchField(value: query, onChanged: setQuery, glass: true, onCancel: clearSearch)
+CfProgressBar(value: 0.65, label: 'Upload')
+CfActivityIndicator(delay: Duration(milliseconds: 300))
+```
+
+## Menus and Popovers
+
+```dart
+showCfMenu(context, items: [
+  CfMenuItem(label: 'Rename', icon: CupertinoIcons.pencil, onSelected: rename),
+  CfMenuItem(label: 'Delete', icon: CupertinoIcons.trash, isDestructive: true, onSelected: del),
+]);
+```
 
 ## Sheets and alerts
 

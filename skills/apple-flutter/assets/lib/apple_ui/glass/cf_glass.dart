@@ -1,6 +1,5 @@
 import 'dart:ui' as ui;
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/widgets.dart';
 
 import '../cf_app.dart';
 import '../motion/cf_motion.dart';
@@ -10,6 +9,8 @@ enum CfGlassVariant { regular, clear, large, tinted }
 
 /// Liquid Glass surface (functional layer only). Blur + saturation + tint + rim highlight + soft shadow,
 /// using the tuned recipes from tokens/materials.json. Reduce Transparency / Increase Contrast make it opaque.
+/// Outer drop shadow sits outside ClipPath so elevation shadow is never clipped.
+/// Set [grouped] = true when wrapped in a BackdropGroup (Flutter 3.29+ Impeller optimization).
 class CfGlass extends StatelessWidget {
   const CfGlass({
     super.key,
@@ -20,6 +21,7 @@ class CfGlass extends StatelessWidget {
     this.onTap,
     this.tint,
     this.dim = false,
+    this.grouped = false,
     this.padding,
   });
 
@@ -30,14 +32,16 @@ class CfGlass extends StatelessWidget {
   final VoidCallback? onTap;
   final Color? tint; // tinted variant color, defaults to accent
   final bool dim; // 35% black dimming under clear glass over bright media
+  final bool grouped; // uses BackdropFilter.grouped inside a BackdropGroup
   final EdgeInsetsGeometry? padding;
 
   @override
   Widget build(BuildContext context) {
     final dark = CupertinoTheme.brightnessOf(context) == Brightness.dark;
     final hc = MediaQuery.highContrastOf(context);
-    final intensity = CfScope.of(context).glassIntensity;
-    final reduce = hc; // Flutter has no reduceTransparency query; also expose an app setting if needed
+    final scope = CfScope.maybeOf(context);
+    final intensity = scope?.glassIntensity ?? 0.5;
+    final reduce = hc || (scope?.reduceTransparency ?? false);
 
     double blur;
     Color fill;
@@ -63,34 +67,44 @@ class CfGlass extends StatelessWidget {
       blur = 0;
     }
 
-    final rim = Border.all(color: Color(dark ? 0x29FFFFFF : 0xE6FFFFFF), width: 0.5); // cf-ignore
-    Widget surface = DecoratedBox(
-      decoration: ShapeDecoration(
-        shape: shape,
-        color: fill,
-        shadows: [
-          BoxShadow(color: Color(dark ? 0x80000000 : 0x24000000), blurRadius: 24, offset: const Offset(0, 8), spreadRadius: -4), // cf-ignore
-          BoxShadow(color: Color(dark ? 0x4D000000 : 0x0F000000), blurRadius: 3, offset: const Offset(0, 1)), // cf-ignore
-        ],
-      ),
+    // Inner fill + rim highlight live inside ClipPath; outer shadow sits outside ClipPath so it is never clipped.
+    Widget inner = DecoratedBox(
+      decoration: ShapeDecoration(shape: shape, color: fill),
       child: CustomPaint(
         foregroundPainter: _RimPainter(shape: shape, dark: dark, hc: hc),
         child: Padding(padding: padding ?? EdgeInsets.zero, child: child),
       ),
     );
     if (blur > 0) {
-      surface = ClipPath(
+      final filter = ui.ImageFilter.compose(
+        outer: ui.ImageFilter.blur(sigmaX: blur, sigmaY: blur),
+        inner: ui.ColorFilter.matrix(_saturation(dark ? 1.6 : 1.8)),
+      );
+      inner = ClipPath(
         clipper: ShapeBorderClipper(shape: shape),
-        child: BackdropFilter(
-          filter: ui.ImageFilter.compose(
-            outer: ui.ImageFilter.blur(sigmaX: blur, sigmaY: blur),
-            inner: ui.ColorFilter.matrix(_saturation(dark ? 1.6 : 1.8)),
-          ),
-          child: surface,
-        ),
+        child: grouped
+            ? BackdropFilter.grouped(filter: filter, child: inner)
+            : BackdropFilter(filter: filter, child: inner),
       );
     }
-    if (dim) surface = Stack(children: [Positioned.fill(child: DecoratedBox(decoration: ShapeDecoration(shape: shape, color: const Color(0x59000000)))), surface]); // cf-ignore
+
+    Widget surface = DecoratedBox(
+      decoration: ShapeDecoration(
+        shape: shape,
+        shadows: [
+          BoxShadow(color: Color(dark ? 0x80000000 : 0x24000000), blurRadius: 24, offset: const Offset(0, 8), spreadRadius: -4), // cf-ignore
+          BoxShadow(color: Color(dark ? 0x4D000000 : 0x0F000000), blurRadius: 3, offset: const Offset(0, 1)), // cf-ignore
+        ],
+      ),
+      child: inner,
+    );
+
+    if (dim) {
+      surface = Stack(children: [
+        Positioned.fill(child: DecoratedBox(decoration: ShapeDecoration(shape: shape, color: const Color(0x59000000)))), // cf-ignore
+        surface,
+      ]);
+    }
     surface = RepaintBoundary(child: surface);
     if (pressable || onTap != null) surface = CfPressable(style: CfPressStyle.glass, onTap: onTap, child: surface);
     return surface;
@@ -129,10 +143,13 @@ class _RimPainter extends CustomPainter {
       ], [0, 0.5, 1]);
     canvas.drawPath(path, top);
     if (hc) {
-      canvas.drawPath(path, Paint()
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = 1
-        ..color = Color(dark ? 0x59FFFFFF : 0x59000000)); // cf-ignore
+      canvas.drawPath(
+        path,
+        Paint()
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 1
+          ..color = Color(dark ? 0x59FFFFFF : 0x59000000), // cf-ignore
+      );
     }
   }
 

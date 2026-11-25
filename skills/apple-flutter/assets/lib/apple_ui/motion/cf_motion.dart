@@ -1,6 +1,6 @@
+import 'dart:ui' show PointerDeviceKind;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/physics.dart';
-import 'package:flutter/widgets.dart';
 
 import '../theme/apple_tokens.dart';
 
@@ -28,7 +28,8 @@ class CfScrollBehavior extends CupertinoScrollBehavior {
   Widget buildOverscrollIndicator(BuildContext context, Widget child, ScrollableDetails details) => child;
 }
 
-/// Push route with Apple push spring and leading edge swipe back (CupertinoPageRoute behavior).
+/// Approximation: wraps CupertinoPageRoute (Curves.linearToEaseOut + leading-edge swipe back)
+/// to approximate native iOS push spring physics; does not use SpringSimulation directly.
 class CfPageRoute<T> extends CupertinoPageRoute<T> {
   CfPageRoute({required super.builder, super.settings, super.fullscreenDialog});
   @override
@@ -38,6 +39,7 @@ class CfPageRoute<T> extends CupertinoPageRoute<T> {
 enum CfPressStyle { glass, solid, plain, card, row }
 
 /// Apple press feedback: instant on pointer down, spring release. No ripple.
+/// Differentiates touch vs fine pointer (mouse/trackpad) via PointerDeviceKind.
 class CfPressable extends StatefulWidget {
   const CfPressable({super.key, required this.child, this.onTap, this.onLongPress, this.style = CfPressStyle.solid, this.enabled = true});
   final Widget child;
@@ -51,20 +53,26 @@ class CfPressable extends StatefulWidget {
 
 class _CfPressableState extends State<CfPressable> with SingleTickerProviderStateMixin {
   late final AnimationController _c = AnimationController.unbounded(vsync: this, value: 0);
+  bool _fine = false;
 
-  void _down(_) {
+  void _down(TapDownDetails details) {
     if (!widget.enabled) return;
+    _fine = details.kind == PointerDeviceKind.mouse ||
+        details.kind == PointerDeviceKind.trackpad ||
+        details.kind == PointerDeviceKind.stylus;
     animateSpring(_c, 1, AppleSprings.press);
   }
 
   void _up([_]) => animateSpring(_c, 0, AppleSprings.release);
 
   @override
-  void dispose() { _c.dispose(); super.dispose(); }
+  void dispose() {
+    _c.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final fine = MediaQuery.of(context).navigationMode == NavigationMode.traditional;
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTapDown: _down,
@@ -78,7 +86,7 @@ class _CfPressableState extends State<CfPressable> with SingleTickerProviderStat
           final t = _c.value;
           switch (widget.style) {
             case CfPressStyle.glass:
-              final s = 1 + (fine ? 0.02 : 0.1) * t;
+              final s = 1 + (_fine ? 0.02 : 0.1) * t;
               return Transform.scale(scale: s, child: child);
             case CfPressStyle.solid:
               return Transform.scale(scale: 1 - 0.03 * t, child: Opacity(opacity: 1 - 0.1 * t.clamp(0, 1), child: child));

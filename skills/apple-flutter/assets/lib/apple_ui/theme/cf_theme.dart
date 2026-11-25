@@ -1,7 +1,5 @@
-import 'dart:ui' show FontFeature;
-import 'package:flutter/foundation.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/foundation.dart';
 
 import '../cf_app.dart';
 import 'apple_tokens.dart';
@@ -22,11 +20,12 @@ class CfColors {
   Brightness get _b => CupertinoTheme.brightnessOf(context);
   bool get _hc => MediaQuery.highContrastOf(context);
   bool get _el => CfElevated.of(context);
-  bool get isMac => CfScope.of(context).isMacStyle(context);
+  CfScope? get _scope => CfScope.maybeOf(context);
+  bool get isMac => _scope?.isMacStyle(context) ?? false;
   Color _r(CfColor c) => c.resolve(_b, highContrast: _hc, elevated: _el);
 
   // Accent and system colors
-  Color get accent => _r(CfScope.of(context).accent);
+  Color get accent => _r(_scope?.accent ?? AppleSystemColors.blue);
   Color get red => _r(AppleSystemColors.red);
   Color get orange => _r(AppleSystemColors.orange);
   Color get yellow => _r(AppleSystemColors.yellow);
@@ -66,32 +65,46 @@ class CfColors {
   CfType get type => CfType.forPlatform(context, _b, _hc);
 }
 
-/// Text styles with tracking, leading, text scaling and bold text applied.
+/// Text styles with tracking, leading, bold text, and script protection applied.
+/// Font sizes remain unscaled here so Flutter's Text applies MediaQuery.textScaler once (no double scaling).
 class CfType {
-  CfType._(this._isMac, this._scaler, this._bold, this._color, this._family);
+  CfType._(this._isMac, this._bold, this._color, this._family, this._nonLatinScript);
   final bool _isMac;
-  final TextScaler _scaler;
   final bool _bold;
   final Color _color;
   final String? _family;
+  final bool _nonLatinScript;
 
   static CfType forPlatform(BuildContext context, Brightness b, bool hc) {
-    final scope = context.dependOnInheritedWidgetOfExactType<CfScope>();
+    final scope = CfScope.maybeOf(context);
     final mac = scope?.isMacStyle(context) ?? false;
     final apple = defaultTargetPlatform == TargetPlatform.iOS || defaultTargetPlatform == TargetPlatform.macOS;
+    final lang = Localizations.maybeLocaleOf(context)?.languageCode;
+    final nonLatin = lang == 'bn' || lang == 'ar' || lang == 'he';
     return CfType._(
       mac,
-      mac ? TextScaler.noScaling : MediaQuery.textScalerOf(context).clamp(maxScaleFactor: 3.1),
       MediaQuery.boldTextOf(context),
       (mac ? AppleMacOSColors.label : AppleIOSColors.label).resolve(b, highContrast: hc),
       apple ? null : 'Inter', // real SF on Apple platforms, Inter elsewhere
+      nonLatin,
     );
   }
 
   TextStyle _s(TextStyle s) {
-    var out = s.copyWith(color: _color, fontFamily: _family, fontSize: _scaler.scale(s.fontSize!));
-    if (_family == 'Inter') out = out.copyWith(letterSpacing: (out.letterSpacing ?? 0) - 0.01 * out.fontSize!, fontFeatures: const [FontFeature.enable('cv11'), FontFeature.enable('ss01'), FontFeature.enable('ss03')]);
-    if (_bold && (out.fontWeight?.index ?? 3) < FontWeight.w600.index) out = out.copyWith(fontWeight: FontWeight.values[(out.fontWeight!.index + 2).clamp(0, 8)]);
+    var out = s.copyWith(color: _color, fontFamily: _family);
+    if (_nonLatinScript) {
+      out = out.copyWith(letterSpacing: 0);
+    } else if (_family == 'Inter') {
+      out = out.copyWith(
+        letterSpacing: (out.letterSpacing ?? 0) - 0.01 * out.fontSize!,
+        fontFeatures: const [FontFeature.enable('cv11'), FontFeature.enable('ss01'), FontFeature.enable('ss03')],
+      );
+    }
+    final w = out.fontWeight ?? FontWeight.w400;
+    if (_bold && w.value < FontWeight.w600.value) {
+      final idx = FontWeight.values.indexOf(w);
+      out = out.copyWith(fontWeight: FontWeight.values[(idx + 2).clamp(0, 8)]);
+    }
     return out;
   }
 

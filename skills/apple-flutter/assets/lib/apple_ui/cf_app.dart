@@ -1,7 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 
 import 'feedback/cf_haptics.dart';
 import 'feedback/cf_sounds.dart';
@@ -13,25 +12,37 @@ enum CfStyle { ios, macos, adaptive }
 
 /// Inherited configuration from .apple-design.json.
 class CfScope extends InheritedWidget {
-  const CfScope({super.key, required this.style, required this.glassIntensity, required this.accent, required super.child});
+  const CfScope({
+    super.key,
+    required this.style,
+    required this.glassIntensity,
+    required this.accent,
+    this.reduceTransparency = false,
+    required super.child,
+  });
+
   final CfStyle style;
   final double glassIntensity; // 0 clear .. 1 tinted
   final CfColor accent;
+  final bool reduceTransparency;
 
   static CfScope of(BuildContext context) => context.dependOnInheritedWidgetOfExactType<CfScope>()!;
+  static CfScope? maybeOf(BuildContext context) => context.dependOnInheritedWidgetOfExactType<CfScope>();
 
   /// Resolved platform for the current available width (size class), per apple-design-core section 3.
   bool isMacStyle(BuildContext context) {
     if (style == CfStyle.macos) return true;
     if (style == CfStyle.ios) return false;
     final w = MediaQuery.sizeOf(context).width;
-    final fine = MediaQuery.of(context).navigationMode == NavigationMode.traditional &&
-        (defaultTargetPlatformIsDesktop());
-    return w >= AppleLayout.breakpointDesktop && fine;
+    return w >= AppleLayout.breakpointDesktop && defaultTargetPlatformIsDesktop();
   }
 
   @override
-  bool updateShouldNotify(CfScope old) => old.style != style || old.glassIntensity != glassIntensity || old.accent != accent;
+  bool updateShouldNotify(CfScope old) =>
+      old.style != style ||
+      old.glassIntensity != glassIntensity ||
+      old.accent != accent ||
+      old.reduceTransparency != reduceTransparency;
 }
 
 bool defaultTargetPlatformIsDesktop() {
@@ -46,7 +57,7 @@ bool defaultTargetPlatformIsDesktop() {
 }
 
 /// App root. Replaces MaterialApp. Cupertino theme with Apple tokens, no ripples, Apple scroll physics.
-class CfApp extends StatelessWidget {
+class CfApp extends StatefulWidget {
   const CfApp({
     super.key,
     this.style = CfStyle.adaptive,
@@ -55,6 +66,7 @@ class CfApp extends StatelessWidget {
     this.title = '',
     this.accent = AppleSystemColors.blue,
     this.glassIntensity = 0.5,
+    this.reduceTransparency = false,
     this.sounds = false,
     this.haptics = true,
     this.brightness, // null follows the system
@@ -68,40 +80,64 @@ class CfApp extends StatelessWidget {
   final String title;
   final CfColor accent;
   final double glassIntensity;
+  final bool reduceTransparency;
   final bool sounds;
   final bool haptics;
   final Brightness? brightness;
 
   @override
-  Widget build(BuildContext context) {
-    CfHaptics.enabled = haptics;
-    CfSounds.enabled = sounds;
+  State<CfApp> createState() => _CfAppState();
+}
+
+class _CfAppState extends State<CfApp> {
+  @override
+  void initState() {
+    super.initState();
+    CfHaptics.enabled = widget.haptics;
+    CfSounds.enabled = widget.sounds;
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+  }
+
+  @override
+  void didUpdateWidget(CfApp oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.haptics != widget.haptics) CfHaptics.enabled = widget.haptics;
+    if (oldWidget.sounds != widget.sounds) CfSounds.enabled = widget.sounds;
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return CfScope(
-      style: style,
-      glassIntensity: glassIntensity,
-      accent: accent,
+      style: widget.style,
+      glassIntensity: widget.glassIntensity,
+      accent: widget.accent,
+      reduceTransparency: widget.reduceTransparency,
       child: Builder(builder: (context) {
-        final b = brightness ?? MediaQuery.platformBrightnessOf(context);
+        final scope = CfScope.of(context);
+        final mac = scope.isMacStyle(context);
+        final b = widget.brightness ?? MediaQuery.platformBrightnessOf(context);
         final hc = MediaQuery.highContrastOf(context);
         return CupertinoApp(
-          title: title,
+          title: widget.title,
           debugShowCheckedModeBanner: false,
-          home: home,
-          routes: routes,
-          onGenerateRoute: onGenerateRoute,
+          home: widget.home,
+          routes: widget.routes,
+          onGenerateRoute: widget.onGenerateRoute,
           theme: CupertinoThemeData(
             brightness: b,
-            primaryColor: accent.resolve(b, highContrast: hc),
-            scaffoldBackgroundColor: AppleIOSColors.bg.resolve(b),
+            primaryColor: widget.accent.resolve(b, highContrast: hc),
+            scaffoldBackgroundColor: (mac ? AppleMacOSColors.bg : AppleIOSColors.bg).resolve(b),
             barBackgroundColor: const Color(0x00000000), // cf-ignore transparent bars, scroll edge effect instead
             textTheme: CupertinoTextThemeData(textStyle: CfType.forPlatform(context, b, hc).body),
           ),
-          builder: (context, child) => ScrollConfiguration(
-            behavior: const CfScrollBehavior(),
-            child: AnnotatedRegion<SystemUiOverlayStyle>(
-              value: b == Brightness.dark ? SystemUiOverlayStyle.light : SystemUiOverlayStyle.dark,
-              child: child ?? const SizedBox.shrink(),
+          builder: (context, child) => MediaQuery.withClampedTextScaling(
+            maxScaleFactor: mac ? 1.0 : 3.1,
+            child: ScrollConfiguration(
+              behavior: const CfScrollBehavior(),
+              child: AnnotatedRegion<SystemUiOverlayStyle>(
+                value: b == Brightness.dark ? SystemUiOverlayStyle.light : SystemUiOverlayStyle.dark,
+                child: child ?? const SizedBox.shrink(),
+              ),
             ),
           ),
         );

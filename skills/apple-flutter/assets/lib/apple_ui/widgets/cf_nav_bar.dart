@@ -7,6 +7,7 @@ import 'cf_button.dart';
 
 /// Screen scaffold with an iOS 27 navigation bar: transparent bar, glass buttons, large title that
 /// collapses into the inline title, scroll edge effect. Put content slivers in [slivers].
+/// Uses a ValueNotifier so scroll offset updates only the two title opacities without rebuilding slivers.
 class CfLargeTitleScaffold extends StatefulWidget {
   const CfLargeTitleScaffold({super.key, required this.title, required this.slivers, this.onBack, this.backLabel = 'Back', this.trailing, this.background, this.bottom});
   final String title;
@@ -23,31 +24,42 @@ class CfLargeTitleScaffold extends StatefulWidget {
 
 class _CfLargeTitleScaffoldState extends State<CfLargeTitleScaffold> {
   final _scroll = ScrollController();
-  double _offset = 0;
+  final ValueNotifier<double> _offset = ValueNotifier<double>(0);
+
+  void _onScroll() {
+    if (_scroll.hasClients) _offset.value = _scroll.offset;
+  }
 
   @override
   void initState() {
     super.initState();
-    _scroll.addListener(() => setState(() => _offset = _scroll.offset));
+    _scroll.addListener(_onScroll);
   }
 
   @override
-  void dispose() { _scroll.dispose(); super.dispose(); }
+  void dispose() {
+    _scroll.removeListener(_onScroll);
+    _scroll.dispose();
+    _offset.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final cf = context.cf;
     final top = MediaQuery.paddingOf(context).top;
-    final inlineOpacity = ((_offset - 28) / 16).clamp(0.0, 1.0);
-    final largeOpacity = (1 - _offset / 28).clamp(0.0, 1.0);
     return CupertinoPageScaffold(
       backgroundColor: widget.background ?? cf.bgGrouped,
       child: Stack(children: [
         CustomScrollView(controller: _scroll, slivers: [
           SliverToBoxAdapter(child: SizedBox(height: top + AppleLayout.navBarHeight)),
           SliverToBoxAdapter(
-            child: Opacity(
-              opacity: largeOpacity,
+            child: ValueListenableBuilder<double>(
+              valueListenable: _offset,
+              builder: (context, offset, child) => Opacity(
+                opacity: (1 - offset / 28).clamp(0.0, 1.0),
+                child: child,
+              ),
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(AppleSpacing.lg, 0, AppleSpacing.lg, AppleSpacing.sm),
                 child: Text(widget.title, style: cf.type.largeTitleEmphasized),
@@ -64,7 +76,16 @@ class _CfLargeTitleScaffoldState extends State<CfLargeTitleScaffold> {
             padding: const EdgeInsets.symmetric(horizontal: AppleSpacing.lg),
             child: Row(children: [
               if (widget.onBack != null) CfIconButton(icon: CupertinoIcons.chevron_back, label: widget.backLabel, onPressed: widget.onBack),
-              Expanded(child: Opacity(opacity: inlineOpacity, child: Text(widget.title, textAlign: TextAlign.center, style: cf.type.headline, overflow: TextOverflow.ellipsis))),
+              Expanded(
+                child: ValueListenableBuilder<double>(
+                  valueListenable: _offset,
+                  builder: (context, offset, child) => Opacity(
+                    opacity: ((offset - 28) / 16).clamp(0.0, 1.0),
+                    child: child,
+                  ),
+                  child: Text(widget.title, textAlign: TextAlign.center, style: cf.type.headline, overflow: TextOverflow.ellipsis),
+                ),
+              ),
               if (widget.trailing != null) widget.trailing! else const SizedBox(width: 44),
             ]),
           ),

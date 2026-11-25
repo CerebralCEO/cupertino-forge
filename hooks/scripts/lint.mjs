@@ -75,6 +75,8 @@ const dartRules = [
   { id: 'text-style-literal', sev: 'warn', re: /\bTextStyle\(/, msg: 'Literal TextStyle. Use context.cf.type.<style> (optionally .copyWith(color:)).' },
   { id: 'box-shadow', sev: 'warn', re: /\bBoxShadow\(/, msg: 'Literal BoxShadow. Use the elevation values from tokens or CfGlass.' },
   { id: 'ripple', sev: 'error', re: /\bsplashColor|highlightColor|InkSplash|splashFactory/, msg: 'Material ripple settings. Apple has no ripples; use CfPressable.' },
+  { id: 'manual-text-scale', sev: 'error', re: /\btextScaler(?:Of\([^)]*\))?\.scale\(/, msg: 'Manual textScaler.scale() causes double scaling with Text widgets. Use MediaQuery.withClampedTextScaling instead.' },
+  { id: 'navigation-mode', sev: 'warn', re: /\bnavigationMode\b/, msg: 'MediaQuery.navigationMode checks D-pad/TV navigation, not pointer vs touch. Inspect PointerDeviceKind instead.' },
 ];
 
 function lintText(file, text) {
