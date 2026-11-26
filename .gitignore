@@ -22,3 +22,4 @@ tests/harness/flutter/lib/apple_ui/
 tests/harness/flutter/.flutter-plugins-dependencies
 tests/harness/flutter/pubspec.lock
 tests/seeded-defects/src/styles/cupertino/
+_local/

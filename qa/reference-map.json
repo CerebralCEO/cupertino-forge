@@ -1,0 +1,375 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-11-27",
+  "note": "Local-only visual reference map pointing to gitignored _local/forgekit PNGs. No PNGs committed.",
+  "components": [
+    {
+      "component": "Button",
+      "webPrimitive": "skills/apple-web/assets/components/apple/button.tsx",
+      "webHarness": "tests/harness/web/src/App.tsx",
+      "harnessSection": "Button",
+      "ios": {
+        "folder": "Button-Content-Area",
+        "lightPng": "_local/forgekit/ios27/apple-ui-kit-ios-and-ipados-27-iPadOS-27/components/Button-Content-Area/preview@2x.png",
+        "lightSizePx": [
+          1900,
+          2140
+        ],
+        "lightBytes": 203765,
+        "darkPng": "_local/forgekit/ios27/apple-ui-kit-ios-and-ipados-27-iPadOS-27/components/Button-Content-Area/preview-dark@2x.png",
+        "darkSizePx": [
+          1900,
+          2140
+        ],
+        "darkBytes": 210415,
+        "effectiveScale": 38.0,
+        "clampedBelow2x": false
+      },
+      "macos": {
+        "folder": "Arrow-Buttons",
+        "lightPng": "_local/forgekit/macos27/apple-ui-kit-macos-27-macOS-27/components/Arrow-Buttons/preview@2x.png",
+        "lightSizePx": [
+          140,
+          300
+        ],
+        "lightBytes": 5962,
+        "darkPng": "_local/forgekit/macos27/apple-ui-kit-macos-27-macOS-27/components/Arrow-Buttons/preview-dark@2x.png",
+        "darkSizePx": [
+          140,
+          300
+        ],
+        "darkBytes": 5934,
+        "effectiveScale": 5.83,
+        "clampedBelow2x": false
+      }
+    },
+    {
+      "component": "Toggle",
+      "webPrimitive": "skills/apple-web/assets/components/apple/controls.tsx",
+      "webHarness": "tests/harness/web/src/App.tsx",
+      "harnessSection": "Toggle",
+      "ios": {
+        "folder": "Toggle-Switch",
+        "lightPng": "_local/forgekit/ios27/apple-ui-kit-ios-and-ipados-27-iPadOS-27/components/Toggle-Switch/preview@2x.png",
+        "lightSizePx": [
+          440,
+          440
+        ],
+        "lightBytes": 32740,
+        "darkPng": "_local/forgekit/ios27/apple-ui-kit-ios-and-ipados-27-iPadOS-27/components/Toggle-Switch/preview-dark@2x.png",
+        "darkSizePx": [
+          440,
+          440
+        ],
+        "darkBytes": 31928,
+        "effectiveScale": 6.88,
+        "clampedBelow2x": false
+      },
+      "macos": {
+        "folder": "Buttons-Toggle",
+        "lightPng": "_local/forgekit/macos27/apple-ui-kit-macos-27-macOS-27/components/Buttons-Toggle/preview@2x.png",
+        "lightSizePx": [
+          220,
+          1720
+        ],
+        "lightBytes": 45215,
+        "darkPng": "_local/forgekit/macos27/apple-ui-kit-macos-27-macOS-27/components/Buttons-Toggle/preview-dark@2x.png",
+        "darkSizePx": [
+          220,
+          1720
+        ],
+        "darkBytes": 49367,
+        "effectiveScale": 3.28,
+        "clampedBelow2x": false
+      }
+    },
+    {
+      "component": "Slider",
+      "webPrimitive": "skills/apple-web/assets/components/apple/controls.tsx",
+      "webHarness": "tests/harness/web/src/App.tsx",
+      "harnessSection": "Slider",
+      "ios": {
+        "folder": "Sliders",
+        "lightPng": "_local/forgekit/ios27/apple-ui-kit-ios-and-ipados-27-iPadOS-27/components/Sliders/preview@2x.png",
+        "lightSizePx": [
+          880,
+          2168
+        ],
+        "lightBytes": 182624,
+        "darkPng": "_local/forgekit/ios27/apple-ui-kit-ios-and-ipados-27-iPadOS-27/components/Sliders/preview-dark@2x.png",
+        "darkSizePx": [
+          880,
+          2168
+        ],
+        "darkBytes": 182565,
+        "effectiveScale": 2.2,
+        "clampedBelow2x": false
+      },
+      "macos": {
+        "folder": "Content-Area-Light-Knobs-Sliders-01-Idle",
+        "lightPng": "_local/forgekit/macos27/apple-ui-kit-macos-27-macOS-27/components/Content-Area-Light-Knobs-Sliders-01-Idle/preview@2x.png",
+        "lightSizePx": [
+          40,
+          40
+        ],
+        "lightBytes": 198,
+        "darkPng": "_local/forgekit/macos27/apple-ui-kit-macos-27-macOS-27/components/Content-Area-Light-Knobs-Sliders-01-Idle/preview-dark@2x.png",
+        "darkSizePx": [
+          40,
+          40
+        ],
+        "darkBytes": 198,
+        "effectiveScale": 2.0,
+        "clampedBelow2x": false
+      }
+    },
+    {
+      "component": "Segmented Control",
+      "webPrimitive": "skills/apple-web/assets/components/apple/controls.tsx",
+      "webHarness": "tests/harness/web/src/App.tsx",
+      "harnessSection": "SegmentedControl",
+      "ios": {
+        "folder": "Segmented-Control",
+        "lightPng": "_local/forgekit/ios27/apple-ui-kit-ios-and-ipados-27-iPadOS-27/components/Segmented-Control/preview@2x.png",
+        "lightSizePx": [
+          840,
+          520
+        ],
+        "lightBytes": 41599,
+        "darkPng": "_local/forgekit/ios27/apple-ui-kit-ios-and-ipados-27-iPadOS-27/components/Segmented-Control/preview-dark@2x.png",
+        "darkSizePx": [
+          840,
+          520
+        ],
+        "darkBytes": 64847,
+        "effectiveScale": 2.27,
+        "clampedBelow2x": false
+      },
+      "macos": {
+        "folder": "Segmented-Control",
+        "lightPng": "_local/forgekit/macos27/apple-ui-kit-macos-27-macOS-27/components/Segmented-Control/preview@2x.png",
+        "lightSizePx": [
+          600,
+          300
+        ],
+        "lightBytes": 17748,
+        "darkPng": "_local/forgekit/macos27/apple-ui-kit-macos-27-macOS-27/components/Segmented-Control/preview-dark@2x.png",
+        "darkSizePx": [
+          600,
+          300
+        ],
+        "darkBytes": 25163,
+        "effectiveScale": 2.25,
+        "clampedBelow2x": false
+      }
+    },
+    {
+      "component": "Tab Bar",
+      "webPrimitive": "skills/apple-web/assets/components/apple/tab-bar.tsx",
+      "webHarness": "tests/harness/web/src/App.tsx",
+      "harnessSection": "TabBar",
+      "ios": {
+        "folder": "Tab-Bar-iPad",
+        "lightPng": "_local/forgekit/ios27/apple-ui-kit-ios-and-ipados-27-iPadOS-27/components/Tab-Bar-iPad/preview@2x.png",
+        "lightSizePx": [
+          1042,
+          148
+        ],
+        "lightBytes": 33016,
+        "darkPng": "_local/forgekit/ios27/apple-ui-kit-ios-and-ipados-27-iPadOS-27/components/Tab-Bar-iPad/preview-dark@2x.png",
+        "darkSizePx": [
+          1042,
+          148
+        ],
+        "darkBytes": 48810,
+        "effectiveScale": 2.12,
+        "clampedBelow2x": false
+      },
+      "macos": {
+        "folder": "Utility-Panel-Tab-Bar",
+        "lightPng": "_local/forgekit/macos27/apple-ui-kit-macos-27-macOS-27/components/Utility-Panel-Tab-Bar/preview@2x.png",
+        "lightSizePx": [
+          470,
+          120
+        ],
+        "lightBytes": 16634,
+        "darkPng": "_local/forgekit/macos27/apple-ui-kit-macos-27-macOS-27/components/Utility-Panel-Tab-Bar/preview-dark@2x.png",
+        "darkSizePx": [
+          470,
+          120
+        ],
+        "darkBytes": 17857,
+        "effectiveScale": 2.14,
+        "clampedBelow2x": false
+      }
+    },
+    {
+      "component": "Navigation / Toolbar",
+      "webPrimitive": "skills/apple-web/assets/components/apple/nav.tsx",
+      "webHarness": "tests/harness/web/src/App.tsx",
+      "harnessSection": "NavBar / Toolbar",
+      "ios": {
+        "folder": "Accessory-Bar-iPhone-Toolbar",
+        "lightPng": "_local/forgekit/ios27/apple-ui-kit-ios-and-ipados-27-iPadOS-27/components/Accessory-Bar-iPhone-Toolbar/preview@2x.png",
+        "lightSizePx": [
+          780,
+          340
+        ],
+        "lightBytes": 75035,
+        "darkPng": "_local/forgekit/ios27/apple-ui-kit-ios-and-ipados-27-iPadOS-27/components/Accessory-Bar-iPhone-Toolbar/preview-dark@2x.png",
+        "darkSizePx": [
+          348,
+          156
+        ],
+        "darkBytes": 25408,
+        "effectiveScale": 4.64,
+        "clampedBelow2x": false
+      },
+      "macos": null
+    },
+    {
+      "component": "List row",
+      "webPrimitive": "skills/apple-web/assets/components/apple/list.tsx",
+      "webHarness": "tests/harness/web/src/App.tsx",
+      "harnessSection": "ListRow",
+      "ios": {
+        "folder": "Lock-Screen-Widget-Modular-List",
+        "lightPng": "_local/forgekit/ios27/apple-ui-kit-ios-and-ipados-27-iPadOS-27/components/Lock-Screen-Widget-Modular-List/preview@2x.png",
+        "lightSizePx": [
+          324,
+          144
+        ],
+        "lightBytes": 5002,
+        "darkPng": "_local/forgekit/ios27/apple-ui-kit-ios-and-ipados-27-iPadOS-27/components/Lock-Screen-Widget-Modular-List/preview-dark@2x.png",
+        "darkSizePx": [
+          324,
+          144
+        ],
+        "darkBytes": 5002,
+        "effectiveScale": 2.0,
+        "clampedBelow2x": false
+      },
+      "macos": null
+    },
+    {
+      "component": "Alert",
+      "webPrimitive": "skills/apple-web/assets/components/apple/alert.tsx",
+      "webHarness": "tests/harness/web/src/App.tsx",
+      "harnessSection": "Alert",
+      "ios": {
+        "folder": "Alert",
+        "lightPng": "_local/forgekit/ios27/apple-ui-kit-ios-and-ipados-27-iPadOS-27/components/Alert/preview@2x.png",
+        "lightSizePx": [
+          1340,
+          960
+        ],
+        "lightBytes": 272209,
+        "darkPng": "_local/forgekit/ios27/apple-ui-kit-ios-and-ipados-27-iPadOS-27/components/Alert/preview-dark@2x.png",
+        "darkSizePx": [
+          1340,
+          960
+        ],
+        "darkBytes": 280734,
+        "effectiveScale": 4.47,
+        "clampedBelow2x": false
+      },
+      "macos": {
+        "folder": "Alert",
+        "lightPng": "_local/forgekit/macos27/apple-ui-kit-macos-27-macOS-27/components/Alert/preview@2x.png",
+        "lightSizePx": [
+          1292,
+          720
+        ],
+        "lightBytes": 257013,
+        "darkPng": "_local/forgekit/macos27/apple-ui-kit-macos-27-macOS-27/components/Alert/preview-dark@2x.png",
+        "darkSizePx": [
+          1292,
+          720
+        ],
+        "darkBytes": 272146,
+        "effectiveScale": 4.97,
+        "clampedBelow2x": false
+      }
+    },
+    {
+      "component": "Sheet",
+      "webPrimitive": "skills/apple-web/assets/components/apple/sheet.tsx",
+      "webHarness": "tests/harness/web/src/App.tsx",
+      "harnessSection": "Sheet",
+      "ios": {
+        "folder": "Action-Sheet",
+        "lightPng": "_local/forgekit/ios27/apple-ui-kit-ios-and-ipados-27-iPadOS-27/components/Action-Sheet/preview@2x.png",
+        "lightSizePx": [
+          792,
+          784
+        ],
+        "lightBytes": 194310,
+        "darkPng": "_local/forgekit/ios27/apple-ui-kit-ios-and-ipados-27-iPadOS-27/components/Action-Sheet/preview-dark@2x.png",
+        "darkSizePx": [
+          792,
+          784
+        ],
+        "darkBytes": 187829,
+        "effectiveScale": 2.64,
+        "clampedBelow2x": false
+      },
+      "macos": {
+        "folder": "Sheet",
+        "lightPng": "_local/forgekit/macos27/apple-ui-kit-macos-27-macOS-27/components/Sheet/preview@2x.png",
+        "lightSizePx": [
+          1476,
+          816
+        ],
+        "lightBytes": 350784,
+        "darkPng": "_local/forgekit/macos27/apple-ui-kit-macos-27-macOS-27/components/Sheet/preview-dark@2x.png",
+        "darkSizePx": [
+          816,
+          816
+        ],
+        "darkBytes": 212596,
+        "effectiveScale": 4.92,
+        "clampedBelow2x": false
+      }
+    },
+    {
+      "component": "Menu",
+      "webPrimitive": "skills/apple-web/assets/components/apple/menu.tsx",
+      "webHarness": "tests/harness/web/src/App.tsx",
+      "harnessSection": "Menu",
+      "ios": {
+        "folder": "Context-Menu",
+        "lightPng": "_local/forgekit/ios27/apple-ui-kit-ios-and-ipados-27-iPadOS-27/components/Context-Menu/preview@2x.png",
+        "lightSizePx": [
+          4220,
+          1000
+        ],
+        "lightBytes": 749292,
+        "darkPng": "_local/forgekit/ios27/apple-ui-kit-ios-and-ipados-27-iPadOS-27/components/Context-Menu/preview-dark@2x.png",
+        "darkSizePx": [
+          4220,
+          1000
+        ],
+        "darkBytes": 779028,
+        "effectiveScale": 12.02,
+        "clampedBelow2x": false
+      },
+      "macos": {
+        "folder": "Menu",
+        "lightPng": "_local/forgekit/macos27/apple-ui-kit-macos-27-macOS-27/components/Menu/preview@2x.png",
+        "lightSizePx": [
+          680,
+          760
+        ],
+        "lightBytes": 187461,
+        "darkPng": "_local/forgekit/macos27/apple-ui-kit-macos-27-macOS-27/components/Menu/preview-dark@2x.png",
+        "darkSizePx": [
+          680,
+          760
+        ],
+        "darkBytes": 196713,
+        "effectiveScale": 2.79,
+        "clampedBelow2x": false
+      }
+    }
+  ]
+}
