@@ -1,7 +1,7 @@
-# cupertino-forge v2.1.0 — Complete Engineering Reference Manual
+# cupertino-forge v2.1.1 — Complete Engineering Reference Manual
 
 > **Audience:** Human engineers and AI coding agents (Claude Code, Google Antigravity, Cursor, Windsurf).
-> When this manual and a source code/token file disagree, the source file wins. All paths, flags, exit codes, and code snippets below are verified directly against `cupertino-forge@2.1.0`.
+> When this manual and a source code/token file disagree, the source file wins. All paths, flags, exit codes, and code snippets below are verified directly against `cupertino-forge@2.1.1`.
 
 ---
 
@@ -51,7 +51,7 @@ flowchart LR
 ### 1.2 Honest Cross-Platform Parity Principle
 
 - **Apple native platforms (iOS, iPadOS, macOS):** Native APIs (`NSGlassEffectView`, SwiftUI `ConcentricRectangle`, `UINotificationFeedbackGenerator`, native SF Pro) provide maximum parity.
-- **Web, Flutter, and Tauri (Windows / Linux / MAS):** `cupertino-forge` enforces **documented visual approximation paired with 100% Apple design psychology, spatial hierarchy, motion discipline, and UX**. Never claim "100% pixel-perfect on every platform."
+- **Web, Flutter, and Tauri (Windows / Linux / MAS):** `cupertino-forge` encodes Apple's published HIG principles and Apple Design Resources kit measurements; closest parity on Apple platforms with native APIs; documented approximation elsewhere; 70 values remain estimates (see `tokens/ESTIMATES.md`). Never claim pixel-perfect parity across non-Apple platforms.
 
 ### 1.3 Token Provenance System (`tokens/*.json` & `tokens/ESTIMATES.md`)
 
@@ -382,7 +382,7 @@ Invoke the single reviewer agent in either or both modes:
 3. **Building a clean release ZIP:**
    ```bash
    node scripts/package-plugin.mjs
-   # Produces _upgrade/scratch/cupertino-forge-v2.1.0.zip (161 runtime files, 0 forbidden entries)
+   # Produces _upgrade/scratch/cupertino-forge-v2.1.1.zip (161 runtime files, 0 forbidden entries)
    ```
 
 ---

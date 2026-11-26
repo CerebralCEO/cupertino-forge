@@ -1,10 +1,10 @@
-# cupertino-forge (v2.1.0)
+# cupertino-forge (v2.1.1)
 
 **Apple iOS 27 & macOS 27 (Liquid Glass) Design System for Claude Code, Google Antigravity, and Cross-IDE Agentic Workflows.**
 
 `cupertino-forge` turns Apple's Human Interface Guidelines (HIG) and iOS 27 / macOS 27 Sketch & Figma UI kit measurements into an enforceable token pipeline, ready-made cross-platform primitives, a brownfield Redesign Engine, a canonical Master Use-Flow, and deterministic Playwright/CLI quality gates.
 
-> **Honest Parity Contract:** On Apple platforms (iOS, iPadOS, macOS), native APIs provide maximum platform parity. On Web (Next.js / React + Tailwind v4 + shadcn/ui), Flutter, and Tauri 2 (Windows / Linux / MAS), `cupertino-forge` delivers **documented visual approximation paired with 100% Apple design psychology, spatial hierarchy, motion discipline, and UX**.
+> **Honest Parity Contract:** `cupertino-forge` encodes Apple's published HIG principles and Apple Design Resources kit measurements; closest parity on Apple platforms with native APIs; documented approximation elsewhere; 70 values remain estimates (see [`tokens/ESTIMATES.md`](tokens/ESTIMATES.md)).
 
 ---
 
@@ -21,11 +21,21 @@
 
 ---
 
+## Where It Works
+
+| Environment | Support Level | What Runs | What Does NOT Run / Limitations | Verification Status |
+|---|---|---|---|---|
+| **Claude Code** | Full plugin (`commands/`, `skills/`, `agents/`, `tokens/`, `scripts/`, `qa/`, `hooks/`) | Slash commands (`/apple-*`), `${CLAUDE_PLUGIN_ROOT}` resolution, `setup-project.mjs`, `build-tokens.mjs`, `verify-plugin.mjs`, and automated `hooks/hooks.json` (`SessionStart`, `UserPromptSubmit`, `PostToolUse`, `Stop`) | Optional runtime harnesses (`playwright`, `flutter`, `cargo`) require local installation (missing tools report `NOT RUN`) | CLI/hook/script runners tested via Node (`verify-plugin.mjs`, `lint.mjs --hook`, 16 tests); interactive Claude Code `/plugin install` UI flow: **untested** in this environment |
+| **Google Antigravity** | Supported (bootstrap + rules + manual QA CLI) | `scripts/setup-project.mjs --target .`, `.agent/rules/cupertino-forge.md` (`templates/AGENTS.apple.md`), global rule (`~/.gemini/GEMINI.md`), and manual terminal commands (`build-tokens.mjs`, `contrast-check.mjs`, `lint.mjs`, `computed-style-audit.mjs`, `ux-keyboard.mjs`) | Claude Code lifecycle hooks (`PostToolUse` / `Stop` auto-blocking) do **not** run automatically; run quality gates via terminal | `setup-project.mjs` + terminal CLI/QA scripts tested; restarted Antigravity `/cupertino-forge:*` slash UI: **untested** |
+| **Claude.ai Chat / Cowork** | Skills only (partial) | Only `skills/` markdown guidance mounts in chat | `tokens/`, `scripts/`, `hooks/`, and `${CLAUDE_PLUGIN_ROOT}` are **not** available — `/apple-doctor`, `setup-project.mjs`, `build-tokens.mjs`, `lint.mjs`, and all script-dependent commands do **not** run | **untested** |
+
+---
+
 ## 2. Architecture & Repository Map
 
 ```text
 cupertino-forge/
-├── .claude-plugin/     Plugin manifest (plugin.json v2.1.0) & local marketplace.json
+├── .claude-plugin/     Plugin manifest (plugin.json v2.1.1) & local marketplace.json
 ├── commands/           7 slash commands (doctor, init, screen, component, redesign, audit, sync)
 ├── agents/             2 specialist agents (apple-design-reviewer [visual|behavior], apple-spec-researcher)
 ├── skills/
@@ -56,7 +66,7 @@ cupertino-forge/
 1. Build a clean release ZIP (optional if installing directly from clone):
    ```bash
    node scripts/package-plugin.mjs
-   # Output: _upgrade/scratch/cupertino-forge-v2.1.0.zip
+   # Output: _upgrade/scratch/cupertino-forge-v2.1.1.zip
    ```
 2. Unzip or keep the repository at a stable path (e.g., `D:\Claude-Plugins\cupertino-forge` or `~/cupertino-forge`).
 3. Inside Claude Code:
@@ -153,7 +163,7 @@ node qa/ux-keyboard.mjs --url <url-or-file> [--browser chromium|webkit|firefox|a
 # Screenshot capture (standard 4 images or --matrix 72-image accessibility/engine matrix)
 python scripts/capture.py --url <url> --out qa/out [--matrix] [--widths 390,1100] [--themes light,dark] [--dry-run]
 
-# Build clean v2.1.0 release ZIP (0 forbidden folders)
+# Build clean v2.1.1 release ZIP (0 forbidden folders)
 node scripts/package-plugin.mjs [--out <zipPath>]
 ```
 

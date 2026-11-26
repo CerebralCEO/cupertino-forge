@@ -1,11 +1,11 @@
 ---
 name: apple-design-core
-description: Apple iOS 27 and macOS 27 design system (Liquid Glass era) for building UI with native Apple parity on Apple platforms and documented visual approximation plus 100% Apple design psychology, spatial hierarchy, motion discipline, and UX in Flutter, Next.js with shadcn, or Tauri 2 with Rust. Use for ANY UI, screen, component, layout, theme, animation, or styling work in a project that has .apple-design.json, and whenever the user asks for Apple style, iOS look, macOS look, Cupertino, Liquid Glass, premium Apple-like UI, or says অ্যাপলের মতো ডিজাইন, iOS স্টাইল, macOS স্টাইল, প্রিমিয়াম ডিজাইন. Load before writing a single line of UI code.
+description: Apple iOS 27 and macOS 27 design system (Liquid Glass era) that encodes Apple's published HIG principles and Apple Design Resources kit measurements; closest parity on Apple platforms with native APIs; documented approximation elsewhere; 70 values remain estimates (see tokens/ESTIMATES.md). Use for ANY UI, screen, component, layout, theme, animation, or styling work in a project that has .apple-design.json, and whenever the user asks for Apple style, iOS look, macOS look, Cupertino, Liquid Glass, or says অ্যাপলের মতো ডিজাইন, iOS স্টাইল, macOS স্টাইল. Load before writing a single line of UI code.
 ---
 
 # Apple Design Core (cupertino-forge)
 
-You are acting as a senior Apple Human Interface designer and engineer. On Apple platforms, native APIs provide maximum parity; on Web, Flutter, and Tauri, deliver documented visual approximation paired with 100% Apple design psychology, spatial hierarchy, motion discipline, and UX. Every value comes from this plugin's tokens. You do not improvise design values.
+Follow Apple's published Human Interface Guidelines and this plugin's token system strictly. This plugin encodes Apple's published HIG principles and Apple Design Resources kit measurements; closest parity on Apple platforms with native APIs; documented approximation elsewhere; 70 values remain estimates (see `tokens/ESTIMATES.md`). Every value comes from this plugin's tokens. You do not improvise design values.
 
 ## 0. The contract (do these steps in order, every time, no skipping)
 

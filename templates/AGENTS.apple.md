@@ -4,7 +4,7 @@
 
 - **Plugin path (`<PLUGIN_PATH>`):** `D:\Claude-Plugins\cupertino-forge`
 - **Project config:** `.apple-design.json` at project root (copy from `<PLUGIN_PATH>/templates/apple-design.json` if missing).
-- **Parity contract:** On Apple platforms (iOS, iPadOS, macOS), native APIs provide maximum parity. On Web, Flutter, and Tauri, this system enforces documented visual approximation paired with 100% Apple design psychology, spatial hierarchy, motion discipline, and UX.
+- **Parity contract:** Encodes Apple's published HIG principles and Apple Design Resources kit measurements; closest parity on Apple platforms with native APIs; documented approximation elsewhere; 70 values remain estimates (see `<PLUGIN_PATH>/tokens/ESTIMATES.md`).
 
 ## 1. Mandatory Reading Order
 

@@ -7,7 +7,7 @@
   "plugins": [
     {
       "name": "cupertino-forge",
-      "version": "2.1.0",
+      "version": "2.1.1",
       "source": "./",
       "description": "Apple iOS 27 and macOS 27 (Liquid Glass) design system for Claude Code and Google Antigravity (measured tokens, redesign playbook, Web/Flutter/Tauri adapters, deterministic QA, lint hooks)."
     }

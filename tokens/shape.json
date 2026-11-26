@@ -91,6 +91,8 @@
   },
   "radiusMacOS": {
     "$source": "Apple Figma kit macOS 27 (window/sheet 16pt nodes 585:3372, 121:11423; alert 10pt 121:11254; popover 10pt 4336:13305; menuItemHighlight 8pt 685:23691, 2026-11-25) + estimated remaining subfields",
+    "$verification": "needs-device-verification",
+    "$kitMeasurementNote": "These 5 values (window 16, sheet 16, alert 10, popover 10, menuItemHighlight 8) are Figma UI kit frame cornerRadius measurements from Apple Design Resources macOS 27 (file 5YNrD6VW0v0Meye5F2JIz0), NOT live macOS 27 OS hardware/AppKit measurements.",
     "window": 16,
     "windowNote": "Measured 16pt (cornerSmoothing 0.6) across all Window BG and Windows - Composed variants in Apple Figma kit macOS 27 (nodes 585:3372, 4363:18479, 4365:31678).",
     "sheet": 16,
