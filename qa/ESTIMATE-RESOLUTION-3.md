@@ -1,193 +1,113 @@
-# Estimate Resolution — Round 3 (ForgeKit iOS 27 & macOS 27)
+# Estimate Resolution — Round 3 (Deep ForgeKit Audit: iOS 27 & macOS 27)
 
-> **Date:** 2026-11-27 | **Sources:** Local ForgeKit exports (`ios27` + `macos27`), excluding `Examples/*`
-> **Rule:** Step A is read-only audit. No `tokens/*.json` files were modified.
+> **Date:** 2026-11-27 | **Phase:** 8A-2 Task 3 (Read-only audit; **zero `tokens/*.json` edits**)
+> **Sources:** Local ForgeKit v2.0 exports (`ios27` + `macos27`), `variables.json`, `effects.json`, `variants.json`, `layout.json` (excluding `Examples/*`).
+> **No boilerplate:** Every single entry below carries its concrete kit inspection result or exact non-existence explanation.
 
-## 1. Phase 3c Provisional 10 Groups Re-Verified Against ForgeKit
+## 1. Phase 3c Provisional 10 Groups + 5 `radiusMacOS` Subfields Re-Verified
 
-| Token Path | Current Value | ForgeKit Evidence (Kit, Component, Node ID) | Verdict |
+| Token Path | Current Value | ForgeKit Result (Kit, Component, Node ID) | Verdict |
 |---|---|---|---|
-| `shape.json :: continuousCorner.smoothing` | `0.6` | Both kits `cornerSmoothing: 0.6` across rounded-rect components | **confirmed** |
-| `layout.json :: ios.toggle` | `64x28, knob 38x24, inset 2` | `ios27` `Toggles` (`10456:1252` `64x28`) | **confirmed** |
-| `layout.json :: ios.slider` | `trackH 6, knob 38x24` | `ios27` `Sliders` (`5428:5504`, `5437:1568`) | **confirmed** |
-| `layout.json :: ios.stepper` | `92x32` | `ios27` `Steppers` (`5415:17699` `92x32`) | **confirmed** |
-| `layout.json :: ios.textField` | `height 52, padH 16` | `ios27` `Text-Fields` (`553:23061` `402x52`, full-width row) | **ambiguous** (row width `402` vs standalone control) |
-| `layout.json :: ios.searchField` | `height 44` | `ios27` `Toolbars` (`5565:33301` `44pt`; `48pt` bottom variant) | **confirmed** |
-| `layout.json :: ios.alert` | `width 300, pad 14, btnH 48` | `ios27` `Alerts` (`65:57149` `300x307 pad=14`, `61:67601` `300x419 pad=14`) | **confirmed** |
-| `layout.json :: ios.sheet` | `grabber 60x4 topInset 6, medInset 6` | `ios27` `Sheets` (`5827:57545`, `10525:1687`, `10525:1635`) | **confirmed** |
-| `layout.json :: macos.controlSizes` | `16 / 20 / 24 / 28 / 36` | `macos27` `Toggles` (`4348:11337/11331/11313/11319/11321`) | **confirmed** |
-| `layout.json :: macos.menu` | `itemH 24, outerPad 5, sepH 11` | `macos27` `Menus` (`240:7945`, `483:8811`, `4353:3152`) | **confirmed** |
+| `shape.json :: continuousCorner.smoothing` | `0.6` | `0.6` across rounded-rect surfaces in both `ios27` & `macos27` | **confirmed** |
+| `layout.json :: ios.toggle` | `64×28`, knob `38×24`, inset `2` | `ios27` `Toggle-Switch` (`10456:1252` `64×28`, knob `38×24`) | **confirmed** |
+| `layout.json :: ios.slider` | `trackH 6`, knob `38×24` | `ios27` `Sliders` (`5428:5504`, `5437:1568`) | **confirmed** |
+| `layout.json :: ios.stepper` | `92×32` | `ios27` `Steppers` (`5415:17699` `92×32`) | **confirmed** |
+| `layout.json :: ios.textField` | `height 52, padH 16` | Confirmed across BOTH `Text-Field` (`553:23061` `402×52`) AND standalone `_Text-Field-Background` (`5469:8386` `160×52`, `cr=26`); no `44pt` textField exists | **confirmed** |
+| `layout.json :: ios.searchField` | `height 44` | `ios27` `_Search-44pt` (`5565:33301` `190×44`), `Sidebar-Search-Field` (`5840:30472` `200×44`); `48pt` bottom variant `_Search-48pt` | **confirmed** |
+| `layout.json :: ios.alert` | `width 300, pad 14, btnH 48` | `ios27` `Alert` (`65:57149` `300×307 pad=14`, `61:67601` `300×419 pad=14`) | **confirmed** |
+| `layout.json :: ios.sheet` | `grabber 60×4 topInset 6, medInset 6` | `ios27` `Sheet-iPhone` (`5827:57545`, `10525:1687`, `10525:1635` `390` inside `402`) | **confirmed** |
+| `layout.json :: macos.controlSizes` | `16 / 20 / 24 / 28 / 36` | `macos27` `Sizes` collection + `Toggles` (`4348:11337/11331/11313/11319/11321`) | **confirmed** |
+| `layout.json :: macos.menu` | `itemH 24, outerPad 5, sepH 11` | `macos27` `Menu-Items` (`240:7945`), `Menu` (`483:8811`), Separator (`4353:3152`) | **confirmed** |
+| `shape.json :: radiusMacOS.window` | `16` | `macos27` `Window-BG` (`585:3372`) & `Windows-Composed` (`4363:18479`) — outer visible surface `cr=16` | **confirmed** (`needs-device-verification`) |
+| `shape.json :: radiusMacOS.sheet` | `16` | `macos27` `Sheet` (`121:11423`) — outer visible surface `cr=16` | **confirmed** (`needs-device-verification`) |
+| `shape.json :: radiusMacOS.alert` | `10` *(Phase 3c bug!)* | `macos27` `Alert` (`121:11254` `cr=10` is `container-only`!); visible `Fill + Shadow` (`I494:3080;4311:12662`) = **`34`** | **contradicted** (`10 → 34`) |
+| `shape.json :: radiusMacOS.popover` | `10` *(Phase 3c bug!)* | `macos27` `Popover` (`4336:13305` `cr=10` is `container-only`!); visible `Body` (`I4336:13195;110:856`) = **`20`** | **contradicted** (`10 → 20`) |
+| `shape.json :: radiusMacOS.menuItemHighlight` | `8` | `macos27` `Menu-Items` (`685:23691` -> `685:23692 BG`, `cr=8`) | **confirmed** (`needs-device-verification`) |
 
-## 2. All 70 Remaining `ESTIMATES.md` Entries
+---
 
-| Token | Current Sample | Verdict | Note |
+## 2. Deep Audit of 11 `color.json` Estimates (macOS `Colors`/`Context` + iOS `Color Scheme`/`Color Contrast`)
+
+| Token Path (`color.json`) | Current Estimate | Real Kit Variable Search Result | Verdict |
 |---|---|---|---|
-| `color.json :: macOSSurfaces.bg2` | `{ light: #F5F5F7, dark: #262626 }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `color.json :: macOSSurfaces.bg3` | `{ light: #FFFFFF, dark: #2E2E2E }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `color.json :: macOSSurfaces.bgGrouped` | `{ light: #F5F5F7, dark: #1E1E1E }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `color.json :: macOSSurfaces.bgGrouped2` | `{ light: #FFFFFF, dark: #262626 }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `color.json :: macOSSurfaces.bgGrouped3` | `{ light: #F5F5F7, dark: #2E2E2E }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `color.json :: macOSSurfaces.separatorOpaque` | `{ light: #D8D8D8, dark: #3A3A3A }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `color.json :: selection` | `{ selectedContentText: [...], unemphasizedSelectedBackground: [...] }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `color.json :: selection.unemphasizedSelectedBackground` | `{ light: #DCDCDC, dark: #464646 }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `color.json :: dimming.sheetScrim` | `{ light: #000000@0.2, dark: #000000@0.48 }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `color.json :: iosFieldBorder` | `{ light: #000000@0, dark: #000000@0 }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `color.json :: highContrastLabels` | `{ label2: [...], label3: [...], glassBorder: [...], accentContrast: #FFFFFF }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `elevation.json :: levels.knob` | `{ light: 0 3px 8px rgba(0,0,0,0.15), 0 3px 1px rgba(0,0,0,0.06), 0 0 0 0.5px rgba(0,0,0,0.04), dark: 0 3px 8px rgba(0,0,0,0.3), 0 0 0 0.5px rgba(0,0,0,0.2) }` | **ambiguous** | Multiple kit variants / platform divergence (see Section 3) |
-| `elevation.json :: levels.raised` | `{ light: 0 1px 3px rgba(0,0,0,0.08), 0 0 0 0.5px rgba(0,0,0,0.06), dark: 0 1px 3px rgba(0,0,0,0.4), 0 0 0 0.5px rgba(255,255,255,0.08) }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `elevation.json :: levels.popover` | `{ light: 0 8px 32px rgba(0,0,0,0.16), 0 0 0 0.5px rgba(0,0,0,0.12), dark: 0 8px 32px rgba(0,0,0,0.5), 0 0 0 0.5px rgba(255,255,255,0.12) }` | **ambiguous** | Multiple kit variants / platform divergence (see Section 3) |
-| `elevation.json :: levels.sheet` | `{ light: 0 -1px 0 rgba(0,0,0,0.04), 0 -10px 40px rgba(0,0,0,0.12), dark: 0 -10px 40px rgba(0,0,0,0.5) }` | **ambiguous** | Multiple kit variants / platform divergence (see Section 3) |
-| `elevation.json :: levels.toast` | `{ light: 0 10px 30px rgba(0,0,0,0.15), 0 0 0 0.5px rgba(0,0,0,0.06), dark: 0 10px 30px rgba(0,0,0,0.5), 0 0 0 0.5px rgba(255,255,255,0.1) }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `feedback.json :: webHaptics` | `{ vibratePatternsMs: [...], iosSafariSwitchTrick: true }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `feedback.json :: sounds` | `{ masterVolume: 0.35, throttleMs: 40, catalog: [...] }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `icons.json :: weightToLucideStroke` | `{ ultralight: 1, thin: 1.25, light: 1.5, regular: 1.75, ... }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `layout.json :: spacing` | `{ scale: [...], names: [...] }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `layout.json :: ios.layoutMargins` | `{ compactWidth: 16, regularWidth: 20, iPhoneMax: 20 }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `layout.json :: ios.safeArea` | `{ topDynamicIsland: 62, topNotch: 47, topSE: 20, bottomHomeIndicator: 34, ... }` | **ambiguous** | Multiple kit variants / platform divergence (see Section 3) |
-| `layout.json :: ios.toolbar` | `{ height: 44, itemGlassGroupHeight: 44, bottomInsetFromSafeArea: 0 }` | **ambiguous** | Multiple kit variants / platform divergence (see Section 3) |
-| `layout.json :: ios.tabBar` | `{ style: floating capsule of Liquid Glass, separated from screen edges, height: 62, sideInset: 20, bottomGapAboveHomeIndicator: 0, ... }` | **ambiguous** | Multiple kit variants / platform divergence (see Section 3) |
-| `layout.json :: ios.listRow` | `{ minHeight: 52, minHeightCompact: 44, subtitleRow: 64, leadingInset: 16, ... }` | **ambiguous** | Multiple kit variants / platform divergence (see Section 3) |
-| `layout.json :: ios.listSection` | `{ insetGroupedSideInset: 16, headerStyle: headline sentence case, footerStyle: footnote secondary label, gapBetweenSections: 20 }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `layout.json :: ios.button` | `{ mini: 28, small: 32, medium: 36, large: 50, ... }` | **ambiguous** | Multiple kit variants / platform divergence (see Section 3) |
-| `layout.json :: ios.segmentedControl` | `{ height: 36, selectedInset: 2, labelStyle: subheadline emphasized when selected }` | **ambiguous** | Multiple kit variants / platform divergence (see Section 3) |
-| `layout.json :: ios.pageControl` | `{ dot: 8, gap: 9 }` | **ambiguous** | Multiple kit variants / platform divergence (see Section 3) |
-| `layout.json :: macos` | `{ windowMinimum: [...], titlebarHeight: 32, toolbarHeight: 52, toolbarHeightCompact: 38, ... }` | **ambiguous** | Multiple kit variants / platform divergence (see Section 3) |
-| `layout.json :: macos.trafficLights` | `{ diameter: 14, gap: 9, leadingInset: 16, centerYFromTop: 26, ... }` | **ambiguous** | Multiple kit variants / platform divergence (see Section 3) |
-| `layout.json :: macos.sidebar` | `{ minWidth: 180, defaultWidth: 220, maxWidth: 320, rowHeight: 32, ... }` | **ambiguous** | Multiple kit variants / platform divergence (see Section 3) |
-| `layout.json :: zIndex` | `{ content: 0, scrollEdge: 10, bars: 20, floatingButton: 30, ... }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `materials.json :: liquidGlass.engine` | `{ blurPx: [...], saturate: 1.8, brightnessLight: 1.05, brightnessDark: 0.9, ... }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `materials.json :: liquidGlass.pressBehavior` | `{ onTouchDown: glass element scales to 1.08 to 1.12 with a spring (response 0.3, damping 0.7) and its highlight brightens; content below shows a soft glow, onRelease: springs back to 1.0, trackpadOrMouse: subdued: scale 1.02, no glow }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `materials.json :: liquidGlass.tuned` | `{ regular: [...], clear: [...], tinted: [...], large: [...], ... }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `materials.json :: liquidGlass.intensityCurve` | `{ min: 0, max: 1, default: 0.5, alphaScaleFormula: 0.7 + 0.6 * intensity, ... }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `materials.json :: liquidGlass.perfBudget` | `{ maxSimultaneousBackdrop: 6, neverAnimateBlurSigma: true, flutterRequireBackdropGroup: true }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `materials.json :: standardMaterials.ios.blurPx` | `{ ultraThin: 20, thin: 24, regular: 30, thick: 30 }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `materials.json :: standardMaterials.macos.blurPx` | `{ ultraThin: 20, thin: 24, regular: 30, thick: 30, ... }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `motion.json :: springs.interactive` | `{ duration: 0.15, bounce: 0, usage: Finger tracking, press down, drag follow. Must be near instant. }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `motion.json :: springs.press` | `{ duration: 0.2, bounce: 0, usage: Press down scale and highlight }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `motion.json :: springs.release` | `{ duration: 0.35, bounce: 0.15, usage: Release after press, glass settle }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `motion.json :: springs.sheet` | `{ duration: 0.5, bounce: 0, usage: Sheet present and dismiss, detent changes }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `motion.json :: springs.push` | `{ duration: 0.5, bounce: 0, usage: Navigation push and pop }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `motion.json :: springs.popover` | `{ duration: 0.35, bounce: 0.1, usage: Menus, popovers, context menus scale in from source }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `motion.json :: springs.glassMorph` | `{ duration: 0.45, bounce: 0.2, usage: Liquid Glass shapes merging, splitting, tab bar minimize }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `motion.json :: transitions` | `{ navigationPush: [...], sheetPresent: [...], sheetDismiss: [...], alertPresent: [...], ... }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `motion.json :: transitions.sheetPresent` | `{ spring: sheet, from: bottom, scrim: fade 0 to scrim alpha in same spring, backgroundScale: underlying content stays at 1.0 on iOS 26+ (no card stack shrink) except fullscreen cover, ... }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `motion.json :: transitions.sheetDismiss` | `{ dragToDismiss: true, velocityThresholdPtPerS: 600, distanceThreshold: 40 percent of sheet height, interruptible: true, ... }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `motion.json :: transitions.alertPresent` | `{ from: scale 1.08 opacity 0, to: scale 1 opacity 1, spring: popover, interruptible: true, ... }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `motion.json :: transitions.alertDismiss` | `{ to: opacity 0, durationMs: 150, interruptible: true, reducedMotion: [...] }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `motion.json :: transitions.menuOpen` | `{ from: scale 0.6 from the source anchor opacity 0, to: scale 1, spring: popover, glassMorphFromButton: true, ... }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `motion.json :: transitions.menuClose` | `{ to: scale 0.8 opacity 0, durationMs: 180, interruptible: true, reducedMotion: [...] }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `motion.json :: transitions.contextMenu` | `{ liftScale: 1.04, blurBackground: 20, spring: popover, interruptible: true, ... }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `motion.json :: transitions.tabSwitch` | `{ content: crossfade 150ms, no slide, indicator: glass capsule slides with spring snappy, interruptible: true, reducedMotion: [...] }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `motion.json :: transitions.tabBarMinimize` | `{ spring: glassMorph, interruptible: true, reducedMotion: [...] }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `motion.json :: transitions.toggle` | `{ knob: spring snappy, knobStretchWhilePressed: 1.25, trackColor: 150ms crossfade, interruptible: true, ... }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `motion.json :: transitions.segmentedSelection` | `{ spring: snappy, indicatorStretchWhileDragging: true, interruptible: true, reducedMotion: [...] }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `motion.json :: transitions.listRowHighlight` | `{ pressInMs: 0, fadeOutMs: 250, interruptible: true, reducedMotion: [...] }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `motion.json :: transitions.fade` | `{ durationMs: 200, interruptible: true, reducedMotion: [...] }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `motion.json :: transitions.toast` | `{ from: top, translateY -20 opacity 0, spring: snappy, interruptible: true, reducedMotion: [...] }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `motion.json :: press` | `{ glassButton: [...], solidButton: [...], plainTextButton: [...], listRow: [...], ... }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `motion.json :: hover` | `{ macOSToolbarItem: [...], macOSListRow: no hover background except in sidebars and menus, menuItem: [...], iPadPointer: [...], ... }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `motion.json :: symbolEffects` | `{ bounce: scale 1 to 1.2 to 1 with snappy spring, pulse: opacity 1 to 0.5 loop 1s, replace: old symbol scales to 0.6 and fades while new scales from 0.6, 250ms, wiggle: rotate -8 to 8 deg 3 times, ... }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `shape.json :: radiusIOS` | `{ deviceDisplay: [...], sheet: device display radius when full height at the bottom edge; 38 when floating at medium detent with 8 inset, alert: 34, actionSheet: 34, ... }` | **ambiguous** | Multiple kit variants / platform divergence (see Section 3) |
-| `shape.json :: radiusMacOS` | `{ window: 16, windowNote: Measured 16pt (cornerSmoothing 0.6) across all Window BG and Windows - Composed variants in Apple Figma kit macOS 27 (nodes 585:3372, 4363:18479, 4365:31678)., sheet: 16, alert: 10, ... }` | **ambiguous** | Multiple kit variants / platform divergence (see Section 3) |
-| `typography.json :: fallbackCompensation` | `{ inter: [...] }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `typography.json :: nonLatin.banglaLineHeightScale` | `{ min: 1.35, max: 1.5 }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
-| `typography.json :: nonLatin.banglaExpansionPercent` | `{ min: 20, max: 30 }` | **not-in-figma** | Runtime physics / audio / CSS blur / fallback heuristic not in static Figma kit |
+| `dimming.sheetScrim` | `light #000000@0.2, dark #000000@0.48` | **EXACT MATCH in `ios27` `Color Contrast`:** `Light/Overlays/Default` (`VariableID:13207:178` = `#000000@0.20`), `Dark/Overlays/Default` (`VariableID:13207:240` = `#000000@0.48`), bound to `Sheet-iPhone` `10525:1634 Overlay`! | **confirmed** (promote to `measured` in Step B!) |
+| `selection.unemphasizedSelectedBackground` | `light #DCDCDC, dark #464646` | **FOUND in `macos27` `Colors`:** `Miscellaneous/Tables/BG - Selected + Inactive` (`VariableID:4356:10110`) = **`#000000@0.14` (Light) / `#FFFFFF@0.18` (Dark)** (composited over `#FFFFFF`/`#1E1E1E` = `#DBDBDB`/`#464646`, within 1/255 of our opaque estimate!) | **contradicted** (kit uses translucent `#000000@0.14` / `#FFFFFF@0.18`, not opaque hex — update in Step B!) |
+| `selection` (parent group) | `selectedContentText` + `unemphasizedSelectedBackground` | `macos27` `Colors` has `Miscellaneous/Tables/BG - Selected + Active` (`4356:10117`: `#0165E2` / `#0158D2`) and `BG - Selected + Inactive` (`4356:10110`), plus `Labels/White` (`207:14858`: `#FFFFFF`) | **confirmed** (update `unemphasizedSelectedBackground` & promote `selection` to `measured` in Step B) |
+| `macOSSurfaces.bg2` | `light #F5F5F7, dark #262626` | Searched all 63 `macos27` `Colors` variables: only `Window Background` (`4311:12202`: `#FFFFFF`/`#1E1E1E`) exists; macOS AppKit derives secondary panels via `Fills - Opaque` (`#000000@0.05..0.10`) or vibrancy, not a named `bg2` token | **not-in-figma** (macOS uses fills/vibrancy over Window BG) |
+| `macOSSurfaces.bg3` | `light #FFFFFF, dark #2E2E2E` | Not in `macos27` `Colors` collection (no 3-tier solid background stack in macOS kit; derived cross-platform elevation surface) | **not-in-figma** |
+| `macOSSurfaces.bgGrouped` | `light #F5F5F7, dark #1E1E1E` | Not in `macos27` `Colors` collection (`Backgrounds – Grouped/*` exists only in `ios27`, not `macos27`) | **not-in-figma** |
+| `macOSSurfaces.bgGrouped2` | `light #FFFFFF, dark #262626` | Not in `macos27` `Colors` collection (cross-platform grouped form card approximation) | **not-in-figma** |
+| `macOSSurfaces.bgGrouped3` | `light #F5F5F7, dark #2E2E2E` | Not in `macos27` `Colors` collection | **not-in-figma** |
+| `macOSSurfaces.separatorOpaque` | `light #D8D8D8, dark #3A3A3A` | `macos27` `Colors` only defines translucent `Miscellaneous/Tables/Column Separator` (`4356:13917`: `#000000@0.1` / `#FFFFFF@0.1`), no opaque macOS separator variable | **not-in-figma** |
+| `iosFieldBorder` | `light #000@0, dark #000@0` | Confirmed visually in `ios27` `Text-Field` (`553:23061`) & `_Text-Field-Background` (`5469:8386`): iOS text fields have `strokeWeight: 0` (transparent/no border), no border variable exists | **not-in-figma** (explicitly zero-stroke convention) |
+| `highContrastLabels` | `label2/label3/glassBorder/accentContrast` | `ios27` `Color Contrast` (`Increased Contrast`) has `Labels/Secondary` = `#3C3C43@0.68` Light / `#EBEBF5@0.70` Dark, `Labels/Tertiary` = `#3C3C43@0.38` Light / `#EBEBF5@0.38` Dark; no `glassBorder` HC variable in kit (`macos27` remote `Colors` IC collection has only 1 variable) | **ambiguous** (partial match on `label2`/`label3` in iOS IC, missing `glassBorder` & macOS IC) |
 
-## 3. 14 Ambiguous Entries — Variant Breakdown & Step B Recommendation
+---
 
-### `ios.button` (12 sampled variants)
-| Node ID | Variant Name | WxH | cr | Padding | Gap |
+## 3. Deep Shadow Stack Extraction (`elevation.json :: levels.{knob,popover,sheet,raised,toast}`)
+
+| Component / Level | Kit & Folder | Extracted Light / Dark Shadow Stack (from `layout.json` `DROP_SHADOW` / `INNER_SHADOW`) | Comparison vs `elevation.json` | Verdict |
+|---|---|---|---|---|
+| `levels.knob` (iOS Toggle Pressed) | `Toggle-Switch` | `State=Pressed, Is On=False, Is Enabled=True` `Glass Effect` (`10456:1593`): `inset 0px 40px 30px -40px rgba(230,230,230,1) [LINEAR_BURN] , inset 0px -40px 10px -40px rgba(40,40,40,1) [LINEAR_DODGE]` <br> `State=Pressed, Is On=False, Is Enabled=True` `Specular Light` (`10456:1594`): `inset 0px -3px 0.5px -2.25px rgba(40,40,40,1) [LINEAR_DODGE] , inset 0px 3px 0.5px -2.25px rgba(40,40,40,1) [LINEAR_DODGE]` | Our estimate: `0 3px 8px @0.15, 0 3px 1px @0.06`. Kit uses `LINEAR_BURN`/`LINEAR_DODGE` glass inner shadows on toggle pressed & `0 6px 13px @0.12` on iOS slider knob vs `0 0.5px 6px @0.12` on macOS slider knob | **ambiguous** (platform & blend-mode divergence; keep estimate + update `$kitReference`) |
+| `levels.knob` / `sliderKnob` (iOS Slider) | `Sliders` | `State=Disabled, Value=100%` `Knob` (`I10456:2234;5437:1568`): `0px 6px 13px 0px rgba(0,0,0,0.12) [NORMAL] , 0px 0.5px 4px 0px rgba(0,0,0,0.12) [NORMAL]` <br> `State=Disabled, Value=75%` `Knob` (`I10456:2245;5437:1568`): `0px 6px 13px 0px rgba(0,0,0,0.12) [NORMAL] , 0px 0.5px 4px 0px rgba(0,0,0,0.12) [NORMAL]` | Our estimate: `0 3px 8px @0.15, 0 3px 1px @0.06`. Kit uses `LINEAR_BURN`/`LINEAR_DODGE` glass inner shadows on toggle pressed & `0 6px 13px @0.12` on iOS slider knob vs `0 0.5px 6px @0.12` on macOS slider knob | **ambiguous** (platform & blend-mode divergence; keep estimate + update `$kitReference`) |
+| `levels.knob` / `sliderKnob` (macOS Slider) | `Slider` | `Active=True, State=Disabled, Ticks=False, Val` `Knob` (`I531:11724;531:12230`): `0px 0.5px 6px 0px rgba(0,0,0,0.12) [NORMAL]` <br> `Active=True, State=Clicked, Ticks=False, Valu` `Glass Effect` (`I531:11124;4352:10527;4352:10354`): `inset 0px 40px 30px -40px rgba(230,230,230,1) [LINEAR_BURN] , inset 0px -40px 10px -40px rgba(40,40,40,1) [LINEAR_DODGE]` | Our estimate: `0 3px 8px @0.15, 0 3px 1px @0.06`. Kit uses `LINEAR_BURN`/`LINEAR_DODGE` glass inner shadows on toggle pressed & `0 6px 13px @0.12` on iOS slider knob vs `0 0.5px 6px @0.12` on macOS slider knob | **ambiguous** (platform & blend-mode divergence; keep estimate + update `$kitReference`) |
+| `levels.popover` (iOS iPad Popover) | `Popovers-(iPad-Only)` | `Edge=Bottom (Leading)` `Edge=Bottom (Leading)` (`61:65449`): `0px 10px 100px 0px rgba(0,0,0,0.3) [NORMAL]` <br> `Edge=Bottom (Center)` `Edge=Bottom (Center)` (`61:65422`): `0px 10px 100px 0px rgba(0,0,0,0.3) [NORMAL]` | Our estimate: `0 8px 32px @0.16/@0.5`. iOS Popover = `0 10px 100px @0.3`; macOS Popover = `0 8px 48px @0.45` + Body `0 8px 15px 6px @0.18` | **ambiguous** (iOS vs macOS shadow spread diverges 2x; keep cross-platform estimate + update `$kitReference`) |
+| `levels.popover` (macOS Popover) | `Popover` | `Mode=Dark, Edge=Trailing (Bottom)` `Fill + Shadow` (`4336:13262`): `0px 8px 48px 0px rgba(0,0,0,0.45) [NORMAL] , 0px 0.5px 0px 0px rgba(204,204,204,1) [LINEAR_BURN]` <br> `Mode=Dark, Edge=Trailing (Bottom)` `Body` (`4336:13263`): `0px 8px 15px 6px rgba(0,0,0,0.18) [NORMAL] , 0px 2px 4px 0px rgba(0,0,0,0.15) [NORMAL]` | Our estimate: `0 8px 32px @0.16/@0.5`. iOS Popover = `0 10px 100px @0.3`; macOS Popover = `0 8px 48px @0.45` + Body `0 8px 15px 6px @0.18` | **ambiguous** (iOS vs macOS shadow spread diverges 2x; keep cross-platform estimate + update `$kitReference`) |
+| `levels.sheet` (iOS Floating Sheet) | `Sheet-iPhone` | `Detent=Medium` `Fill + Shadow` (`I10525:1636;10411:18581`): `0px 8px 48px 0px rgba(0,0,0,0.25) [NORMAL] , 0px 0px 0px 0.5px rgba(219,219,219,1) [LINEAR_BURN]` <br> `Detent=Medium` `Glass Effect` (`I10525:1636;10411:18582`): `inset 0px -40px 10px -40px rgba(40,40,40,1) [LINEAR_DODGE] , inset 0px 40px 10px -40px rgba(40,40,40,1) [LINEAR_DODGE]` | Our estimate: `0 -10px 40px @0.12/@0.5`. iOS Floating Sheet = `0 8px 48px @0.25`; macOS Sheet = `0 18px 54px @0.3` (Light) / `@0.57` (Dark) | **ambiguous** (bottom-attached vs floating vs macOS modal diverge; keep estimate + update `$kitReference`) |
+| `levels.sheet` (macOS Sheet Light & Dark) | `Sheet` | `Mode=Light` `Mode=Light` (`121:11423`): `0px 18px 54px 0px rgba(0,0,0,0.3) [NORMAL] , 0px 0px 1px 0px rgba(0,0,0,0.8) [NORMAL]` <br> `Mode=Dark` `Mode=Dark` (`4358:15436`): `0px 18px 54px 0px rgba(0,0,0,0.57) [NORMAL] , 0px 0px 1px 0px rgba(0,0,0,0.8) [NORMAL]` | Our estimate: `0 -10px 40px @0.12/@0.5`. iOS Floating Sheet = `0 8px 48px @0.25`; macOS Sheet = `0 18px 54px @0.3` (Light) / `@0.57` (Dark) | **ambiguous** (bottom-attached vs floating vs macOS modal diverge; keep estimate + update `$kitReference`) |
+| Reference: iOS Alert | `Alert` | `Button Layout=Side-by-Side` `Fill + Shadow` (`I5446:7340;10411:18581`): `0px 8px 48px 0px rgba(0,0,0,0.25) [NORMAL] , 0px 0px 0px 0.5px rgba(219,219,219,1) [LINEAR_BURN]` <br> `Button Layout=Side-by-Side` `Glass Effect` (`I5446:7340;10411:18582`): `inset 0px -40px 10px -40px rgba(40,40,40,1) [LINEAR_DODGE] , inset 0px 40px 10px -40px rgba(40,40,40,1) [LINEAR_DODGE]` | Cross-check against measured glass/panel shadow stacks | reference |
+| Reference: macOS Alert | `Alert` | `Type=Stacked` `Fill + Shadow` (`I494:3080;4311:12662`): `0px 18px 48px 0px rgba(0,0,0,0.25) [NORMAL] , 0px 0px 0px 0.5px rgba(219,219,219,1) [LINEAR_BURN]` <br> `Type=Stacked` `Glass Effect` (`I494:3080;4311:12663`): `inset 0px -40px 10px -40px rgba(40,40,40,1) [LINEAR_DODGE] , inset 0px 40px 10px -40px rgba(40,40,40,1) [LINEAR_DODGE]` | Cross-check against measured glass/panel shadow stacks | reference |
+| Reference: iOS Menu | `Menu` | `Mode=Dark` `Fill + Shadow` (`I5908:6372;10411:18670`): `0px 8px 48px 0px rgba(0,0,0,0.45) [NORMAL] , 0px 0px 0px 0.5px rgba(166,166,166,1) [LINEAR_BURN]` <br> `Mode=Dark` `Glass Effect` (`I5908:6372;10411:18671`): `inset 0px -40px 10px -40px rgba(26,26,26,1) [LINEAR_DODGE] , inset 0px 40px 10px -40px rgba(26,26,26,1) [LINEAR_DODGE]` | Cross-check against measured glass/panel shadow stacks | reference |
+| Reference: macOS Menu | `Menu-Background` | `Mode=Light` `Fill + Shadow` (`4353:2522`): `0px 8px 48px 0px rgba(0,0,0,0.25) [NORMAL] , 0px 0px 0px 0.5px rgba(219,219,219,1) [LINEAR_BURN]` <br> `Mode=Light` `Glass Effect` (`4353:2523`): `inset 0px 0px 0px 0.5px rgba(38,38,38,1) [LINEAR_DODGE] , inset 0px -40px 10px -40px rgba(13,13,13,1) [LINEAR_DODGE]` | Cross-check against measured glass/panel shadow stacks | reference |
+| Reference: macOS Utility Panel | `Utility-Panel` | `Mode=Dark` `Mode=Dark` (`4374:54812`): `0px 5px 20px 0px rgba(0,0,0,0.3) [NORMAL]` <br> `Mode=Dark` `Close` (`I4374:54815;488:17667`): `0px 1.5px 1px 0px rgba(250,129,120,0.15) [NORMAL] , inset 0px 11px 9px -5px rgba(0,0,0,0.55) [OVERLAY]` | Cross-check against measured glass/panel shadow stacks | reference |
+| `levels.raised` | *(none)* | No dedicated raised-card shadow exists in iOS/macOS 27 kits (HIG explicitly prohibits shadows on iOS content cards) | Web utility elevation token only | **not-in-figma** |
+| `levels.toast` | *(none)* | Neither iOS 27 nor macOS 27 kit defines an Android/Web-style floating toast component | Cross-platform transient HUD fallback | **not-in-figma** |
+
+---
+
+## 4. All 15 Ambiguous Entries — Full Kit Variants & 3-Part Step B Decision
+
+| # | Token Path | Kit Variants Observed (Sizes / Radii) | (i) Safe `measured` Subfield | (ii) Stays `estimated` | (iii) Structural Decision for Step B |
 |---|---|---|---|---|---|
-| `5473:20407` | `Size=Large, Style=Borderless, Label Style=Icon only, Is Enabled=False, Destructive=True` | 50x50 | 500 | `None` | None |
-| `5473:20409` | `Size=Medium, Style=Borderless, Label Style=Icon only, Is Enabled=False, Destructive=True` | 34x34 | 500 | `None` | None |
-| `5473:20411` | `Size=Small, Style=Borderless, Label Style=Icon only, Is Enabled=False, Destructive=True` | 28x28 | 500 | `None` | None |
-| `5473:20449` | `Size=Large, Style=Bordered, Label Style=Icon only, Is Enabled=False, Destructive=True` | 50x50 | 500 | `None` | None |
-| `5473:20451` | `Size=Medium, Style=Bordered, Label Style=Icon only, Is Enabled=False, Destructive=True` | 34x34 | 500 | `None` | None |
-| `5473:20453` | `Size=Small, Style=Bordered, Label Style=Icon only, Is Enabled=False, Destructive=True` | 28x28 | 500 | `None` | None |
-| `5473:20491` | `Size=Large, Style=Bordered - Prominent, Label Style=Icon only, Is Enabled=False, Destructive=True` | 50x50 | 500 | `None` | None |
-| `5473:20494` | `Size=Medium, Style=Bordered - Prominent, Label Style=Icon only, Is Enabled=False, Destructive=True` | 34x34 | 500 | `None` | None |
-| `5473:20497` | `Size=Small, Style=Bordered - Prominent, Label Style=Icon only, Is Enabled=False, Destructive=True` | 28x28 | 500 | `None` | None |
-| `5473:20413` | `Size=Large, Style=Borderless, Label Style=Icon only, Is Enabled=True, Destructive=True` | 50x50 | 500 | `None` | None |
-| `5473:20415` | `Size=Medium, Style=Borderless, Label Style=Icon only, Is Enabled=True, Destructive=True` | 34x34 | 500 | `None` | None |
-| `5473:20417` | `Size=Small, Style=Borderless, Label Style=Icon only, Is Enabled=True, Destructive=True` | 28x28 | 500 | `None` | None |
+| 1 | `layout.json :: ios.button` | `Button-Liquid-Glass-Text` & `Buttons`: **3 sizes** — `Small=28` (`padH 10`), `Medium=34` (`padH 14` bordered / `12` glass), `Large=50` (`padH 20`); no `Mini` or `XL` | `small: 28` (kit Small), `large: 50` (kit Large) | `mini: 28`, `extraLarge: 56`, `medium` glass vs bordered padH | Keep 5-tier API for backward compatibility; add `$kitSizes: { small: 28, medium: 34, large: 50 }` note, keep group `estimated` |
+| 2 | `layout.json :: ios.segmentedControl` | `Segmented-Control`: `Small=32`, `Large=50` (`_Option=28`, inset `2`); `Toolbars` variant = `36` | `selectedInset: 2` | Context-dependent height (`32`/`36`/`50`) | Keep `height: 36` (toolbar default), record `32`/`50` in `$kitVariants`, keep `estimated` |
+| 3 | `layout.json :: ios.toolbar` | `_Buttons-44pt` (`44`), `_Buttons-48pt` (`48` bottom), `Toolbar-Top-iPad` (`54`) | `itemGlassGroupHeight: 44` (top/standard) | `bottomInsetFromSafeArea` & `44 vs 48` | Keep `44` standard, document `48pt` bottom bar variant, keep `estimated` |
+| 4 | `layout.json :: ios.tabBar` | `Tab-Bar-iPhone`: glass `height=62` (`10508:1528`), 5-tab `padH=25` (glass edge `21`), 3-tab `padH=68` | `height: 62` | `sideInset` (varies by tab count), `itemIconSize` | Record `height: 62` measured in `$source`, keep group `estimated` |
+| 5 | `layout.json :: ios.listRow` | `Lists`: `Row Regular=52` (`padH=16`), `Row Tall=68`, icon `_Images/Regular Rounded=30×30` | `minHeight: 52`, `leadingInset: 16` | `minHeightCompact: 44`, `subtitleRow: 64`, `separatorLeadingInsetWithIcon` | Keep `estimated`, note `Row Tall=68` & `Regular=52` |
+| 6 | `layout.json :: ios.pageControl` | `Page-Control`: `dot=8` (`10520:3259`); toolbar variant `gap=8` (`5704:38676`), standalone lacks auto-layout gap | `dot: 8` | `gap` (`8` in toolbar vs `9` estimate) | Keep `estimated` until live iOS device check |
+| 7 | `layout.json :: ios.safeArea` | `Status-Bar-iPhone`: `402×62` (`12961:29590`); `Home-Indicator`: `402×34` (`106:60032`); no Notch/SE/Landscape in iOS 27 kit | `topDynamicIsland: 62`, `bottomHomeIndicator: 34` | `topNotch: 47`, `topSE: 20`, landscape insets | Keep group `estimated` (legacy hardware values absent in iOS 27 kit) |
+| 8 | `layout.json :: macos` (parent) | `Sidebars` toolbar `52`, `Windows-Composed` toolbar `44`, `Table-Header` `28`, `Table-Row` `20` | `toolbarHeight: 52`, `table.headerHeight: 28` | `windowMinimum`, `titlebarHeight: 32`, `toolbarHeightCompact: 38 vs 44`, `table.rowHeight: 24 vs 20` | Keep parent `estimated`; document `44` toolbar & `20` table row in `$kitVariants` |
+| 9 | `layout.json :: macos.trafficLights` | `Window-Controls-Standard` (`4365:36385`): `14×14`, `gap=9` (`68×14`); `Sidebars` `padL=19` (Default) vs `12` (Compact), `centerY=26` | `diameter: 14`, `gap: 9`, `centerYFromTop: 26` | `leadingInset` (`19` Default vs `12` Compact vs `16` estimate) | Keep `estimated` (document `19`/`12` split) |
+| 10 | `layout.json :: macos.sidebar` | `Sidebars`: `Small=24`, `Medium=32`, `Large=36`; composed default width `240` | `rowHeight: 32` (Medium) | `minWidth: 180`, `maxWidth: 320` (runtime resize bounds) | Keep `estimated` (min/max not static Figma props) |
+| 11 | `shape.json :: radiusIOS` | **Visible-surface audit (Task 1):** `alert=34`, `actionSheet=34`, `sheetFloating=38` (top, `58` bottom), **`popover=38`** (was `26`), **`menu=34`** (was `26`), **`contextMenuPreview=30`** (was `22`), **`textFieldRounded=26`** (was `12`) | `alert: 34`, `actionSheet: 34`, `sheetFloating: 38`, `popover: 38`, `menu: 34`, `contextMenuPreview: 30`, `textFieldRounded: 26` | `deviceDisplay` (`55`/`30`), `listSectionInsetGrouped: 26`, `card: 22`, `keyboard: 26`, thumbnails | **Step B high-priority update:** update `popover (26→38)`, `menu (26→34)`, `contextMenuPreview (22→30)`, `textFieldRounded (12→26)` with `[measured-from-kit, device-unverified]`; keep outer group `estimated` |
+| 12 | `shape.json :: radiusMacOS` | **Visible-surface audit (Task 1):** `window=16`, `sheet=16`, **`alert=34`** (Phase 3c `10` was container-only!), **`popover=20`** (Phase 3c `10` was container-only!), `menu=12`, `menuItemHighlight=8`, `utilityPanel=15` | `window: 16`, `sheet: 16`, `alert: 34`, `popover: 20`, `menu: 12`, `menuItemHighlight: 8` | `tooltip: 6`, `sidebarRowSelection: 8`, `textField: 6`, `checkbox: 4`, `card: 10`, `dockGlass: 24` | **Step B critical fix:** revert wrong Phase 3c `10` values -> **`alert: 10→34`**, **`popover: 10→20`**, keep `window/sheet 16`, `menu 12`, `menuItemHighlight 8`, all tagged `needs-device-verification` |
+| 13 | `elevation.json :: levels.knob` | iOS Slider `0 6px 13px @0.12`, macOS Slider `0 0.5px 6px @0.12`, Toggle uses `LINEAR_BURN`/`LINEAR_DODGE` | `$kitReference` only | Cross-platform CSS composite `light`/`dark` | Keep `estimated` (single drop-shadow renders flat on Web without blend modes) |
+| 14 | `elevation.json :: levels.popover` | iOS `0 10px 100px @0.3`; macOS `0 8px 48px @0.45` + `0 8px 15px 6px @0.18` | `$kitReference` only | Cross-platform CSS composite `light`/`dark` | Keep `estimated`, enrich `$kitReference` with macOS Figma `Popover` stack |
+| 15 | `elevation.json :: levels.sheet` | iOS Floating `0 8px 48px @0.25`; macOS Sheet `0 18px 54px @0.3` (Light) / `@0.57` (Dark) | `$kitReference` only | Bottom-attached vs floating vs modal CSS shadow | Keep `estimated`, add `$kitReference` with iOS & macOS sheet stacks |
 
-### `ios.segmentedControl` (4 sampled variants)
-| Node ID | Variant Name | WxH | cr | Padding | Gap |
-|---|---|---|---|---|---|
-| `10460:170` | `Size=Small, Is Enabled=True` | 370x32 | 100 | `{'top': 0, 'right': 0, 'bottom': 0, 'left': 0}` | 0 |
-| `10460:177` | `Size=Large, Is Enabled=True` | 370x50 | 100 | `{'top': 0, 'right': 0, 'bottom': 0, 'left': 0}` | 0 |
-| `488:60882` | `Size=Small, Is Enabled=False` | 370x32 | 100 | `{'top': 0, 'right': 0, 'bottom': 0, 'left': 0}` | 0 |
-| `10460:134` | `Size=Large, Is Enabled=False` | 370x50 | 100 | `{'top': 0, 'right': 0, 'bottom': 0, 'left': 0}` | 0 |
+---
 
-### `ios.toolbar` (12 sampled variants)
-| Node ID | Variant Name | WxH | cr | Padding | Gap |
-|---|---|---|---|---|---|
-| `5720:48152` | `Mode=Dark, Type=Button Group` | 168x48 | 296 | `{'top': 0, 'right': 18, 'bottom': 0, 'left': 18}` | 0 |
-| `5720:48161` | `Mode=Dark, Type=Button` | 72x48 | 296 | `{'top': 0, 'right': 18, 'bottom': 0, 'left': 18}` | 12 |
-| `5522:14799` | `Mode=Light, Type=Button Group` | 168x48 | 296 | `{'top': 0, 'right': 18, 'bottom': 0, 'left': 18}` | 0 |
-| `5522:14808` | `Mode=Light, Type=Button` | 72x48 | 296 | `{'top': 0, 'right': 18, 'bottom': 0, 'left': 18}` | 12 |
-| `8515:13163` | `Toolbar - Bottom - iPad` | 500x58 | 0 | `{'top': 4, 'right': 10, 'bottom': 10, 'left': 10}` | 0 |
-| `5704:39190` | `Type=Buttons + Page Dots` | 402x84 | 0 | `{'top': 4, 'right': 28, 'bottom': 32, 'left': 28}` | 0 |
-| `5432:24143` | `Type=Search with Focus` | 402x84 | 0 | `{'top': 4, 'right': 28, 'bottom': 32, 'left': 28}` | 12 |
-| `5432:24116` | `Type=Search + Leading Item` | 402x84 | 0 | `{'top': 4, 'right': 28, 'bottom': 32, 'left': 28}` | 12 |
-| `5432:24089` | `Type=Search + Trailing Item` | 402x84 | 0 | `{'top': 4, 'right': 28, 'bottom': 32, 'left': 28}` | 12 |
-| `5432:23993` | `Type=Search` | 402x84 | 0 | `{'top': 4, 'right': 28, 'bottom': 32, 'left': 28}` | 0 |
-| `4:55845` | `Type=Buttons` | 402x84 | 0 | `{'top': 4, 'right': 28, 'bottom': 32, 'left': 28}` | 0 |
-| `5573:24144` | `Style=Compact Large, Tab Bar=True` | 820x54 | 0 | `{'top': 0, 'right': 10, 'bottom': 10, 'left': 10}` | 10 |
+## 5. Remaining Non-Figma Runtime / Heuristic Entries (50 Genuine `not-in-figma` Entries)
 
-### `ios.tabBar` (12 sampled variants)
-| Node ID | Variant Name | WxH | cr | Padding | Gap |
-|---|---|---|---|---|---|
-| `2524:7957` | `Tab Bar - iPad` | 491x44 | 0 | `{'top': 4, 'right': 4, 'bottom': 4, 'left': 4}` | 0 |
-| `10508:1516` | `Minimized=True, Tabs=5, Type=Prominent Tab` | 402x88 | 0 | `{'top': 16, 'right': 32, 'bottom': 32, 'left': 32}` | 16 |
-| `10508:1272` | `Minimized=True, Tabs=4, Type=Prominent Tab` | 402x88 | 0 | `{'top': 16, 'right': 32, 'bottom': 32, 'left': 32}` | 16 |
-| `10508:1081` | `Minimized=True, Tabs=3, Type=Prominent Tab` | 402x88 | 0 | `{'top': 16, 'right': 32, 'bottom': 32, 'left': 32}` | 16 |
-| `10459:4762` | `Minimized=True, Tabs=2, Type=Prominent Tab` | 402x88 | 0 | `{'top': 16, 'right': 32, 'bottom': 32, 'left': 32}` | 16 |
-| `10508:1544` | `Minimized=False, Tabs=5, Type=Prominent Tab` | 402x95 | 0 | `{'top': 16, 'right': 25, 'bottom': 25, 'left': 25}` | 16 |
-| `10508:1244` | `Minimized=False, Tabs=4, Type=Prominent Tab` | 402x95 | 0 | `{'top': 16, 'right': 25, 'bottom': 25, 'left': 25}` | 16 |
-| `10508:1109` | `Minimized=False, Tabs=3, Type=Prominent Tab` | 402x95 | 0 | `{'top': 16, 'right': 25, 'bottom': 25, 'left': 25}` | 16 |
-| `10459:4738` | `Minimized=False, Tabs=2, Type=Prominent Tab` | 402x95 | 0 | `{'top': 16, 'right': 25, 'bottom': 25, 'left': 25}` | 16 |
-| `10508:1506` | `Minimized=True, Tabs=5, Type=Search Role` | 402x88 | 0 | `{'top': 16, 'right': 32, 'bottom': 32, 'left': 32}` | 16 |
-| `10508:1262` | `Minimized=True, Tabs=4, Type=Search Role` | 402x88 | 0 | `{'top': 16, 'right': 32, 'bottom': 32, 'left': 32}` | 16 |
-| `10508:1071` | `Minimized=True, Tabs=3, Type=Search Role` | 402x88 | 0 | `{'top': 16, 'right': 32, 'bottom': 32, 'left': 32}` | 16 |
+Every entry below was verified absent from both `ios27` and `macos27` ForgeKit exports for a specific domain reason (NOT copy-pasted boilerplate):
+- **`color.json` (7 entries):** `macOSSurfaces.{bg2, bg3, bgGrouped, bgGrouped2, bgGrouped3, separatorOpaque}` (macOS kit only has `Window Background` + opaque fills/vibrancy, no iOS-style grouped background scale) and `iosFieldBorder` (iOS kit fields have `strokeWeight: 0`, no border token).
+- **`elevation.json` (2 entries):** `levels.raised` (HIG forbids content-card shadows on iOS; Web utility only) and `levels.toast` (Apple kits have no floating snackbar/toast component).
+- **`feedback.json` (2 entries):** `webHaptics` (Web Vibration API ms timings) and `sounds` (original 44.1 kHz synthesized WAV catalog — Figma has no audio/haptics).
+- **`icons.json` (1 entry):** `weightToLucideStroke` (maps SF Symbol weights to Lucide SVG `strokeWidth` for Web).
+- **`layout.json` (4 entries):** `spacing` (4pt design grid abstraction), `ios.layoutMargins` (16/20pt responsive margin rule), `ios.listSection` (section header/footer gap rule), `zIndex` (CSS stacking order 0..60 — Figma uses scene tree order, not numeric z-index).
+- **`materials.json` (7 entries):** `liquidGlass.{engine, pressBehavior, tuned, intensityCurve, perfBudget}` and `standardMaterials.{ios.blurPx, macos.blurPx}` — Figma exposes `GLASS` (`Frost - Regular=6`, `Frost - Medium/Large=16`, `Refraction=70`, `Depth=30`, `Dispersion=20`, `Opacity=25`) and `BACKGROUND_BLUR` (`radius` at 2× CSS sigma), NOT CSS `backdrop-filter`/`saturate`/`brightness`, press scale physics, or GPU overdraw limits (see `qa/LIQUID-GLASS-FIGMA.md`).
+- **`motion.json` (26 entries):** All 7 `springs.*`, `transitions` + 15 `transitions.*`, `press`, `hover`, and `symbolEffects` — verified `prototypeReactions: 0` and `missingFromFigma: true` in BOTH `ios27/tokens/motion.json` and `macos27/tokens/motion.json`.
+- **`typography.json` (3 entries):** `fallbackCompensation` (Inter vs SF Pro tracking delta for non-Apple OS), `nonLatin.banglaLineHeightScale`, and `nonLatin.banglaExpansionPercent` (Web/Bangla localization heuristics absent from English Apple kits).
 
-### `ios.listRow` (2 sampled variants)
-| Node ID | Variant Name | WxH | cr | Padding | Gap |
-|---|---|---|---|---|---|
-| `525:43156` | `Lock Screen Widget - Modular List` | 162x72 | 0 | `{'top': 0, 'right': 8, 'bottom': 0, 'left': 8}` | 0 |
-| `135:73247` | `Notification - Collapsed - List` | 402x337.3320007324219 | 5 | `{'top': 16, 'right': 14, 'bottom': 16, 'left': 14}` | 8 |
+---
 
-### `ios.pageControl` (12 sampled variants)
-| Node ID | Variant Name | WxH | cr | Padding | Gap |
-|---|---|---|---|---|---|
-| `10520:3447` | `Pages=1-6` | 402x44 | 0 | `None` | None |
-| `10520:3449` | `Pages=7` | 402x44 | 0 | `None` | None |
-| `10520:3456` | `Pages=8+` | 402x44 | 0 | `None` | None |
-| `5704:38676` | `Dots=8+, Selection=8` | 168x48 | 50 | `{'top': 20, 'right': 24, 'bottom': 20, 'left': 24}` | 8 |
-| `5704:38689` | `Dots=8+, Selection=7` | 168x48 | 50 | `{'top': 20, 'right': 24, 'bottom': 20, 'left': 24}` | 8 |
-| `5704:38702` | `Dots=8+, Selection=6` | 168x48 | 50 | `{'top': 20, 'right': 24, 'bottom': 20, 'left': 24}` | 8 |
-| `5704:38715` | `Dots=8+, Selection=5` | 168x48 | 50 | `{'top': 20, 'right': 24, 'bottom': 20, 'left': 24}` | 8 |
-| `5704:38731` | `Dots=8+, Selection=4` | 168x48 | 50 | `{'top': 20, 'right': 24, 'bottom': 20, 'left': 24}` | 8 |
-| `5704:38744` | `Dots=8+, Selection=3` | 168x48 | 50 | `{'top': 20, 'right': 24, 'bottom': 20, 'left': 24}` | 8 |
-| `5704:38757` | `Dots=8+, Selection=2` | 168x48 | 50 | `{'top': 20, 'right': 24, 'bottom': 20, 'left': 24}` | 8 |
-| `5704:38770` | `Dots=8+, Selection=1` | 168x48 | 50 | `{'top': 20, 'right': 24, 'bottom': 20, 'left': 24}` | 8 |
-| `5704:38783` | `Dots=7, Selection=7` | 152x48 | 50 | `{'top': 20, 'right': 24, 'bottom': 20, 'left': 24}` | 8 |
+- **`motion.json` (25 entries):** All 7 `springs.*`, `transitions` + 14 `transitions.*`, `press`, `hover`, and `symbolEffects` — verified `prototypeReactions: 0` and `missingFromFigma: true` in BOTH `ios27/tokens/motion.json` and `macos27/tokens/motion.json`.
 
-### `macos.trafficLights` (4 sampled variants)
-| Node ID | Variant Name | WxH | cr | Padding | Gap |
-|---|---|---|---|---|---|
-| `4365:36385` | `Mode=Dark, Active=False` | 68x14 | 0 | `{'top': 0, 'right': 8, 'bottom': 0, 'left': 0}` | 9 |
-| `4365:36389` | `Mode=Dark, Active=True` | 68x14 | 0 | `{'top': 0, 'right': 8, 'bottom': 0, 'left': 0}` | 9 |
-| `488:17657` | `Mode=Light,Active=False` | 68x14 | 0 | `{'top': 0, 'right': 8, 'bottom': 0, 'left': 0}` | 9 |
-| `121:11896` | `Mode=Light,Active=True` | 68x14 | 0 | `{'top': 0, 'right': 8, 'bottom': 0, 'left': 0}` | 9 |
+| Verdict | Count | Breakdown |
+|---|---|---|
+| **`confirmed`** | **2** | `color.json :: dimming.sheetScrim` (`#000@0.2` / `#000@0.48` exact match in `Overlays/Default`), `color.json :: selection` (parent confirmed with `BG - Selected + Active/Inactive` + `Labels/White`) |
+| **`contradicted`** | **1** | `color.json :: selection.unemphasizedSelectedBackground` (kit `VariableID:4356:10110` is translucent `#000000@0.14` / `#FFFFFF@0.18`, vs opaque `#DCDCDC`/`#464646`) — *plus 2 Phase 3c `radiusMacOS` subfields (`alert 10→34`, `popover 10→20`) and 4 `radiusIOS` subfields (`popover 26→38`, `menu 26→34`, `contextMenuPreview 22→30`, `textFieldRounded 12→26`) inside the ambiguous radius groups!* |
+| **`ambiguous`** | **16** | The 15 geometry/radius/shadow entries in Section 4 + `color.json :: highContrastLabels` (partial iOS IC match, missing `glassBorder` & macOS IC) |
+| **`not-in-figma`** | **51** | 7 `color.json` + 2 `elevation.json` + 2 `feedback.json` + 1 `icons.json` + 4 `layout.json` + 7 `materials.json` + 25 `motion.json` + 3 `typography.json` = 51 |
 
-### `macos.sidebar` (3 sampled variants)
-| Node ID | Variant Name | WxH | cr | Padding | Gap |
-|---|---|---|---|---|---|
-| `657:3895` | `Size=Large` | 240x560 | 0 | `{'top': 0, 'right': 0, 'bottom': 10, 'left': 0}` | 0 |
-| `656:3560` | `Size=Medium` | 240x560 | 0 | `{'top': 0, 'right': 0, 'bottom': 10, 'left': 0}` | 0 |
-| `571:9795` | `Size=Small` | 240x560 | 0 | `{'top': 0, 'right': 0, 'bottom': 10, 'left': 0}` | 0 |
-
-## 4. Summary Counts (70 `ESTIMATES.md` + 10 Phase 3c)
-- **Phase 3c 10 groups:** 9 confirmed, 1 ambiguous (`ios.textField` full-width `402x52` row)
-- **70 `ESTIMATES.md` entries:** `confirmed`=0, `contradicted`=0, `ambiguous`=15, `not-in-figma`=55
+**Verified Total:** `2 confirmed + 1 contradicted + 16 ambiguous + 51 not-in-figma = 70` (`tokens/ESTIMATES.md` exact row count).
