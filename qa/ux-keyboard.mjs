@@ -123,7 +123,11 @@ async function runSingle(pw, targetUrl, engine, theme) {
       }
       const focusable = Array.from(
         document.querySelectorAll('button:not([disabled]), a[href], input:not([disabled]):not([type="hidden"]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])')
-      ).filter((el) => isVis(el) && !el.closest('[aria-hidden="true"]'));
+      ).filter((el) => {
+        if (!isVis(el) || el.closest('[aria-hidden="true"]')) return false;
+        if (el.hasAttribute('tabindex') && parseInt(el.getAttribute('tabindex') || '0', 10) < 0) return false;
+        return true;
+      });
       focusable.forEach((el, i) => el.setAttribute('data-cf-ux-idx', String(i)));
       const snaps = focusable.map((el, i) => {
         const cs = getComputedStyle(el);
@@ -150,6 +154,7 @@ async function runSingle(pw, targetUrl, engine, theme) {
       let prevIdx = -1;
       let stuckCount = 0;
       let wrapped = false;
+      let hitDocumentEnd = false;
       const steps = Math.min(prep.snaps.length + 4, 60);
       for (let i = 0; i < steps; i++) {
         await page.keyboard.press('Tab');
@@ -167,7 +172,10 @@ async function runSingle(pw, targetUrl, engine, theme) {
             boxShadow: cs.boxShadow,
           };
         });
-        if (!info || info.idx < 0) continue;
+        if (!info || info.idx < 0) {
+          if (prevIdx >= 0) hitDocumentEnd = true;
+          continue;
+        }
         if (info.idx === prevIdx) {
           stuckCount++;
           if (stuckCount >= 2) {
@@ -182,8 +190,12 @@ async function runSingle(pw, targetUrl, engine, theme) {
           stuckCount = 0;
         }
         if (prevIdx >= 0 && info.idx < prevIdx) {
-          if (wrapped) {
-            // Second backward jump indicates non-DOM tab order (e.g. tabindex > 0)
+          // A clean end-of-document wrap back to an already-visited element finishes the Tab cycle
+          if (hitDocumentEnd && seenFocus.has(info.idx)) {
+            break;
+          }
+          if (!seenFocus.has(info.idx) || wrapped) {
+            // Backward jump to an unvisited element (e.g. tabindex > 0) or repeated backward jump indicates non-DOM tab order
             tabViolations.push({
               selector: snapMap.get(info.idx)?.selector || info.tag,
               actual: `focus jumped backwards from DOM index ${prevIdx} to ${info.idx}`,
@@ -193,6 +205,7 @@ async function runSingle(pw, targetUrl, engine, theme) {
             wrapped = true;
           }
         }
+        hitDocumentEnd = false;
         prevIdx = info.idx;
         visitedOrder.push(info.idx);
 
@@ -230,9 +243,14 @@ async function runSingle(pw, targetUrl, engine, theme) {
 
     for (const trigSel of modalTriggers) {
       await page.locator(trigSel).first().focus({ timeout: 3000 });
-      await page.locator(trigSel).first().click({ timeout: 3000 });
+      // Activate via keyboard Enter so WebKit does not blur the <button> on mouse mousedown before onClick
+      await page.keyboard.press('Enter');
       await page.waitForTimeout(350);
       const dialogSel = '[role="dialog"], [role="alertdialog"]';
+      if ((await page.locator(dialogSel).count()) === 0) {
+        await page.locator(trigSel).first().click({ timeout: 3000 });
+        await page.waitForTimeout(350);
+      }
       const dlgCount = await page.locator(dialogSel).count();
       if (dlgCount === 0) {
         modalViolations.push({ selector: trigSel, actual: 'dialog did not open', expected: 'role="dialog" or role="alertdialog" opens' });

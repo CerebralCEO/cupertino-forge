@@ -24,14 +24,19 @@ test('build-tokens.mjs emits device-display/sheet radii, elevation tokens, dark-
     const est = fs.readFileSync(estPath, 'utf8');
     const btSource = fs.readFileSync(buildScript, 'utf8');
 
-    // Phase 1/3c/8B checks: Rust (window radius 16.0), JSON, ESTIMATES.md, capsule textFieldRounded, visible-surface macOS/iOS radii
+    // Phase 1/3c/8B/8C checks: Rust (window radius 16.0), JSON, ESTIMATES.md, fixed 26px textFieldRounded, visible-surface macOS/iOS radii & iOS menu tokens
     assert.match(rust, /pub const WINDOW_CORNER_RADIUS: f64 = 16\.0;/);
     assert.match(rust, /pub const TRAFFIC_LIGHT_X: f64 = 16\.0;/);
-    assert.match(css, /--cf-radius-text-field-rounded:\s*9999px;/);
+    assert.match(css, /--cf-radius-text-field-rounded:\s*26px;/);
+    assert.match(css, /--cf-menu-ios-w:\s*238px;/);
+    assert.match(css, /--cf-menu-ios-pad-y:\s*10px;/);
+    assert.match(css, /--cf-menu-ios-pad-x:\s*16px;/);
+    assert.match(css, /--cf-menu-ios-row-h:\s*40px;/);
     assert.match(css, /--cf-radius-popover:\s*38px;/);
     assert.match(css, /--cf-radius-menu:\s*34px;/);
     assert.match(css, /--cf-radius-utility-panel:\s*15px;/);
-    assert.match(dart, /static const double textFieldRounded = 9999;/);
+    assert.match(dart, /static const double textFieldRounded = 26;/);
+    assert.match(dart, /static const double iosMenuWidth = 238;/);
     assert.match(dart, /static const double utilityPanel = 15;/);
     assert.equal(resolved.materials.intensityCurve.default, 0.5);
     assert.match(css, /:lang\(bn\), :lang\(ar\), :lang\(he\) \{ letter-spacing: 0 !important; \}/);

@@ -68,7 +68,7 @@
     "contextMenuPreview": 30,
     "listSectionInsetGrouped": 26,
     "card": 22,
-    "textFieldRounded": "capsule",
+    "textFieldRounded": 26,
     "searchField": "capsule",
     "button": "capsule (all sizes)",
     "iconButton": "circle",
@@ -96,14 +96,24 @@
     },
     "$kitExample": {
       "textFieldRounded": {
-        "component": "_Text-Field-Background (ios27)",
-        "nodes": [
-          "5469:8386",
-          "5469:8387"
-        ],
-        "size": "160x52",
-        "cornerRadius": 26,
-        "note": "Full capsule (height / 2 = 26 at 52pt); stored as 'capsule' so height changes never break shape."
+        "singleLine": {
+          "component": "_Text-Field-Background (ios27)",
+          "nodes": [
+            "5469:8386",
+            "5469:8387"
+          ],
+          "size": "160x52",
+          "cornerRadius": 26
+        },
+        "multiLine": {
+          "component": "Text-Field-2 _Background (ios27)",
+          "nodes": [
+            "12616:832"
+          ],
+          "size": "272x104",
+          "cornerRadius": 26
+        },
+        "note": "Fixed radius 26pt in both single-line (52pt tall -> visually capsule via natural clamp) and multi-line (104pt tall -> 26pt rounded rect)."
       }
     },
     "$measuredSubfields": {
@@ -146,10 +156,11 @@
         "date": "2026-11-27"
       },
       "textFieldRounded": {
-        "value": "capsule",
+        "value": 26,
         "nodes": [
           "5469:8386",
-          "5469:8387"
+          "5469:8387",
+          "12616:832"
         ],
         "date": "2026-11-27"
       }

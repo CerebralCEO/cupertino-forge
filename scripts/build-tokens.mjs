@@ -174,10 +174,7 @@ function buildCSS() {
     // spacing, radii, layout
     for (const [k, v] of entries(layout.spacing.names)) put(`space-${k}`, `${v}px`);
     const rI = shape.radiusIOS;
-    for (const [k, v] of entries(rI)) {
-      if (typeof v === 'number') put(`radius-${kebab(k)}`, `${v}px`);
-      else if (v === 'capsule') put(`radius-${kebab(k)}`, '9999px');
-    }
+    for (const [k, v] of entries(rI)) if (typeof v === 'number') put(`radius-${kebab(k)}`, `${v}px`);
     if (rI.deviceDisplay && typeof rI.deviceDisplay.iPhone17Pro === 'number') {
       put('radius-device-display', `${rI.deviceDisplay.iPhone17Pro}px`);
     }
@@ -206,6 +203,16 @@ function buildCSS() {
     put('traffic-gap', `${layout.macos.trafficLights.gap}px`);
     put('menu-pad', `${layout.macos.menu.outerPadding}px`);
     put('menu-min-w', `${layout.macos.menu.minWidth}px`);
+    if (layout.ios.menu) {
+      put('menu-ios-w', `${layout.ios.menu.width}px`);
+      put('menu-ios-pad-y', `${layout.ios.menu.paddingVertical}px`);
+      put('menu-ios-pad-x', `${layout.ios.menu.paddingHorizontal}px`);
+      put('menu-ios-row-h', `${layout.ios.menu.rowHeight}px`);
+      put('menu-ios-row-pad-l', `${layout.ios.menu.rowPaddingLeading}px`);
+      put('menu-ios-row-pad-r', `${layout.ios.menu.rowPaddingTrailing}px`);
+      put('menu-ios-sep-h', `${layout.ios.menu.separatorHeight}px`);
+      put('menu-ios-sep-inset', `${layout.ios.menu.separatorHorizontalInset}px`);
+    }
     // motion
     for (const [k, sp] of entries(motion.springs)) {
       const { linear, ms } = springToLinear(sp);
@@ -366,7 +373,7 @@ function buildTailwind() {
     L.push(`  --text-${n}--letter-spacing: var(--cf-text-${n}-tracking);`);
     L.push(`  --text-${n}--font-weight: var(--cf-text-${n}-weight);`);
   }
-  const radii = new Set([...entries(shape.radiusIOS), ...entries(shape.radiusMacOS)].filter(([, v]) => typeof v === 'number' || v === 'capsule').map(([k]) => kebab(k)));
+  const radii = new Set([...entries(shape.radiusIOS), ...entries(shape.radiusMacOS)].filter(([, v]) => typeof v === 'number').map(([k]) => kebab(k)));
   for (const r of radii) L.push(`  --radius-${r}: var(--cf-radius-${r});`);
   L.push('  --radius-device-display: var(--cf-radius-device-display);');
   L.push('  --radius-sheet-floating: var(--cf-radius-sheet-floating);');
@@ -468,10 +475,7 @@ function buildDart() {
   for (const [k, v] of entries(layout.spacing.names)) L.push(`  static const double ${k} = ${v};`);
   L.push('}');
   L.push('abstract final class AppleRadiusIOS {');
-  for (const [k, v] of entries(shape.radiusIOS)) {
-    if (typeof v === 'number') L.push(`  static const double ${camel(k)} = ${v};`);
-    else if (v === 'capsule') L.push(`  static const double ${camel(k)} = 9999;`);
-  }
+  for (const [k, v] of entries(shape.radiusIOS)) if (typeof v === 'number') L.push(`  static const double ${camel(k)} = ${v};`);
   if (shape.radiusIOS.deviceDisplay && typeof shape.radiusIOS.deviceDisplay.iPhone17Pro === 'number') {
     L.push(`  static const double deviceDisplay = ${shape.radiusIOS.deviceDisplay.iPhone17Pro};`);
   }
@@ -492,6 +496,16 @@ function buildDart() {
   L.push(`  static const double tabBarHeight = ${layout.ios.tabBar.height};`);
   L.push(`  static const double tabBarSideInset = ${layout.ios.tabBar.sideInset};`);
   L.push(`  static const double listRowMinHeight = ${layout.ios.listRow.minHeight};`);
+  if (layout.ios.menu) {
+    L.push(`  static const double iosMenuWidth = ${layout.ios.menu.width};`);
+    L.push(`  static const double iosMenuPadY = ${layout.ios.menu.paddingVertical};`);
+    L.push(`  static const double iosMenuPadX = ${layout.ios.menu.paddingHorizontal};`);
+    L.push(`  static const double iosMenuRowHeight = ${layout.ios.menu.rowHeight};`);
+    L.push(`  static const double iosMenuRowPadLeading = ${layout.ios.menu.rowPaddingLeading};`);
+    L.push(`  static const double iosMenuRowPadTrailing = ${layout.ios.menu.rowPaddingTrailing};`);
+    L.push(`  static const double iosMenuSeparatorHeight = ${layout.ios.menu.separatorHeight};`);
+    L.push(`  static const double iosMenuSeparatorInset = ${layout.ios.menu.separatorHorizontalInset};`);
+  }
   L.push(`  static const double toggleWidth = ${layout.ios.toggle.width};`);
   L.push(`  static const double toggleHeight = ${layout.ios.toggle.height};`);
   L.push(`  static const double buttonLarge = ${layout.ios.button.large};`);

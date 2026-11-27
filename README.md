@@ -1,4 +1,4 @@
-# cupertino-forge (v2.2.0)
+# cupertino-forge (v2.2.1)
 
 **Apple iOS 27 & macOS 27 (Liquid Glass) Design System for Claude Code, Google Antigravity, and Cross-IDE Agentic Workflows.**
 
@@ -35,7 +35,7 @@
 
 ```text
 cupertino-forge/
-├── .claude-plugin/     Plugin manifest (plugin.json v2.2.0) & local marketplace.json
+├── .claude-plugin/     Plugin manifest (plugin.json v2.2.1) & local marketplace.json
 ├── commands/           7 slash commands (doctor, init, screen, component, redesign, audit, sync)
 ├── agents/             2 specialist agents (apple-design-reviewer [visual|behavior], apple-spec-researcher)
 ├── skills/
@@ -66,7 +66,7 @@ cupertino-forge/
 1. Build a clean release ZIP (optional if installing directly from clone):
    ```bash
    node scripts/package-plugin.mjs
-   # Output: _upgrade/scratch/cupertino-forge-v2.2.0.zip
+   # Output: _upgrade/scratch/cupertino-forge-v2.2.1.zip
    ```
 2. Unzip or keep the repository at a stable path (e.g., `D:\Claude-Plugins\cupertino-forge` or `~/cupertino-forge`).
 3. Inside Claude Code:
@@ -163,7 +163,7 @@ node qa/ux-keyboard.mjs --url <url-or-file> [--browser chromium|webkit|firefox|a
 # Screenshot capture (standard 4 images or --matrix 72-image accessibility/engine matrix)
 python scripts/capture.py --url <url> --out qa/out [--matrix] [--widths 390,1100] [--themes light,dark] [--dry-run]
 
-# Build clean v2.2.0 release ZIP (0 forbidden folders)
+# Build clean v2.2.1 release ZIP (0 forbidden folders)
 node scripts/package-plugin.mjs [--out <zipPath>]
 ```
 

@@ -1,7 +1,7 @@
-# cupertino-forge v2.2.0 — Complete Engineering Reference Manual
+# cupertino-forge v2.2.1 — Complete Engineering Reference Manual
 
 > **Audience:** Human engineers and AI coding agents (Claude Code, Google Antigravity, Cursor, Windsurf).
-> When this manual and a source code/token file disagree, the source file wins. All paths, flags, exit codes, and code snippets below are verified directly against `cupertino-forge@2.2.0`.
+> When this manual and a source code/token file disagree, the source file wins. All paths, flags, exit codes, and code snippets below are verified directly against `cupertino-forge@2.2.1`.
 
 ---
 
@@ -382,7 +382,7 @@ Invoke the single reviewer agent in either or both modes:
 3. **Building a clean release ZIP:**
    ```bash
    node scripts/package-plugin.mjs
-   # Produces _upgrade/scratch/cupertino-forge-v2.2.0.zip (162+ runtime files, 0 forbidden entries)
+   # Produces _upgrade/scratch/cupertino-forge-v2.2.1.zip (165 runtime files, 0 forbidden entries)
    ```
 
 ---

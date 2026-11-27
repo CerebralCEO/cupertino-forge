@@ -4,7 +4,7 @@ import '../glass/cf_glass.dart';
 import '../theme/apple_tokens.dart';
 import '../theme/cf_theme.dart';
 
-/// iOS/macOS text field: 44pt standalone rounded-squircle field (radius 12, fill3) with clear button & red error footnote,
+/// iOS/macOS text field: 44pt+ standalone field (fixed 26pt radius auto-clamping to capsule <=52pt, fill3) with clear button & red error footnote,
 /// or borderless inList variant inside grouped settings rows.
 class CfTextField extends StatefulWidget {
   const CfTextField({
@@ -114,7 +114,8 @@ class _CfTextFieldState extends State<CfTextField> {
         ? ConstrainedBox(constraints: const BoxConstraints(minHeight: AppleLayout.listRowMinHeight), child: field)
         : DecoratedBox(
             decoration: ShapeDecoration(
-              shape: const StadiumBorder(),
+              // cf-ignore: fixed 26pt radius auto-clamps to capsule at height <= 52 and stays 26pt on multi-line (104pt)
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppleRadiusIOS.textFieldRounded)),
               color: cf.fill3,
             ),
             child: ConstrainedBox(

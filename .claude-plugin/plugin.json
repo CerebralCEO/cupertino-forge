@@ -1,6 +1,6 @@
 {
   "name": "cupertino-forge",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "Apple iOS 27 and macOS 27 (Liquid Glass) design system for Claude Code and Google Antigravity: official HIG & Sketch/Figma-measured tokens, canonical Master Use-Flow, Redesign Playbook, Web/Flutter/Tauri 2 adapters, deterministic QA audits, lint hooks, and two-mode reviewer agent.",
   "author": { "name": "ZeroFounder" },
   "keywords": ["apple", "ios", "macos", "liquid-glass", "design-system", "nextjs", "shadcn", "flutter", "tauri", "antigravity"],

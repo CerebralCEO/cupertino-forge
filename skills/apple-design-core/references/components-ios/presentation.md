@@ -38,7 +38,7 @@
 ## Menu (pull down)
 
 **Anatomy:** glass panel morphing from its source button with scale + opacity (`[estimate]`), rows `44` tall `[estimate]` with leading label and trailing icon (iOS menu rows put the icon trailing), separators between groups (`8` gap `[estimate]`; hide trailing separator via `last:hidden`), destructive red last.
-**Metrics:** radius `34` `[measured-from-kit, device-unverified]` (`I5908:6372;10411:18670`), width `250`, row padding `16` `[estimate]`.
+**Metrics:** radius `34` `[measured-from-kit, device-unverified]` (`I5908:6372;10411:18670`), width `238`, outer padding `10v / 16h`, row height `40` (`60` subtitle), capsule row highlight (`5856:13992`), separator `21` tall / `8` inset `[measured]` (`5908:6481`, `5908:6377`, `5908:6379`, `5908:6378`).
 **Motion:** morphs out of the button with `glassMorph` and `popover` spring (`[estimate]`); selection item highlight `fill-4`.
 **Feedback:** none on open by tap; medium impact when opened by long press.
 **Primitive:** `Menu`, `MenuItem`, `MenuSection`.

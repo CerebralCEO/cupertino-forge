@@ -201,19 +201,12 @@ abstract final class AppleRadiusIOS {
   static const double contextMenuPreview = 30;
   static const double listSectionInsetGrouped = 26;
   static const double card = 22;
-  static const double textFieldRounded = 9999;
-  static const double searchField = 9999;
-  static const double segmentedControl = 9999;
-  static const double toggleTrack = 9999;
-  static const double sliderTrack = 9999;
-  static const double tabBar = 9999;
-  static const double toolbarGroup = 9999;
+  static const double textFieldRounded = 26;
   static const double keyboard = 26;
   static const double widgetSmall = 22;
   static const double thumbnailSmall = 8;
   static const double thumbnailMedium = 12;
   static const double settingsIcon = 7;
-  static const double badge = 9999;
   static const double sheetFloating = 38;
   static const double deviceDisplay = 55;
 }
@@ -245,6 +238,14 @@ abstract final class AppleLayout {
   static const double tabBarHeight = 62;
   static const double tabBarSideInset = 20;
   static const double listRowMinHeight = 52;
+  static const double iosMenuWidth = 238;
+  static const double iosMenuPadY = 10;
+  static const double iosMenuPadX = 16;
+  static const double iosMenuRowHeight = 40;
+  static const double iosMenuRowPadLeading = 6;
+  static const double iosMenuRowPadTrailing = 8;
+  static const double iosMenuSeparatorHeight = 21;
+  static const double iosMenuSeparatorInset = 8;
   static const double toggleWidth = 64;
   static const double toggleHeight = 28;
   static const double buttonLarge = 50;

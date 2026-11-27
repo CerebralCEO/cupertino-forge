@@ -250,6 +250,8 @@ async function runAudit(targetUrl, tokens, platform, theme) {
       const accentTokens = [
         parseTokenHex(tok.$meta?.accent?.light),
         parseTokenHex(tok.$meta?.accent?.dark),
+        parseTokenHex(tok.colors?.system?.blue?.light),
+        parseTokenHex(tok.colors?.system?.blue?.dark),
       ].filter(Boolean);
 
       const isWhiteOnOfficialAccent = (fgC, bgC) =>

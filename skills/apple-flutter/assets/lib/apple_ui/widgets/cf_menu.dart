@@ -22,7 +22,7 @@ class CfMenuItem {
   final VoidCallback? onSelected;
 }
 
-/// iOS 27 pull-down glass menu (250pt wide, 44pt rows with trailing icon, destructive red last).
+/// iOS 27 pull-down glass menu (238pt wide, pad 10v/16h, 40pt capsule rows, destructive red last).
 Future<void> showCfMenu(
   BuildContext context, {
   required List<CfMenuItem> items,
@@ -39,16 +39,26 @@ Future<void> showCfMenu(
           child: Padding(
             padding: const EdgeInsets.all(AppleSpacing.lg),
             child: SizedBox(
-              width: 250,
+              width: AppleLayout.iosMenuWidth,
               child: CfGlass(
                 variant: CfGlassVariant.large,
                 shape: const SquircleBorder(radius: AppleRadiusIOS.menu),
-                padding: const EdgeInsets.symmetric(vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  vertical: AppleLayout.iosMenuPadY,
+                  horizontal: AppleLayout.iosMenuPadX,
+                ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     for (var i = 0; i < items.length; i++) ...[
-                      if (i > 0) Container(height: 0.5, color: cf.separator),
+                      if (i > 0)
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: AppleLayout.iosMenuSeparatorInset,
+                            vertical: (AppleLayout.iosMenuSeparatorHeight - 1) / 2,
+                          ),
+                          child: Container(height: 1, color: cf.separator),
+                        ),
                       _MenuRow(
                         item: items[i],
                         onTap: () {
@@ -84,20 +94,26 @@ class _MenuRow extends StatelessWidget {
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTap: onTap,
-        child: SizedBox(
-          height: 44,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: AppleSpacing.lg),
-            child: Row(children: [
-              if (item.checked) ...[
-                Icon(CupertinoIcons.checkmark_alt, size: 17, color: fg),
-                const SizedBox(width: AppleSpacing.sm),
-              ],
-              Expanded(
-                child: Text(item.label, style: cf.type.body.copyWith(color: fg), maxLines: 1, overflow: TextOverflow.ellipsis),
+        child: DecoratedBox(
+          decoration: const ShapeDecoration(shape: StadiumBorder()),
+          child: SizedBox(
+            height: AppleLayout.iosMenuRowHeight,
+            child: Padding(
+              padding: const EdgeInsets.only(
+                left: AppleLayout.iosMenuRowPadLeading,
+                right: AppleLayout.iosMenuRowPadTrailing,
               ),
-              if (item.icon != null) Icon(item.icon, size: 19, color: fg),
-            ]),
+              child: Row(children: [
+                if (item.checked) ...[
+                  Icon(CupertinoIcons.checkmark_alt, size: 17, color: fg),
+                  const SizedBox(width: AppleSpacing.sm),
+                ],
+                Expanded(
+                  child: Text(item.label, style: cf.type.body.copyWith(color: fg), maxLines: 1, overflow: TextOverflow.ellipsis),
+                ),
+                if (item.icon != null) Icon(item.icon, size: 19, color: fg),
+              ]),
+            ),
           ),
         ),
       ),

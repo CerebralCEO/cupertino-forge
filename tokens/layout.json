@@ -327,6 +327,26 @@
       "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
       "$platform": "iOS 27"
     },
+    "menu": {
+      "width": 238,
+      "paddingVertical": 10,
+      "paddingHorizontal": 16,
+      "rowHeight": 40,
+      "rowHeightSubtitle": 60,
+      "rowPaddingLeading": 6,
+      "rowPaddingTrailing": 8,
+      "rowGap": 6,
+      "highlightRadius": "capsule",
+      "separatorHeight": 21,
+      "separatorHorizontalInset": 8,
+      "controlGroupPaddingHorizontal": 10,
+      "controlGroupActionRadius": 20,
+      "$source": "Apple Figma kit iOS 27 Menu (5908:6481, 5908:6377, 5908:6379, 5908:6381, 5908:6378, 5908:6373, 5856:13992), 2026-11-27",
+      "$class": "measured",
+      "$verification": "needs-device-verification",
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/menus",
+      "$platform": "iOS 27"
+    },
     "keyboardTopRadius": 26,
     "widgets": {
       "standardMargin": 16,

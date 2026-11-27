@@ -8,6 +8,7 @@ import 'package:cupertino_forge_flutter_check/apple_ui/cf_app.dart';
 import 'package:cupertino_forge_flutter_check/apple_ui/feedback/cf_haptics.dart';
 import 'package:cupertino_forge_flutter_check/apple_ui/glass/cf_glass.dart';
 import 'package:cupertino_forge_flutter_check/apple_ui/motion/cf_motion.dart';
+import 'package:cupertino_forge_flutter_check/apple_ui/theme/apple_tokens.dart';
 import 'package:cupertino_forge_flutter_check/apple_ui/theme/cf_theme.dart';
 import 'package:cupertino_forge_flutter_check/apple_ui/widgets/cf_fields.dart';
 import 'package:cupertino_forge_flutter_check/apple_ui/widgets/cf_menu.dart';
@@ -260,5 +261,60 @@ void main() {
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 300));
     expect(menuPicked, equals('rename'));
+  });
+
+  testWidgets('CfTextField fixed 26pt radius auto-clamps to capsule at 40px and stays 26pt at 104px while CfSearchField stays StadiumBorder', (tester) async {
+    expect(AppleRadiusIOS.textFieldRounded, equals(26.0));
+    final shape = RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppleRadiusIOS.textFieldRounded));
+
+    // Verify RRect radius scaling (what Flutter's Skia/Impeller renderer uses for RoundedRectangleBorder)
+    final rrect40 = RRect.fromRectAndRadius(const Rect.fromLTWH(0, 0, 200, 40), const Radius.circular(AppleRadiusIOS.textFieldRounded)).scaleRadii();
+    expect(rrect40.tlRadiusX, equals(20.0));
+    expect(rrect40.tlRadiusY, equals(20.0));
+
+    final rrect104 = RRect.fromRectAndRadius(const Rect.fromLTWH(0, 0, 200, 104), const Radius.circular(AppleRadiusIOS.textFieldRounded)).scaleRadii();
+    expect(rrect104.tlRadiusX, equals(26.0));
+    expect(rrect104.tlRadiusY, equals(26.0));
+
+    // Verify rendered outer Path geometry directly at 40px vs 104px
+    final path40 = shape.getOuterPath(const Rect.fromLTWH(0, 0, 200, 40));
+    // For r=20 semi-circle on 200x40: at y=0.5, x boundary = 20 - sqrt(20^2 - 19.5^2) ~= 15.56
+    expect(path40.contains(const Offset(14.0, 0.5)), isFalse);
+    expect(path40.contains(const Offset(17.0, 0.5)), isTrue);
+    // At y=20 (vertical midpoint), x=0.5 is inside the capsule edge
+    expect(path40.contains(const Offset(0.5, 20.0)), isTrue);
+
+    final path104 = shape.getOuterPath(const Rect.fromLTWH(0, 0, 200, 104));
+    // For r=26 on 200x104: at y=0.5, x boundary = 26 - sqrt(26^2 - 25.5^2) ~= 20.93
+    expect(path104.contains(const Offset(19.0, 0.5)), isFalse);
+    expect(path104.contains(const Offset(22.0, 0.5)), isTrue);
+    // At y=30 (below 26pt corner arc), x=0.5 is on the straight vertical edge
+    expect(path104.contains(const Offset(0.5, 30.0)), isTrue);
+
+    // Mount real CfTextField (44pt single-line minHeight <= 52pt -> auto-clamped capsule; 104pt multi-line -> 26pt radius) + CfSearchField (StadiumBorder)
+    await tester.pumpWidget(
+      CfApp(
+        style: CfStyle.ios,
+        home: CupertinoPageScaffold(
+          child: Column(
+            children: [
+              const SizedBox(width: 200, height: 44, child: CfTextField(placeholder: 'Single')),
+              const SizedBox(width: 200, height: 104, child: CfTextField(placeholder: 'Multi')),
+              CfSearchField(value: '', onChanged: (_) {}),
+            ],
+          ),
+        ),
+      ),
+    );
+    final fieldBoxes = tester.widgetList<DecoratedBox>(find.descendant(of: find.byType(CfTextField), matching: find.byType(DecoratedBox))).toList();
+    expect(fieldBoxes.length, equals(2));
+    for (final box in fieldBoxes) {
+      final sd = box.decoration as ShapeDecoration;
+      expect(sd.shape, isA<RoundedRectangleBorder>());
+      final rrb = sd.shape as RoundedRectangleBorder;
+      expect(rrb.borderRadius, equals(BorderRadius.circular(26)));
+    }
+    final searchBox = tester.widget<DecoratedBox>(find.descendant(of: find.byType(CfSearchField), matching: find.byType(DecoratedBox)).first);
+    expect((searchBox.decoration as ShapeDecoration).shape, isA<StadiumBorder>());
   });
 }

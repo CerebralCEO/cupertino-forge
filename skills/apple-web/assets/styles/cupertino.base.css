@@ -27,7 +27,6 @@
   --sidebar-border: var(--cf-separator);
 
   /* ---------- component-local layout & glyph scale tokens ---------- */
-  --cf-menu-ios-w: 250px;
   --cf-mac-btn-min-w: 72px;
   --cf-icon-btn-lg: var(--cf-control-large);
   --cf-empty-max-w: var(--cf-alert-w);
