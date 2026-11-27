@@ -8,7 +8,7 @@
     },
     "shadowNote": "Sketch's token export drops the inner versus outer flag. In boxShadowCss every negative spread or hairline edge layer was converted to inset (edge lighting and rim highlights); large blur layers with spread 0 or more stay outer (drop shadow). kitShadowsRaw keeps Apple's exact numbers for reference.",
     "blendModeNote": "Apple builds glass layers with blend modes (plus-lighter, plus-darker) that the token export drops. Rendering kitShadowsRaw literally makes glass look dirty. Platform code MUST use the tuned recipes below, which reproduce the kit look with plain alpha compositing.",
-    "reconciledDate": "2026-11-25"
+    "reconciledDate": "2026-11-27"
   },
   "rules": [
     "Liquid Glass lives ONLY in the functional layer: nav bars, toolbars, tab bars, sidebars (macOS 27 sidebars are edge to edge, not floating), floating buttons, menus, popovers, alerts, sheets at partial height, sliders and toggles while being dragged.",
@@ -249,7 +249,7 @@
       },
       "tinted": {
         "$usage": "Primary action only. Background is accent at 0.90 alpha over the regular glass recipe, label white. Pressed adds white 0.1 overlay (kit: prominent clicked overlay).",
-        "alpha": 0.90,
+        "alpha": 0.9,
         "$note": "Raised from estimated 0.85 to 0.90 (and non-glass Button tinted variant lowered from estimated 15% to 12%) after light-mode DOM contrast audit measured 2.94:1 (< 3.0:1 HIG bold/large floor) for #0088FF over #FFFFFF; at 0.90 / 12% contrast is 3.17:1 / 3.05:1 while keeping glass translucent (< 0.95)."
       },
       "large": {
@@ -409,5 +409,1322 @@
       "$platform": "macOS 27"
     },
     "$usage": "Standard materials go in the content layer: background panels, cards over imagery, grouped areas. Pair with vibrant label colors."
+  },
+  "figmaGlass": {
+    "$class": "measured",
+    "$usage": "reference-only (does not drive CSS)",
+    "$source": "Apple Figma kit iOS 27 & macOS 27 via ForgeKit v2.0 (Kit collection VariableCollectionId:5565:22724 + component layout.json), 2026-11-27",
+    "$calibrationNote": "calibration: derived (Figma Dev Mode CSS export convention radius/2); not verified against Apple OS \u2014 no official Figma docs URL found for the radius/2 formula",
+    "iosKitFloatVariables": {
+      "$collectionId": "VariableCollectionId:5565:22724",
+      "frostRegular": 6,
+      "frostMedium": 16,
+      "frostLarge": 16,
+      "refraction": 70,
+      "depthRegular": 30,
+      "depthMediumAndLarge": 30,
+      "dispersion": 20,
+      "splayRegular": 20,
+      "splayMediumAndLarge": 20,
+      "lightAngle": 0,
+      "opacity": 25
+    },
+    "components": [
+      {
+        "kit": "ios27",
+        "component": "Button-Liquid-Glass-Symbol",
+        "variant": "Style=Glass, Is Enabled=False, Destructive=True",
+        "nodeId": "10456:9821",
+        "glass": [
+          {
+            "nodeId": "I10456:9822;10411:17583",
+            "layer": "Glass Effect",
+            "lightIntensity": null,
+            "lightAngle": null,
+            "refraction": null,
+            "depth": null,
+            "dispersion": null,
+            "radius": null
+          }
+        ],
+        "backgroundBlur": [],
+        "overlayFills": [
+          {
+            "layer": "Fill + Shadow",
+            "color": "#000000@0.25",
+            "blendMode": "NORMAL"
+          },
+          {
+            "layer": "Fill + Shadow",
+            "color": "#FFFFFF@0.25",
+            "blendMode": "NORMAL"
+          },
+          {
+            "layer": "Fill + Shadow",
+            "color": "#444444@0.6",
+            "blendMode": "LINEAR_DODGE"
+          },
+          {
+            "layer": "Fill + Shadow",
+            "color": "#F8F8F8@0.2",
+            "blendMode": "LUMINOSITY"
+          }
+        ]
+      },
+      {
+        "kit": "ios27",
+        "component": "Button-Liquid-Glass-Symbol",
+        "variant": "Style=Glass, Is Enabled=True, Destructive=True",
+        "nodeId": "10456:9824",
+        "glass": [
+          {
+            "nodeId": "I10456:9825;10411:17583",
+            "layer": "Glass Effect",
+            "lightIntensity": null,
+            "lightAngle": null,
+            "refraction": null,
+            "depth": null,
+            "dispersion": null,
+            "radius": null
+          }
+        ],
+        "backgroundBlur": [],
+        "overlayFills": [
+          {
+            "layer": "Fill + Shadow",
+            "color": "#000000@0.25",
+            "blendMode": "NORMAL"
+          },
+          {
+            "layer": "Fill + Shadow",
+            "color": "#FFFFFF@0.25",
+            "blendMode": "NORMAL"
+          },
+          {
+            "layer": "Fill + Shadow",
+            "color": "#444444@0.6",
+            "blendMode": "LINEAR_DODGE"
+          },
+          {
+            "layer": "Fill + Shadow",
+            "color": "#F8F8F8@0.2",
+            "blendMode": "LUMINOSITY"
+          }
+        ]
+      },
+      {
+        "kit": "ios27",
+        "component": "Button-Liquid-Glass-Symbol",
+        "variant": "Style=Glass Prominent, Is Enabled=False, Destructive=True",
+        "nodeId": "10456:9827",
+        "glass": [
+          {
+            "nodeId": "I10456:9828;10411:17583",
+            "layer": "Glass Effect",
+            "lightIntensity": null,
+            "lightAngle": null,
+            "refraction": null,
+            "depth": null,
+            "dispersion": null,
+            "radius": null
+          }
+        ],
+        "backgroundBlur": [],
+        "overlayFills": [
+          {
+            "layer": "Fill + Shadow",
+            "color": "#000000@0.25",
+            "blendMode": "NORMAL"
+          },
+          {
+            "layer": "Fill + Shadow",
+            "color": "#FFFFFF@0.25",
+            "blendMode": "NORMAL"
+          },
+          {
+            "layer": "Fill + Shadow",
+            "color": "#444444@0.6",
+            "blendMode": "LINEAR_DODGE"
+          },
+          {
+            "layer": "Fill + Shadow",
+            "color": "#F8F8F8@0.2",
+            "blendMode": "LUMINOSITY"
+          }
+        ]
+      },
+      {
+        "kit": "ios27",
+        "component": "Button-Liquid-Glass-Text",
+        "variant": "Size=Small, Style=Glass, Is Enabled=False, Destructive=True",
+        "nodeId": "10456:14495",
+        "glass": [
+          {
+            "nodeId": "I10456:14496;10411:17583",
+            "layer": "Glass Effect",
+            "lightIntensity": null,
+            "lightAngle": null,
+            "refraction": null,
+            "depth": null,
+            "dispersion": null,
+            "radius": null
+          }
+        ],
+        "backgroundBlur": [],
+        "overlayFills": [
+          {
+            "layer": "Fill + Shadow",
+            "color": "#000000@0.25",
+            "blendMode": "NORMAL"
+          },
+          {
+            "layer": "Fill + Shadow",
+            "color": "#FFFFFF@0.25",
+            "blendMode": "NORMAL"
+          },
+          {
+            "layer": "Fill + Shadow",
+            "color": "#444444@0.6",
+            "blendMode": "LINEAR_DODGE"
+          },
+          {
+            "layer": "Fill + Shadow",
+            "color": "#F8F8F8@0.2",
+            "blendMode": "LUMINOSITY"
+          }
+        ]
+      },
+      {
+        "kit": "ios27",
+        "component": "Button-Liquid-Glass-Text",
+        "variant": "Size=Medium, Style=Glass, Is Enabled=False, Destructive=True",
+        "nodeId": "10456:14447",
+        "glass": [
+          {
+            "nodeId": "I10456:14448;10411:17583",
+            "layer": "Glass Effect",
+            "lightIntensity": null,
+            "lightAngle": null,
+            "refraction": null,
+            "depth": null,
+            "dispersion": null,
+            "radius": null
+          }
+        ],
+        "backgroundBlur": [],
+        "overlayFills": [
+          {
+            "layer": "Fill + Shadow",
+            "color": "#000000@0.25",
+            "blendMode": "NORMAL"
+          },
+          {
+            "layer": "Fill + Shadow",
+            "color": "#FFFFFF@0.25",
+            "blendMode": "NORMAL"
+          },
+          {
+            "layer": "Fill + Shadow",
+            "color": "#444444@0.6",
+            "blendMode": "LINEAR_DODGE"
+          },
+          {
+            "layer": "Fill + Shadow",
+            "color": "#F8F8F8@0.2",
+            "blendMode": "LUMINOSITY"
+          }
+        ]
+      },
+      {
+        "kit": "ios27",
+        "component": "Button-Liquid-Glass-Text",
+        "variant": "Size=Large, Style=Glass, Is Enabled=False, Destructive=True",
+        "nodeId": "10456:9809",
+        "glass": [
+          {
+            "nodeId": "I10456:9810;10411:17583",
+            "layer": "Glass Effect",
+            "lightIntensity": null,
+            "lightAngle": null,
+            "refraction": null,
+            "depth": null,
+            "dispersion": null,
+            "radius": null
+          }
+        ],
+        "backgroundBlur": [],
+        "overlayFills": [
+          {
+            "layer": "Fill + Shadow",
+            "color": "#000000@0.25",
+            "blendMode": "NORMAL"
+          },
+          {
+            "layer": "Fill + Shadow",
+            "color": "#FFFFFF@0.25",
+            "blendMode": "NORMAL"
+          },
+          {
+            "layer": "Fill + Shadow",
+            "color": "#444444@0.6",
+            "blendMode": "LINEAR_DODGE"
+          },
+          {
+            "layer": "Fill + Shadow",
+            "color": "#F8F8F8@0.2",
+            "blendMode": "LUMINOSITY"
+          }
+        ]
+      },
+      {
+        "kit": "ios27",
+        "component": "Liquid-Glass-Clear",
+        "variant": "Liquid Glass - Clear",
+        "nodeId": "5914:23547",
+        "glass": [
+          {
+            "nodeId": "10465:43090",
+            "layer": "Glass Effect",
+            "lightIntensity": null,
+            "lightAngle": null,
+            "refraction": null,
+            "depth": null,
+            "dispersion": null,
+            "radius": null
+          }
+        ],
+        "backgroundBlur": [],
+        "overlayFills": [
+          {
+            "layer": "Fill + Shadow",
+            "color": "#101010@1",
+            "blendMode": "LINEAR_DODGE"
+          },
+          {
+            "layer": "Fill + Shadow",
+            "color": "#FFFFFF@0.04",
+            "blendMode": "LUMINOSITY"
+          }
+        ]
+      },
+      {
+        "kit": "ios27",
+        "component": "Liquid-Glass-Regular-Large",
+        "variant": "Mode=Dark",
+        "nodeId": "5584:31860",
+        "glass": [
+          {
+            "nodeId": "10411:18700",
+            "layer": "Glass Effect",
+            "lightIntensity": null,
+            "lightAngle": null,
+            "refraction": null,
+            "depth": null,
+            "dispersion": null,
+            "radius": null
+          }
+        ],
+        "backgroundBlur": [],
+        "overlayFills": [
+          {
+            "layer": "Fill + Shadow",
+            "color": "#1A1A1A@0.7",
+            "blendMode": "LUMINOSITY"
+          },
+          {
+            "layer": "Fill + Shadow",
+            "color": "#1A1A1A@0.9",
+            "blendMode": "LUMINOSITY"
+          },
+          {
+            "layer": "Fill + Shadow",
+            "color": "#1A1A1A@1",
+            "blendMode": "LIGHTEN"
+          },
+          {
+            "layer": "Glass Effect",
+            "color": "#FFFFFF@1",
+            "blendMode": "MULTIPLY"
+          }
+        ]
+      },
+      {
+        "kit": "ios27",
+        "component": "Liquid-Glass-Regular-Large",
+        "variant": "Mode=Light",
+        "nodeId": "5584:31859",
+        "glass": [
+          {
+            "nodeId": "10411:18691",
+            "layer": "Glass Effect",
+            "lightIntensity": null,
+            "lightAngle": null,
+            "refraction": null,
+            "depth": null,
+            "dispersion": null,
+            "radius": null
+          }
+        ],
+        "backgroundBlur": [],
+        "overlayFills": [
+          {
+            "layer": "Fill + Shadow",
+            "color": "#FFFFFF@0.7",
+            "blendMode": "LIGHTEN"
+          },
+          {
+            "layer": "Fill + Shadow",
+            "color": "#BFBFBF@0.1",
+            "blendMode": "DARKEN"
+          },
+          {
+            "layer": "Glass Effect",
+            "color": "#FFFFFF@1",
+            "blendMode": "MULTIPLY"
+          }
+        ]
+      },
+      {
+        "kit": "ios27",
+        "component": "Scroll-Edge-Effect-Hard",
+        "variant": "Mode=Dark,Edge=Bottom",
+        "nodeId": "10509:2668",
+        "glass": [],
+        "backgroundBlur": [
+          {
+            "nodeId": "10509:2668",
+            "layer": "Mode=Dark,Edge=Bottom",
+            "type": "BACKGROUND_BLUR",
+            "figmaRadius": 6,
+            "blurType": "NORMAL"
+          }
+        ],
+        "overlayFills": [
+          {
+            "layer": "Mode=Dark,Edge=Bottom",
+            "color": "#000000@0.55",
+            "blendMode": "NORMAL"
+          }
+        ]
+      },
+      {
+        "kit": "ios27",
+        "component": "Scroll-Edge-Effect-Hard",
+        "variant": "Mode=Dark,Edge=Top",
+        "nodeId": "10509:2669",
+        "glass": [],
+        "backgroundBlur": [
+          {
+            "nodeId": "10509:2669",
+            "layer": "Mode=Dark,Edge=Top",
+            "type": "BACKGROUND_BLUR",
+            "figmaRadius": 6,
+            "blurType": "NORMAL"
+          }
+        ],
+        "overlayFills": [
+          {
+            "layer": "Mode=Dark,Edge=Top",
+            "color": "#000000@0.55",
+            "blendMode": "NORMAL"
+          }
+        ]
+      },
+      {
+        "kit": "ios27",
+        "component": "Scroll-Edge-Effect-Hard",
+        "variant": "Mode=Light, Edge=Bottom",
+        "nodeId": "5661:26984",
+        "glass": [],
+        "backgroundBlur": [
+          {
+            "nodeId": "5661:26984",
+            "layer": "Mode=Light, Edge=Bottom",
+            "type": "BACKGROUND_BLUR",
+            "figmaRadius": 6,
+            "blurType": "NORMAL"
+          }
+        ],
+        "overlayFills": [
+          {
+            "layer": "Mode=Light, Edge=Bottom",
+            "color": "#FFFFFF@0.85",
+            "blendMode": "NORMAL"
+          }
+        ]
+      },
+      {
+        "kit": "ios27",
+        "component": "Scroll-Edge-Effect-Hard",
+        "variant": "Mode=Light, Edge=Top",
+        "nodeId": "5661:26986",
+        "glass": [],
+        "backgroundBlur": [
+          {
+            "nodeId": "5661:26986",
+            "layer": "Mode=Light, Edge=Top",
+            "type": "BACKGROUND_BLUR",
+            "figmaRadius": 6,
+            "blurType": "NORMAL"
+          }
+        ],
+        "overlayFills": [
+          {
+            "layer": "Mode=Light, Edge=Top",
+            "color": "#FFFFFF@0.85",
+            "blendMode": "NORMAL"
+          }
+        ]
+      },
+      {
+        "kit": "ios27",
+        "component": "Scroll-Edge-Effect-Soft",
+        "variant": "Edge=Bottom",
+        "nodeId": "5661:26968",
+        "glass": [],
+        "backgroundBlur": [
+          {
+            "nodeId": "5661:26968",
+            "layer": "Edge=Bottom",
+            "type": "BACKGROUND_BLUR",
+            "figmaRadius": 10,
+            "blurType": "PROGRESSIVE"
+          },
+          {
+            "nodeId": "5661:28857",
+            "layer": "Blur",
+            "type": "BACKGROUND_BLUR",
+            "figmaRadius": 100,
+            "blurType": "UNIFORM"
+          }
+        ],
+        "overlayFills": [
+          {
+            "layer": "Blur",
+            "color": "#000000@1",
+            "blendMode": "SCREEN"
+          }
+        ]
+      },
+      {
+        "kit": "ios27",
+        "component": "Scroll-Edge-Effect-Soft",
+        "variant": "Edge=Top",
+        "nodeId": "5661:26964",
+        "glass": [],
+        "backgroundBlur": [
+          {
+            "nodeId": "5661:26964",
+            "layer": "Edge=Top",
+            "type": "BACKGROUND_BLUR",
+            "figmaRadius": 10,
+            "blurType": "PROGRESSIVE"
+          },
+          {
+            "nodeId": "5661:28853",
+            "layer": "Blur",
+            "type": "BACKGROUND_BLUR",
+            "figmaRadius": 100,
+            "blurType": "UNIFORM"
+          }
+        ],
+        "overlayFills": [
+          {
+            "layer": "Blur",
+            "color": "#000000@1",
+            "blendMode": "SCREEN"
+          }
+        ]
+      },
+      {
+        "kit": "ios27",
+        "component": "_Materials",
+        "variant": "Style=Chrome",
+        "nodeId": "510:79106",
+        "glass": [],
+        "backgroundBlur": [
+          {
+            "nodeId": "510:79115",
+            "layer": "Chrome",
+            "type": "BACKGROUND_BLUR",
+            "figmaRadius": 50,
+            "blurType": "UNIFORM"
+          }
+        ],
+        "overlayFills": [
+          {
+            "layer": "Chrome",
+            "color": "#FFFFFF@0.75",
+            "blendMode": "HARD_LIGHT"
+          }
+        ]
+      },
+      {
+        "kit": "ios27",
+        "component": "_Materials",
+        "variant": "Style=Thick",
+        "nodeId": "510:79108",
+        "glass": [],
+        "backgroundBlur": [
+          {
+            "nodeId": "510:79116",
+            "layer": "Thick",
+            "type": "BACKGROUND_BLUR",
+            "figmaRadius": 100,
+            "blurType": "UNIFORM"
+          }
+        ],
+        "overlayFills": [
+          {
+            "layer": "Thick",
+            "color": "#FFFFFF@0.34",
+            "blendMode": "LINEAR_DODGE"
+          },
+          {
+            "layer": "Thick",
+            "color": "#FFFFFF@0.84",
+            "blendMode": "COLOR_DODGE"
+          }
+        ]
+      },
+      {
+        "kit": "ios27",
+        "component": "_Materials",
+        "variant": "Style=Regular",
+        "nodeId": "510:79110",
+        "glass": [],
+        "backgroundBlur": [
+          {
+            "nodeId": "510:79117",
+            "layer": "Regular",
+            "type": "BACKGROUND_BLUR",
+            "figmaRadius": 100,
+            "blurType": "UNIFORM"
+          }
+        ],
+        "overlayFills": [
+          {
+            "layer": "Regular",
+            "color": "#FFFFFF@0.25",
+            "blendMode": "LINEAR_DODGE"
+          },
+          {
+            "layer": "Regular",
+            "color": "#FFFFFF@0.6",
+            "blendMode": "COLOR_DODGE"
+          }
+        ]
+      },
+      {
+        "kit": "ios27",
+        "component": "_Materials",
+        "variant": "Style=Thin",
+        "nodeId": "510:79112",
+        "glass": [],
+        "backgroundBlur": [
+          {
+            "nodeId": "510:79118",
+            "layer": "Thin",
+            "type": "BACKGROUND_BLUR",
+            "figmaRadius": 100,
+            "blurType": "UNIFORM"
+          }
+        ],
+        "overlayFills": [
+          {
+            "layer": "Thin",
+            "color": "#FFFFFF@0.05",
+            "blendMode": "NORMAL"
+          },
+          {
+            "layer": "Thin",
+            "color": "#FFFFFF@0.4",
+            "blendMode": "COLOR_DODGE"
+          }
+        ]
+      },
+      {
+        "kit": "ios27",
+        "component": "_Materials",
+        "variant": "Style=Ultrathin",
+        "nodeId": "510:79104",
+        "glass": [],
+        "backgroundBlur": [
+          {
+            "nodeId": "510:79114",
+            "layer": "Ultrathin",
+            "type": "BACKGROUND_BLUR",
+            "figmaRadius": 100,
+            "blurType": "UNIFORM"
+          }
+        ],
+        "overlayFills": [
+          {
+            "layer": "Ultrathin",
+            "color": "#FFFFFF@0.07",
+            "blendMode": "NORMAL"
+          },
+          {
+            "layer": "Ultrathin",
+            "color": "#FFFFFF@0.03",
+            "blendMode": "COLOR_DODGE"
+          }
+        ]
+      },
+      {
+        "kit": "ios27",
+        "component": "_Materials-Mode-Options",
+        "variant": "Mode=IC - Dark, Style=Chrome",
+        "nodeId": "3095:22065",
+        "glass": [],
+        "backgroundBlur": [
+          {
+            "nodeId": "3095:22065",
+            "layer": "Mode=IC - Dark, Style=Chrome",
+            "type": "BACKGROUND_BLUR",
+            "figmaRadius": 100,
+            "blurType": "UNIFORM"
+          }
+        ],
+        "overlayFills": [
+          {
+            "layer": "Mode=IC - Dark, Style=Chrome",
+            "color": "#1C1C1C@0.9",
+            "blendMode": "NORMAL"
+          },
+          {
+            "layer": "Mode=IC - Dark, Style=Chrome",
+            "color": "#7C7C7C@1",
+            "blendMode": "OVERLAY"
+          }
+        ]
+      },
+      {
+        "kit": "ios27",
+        "component": "_Materials-Mode-Options",
+        "variant": "Mode=IC - Dark, Style=Thick",
+        "nodeId": "3095:22066",
+        "glass": [],
+        "backgroundBlur": [
+          {
+            "nodeId": "3095:22066",
+            "layer": "Mode=IC - Dark, Style=Thick",
+            "type": "BACKGROUND_BLUR",
+            "figmaRadius": 100,
+            "blurType": "UNIFORM"
+          }
+        ],
+        "overlayFills": [
+          {
+            "layer": "Mode=IC - Dark, Style=Thick",
+            "color": "#000000@0.6",
+            "blendMode": "NORMAL"
+          }
+        ]
+      },
+      {
+        "kit": "macos27",
+        "component": "Liquid-Glass-Large",
+        "variant": "Mode=Dark",
+        "nodeId": "483:9238",
+        "glass": [
+          {
+            "nodeId": "4311:12668",
+            "layer": "Glass Effect",
+            "lightIntensity": null,
+            "lightAngle": null,
+            "refraction": null,
+            "depth": null,
+            "dispersion": null,
+            "radius": null
+          }
+        ],
+        "backgroundBlur": [],
+        "overlayFills": [
+          {
+            "layer": "Fill + Shadow",
+            "color": "#1A1A1A@0.7",
+            "blendMode": "LUMINOSITY"
+          },
+          {
+            "layer": "Fill + Shadow",
+            "color": "#1A1A1A@0.9",
+            "blendMode": "LUMINOSITY"
+          },
+          {
+            "layer": "Fill + Shadow",
+            "color": "#1A1A1A@1",
+            "blendMode": "LIGHTEN"
+          },
+          {
+            "layer": "Glass Effect",
+            "color": "#FFFFFF@1",
+            "blendMode": "MULTIPLY"
+          }
+        ]
+      },
+      {
+        "kit": "macos27",
+        "component": "Liquid-Glass-Large",
+        "variant": "Mode=Light",
+        "nodeId": "483:9244",
+        "glass": [
+          {
+            "nodeId": "4311:12663",
+            "layer": "Glass Effect",
+            "lightIntensity": null,
+            "lightAngle": null,
+            "refraction": null,
+            "depth": null,
+            "dispersion": null,
+            "radius": null
+          }
+        ],
+        "backgroundBlur": [],
+        "overlayFills": [
+          {
+            "layer": "Fill + Shadow",
+            "color": "#FFFFFF@0.7",
+            "blendMode": "LIGHTEN"
+          },
+          {
+            "layer": "Fill + Shadow",
+            "color": "#BFBFBF@0.1",
+            "blendMode": "DARKEN"
+          },
+          {
+            "layer": "Glass Effect",
+            "color": "#FFFFFF@1",
+            "blendMode": "MULTIPLY"
+          }
+        ]
+      },
+      {
+        "kit": "macos27",
+        "component": "Liquid-Glass-Medium",
+        "variant": "Mode=Dark",
+        "nodeId": "483:9251",
+        "glass": [
+          {
+            "nodeId": "4311:12658",
+            "layer": "Glass Effect",
+            "lightIntensity": null,
+            "lightAngle": null,
+            "refraction": null,
+            "depth": null,
+            "dispersion": null,
+            "radius": null
+          }
+        ],
+        "backgroundBlur": [],
+        "overlayFills": [
+          {
+            "layer": "Fill + Shadow",
+            "color": "#1A1A1A@0.7",
+            "blendMode": "LUMINOSITY"
+          },
+          {
+            "layer": "Fill + Shadow",
+            "color": "#1A1A1A@0.9",
+            "blendMode": "LUMINOSITY"
+          },
+          {
+            "layer": "Fill + Shadow",
+            "color": "#1A1A1A@1",
+            "blendMode": "LIGHTEN"
+          },
+          {
+            "layer": "Glass Effect",
+            "color": "#FFFFFF@1",
+            "blendMode": "MULTIPLY"
+          }
+        ]
+      },
+      {
+        "kit": "macos27",
+        "component": "Liquid-Glass-Medium",
+        "variant": "Mode=Light",
+        "nodeId": "483:9257",
+        "glass": [
+          {
+            "nodeId": "4311:12609",
+            "layer": "Glass Effect",
+            "lightIntensity": null,
+            "lightAngle": null,
+            "refraction": null,
+            "depth": null,
+            "dispersion": null,
+            "radius": null
+          }
+        ],
+        "backgroundBlur": [],
+        "overlayFills": [
+          {
+            "layer": "Fill + Shadow",
+            "color": "#FFFFFF@0.7",
+            "blendMode": "LIGHTEN"
+          },
+          {
+            "layer": "Fill + Shadow",
+            "color": "#BFBFBF@0.1",
+            "blendMode": "DARKEN"
+          },
+          {
+            "layer": "Glass Effect",
+            "color": "#FFFFFF@1",
+            "blendMode": "MULTIPLY"
+          }
+        ]
+      },
+      {
+        "kit": "macos27",
+        "component": "Liquid-Glass-Notification-Dark",
+        "variant": "Liquid Glass - Notification - Dark",
+        "nodeId": "4358:11539",
+        "glass": [
+          {
+            "nodeId": "4358:11538",
+            "layer": "Glass Effect",
+            "lightIntensity": null,
+            "lightAngle": null,
+            "refraction": null,
+            "depth": null,
+            "dispersion": null,
+            "radius": null
+          }
+        ],
+        "backgroundBlur": [],
+        "overlayFills": [
+          {
+            "layer": "Fill + Shadow",
+            "color": "#333333@0.3",
+            "blendMode": "LUMINOSITY"
+          },
+          {
+            "layer": "Fill + Shadow",
+            "color": "#333333@0.1",
+            "blendMode": "NORMAL"
+          },
+          {
+            "layer": "Glass Effect",
+            "color": "#FFFFFF@1",
+            "blendMode": "MULTIPLY"
+          }
+        ]
+      },
+      {
+        "kit": "macos27",
+        "component": "Liquid-Glass-Notification-Light",
+        "variant": "Liquid Glass - Notification - Light",
+        "nodeId": "4358:11549",
+        "glass": [
+          {
+            "nodeId": "4358:11548",
+            "layer": "Glass Effect",
+            "lightIntensity": null,
+            "lightAngle": null,
+            "refraction": null,
+            "depth": null,
+            "dispersion": null,
+            "radius": null
+          }
+        ],
+        "backgroundBlur": [],
+        "overlayFills": [
+          {
+            "layer": "Fill + Shadow",
+            "color": "#BFBFBF@0.25",
+            "blendMode": "LIGHTEN"
+          },
+          {
+            "layer": "Fill + Shadow",
+            "color": "#1A1A1A@1",
+            "blendMode": "LINEAR_DODGE"
+          },
+          {
+            "layer": "Glass Effect",
+            "color": "#FFFFFF@1",
+            "blendMode": "MULTIPLY"
+          }
+        ]
+      },
+      {
+        "kit": "macos27",
+        "component": "Scroll-Edge-Effect-Hard",
+        "variant": "Mode=Light, Edge=Bottom",
+        "nodeId": "4363:18595",
+        "glass": [],
+        "backgroundBlur": [
+          {
+            "nodeId": "4363:18595",
+            "layer": "Mode=Light, Edge=Bottom",
+            "type": "BACKGROUND_BLUR",
+            "figmaRadius": 6,
+            "blurType": "NORMAL"
+          }
+        ],
+        "overlayFills": [
+          {
+            "layer": "Mode=Light, Edge=Bottom",
+            "color": "#FFFFFF@0.85",
+            "blendMode": "NORMAL"
+          }
+        ]
+      },
+      {
+        "kit": "macos27",
+        "component": "Scroll-Edge-Effect-Hard",
+        "variant": "Mode=Light, Edge=Top",
+        "nodeId": "4363:18596",
+        "glass": [],
+        "backgroundBlur": [
+          {
+            "nodeId": "4363:18596",
+            "layer": "Mode=Light, Edge=Top",
+            "type": "BACKGROUND_BLUR",
+            "figmaRadius": 6,
+            "blurType": "NORMAL"
+          }
+        ],
+        "overlayFills": [
+          {
+            "layer": "Mode=Light, Edge=Top",
+            "color": "#FFFFFF@0.85",
+            "blendMode": "NORMAL"
+          }
+        ]
+      },
+      {
+        "kit": "macos27",
+        "component": "Scroll-Edge-Effect-Hard",
+        "variant": "Edge=Bottom,Mode=Dark",
+        "nodeId": "4363:18597",
+        "glass": [],
+        "backgroundBlur": [
+          {
+            "nodeId": "4363:18597",
+            "layer": "Edge=Bottom,Mode=Dark",
+            "type": "BACKGROUND_BLUR",
+            "figmaRadius": 6,
+            "blurType": "NORMAL"
+          }
+        ],
+        "overlayFills": [
+          {
+            "layer": "Edge=Bottom,Mode=Dark",
+            "color": "#1F1F1F@0.55",
+            "blendMode": "NORMAL"
+          }
+        ]
+      },
+      {
+        "kit": "macos27",
+        "component": "Scroll-Edge-Effect-Hard",
+        "variant": "Mode=Dark,Edge=Top",
+        "nodeId": "4363:18598",
+        "glass": [],
+        "backgroundBlur": [
+          {
+            "nodeId": "4363:18598",
+            "layer": "Mode=Dark,Edge=Top",
+            "type": "BACKGROUND_BLUR",
+            "figmaRadius": 6,
+            "blurType": "NORMAL"
+          }
+        ],
+        "overlayFills": [
+          {
+            "layer": "Mode=Dark,Edge=Top",
+            "color": "#1F1F1F@0.55",
+            "blendMode": "NORMAL"
+          }
+        ]
+      },
+      {
+        "kit": "macos27",
+        "component": "Scroll-Edge-Effect-Soft",
+        "variant": "Edge=Bottom",
+        "nodeId": "4363:18555",
+        "glass": [],
+        "backgroundBlur": [
+          {
+            "nodeId": "4363:18555",
+            "layer": "Edge=Bottom",
+            "type": "BACKGROUND_BLUR",
+            "figmaRadius": 10,
+            "blurType": "PROGRESSIVE"
+          },
+          {
+            "nodeId": "4363:18557",
+            "layer": "Blur",
+            "type": "BACKGROUND_BLUR",
+            "figmaRadius": 100,
+            "blurType": "UNIFORM"
+          }
+        ],
+        "overlayFills": [
+          {
+            "layer": "Blur",
+            "color": "#000000@1",
+            "blendMode": "SCREEN"
+          }
+        ]
+      },
+      {
+        "kit": "macos27",
+        "component": "Scroll-Edge-Effect-Soft",
+        "variant": "Edge=Top",
+        "nodeId": "4363:18558",
+        "glass": [],
+        "backgroundBlur": [
+          {
+            "nodeId": "4363:18558",
+            "layer": "Edge=Top",
+            "type": "BACKGROUND_BLUR",
+            "figmaRadius": 10,
+            "blurType": "PROGRESSIVE"
+          },
+          {
+            "nodeId": "4363:18560",
+            "layer": "Blur",
+            "type": "BACKGROUND_BLUR",
+            "figmaRadius": 100,
+            "blurType": "UNIFORM"
+          }
+        ],
+        "overlayFills": [
+          {
+            "layer": "Blur",
+            "color": "#000000@1",
+            "blendMode": "SCREEN"
+          }
+        ]
+      },
+      {
+        "kit": "macos27",
+        "component": "Materials",
+        "variant": "Mode=Light, Type=Ultra Thick",
+        "nodeId": "4331:12156",
+        "glass": [],
+        "backgroundBlur": [
+          {
+            "nodeId": "4331:12156",
+            "layer": "Mode=Light, Type=Ultra Thick",
+            "type": "BACKGROUND_BLUR",
+            "figmaRadius": 60,
+            "blurType": "NORMAL"
+          }
+        ],
+        "overlayFills": [
+          {
+            "layer": "Mode=Light, Type=Ultra Thick",
+            "color": "#333333@1",
+            "blendMode": "LINEAR_DODGE"
+          },
+          {
+            "layer": "Mode=Light, Type=Ultra Thick",
+            "color": "#ECECEC@0.88",
+            "blendMode": "NORMAL"
+          }
+        ]
+      },
+      {
+        "kit": "macos27",
+        "component": "Materials",
+        "variant": "Mode=Light, Type=Thick",
+        "nodeId": "4331:12155",
+        "glass": [],
+        "backgroundBlur": [
+          {
+            "nodeId": "4331:12155",
+            "layer": "Mode=Light, Type=Thick",
+            "type": "BACKGROUND_BLUR",
+            "figmaRadius": 60,
+            "blurType": "UNIFORM"
+          }
+        ],
+        "overlayFills": [
+          {
+            "layer": "Mode=Light, Type=Thick",
+            "color": "#F6F6F6@0.72",
+            "blendMode": "NORMAL"
+          }
+        ]
+      },
+      {
+        "kit": "macos27",
+        "component": "Materials",
+        "variant": "Mode=Light, Type=Medium",
+        "nodeId": "4331:12154",
+        "glass": [],
+        "backgroundBlur": [
+          {
+            "nodeId": "4331:12154",
+            "layer": "Mode=Light, Type=Medium",
+            "type": "BACKGROUND_BLUR",
+            "figmaRadius": 60,
+            "blurType": "UNIFORM"
+          }
+        ],
+        "overlayFills": [
+          {
+            "layer": "Mode=Light, Type=Medium",
+            "color": "#F6F6F6@0.6",
+            "blendMode": "NORMAL"
+          }
+        ]
+      },
+      {
+        "kit": "macos27",
+        "component": "Materials",
+        "variant": "Mode=Light, Type=Thin",
+        "nodeId": "4331:12153",
+        "glass": [],
+        "backgroundBlur": [
+          {
+            "nodeId": "4331:12153",
+            "layer": "Mode=Light, Type=Thin",
+            "type": "BACKGROUND_BLUR",
+            "figmaRadius": 60,
+            "blurType": "UNIFORM"
+          }
+        ],
+        "overlayFills": [
+          {
+            "layer": "Mode=Light, Type=Thin",
+            "color": "#F6F6F6@0.48",
+            "blendMode": "NORMAL"
+          }
+        ]
+      },
+      {
+        "kit": "macos27",
+        "component": "Materials",
+        "variant": "Mode=Light, Type=Ultra Thin",
+        "nodeId": "4331:12152",
+        "glass": [],
+        "backgroundBlur": [
+          {
+            "nodeId": "4331:12152",
+            "layer": "Mode=Light, Type=Ultra Thin",
+            "type": "BACKGROUND_BLUR",
+            "figmaRadius": 60,
+            "blurType": "UNIFORM"
+          }
+        ],
+        "overlayFills": [
+          {
+            "layer": "Mode=Light, Type=Ultra Thin",
+            "color": "#F6F6F6@0.36",
+            "blendMode": "NORMAL"
+          }
+        ]
+      },
+      {
+        "kit": "macos27",
+        "component": "Materials",
+        "variant": "Mode=Dark, Type=Ultra Thick",
+        "nodeId": "4331:12151",
+        "glass": [],
+        "backgroundBlur": [
+          {
+            "nodeId": "4331:12151",
+            "layer": "Mode=Dark, Type=Ultra Thick",
+            "type": "BACKGROUND_BLUR",
+            "figmaRadius": 60,
+            "blurType": "UNIFORM"
+          }
+        ],
+        "overlayFills": [
+          {
+            "layer": "Mode=Dark, Type=Ultra Thick",
+            "color": "#000000@0.5",
+            "blendMode": "NORMAL"
+          }
+        ]
+      },
+      {
+        "kit": "macos27",
+        "component": "Dock",
+        "variant": "Mode=Dark",
+        "nodeId": "4355:8234",
+        "glass": [
+          {
+            "nodeId": "4355:11466",
+            "layer": "Glass Effect",
+            "lightIntensity": null,
+            "lightAngle": null,
+            "refraction": null,
+            "depth": null,
+            "dispersion": null,
+            "radius": null
+          }
+        ],
+        "backgroundBlur": [],
+        "overlayFills": [
+          {
+            "layer": "Fill + Shadow",
+            "color": "#454545@0.5",
+            "blendMode": "LUMINOSITY"
+          },
+          {
+            "layer": "Fill + Shadow",
+            "color": "#1A1A1A@0.1",
+            "blendMode": "LINEAR_BURN"
+          },
+          {
+            "layer": "Fill + Shadow",
+            "color": "#FFFFFF@0.08",
+            "blendMode": "LIGHTEN"
+          },
+          {
+            "layer": "Glass Effect",
+            "color": "#FFFFFF@1",
+            "blendMode": "MULTIPLY"
+          }
+        ]
+      },
+      {
+        "kit": "macos27",
+        "component": "Dock",
+        "variant": "Mode=Light",
+        "nodeId": "4355:8232",
+        "glass": [
+          {
+            "nodeId": "4355:11429",
+            "layer": "Glass Effect",
+            "lightIntensity": null,
+            "lightAngle": null,
+            "refraction": null,
+            "depth": null,
+            "dispersion": null,
+            "radius": null
+          }
+        ],
+        "backgroundBlur": [],
+        "overlayFills": [
+          {
+            "layer": "Fill + Shadow",
+            "color": "#4D4D4D@0.3",
+            "blendMode": "LUMINOSITY"
+          },
+          {
+            "layer": "Fill + Shadow",
+            "color": "#1A1A1A@0.1",
+            "blendMode": "LINEAR_BURN"
+          },
+          {
+            "layer": "Fill + Shadow",
+            "color": "#FFFFFF@0.08",
+            "blendMode": "LIGHTEN"
+          },
+          {
+            "layer": "Glass Effect",
+            "color": "#FFFFFF@1",
+            "blendMode": "MULTIPLY"
+          }
+        ]
+      }
+    ]
   }
 }

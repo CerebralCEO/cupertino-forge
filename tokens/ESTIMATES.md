@@ -4,7 +4,7 @@
 
 These token entries carry `$class: "estimated"` (not published numerically by Apple HIG or Sketch token exports), `$class: "inferred/community"` (community SPI benchmarks kept out of primary official/kit tokens per merge Rule 1), or `$status: "needs-device-verification"`. List relevant items in the Compliance Report (`Values marked estimate`).
 
-## 1. Estimated Tokens (70 groups/entries)
+## 1. Estimated Tokens (67 groups/entries)
 
 | Token File | Path | Sample Value | Class | Source Note |
 |---|---|---|---|---|
@@ -14,9 +14,6 @@ These token entries carry `$class: "estimated"` (not published numerically by Ap
 | `color.json` | `macOSSurfaces.bgGrouped2` | `{ light: #FFFFFF, dark: #262626 }` | `estimated` | estimated |
 | `color.json` | `macOSSurfaces.bgGrouped3` | `{ light: #F5F5F7, dark: #2E2E2E }` | `estimated` | estimated |
 | `color.json` | `macOSSurfaces.separatorOpaque` | `{ light: #D8D8D8, dark: #3A3A3A }` | `estimated` | estimated |
-| `color.json` | `selection` | `{ selectedContentText: [...], unemphasizedSelectedBackground: [...] }` | `estimated` | Apple macOS 27 Sketch Kit + estimated unemphasized background |
-| `color.json` | `selection.unemphasizedSelectedBackground` | `{ light: #DCDCDC, dark: #464646 }` | `estimated` | estimate, verify in kit Lists page |
-| `color.json` | `dimming.sheetScrim` | `{ light: #000000@0.2, dark: #000000@0.48 }` | `estimated` | estimated |
 | `color.json` | `iosFieldBorder` | `{ light: #000000@0, dark: #000000@0 }` | `estimated` | estimated |
 | `color.json` | `highContrastLabels` | `{ label2: [...], label3: [...], glassBorder: [...], accentContrast: #FFFFFF }` | `estimated` | estimated |
 | `elevation.json` | `levels.knob` | `{ light: 0 3px 8px rgba(0,0,0,0.15), 0 3px 1px rgba(0,0,0,0.06), 0 0 0 0.5px rgba(0,0,0,0.04), dark: 0 3px 8px rgba(0,0,0,0.3), 0 0 0 0.5px rgba(0,0,0,0.2) }` | `estimated` | estimated |
@@ -73,16 +70,18 @@ These token entries carry `$class: "estimated"` (not published numerically by Ap
 | `motion.json` | `press` | `{ glassButton: [...], solidButton: [...], plainTextButton: [...], listRow: [...], ... }` | `estimated` | estimated (HIG Motion touch vs pointer qualitative) |
 | `motion.json` | `hover` | `{ macOSToolbarItem: [...], macOSListRow: no hover background except in sidebars and menus, menuItem: [...], iPadPointer: [...], ... }` | `estimated` | estimated |
 | `motion.json` | `symbolEffects` | `{ bounce: scale 1 to 1.2 to 1 with snappy spring, pulse: opacity 1 to 0.5 loop 1s, replace: old symbol scales to 0.6 and fades while new scales from 0.6, 250ms, wiggle: rotate -8 to 8 deg 3 times, ... }` | `estimated` | estimated CSS/SVG timing approximations of SF Symbols animations |
-| `shape.json` | `radiusIOS` | `{ deviceDisplay: [...], sheet: device display radius when full height at the bottom edge; 38 when floating at medium detent with 8 inset, alert: 34, actionSheet: 34, ... }` | `estimated` | estimated (primary deviceDisplay preserved at 55/30 per Rule 1; community 62/18 in $alt) |
-| `shape.json` | `radiusMacOS` | `{ window: 16, windowNote: Measured 16pt (cornerSmoothing 0.6) across all Window BG and Windows - Composed variants in Apple Figma kit macOS 27 (nodes 585:3372, 4363:18479, 4365:31678)., sheet: 16, alert: 10, ... }` | `estimated` | Apple Figma kit macOS 27 (window/sheet 16pt nodes 585:3372, 121:11423; alert 10pt 121:11254; popover 10pt 4336:13305; menuItemHighlight 8pt 685:23691, 2026-11-25) + estimated remaining subfields |
+| `shape.json` | `radiusIOS` | `{ deviceDisplay: [...], sheet: device display radius when full height at the bottom edge; 38 when floating at medium detent with 8 inset, alert: 34, actionSheet: 34, ... }` | `estimated` | Apple Figma kit iOS 27 (ForgeKit visible-surface audit 2026-11-27: alert/actionSheet/menu 34, sheetFloating/popover 38, contextMenuPreview 30, textFieldRounded capsule) + estimated remaining subfields (deviceDisplay preserved at 55/30 per Rule 1) |
+| `shape.json` | `radiusMacOS` | `{ window: 16, windowNote: Measured 16pt (cornerSmoothing 0.6) across all Window BG and Windows - Composed variants in Apple Figma kit macOS 27 (nodes 585:3372, 4363:18479, 4365:31678)., sheet: 16, alert: 34, ... }` | `estimated` | Apple Figma kit macOS 27 visible surfaces (window/sheet 16, alert 34 [I494:3080;4311:12662], popover 20 [I4336:13195;110:856], menu 12 [4353:2522], menuItemHighlight 8 [685:23692], utilityPanel 15 [4374:54812], 2026-11-27) + estimated remaining subfields |
 | `typography.json` | `fallbackCompensation` | `{ inter: [...] }` | `estimated` | estimated Inter width compensation |
 | `typography.json` | `nonLatin.banglaLineHeightScale` | `{ min: 1.35, max: 1.5 }` | `estimated` | estimated |
 | `typography.json` | `nonLatin.banglaExpansionPercent` | `{ min: 20, max: 30 }` | `estimated` | estimated |
 
-## 2. Source Conflicts & Community Alternates (3 entries)
+## 2. Source Conflicts & Community Alternates (5 entries)
 
 | Token File | Path | Alternate / Conflict Values | Status / Class | Source |
 |---|---|---|---|---|
+| `color.json` | `labelIOS.secondary.$kitConflict` | `{ dark: #EBEBF5@0.7 }` | `needs-device-verification` | Apple Figma kit iOS 27 Dark/Labels/Secondary (VariableID:13207:204, Default & Increased Contrast modes) vs Apple Sketch kit (#EBEBF5@0.6), 2026-11-27 |
+| `color.json` | `separatorIOS.nonOpaque.$kitConflict` | `{ dark: #FFFFFF@0.17 }` | `needs-device-verification` | Apple Figma kit iOS 27 Dark/Separators/Non-opaque (VariableID:13207:239, Default & Increased Contrast modes) vs Apple Sketch kit (#FFFFFF@0.12), 2026-11-27 |
 | `layout.json` | `ios.safeArea.$alt` | `{ iPhone15_16_topDynamicIsland: 59, iPhone17_17Pro_topDynamicIsland: 62 }` | `inferred/community` | screens.guide community specs |
 | `shape.json` | `radiusIOS.deviceDisplay.$alt` | `{ iPhone16Pro_17Pro: 62, iPadPro_M4_M5: 18 }` | `inferred/community` | ScreenCorners community SPI |
 | `typography.json` | `macosTextStyles.$kitConflict` | `{ headline: [...], caption1: [...], caption2: [...] }` | `needs-device-verification` | Apple macOS 27 Sketch Kit vs Apple HIG Typography |

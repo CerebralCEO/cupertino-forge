@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
 import '../glass/cf_glass.dart';
-import '../shapes/squircle_border.dart';
 import '../theme/apple_tokens.dart';
 import '../theme/cf_theme.dart';
 
@@ -115,7 +114,7 @@ class _CfTextFieldState extends State<CfTextField> {
         ? ConstrainedBox(constraints: const BoxConstraints(minHeight: AppleLayout.listRowMinHeight), child: field)
         : DecoratedBox(
             decoration: ShapeDecoration(
-              shape: const SquircleBorder(radius: AppleRadiusIOS.textFieldRounded),
+              shape: const StadiumBorder(),
               color: cf.fill3,
             ),
             child: ConstrainedBox(

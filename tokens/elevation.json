@@ -5,7 +5,7 @@
       "kit": "macOS 27 Windows, Panels, Knobs layer styles; iOS 27 Controls",
       "estimate": "verify visually"
     },
-    "reconciledDate": "2026-11-25"
+    "reconciledDate": "2026-11-27"
   },
   "rules": [
     "Content layer elements (cards, rows) have NO shadow on iOS. Separation comes from background level (grouped vs secondary).",
@@ -30,7 +30,71 @@
         "macosFigmaToggleKnob": "0 3px 36px rgba(0,0,0,0.05)",
         "iosFigmaSliderKnob": "0 6px 13px rgba(0,0,0,0.12), 0 0.5px 4px rgba(0,0,0,0.12)",
         "macosOverGlassLight": "0 0 44px rgba(0,0,0,0.1) (+ 5 rim/highlight layers)",
-        "$note": "Kept primary estimate; visually verified in Phase 3b-lite that single 0 3px 36px @0.05 shadow renders flat on Web without Apple's blend-mode rim layers."
+        "$note": "Kept primary estimate; visually verified in Phase 3b-lite that single 0 3px 36px @0.05 shadow renders flat on Web without Apple's blend-mode rim layers.",
+        "forgekitStacks": {
+          "iosTogglePressed": [
+            {
+              "variant": "State=Pressed, Is On=False, Is Enabled=True",
+              "nodeId": "10456:1593",
+              "layer": "Glass Effect",
+              "shadows": [
+                "inset 0px 40px 30px -40px rgba(230,230,230,1) [LINEAR_BURN]",
+                "inset 0px -40px 10px -40px rgba(40,40,40,1) [LINEAR_DODGE]",
+                "inset 0px 40px 10px -40px rgba(40,40,40,1) [LINEAR_DODGE]"
+              ]
+            },
+            {
+              "variant": "State=Pressed, Is On=False, Is Enabled=True",
+              "nodeId": "10456:1594",
+              "layer": "Specular Light",
+              "shadows": [
+                "inset 0px -3px 0.5px -2.25px rgba(40,40,40,1) [LINEAR_DODGE]",
+                "inset 0px 3px 0.5px -2.25px rgba(40,40,40,1) [LINEAR_DODGE]"
+              ]
+            }
+          ],
+          "iosSliderKnob": [
+            {
+              "variant": "State=Disabled, Value=100%",
+              "nodeId": "I10456:2234;5437:1568",
+              "layer": "Knob",
+              "shadows": [
+                "0px 6px 13px 0px rgba(0,0,0,0.12) [NORMAL]",
+                "0px 0.5px 4px 0px rgba(0,0,0,0.12) [NORMAL]"
+              ]
+            },
+            {
+              "variant": "State=Disabled, Value=75%",
+              "nodeId": "I10456:2245;5437:1568",
+              "layer": "Knob",
+              "shadows": [
+                "0px 6px 13px 0px rgba(0,0,0,0.12) [NORMAL]",
+                "0px 0.5px 4px 0px rgba(0,0,0,0.12) [NORMAL]"
+              ]
+            }
+          ],
+          "macosSliderKnob": [
+            {
+              "variant": "Active=True, State=Disabled, Ticks=False, Val",
+              "nodeId": "I531:11724;531:12230",
+              "layer": "Knob",
+              "shadows": [
+                "0px 0.5px 6px 0px rgba(0,0,0,0.12) [NORMAL]"
+              ]
+            },
+            {
+              "variant": "Active=True, State=Clicked, Ticks=False, Valu",
+              "nodeId": "I531:11124;4352:10527;4352:10354",
+              "layer": "Glass Effect",
+              "shadows": [
+                "inset 0px 40px 30px -40px rgba(230,230,230,1) [LINEAR_BURN]",
+                "inset 0px -40px 10px -40px rgba(40,40,40,1) [LINEAR_DODGE]",
+                "inset 0px 40px 10px -40px rgba(40,40,40,1) [LINEAR_DODGE]"
+              ]
+            }
+          ],
+          "$source": "ForgeKit iOS 27 & macOS 27 layout.json shadow stacks (with blend modes), 2026-11-27"
+        }
       }
     },
     "sliderKnob": {
@@ -60,7 +124,73 @@
         "macosPanelLight": "0 5px 20px rgba(0,0,0,0.3)",
         "macosPanelDark": "0 16px 33px rgba(0,0,0,0.4), 0 0 1px rgba(0,0,0,0.8) + 1px solid rgba(255,255,255,0.2)",
         "iosFigmaPopover": "0 10px 100px rgba(0,0,0,0.3)",
-        "$note": "Platform/component divergence (macOS Panel vs iOS iPad Popover vs cross-platform Popover); primary estimate preserved."
+        "$note": "Platform/component divergence (macOS Panel vs iOS iPad Popover vs cross-platform Popover); primary estimate preserved.",
+        "forgekitStacks": {
+          "iosPopover": [
+            {
+              "variant": "Edge=Bottom (Leading)",
+              "nodeId": "61:65449",
+              "layer": "Edge=Bottom (Leading)",
+              "shadows": [
+                "0px 10px 100px 0px rgba(0,0,0,0.3) [NORMAL]"
+              ]
+            },
+            {
+              "variant": "Edge=Bottom (Center)",
+              "nodeId": "61:65422",
+              "layer": "Edge=Bottom (Center)",
+              "shadows": [
+                "0px 10px 100px 0px rgba(0,0,0,0.3) [NORMAL]"
+              ]
+            }
+          ],
+          "macosPopover": [
+            {
+              "variant": "Mode=Dark, Edge=Trailing (Bottom)",
+              "nodeId": "4336:13262",
+              "layer": "Fill + Shadow",
+              "shadows": [
+                "0px 8px 48px 0px rgba(0,0,0,0.45) [NORMAL]",
+                "0px 0.5px 0px 0px rgba(204,204,204,1) [LINEAR_BURN]",
+                "0px -0.5px 0px 0px rgba(204,204,204,1) [LINEAR_BURN]",
+                "-0.5px 0px 0px -0.75px rgba(166,166,166,1) [LINEAR_BURN]",
+                "0.5px 0px 0px -0.75px rgba(166,166,166,1) [LINEAR_BURN]"
+              ]
+            },
+            {
+              "variant": "Mode=Dark, Edge=Trailing (Bottom)",
+              "nodeId": "4336:13263",
+              "layer": "Body",
+              "shadows": [
+                "0px 8px 15px 6px rgba(0,0,0,0.18) [NORMAL]",
+                "0px 2px 4px 0px rgba(0,0,0,0.15) [NORMAL]",
+                "inset 0px 0.5px 1px 0.5px rgba(255,255,255,0.5) [NORMAL]"
+              ]
+            },
+            {
+              "variant": "Mode=Dark, Edge=Trailing (Bottom)",
+              "nodeId": "4336:13325",
+              "layer": "Glass Effect",
+              "shadows": [
+                "inset 0px -1px 1px 0px rgba(51,51,51,1) [COLOR_DODGE]",
+                "inset 0px 1px 1px 0px rgba(51,51,51,1) [LINEAR_DODGE]"
+              ]
+            },
+            {
+              "variant": "Mode=Dark, Edge=Trailing (Middle)",
+              "nodeId": "4336:13266",
+              "layer": "Fill + Shadow",
+              "shadows": [
+                "0px 8px 48px 0px rgba(0,0,0,0.45) [NORMAL]",
+                "0px 0.5px 0px 0px rgba(204,204,204,1) [LINEAR_BURN]",
+                "0px -0.5px 0px 0px rgba(204,204,204,1) [LINEAR_BURN]",
+                "-0.5px 0px 0px -0.75px rgba(166,166,166,1) [LINEAR_BURN]",
+                "0.5px 0px 0px -0.75px rgba(166,166,166,1) [LINEAR_BURN]"
+              ]
+            }
+          ],
+          "$source": "ForgeKit iOS 27 & macOS 27 Popover shadow stacks (with blend modes), 2026-11-27"
+        }
       }
     },
     "menu": {
@@ -101,7 +231,65 @@
       "$source": "estimated",
       "$class": "estimated",
       "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
-      "$platform": "All"
+      "$platform": "All",
+      "$kitReference": {
+        "$class": "measured-kit-reference",
+        "$source": "ForgeKit iOS 27 Sheet-iPhone & macOS 27 Sheet (Light & Dark, with blend modes), 2026-11-27",
+        "iosSheet": [
+          {
+            "variant": "Detent=Medium",
+            "nodeId": "I10525:1636;10411:18581",
+            "layer": "Fill + Shadow",
+            "shadows": [
+              "0px 8px 48px 0px rgba(0,0,0,0.25) [NORMAL]",
+              "0px 0px 0px 0.5px rgba(219,219,219,1) [LINEAR_BURN]",
+              "-1.25px 0px 0px -0.75px rgba(219,219,219,1) [LINEAR_BURN]",
+              "1.25px 0px 0px -0.75px rgba(219,219,219,1) [LINEAR_BURN]"
+            ]
+          },
+          {
+            "variant": "Detent=Medium",
+            "nodeId": "I10525:1636;10411:18582",
+            "layer": "Glass Effect",
+            "shadows": [
+              "inset 0px -40px 10px -40px rgba(40,40,40,1) [LINEAR_DODGE]",
+              "inset 0px 40px 10px -40px rgba(40,40,40,1) [LINEAR_DODGE]"
+            ]
+          },
+          {
+            "variant": "Detent=Medium",
+            "nodeId": "I10525:1697;5553:35134;10525:1725;5566:7888;10411:17582",
+            "layer": "Fill + Shadow",
+            "shadows": [
+              "0px 8px 15px 0px rgba(0,0,0,0.02) [NORMAL]",
+              "0px 0px 0px 0.5px rgba(232,232,232,1) [LINEAR_BURN]",
+              "-1.25px 0px 0px -0.75px rgba(208,208,208,1) [LINEAR_BURN]",
+              "1.25px 0px 0px -0.75px rgba(208,208,208,1) [LINEAR_BURN]"
+            ]
+          }
+        ],
+        "macosSheet": [
+          {
+            "variant": "Mode=Light",
+            "nodeId": "121:11423",
+            "layer": "Mode=Light",
+            "shadows": [
+              "0px 18px 54px 0px rgba(0,0,0,0.3) [NORMAL]",
+              "0px 0px 1px 0px rgba(0,0,0,0.8) [NORMAL]"
+            ]
+          },
+          {
+            "variant": "Mode=Dark",
+            "nodeId": "4358:15436",
+            "layer": "Mode=Dark",
+            "shadows": [
+              "0px 18px 54px 0px rgba(0,0,0,0.57) [NORMAL]",
+              "0px 0px 1px 0px rgba(0,0,0,0.8) [NORMAL]"
+            ]
+          }
+        ],
+        "$note": "Primary cross-platform estimate preserved; iOS floating vs macOS attached modal sheets diverge."
+      }
     },
     "glassBar": "use materials.liquidGlass.tuned.regular boxShadow",
     "toast": {

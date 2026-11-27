@@ -13,7 +13,7 @@
       "lightHC",
       "darkHC"
     ],
-    "reconciledDate": "2026-11-25"
+    "reconciledDate": "2026-11-27"
   },
   "system": {
     "$source": "Apple iOS 27 & macOS 27 Sketch Kits (HC from HIG swatches)",
@@ -214,7 +214,12 @@
     },
     "secondary": {
       "light": "#3C3C43@0.6",
-      "dark": "#EBEBF5@0.6"
+      "dark": "#EBEBF5@0.6",
+      "$kitConflict": {
+        "dark": "#EBEBF5@0.7",
+        "$status": "needs-device-verification",
+        "$source": "Apple Figma kit iOS 27 Dark/Labels/Secondary (VariableID:13207:204, Default & Increased Contrast modes) vs Apple Sketch kit (#EBEBF5@0.6), 2026-11-27"
+      }
     },
     "tertiary": {
       "light": "#3C3C43@0.3",
@@ -480,7 +485,12 @@
     "$source": "Apple iOS 27 Sketch Kit",
     "nonOpaque": {
       "light": "#000000@0.12",
-      "dark": "#FFFFFF@0.12"
+      "dark": "#FFFFFF@0.12",
+      "$kitConflict": {
+        "dark": "#FFFFFF@0.17",
+        "$status": "needs-device-verification",
+        "$source": "Apple Figma kit iOS 27 Dark/Separators/Non-opaque (VariableID:13207:239, Default & Increased Contrast modes) vs Apple Sketch kit (#FFFFFF@0.12), 2026-11-27"
+      }
     },
     "opaque": {
       "light": "#C6C6C8",
@@ -708,20 +718,28 @@
     "$platform": "macOS 27 / Web"
   },
   "selection": {
-    "$source": "Apple macOS 27 Sketch Kit + estimated unemphasized background",
+    "$source": "Apple Figma kit macOS 27 (BG - Selected + Active 4356:10117, BG - Selected + Inactive 4356:10110, Labels/White 207:14858, 2026-11-27)",
     "$usage": "Selected rows use accent background with white label. Unfocused window selection uses unemphasized gray.",
     "selectedContentText": {
       "light": "#FFFFFF",
       "dark": "#FFFFFF"
     },
     "unemphasizedSelectedBackground": {
-      "light": "#DCDCDC",
-      "dark": "#464646",
-      "$source": "estimate, verify in kit Lists page"
+      "light": "#000000@0.14",
+      "dark": "#FFFFFF@0.18",
+      "$source": "Apple Figma kit macOS 27 (Miscellaneous/Tables/BG - Selected + Inactive, VariableID:4356:10110, 2026-11-27)",
+      "$previous": {
+        "light": "#DCDCDC",
+        "dark": "#464646"
+      },
+      "$class": "measured"
     },
-    "$class": "estimated",
+    "$class": "measured",
     "$url": "tokens/source/apple-macos-27-ui-kit.tokens.json",
-    "$platform": "macOS 27"
+    "$platform": "macOS 27",
+    "$previous": {
+      "$class": "estimated"
+    }
   },
   "dimming": {
     "$source": "Apple HIG Materials (clear glass dimming) + estimated sheet scrim",
@@ -732,10 +750,13 @@
     "sheetScrim": {
       "light": "#000000@0.2",
       "dark": "#000000@0.48",
-      "$source": "estimated",
-      "$class": "estimated",
+      "$source": "Apple Figma kit iOS 27 (Overlays/Default, VariableID:13207:178 Light & 13207:240 Dark, bound to Sheet-iPhone 10525:1634, 2026-11-27)",
+      "$class": "measured",
       "$platform": "iOS",
-      "$url": "https://developer.apple.com/design/human-interface-guidelines/sheets"
+      "$url": "https://developer.apple.com/design/human-interface-guidelines/sheets",
+      "$previous": {
+        "$class": "estimated"
+      }
     }
   },
   "accent": {

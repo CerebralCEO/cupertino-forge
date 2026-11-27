@@ -196,25 +196,32 @@ abstract final class AppleSpacing {
 abstract final class AppleRadiusIOS {
   static const double alert = 34;
   static const double actionSheet = 34;
-  static const double popover = 26;
-  static const double menu = 26;
-  static const double contextMenuPreview = 22;
+  static const double popover = 38;
+  static const double menu = 34;
+  static const double contextMenuPreview = 30;
   static const double listSectionInsetGrouped = 26;
   static const double card = 22;
-  static const double textFieldRounded = 12;
+  static const double textFieldRounded = 9999;
+  static const double searchField = 9999;
+  static const double segmentedControl = 9999;
+  static const double toggleTrack = 9999;
+  static const double sliderTrack = 9999;
+  static const double tabBar = 9999;
+  static const double toolbarGroup = 9999;
   static const double keyboard = 26;
   static const double widgetSmall = 22;
   static const double thumbnailSmall = 8;
   static const double thumbnailMedium = 12;
   static const double settingsIcon = 7;
+  static const double badge = 9999;
   static const double sheetFloating = 38;
   static const double deviceDisplay = 55;
 }
 abstract final class AppleRadiusMacOS {
   static const double window = 16;
   static const double sheet = 16;
-  static const double alert = 10;
-  static const double popover = 10;
+  static const double alert = 34;
+  static const double popover = 20;
   static const double menu = 12;
   static const double menuItemHighlight = 8;
   static const double tooltip = 6;
@@ -226,6 +233,7 @@ abstract final class AppleRadiusMacOS {
   static const double tableRowSelection = 6;
   static const double card = 10;
   static const double dockGlass = 24;
+  static const double utilityPanel = 15;
 }
 abstract final class AppleLayout {
   static const double hitIOS = 44;

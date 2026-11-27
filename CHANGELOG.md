@@ -2,6 +2,23 @@
 
 All notable changes to `cupertino-forge` are documented in this file.
 
+## v2.2.0 — 2026-11-27 (Phase 8B: ForgeKit Visible-Surface Token Sync & Liquid Glass Reference)
+
+- **Corrected Phase 3c container-only `radiusMacOS` errors (`tokens/shape.json`):** Phase 3c read `cornerRadius: 10` from invisible `container-only` outer frames on macOS `Alert` (`121:11254`) and `Popover` (`4336:13305`). Applied the Visible-Surface Rule via ForgeKit `layout.json`:
+  - `radiusMacOS.alert`: `10 → 34` (`I494:3080;4311:12662` `Fill + Shadow`, `needs-device-verification`)
+  - `radiusMacOS.popover`: `10 → 20` (`I4336:13195;110:856` `Body`, `needs-device-verification`)
+  - `radiusMacOS.menu`: confirmed `12` (`4353:2522`), `window`: `16` (`585:3372`), `sheet`: `16` (`121:11423`), `menuItemHighlight`: `8` (`685:23692`), **new `utilityPanel`: `15`** (`4374:54812`).
+- **Updated `radiusIOS` visible-surface radii (`tokens/shape.json`, all `needs-device-verification`):**
+  - `popover`: `26 → 38` (`513:95247` `Popovers-(iPad-Only) Background`)
+  - `menu`: `26 → 34` (`I5908:6372;10411:18670` `Menu Fill + Shadow`)
+  - `contextMenuPreview`: `22 → 30` (`548:48135` / `548:50347` `Context-Menu Content Area`)
+  - `textFieldRounded`: `12 → "capsule"` (`$kitExample`: `_Text-Field-Background` `5469:8386` `160×52 cr=26`, so height changes never break capsule shape; `build-tokens.mjs` emits `9999px` / `9999`, Flutter `CfTextField` uses `StadiumBorder()`, and `cupertino.base.css` remaps shadcn `--radius` to `--cf-radius-thumbnail-medium`).
+- **Promoted 3 `color.json` estimates (`70 → 67` in `tokens/ESTIMATES.md`) & logged 2 `$kitConflict` entries (`3 → 5`):**
+  - `dimming.sheetScrim`: promoted to `measured` (`#000000@0.2` / `#000000@0.48`, `Overlays/Default` `13207:178` & `13207:240`).
+  - `selection.unemphasizedSelectedBackground`: `#DCDCDC/#464646 → #000000@0.14 / #FFFFFF@0.18` (`measured`, `VariableID:4356:10110`), `selection` parent promoted to `measured`.
+  - `labelIOS.secondary.dark` & `separatorIOS.nonOpaque.dark`: Sketch values preserved primary; Figma `@0.70` (`13207:204`) & `@0.17` (`13207:239`) logged under `$kitConflict` (`needs-device-verification`).
+- **Added `tokens/materials.json :: figmaGlass` (reference-only), enriched `layout.json` & `elevation.json` `$kitReference` blocks, and added `qa/KIT-QUIRKS.md`:** Preserved `typography.json` 100% unchanged per Official Apple HIG while documenting all 14 Apple Figma kit Dynamic Type quirks; clarified blur calibration wording (`calibration: derived (Figma Dev Mode CSS export convention radius/2); not verified against Apple OS`, no official source found).
+
 ## v2.1.1 — 2026-11-27 (Hygiene, Honest Claims, Device-Verification Tagging & License/Trigger Audit)
 
 - **Honest Claim Audit (`N = 70` estimates):** Replaced unverified parity/percentage/persona wording in `README.md`, `GUIDE.md`, `skills/apple-design-core/SKILL.md`, `templates/AGENTS.apple.md`, and `templates/CLAUDE.apple.md` with explicit honest framing (`encodes Apple's published HIG principles and Apple Design Resources kit measurements; closest parity on Apple platforms with native APIs; documented approximation elsewhere; 70 values remain estimates (see tokens/ESTIMATES.md)`).

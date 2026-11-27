@@ -56,3 +56,7 @@ Real Liquid Glass bends the content at the rim. Implementations:
 ## Standard materials (content layer)
 
 ultraThin, thin, regular, thick (and ultraThick on macOS). Use for panels over imagery inside content, grouped areas over wallpapers, overlays on video. Pair with label-vibrant colors. Values in tokens.
+
+## Reference-only Figma `GLASS` parameters (`materials.json :: figmaGlass`)
+
+Apple's iOS 27 & macOS 27 Figma kits store `GLASS` parameters (`Frost Regular 6`, `Frost Medium/Large 16`, `Refraction 70`, `Depth 30`, `Dispersion 20`, `Splay 20`, `Light Angle 0`, `Opacity 25` — `VariableCollectionId:5565:22724`) and raw `BACKGROUND_BLUR` radii under `materials.json :: figmaGlass` (`[measured]`, reference-only; does not drive CSS). CSS/Flutter `liquidGlass.tuned` and `engine` remain `[estimate]` (`calibration: derived (Figma Dev Mode CSS export convention radius/2); not verified against Apple OS`, no official Figma docs URL found).

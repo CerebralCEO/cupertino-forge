@@ -67,8 +67,8 @@ Applied the strict **Visible Container Rule (`দৃশ্যমান পাত
 2. **Official iOS `Kit` Liquid Glass FLOAT variables (`5565:22724`):** `Frost - Regular = 6`, `Frost - Medium/Large = 16`, `Refraction = 70`, `Depth = 30`, `Dispersion = 20`, `Splay = 20`, `Light Angle = 0`, `Opacity = 25`.
 3. **Mode collections decoded:** iOS `Liquid Glass (Bright/Dim)` has **`0` variables** (empty placeholder); macOS `Context (Content Area/Over-glass)` has **`1` STRING switch variable** (`Mode`), not color/blur math.
 4. **Figma `GlassEffect.radius` officially verified:** Figma Plugin/REST API defines `radius` as **frost (blur/softening) radius**.
-5. **Blur-Scale Calibration (`calibration: derived — Figma Dev Mode radius/2 + Chromium step-edge check; live OS unverified`):**
-   - Headless Chromium (`_local/forgekit/scripts/a8a2_blur_calibrate.py`) confirmed CSS `blur(20px)` produces `50px` 10%→90% transition width ($\sigma = 19.51\text{px}$) vs `24px` ($\sigma = 9.36\text{px}$) for CSS `blur(10px)` (`r=20 / 2`) — **2.08× spread**, confirming Figma `radius ≈ 2 × CSS blur(px)`.
+5. **Blur-Scale Calibration (`calibration: derived (Figma Dev Mode CSS export convention radius/2); not verified against Apple OS` — no official Figma docs URL found):**
+   - Headless Chromium (`_local/forgekit/scripts/a8a2_blur_calibrate.py`) measures CSS `blur()` linearity (`blur(20px)` = `50px` 10%→90% transition width, $\sigma = 19.51\text{px}$, vs `blur(10px)` = `24px`, $\sigma = 9.36\text{px}$); this verifies CSS linearity only, NOT Figma's internal renderer.
    - `refraction (0.7)` and `dispersion (0.2)` are **impossible** in portable CSS/Flutter; `GLASS.radius/2` (`3px`/`8px`) is lighter than our tuned CSS blur (`8–20px`) because Web lacks optical refraction.
 
 ---

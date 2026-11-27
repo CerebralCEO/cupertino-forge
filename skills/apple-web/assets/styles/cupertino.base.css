@@ -20,7 +20,7 @@
   --border: var(--cf-separator);
   --input: var(--cf-fill-3);
   --ring: var(--cf-accent);
-  --radius: var(--cf-radius-text-field-rounded, 12px);
+  --radius: var(--cf-radius-thumbnail-medium, 12px);
   --sidebar: var(--cf-sidebar);
   --sidebar-foreground: var(--cf-label);
   --sidebar-primary: var(--cf-accent);

@@ -127,7 +127,7 @@
    CSS blur(30px) [Figma r=60 / 2]        | x10=164, x90=235, transition_10_90= 71px | derived_sigma=27.7px
    CSS blur(60px) [Figma r=60 direct]     | x10=143, x90=257, transition_10_90=114px | derived_sigma=44.48px
    ```
-   - **Calibration status:** **`calibration: derived (Figma Dev Mode radius/2 + Chromium step-edge check; visual parity with Figma/Apple OS unverified)`**. Directly copying Figma `radius` into CSS produces **~2× wider blur spread** (`50px` vs `24px` at `r=20`).
+   - **Calibration status:** **`calibration: derived (Figma Dev Mode CSS export convention radius/2); not verified against Apple OS`** *(no official Figma docs URL found for the `radius/2` formula; the headless Chromium test above only demonstrates CSS `blur()` linearity — `50px` vs `24px` transition width at `20px` vs `10px` — not a direct pixel measurement of Figma's renderer)*.
    - **Comparison with `tokens/materials.json`:** Our current CSS estimates (`small: 8px, medium: 12px, large: 20px`) are actually **heavier** than `Frost / 2` (`Regular 6/2 = 3px`, `Medium/Large 16/2 = 8px`) because Apple's Liquid Glass relies on optical refraction (`0.7`) + high depth (`30`) rather than heavy frosted blur, whereas standard `BACKGROUND_BLUR` materials (`r=50..60` -> `25..30px` at `r/2`) align closely with our `standardMaterials.blurPx` (`20..30px`)!
 
 ## 6. Calibrated Translation Proposal (No Token Edits Applied)

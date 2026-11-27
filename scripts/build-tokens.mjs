@@ -174,7 +174,10 @@ function buildCSS() {
     // spacing, radii, layout
     for (const [k, v] of entries(layout.spacing.names)) put(`space-${k}`, `${v}px`);
     const rI = shape.radiusIOS;
-    for (const [k, v] of entries(rI)) if (typeof v === 'number') put(`radius-${kebab(k)}`, `${v}px`);
+    for (const [k, v] of entries(rI)) {
+      if (typeof v === 'number') put(`radius-${kebab(k)}`, `${v}px`);
+      else if (v === 'capsule') put(`radius-${kebab(k)}`, '9999px');
+    }
     if (rI.deviceDisplay && typeof rI.deviceDisplay.iPhone17Pro === 'number') {
       put('radius-device-display', `${rI.deviceDisplay.iPhone17Pro}px`);
     }
@@ -363,7 +366,7 @@ function buildTailwind() {
     L.push(`  --text-${n}--letter-spacing: var(--cf-text-${n}-tracking);`);
     L.push(`  --text-${n}--font-weight: var(--cf-text-${n}-weight);`);
   }
-  const radii = new Set([...entries(shape.radiusIOS), ...entries(shape.radiusMacOS)].filter(([, v]) => typeof v === 'number').map(([k]) => kebab(k)));
+  const radii = new Set([...entries(shape.radiusIOS), ...entries(shape.radiusMacOS)].filter(([, v]) => typeof v === 'number' || v === 'capsule').map(([k]) => kebab(k)));
   for (const r of radii) L.push(`  --radius-${r}: var(--cf-radius-${r});`);
   L.push('  --radius-device-display: var(--cf-radius-device-display);');
   L.push('  --radius-sheet-floating: var(--cf-radius-sheet-floating);');
@@ -465,7 +468,10 @@ function buildDart() {
   for (const [k, v] of entries(layout.spacing.names)) L.push(`  static const double ${k} = ${v};`);
   L.push('}');
   L.push('abstract final class AppleRadiusIOS {');
-  for (const [k, v] of entries(shape.radiusIOS)) if (typeof v === 'number') L.push(`  static const double ${camel(k)} = ${v};`);
+  for (const [k, v] of entries(shape.radiusIOS)) {
+    if (typeof v === 'number') L.push(`  static const double ${camel(k)} = ${v};`);
+    else if (v === 'capsule') L.push(`  static const double ${camel(k)} = 9999;`);
+  }
   if (shape.radiusIOS.deviceDisplay && typeof shape.radiusIOS.deviceDisplay.iPhone17Pro === 'number') {
     L.push(`  static const double deviceDisplay = ${shape.radiusIOS.deviceDisplay.iPhone17Pro};`);
   }

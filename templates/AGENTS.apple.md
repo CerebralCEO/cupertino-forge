@@ -4,7 +4,7 @@
 
 - **Plugin path (`<PLUGIN_PATH>`):** `D:\Claude-Plugins\cupertino-forge`
 - **Project config:** `.apple-design.json` at project root (copy from `<PLUGIN_PATH>/templates/apple-design.json` if missing).
-- **Parity contract:** Encodes Apple's published HIG principles and Apple Design Resources kit measurements; closest parity on Apple platforms with native APIs; documented approximation elsewhere; 70 values remain estimates (see `<PLUGIN_PATH>/tokens/ESTIMATES.md`).
+- **Parity contract:** Encodes Apple's published HIG principles and Apple Design Resources kit measurements; closest parity on Apple platforms with native APIs; documented approximation elsewhere; 67 values remain estimates (see `<PLUGIN_PATH>/tokens/ESTIMATES.md`).
 
 ## 1. Mandatory Reading Order
 

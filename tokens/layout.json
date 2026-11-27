@@ -5,7 +5,7 @@
       "hig": "HIG Layout and Buttons",
       "estimate": "measured from iOS 27 and macOS 27 kits and devices, verify with kit Inspect"
     },
-    "reconciledDate": "2026-11-25"
+    "reconciledDate": "2026-11-27"
   },
   "spacing": {
     "$usage": "4pt base grid. Only these steps. Apple layouts rely on 8, 16, 20 most.",
@@ -82,6 +82,11 @@
         "$source": "screens.guide community specs",
         "$class": "inferred/community",
         "$url": "https://screens.guide/"
+      },
+      "$kitReference": {
+        "statusBarIPhone": 62,
+        "homeIndicatorIPhone": 34,
+        "$source": "Apple Figma kit iOS 27 Status-Bar-iPhone (12961:29590) & Home-Indicator (106:60032), 2026-11-27"
       }
     },
     "statusBar": {
@@ -108,7 +113,13 @@
       "$source": "estimated",
       "$class": "estimated",
       "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
-      "$platform": "iOS 27"
+      "$platform": "iOS 27",
+      "$kitReference": {
+        "buttonsTop": 44,
+        "buttonsBottom": 48,
+        "iPadTop": 54,
+        "$source": "Apple Figma kit iOS 27 Toolbars (nodes 5432:23124, 5565:35662, 5573:24144, 2026-11-27)"
+      }
     },
     "tabBar": {
       "$source": "estimated",
@@ -124,7 +135,14 @@
       "$class": "estimated",
       "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
       "$platform": "iOS 27",
-      "maxVisibleTabsPhone": 5
+      "maxVisibleTabsPhone": 5,
+      "$kitReference": {
+        "height": 62,
+        "padH5Tab": 25,
+        "glassEdgeInset5Tab": 21,
+        "padH3Tab": 68,
+        "$source": "Apple Figma kit iOS 27 Tab-Bar-iPhone (nodes 10508:1528, 10508:1526, 2026-11-27)"
+      }
     },
     "searchField": {
       "height": 44,
@@ -147,7 +165,14 @@
       "$source": "estimated",
       "$class": "estimated",
       "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
-      "$platform": "iOS 27"
+      "$platform": "iOS 27",
+      "$kitReference": {
+        "regular": 52,
+        "tall": 68,
+        "leadingInset": 16,
+        "regularRoundedIcon": 30,
+        "$source": "Apple Figma kit iOS 27 Lists (nodes 550:50627, 550:50515, 24:56947, 2026-11-27)"
+      }
     },
     "listSection": {
       "insetGroupedSideInset": 16,
@@ -218,7 +243,17 @@
       },
       "$class": "estimated",
       "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
-      "$platform": "iOS 27"
+      "$platform": "iOS 27",
+      "$kitSizes": {
+        "small": 28,
+        "medium": 34,
+        "large": 50,
+        "padHSmall": 10,
+        "padHMediumBordered": 14,
+        "padHMediumGlass": 12,
+        "padHLarge": 20,
+        "$source": "Apple Figma kit iOS 27 Buttons (nodes 5473:20465, 5473:20463, 5473:20461, 2026-11-27; 5-size scale preserved for compatibility)"
+      }
     },
     "toggle": {
       "width": 64,
@@ -247,7 +282,14 @@
       "$source": "estimated",
       "$class": "estimated",
       "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
-      "$platform": "iOS 27"
+      "$platform": "iOS 27",
+      "$kitReference": {
+        "small": 32,
+        "toolbar": 36,
+        "large": 50,
+        "selectedInset": 2,
+        "$source": "Apple Figma kit iOS 27 Segmented-Control & Toolbars (nodes 10460:170, 5573:24522, 10460:177, 2026-11-27)"
+      }
     },
     "stepper": {
       "width": 92,
@@ -266,13 +308,18 @@
       "$source": "estimated",
       "$class": "estimated",
       "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
-      "$platform": "iOS 27"
+      "$platform": "iOS 27",
+      "$kitReference": {
+        "dot": 8,
+        "toolbarGap": 8,
+        "$source": "Apple Figma kit iOS 27 Page-Controls & Toolbars (nodes 10520:3259, 5704:38676, 2026-11-27)"
+      }
     },
     "textField": {
       "height": 52,
       "horizontalPadding": 16,
       "background": "fillIOS.tertiary on grouped, secondary background on plain",
-      "$source": "Apple Figma kit iOS 27, node 553:23061, 2026-11-25",
+      "$source": "Apple Figma kit iOS 27 Text-Field (553:23061 402x52) & standalone _Text-Field-Background (5469:8386 160x52 cr=26), 2026-11-27",
       "$class": "measured",
       "$previous": {
         "height": 44
@@ -319,7 +366,15 @@
         "zoom": "#28C840",
         "inactive": "#000000@0.1 light, #FFFFFF@0.15 dark"
       },
-      "glyphsOnHoverOnly": true
+      "glyphsOnHoverOnly": true,
+      "$kitReference": {
+        "diameter": 14,
+        "gap": 9,
+        "centerYFromTop": 26,
+        "leadingDefault": 19,
+        "leadingCompact": 12,
+        "$source": "Apple Figma kit macOS 27 Window-Controls-Standard (4365:36385) & Sidebars (4358:9373, 4358:9902), 2026-11-27"
+      }
     },
     "sidebar": {
       "minWidth": 180,
@@ -330,7 +385,14 @@
       "iconSize": 16,
       "sectionHeaderStyle": "subheadline emphasized secondary",
       "edgeToEdge": true,
-      "$source": "estimate; macOS 27 sidebars are edge to edge, not floating"
+      "$source": "estimate; macOS 27 sidebars are edge to edge, not floating",
+      "$kitReference": {
+        "rowSmall": 24,
+        "rowMedium": 32,
+        "rowLarge": 36,
+        "composedDefaultWidth": 240,
+        "$source": "Apple Figma kit macOS 27 Sidebars (nodes 4376:58819, 657:3895, 2026-11-27)"
+      }
     },
     "inspector": {
       "minWidth": 240,
@@ -390,7 +452,14 @@
     "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
     "$platform": "macOS 27",
     "menuBarHeight": 24,
-    "splitViewDividerWidth": 1
+    "splitViewDividerWidth": 1,
+    "$kitReference": {
+      "sidebarToolbarHeight": 52,
+      "composedToolbarHeight": 44,
+      "tableHeaderHeight": 28,
+      "tableRowHeight": 20,
+      "$source": "Apple Figma kit macOS 27 Sidebars/Windows/Tables (nodes 4358:9373, 4365:31705, 4356:13469, 4356:11774, 2026-11-27)"
+    }
   },
   "breakpoints": {
     "$usage": "Web and Flutter: choose iOS style below 768, iPad style 768 to 1179, macOS style 1180 and up OR when a pointer is fine and hover capable. Base on available width (size class), not on device type.",

@@ -6,7 +6,7 @@
       "estimate": "measured from kit components, verify in kit Inspect",
       "macrumors": "macOS 27 uniform window radius"
     },
-    "reconciledDate": "2026-11-25"
+    "reconciledDate": "2026-11-27"
   },
   "continuousCorner": {
     "$usage": "Every rounded rectangle uses a continuous corner. CSS: border-radius R plus corner-shape: squircle where supported, else the SVG squircle path generator. Flutter: ContinuousRectangleBorder is NOT equal, use the plugin's SquircleBorder. Figma equivalent: corner smoothing 60 percent.",
@@ -45,7 +45,7 @@
     "$platform": "iOS 26+ / macOS 26+"
   },
   "radiusIOS": {
-    "$source": "estimated (primary deviceDisplay preserved at 55/30 per Rule 1; community 62/18 in $alt)",
+    "$source": "Apple Figma kit iOS 27 (ForgeKit visible-surface audit 2026-11-27: alert/actionSheet/menu 34, sheetFloating/popover 38, contextMenuPreview 30, textFieldRounded capsule) + estimated remaining subfields (deviceDisplay preserved at 55/30 per Rule 1)",
     "deviceDisplay": {
       "iPhone17Pro": 55,
       "iPhone17": 55,
@@ -63,12 +63,12 @@
     "sheet": "device display radius when full height at the bottom edge; 38 when floating at medium detent with 8 inset",
     "alert": 34,
     "actionSheet": 34,
-    "popover": 26,
-    "menu": 26,
-    "contextMenuPreview": 22,
+    "popover": 38,
+    "menu": 34,
+    "contextMenuPreview": 30,
     "listSectionInsetGrouped": 26,
     "card": 22,
-    "textFieldRounded": 12,
+    "textFieldRounded": "capsule",
     "searchField": "capsule",
     "button": "capsule (all sizes)",
     "iconButton": "circle",
@@ -87,24 +87,93 @@
     "$class": "estimated",
     "$url": "https://developer.apple.com/design/human-interface-guidelines/layout",
     "$platform": "iOS 27",
-    "sheetFloating": 38
+    "sheetFloating": 38,
+    "$previous": {
+      "popover": 26,
+      "menu": 26,
+      "contextMenuPreview": 22,
+      "textFieldRounded": 12
+    },
+    "$kitExample": {
+      "textFieldRounded": {
+        "component": "_Text-Field-Background (ios27)",
+        "nodes": [
+          "5469:8386",
+          "5469:8387"
+        ],
+        "size": "160x52",
+        "cornerRadius": 26,
+        "note": "Full capsule (height / 2 = 26 at 52pt); stored as 'capsule' so height changes never break shape."
+      }
+    },
+    "$measuredSubfields": {
+      "alert": {
+        "value": 34,
+        "node": "I5446:7340;10411:18581",
+        "date": "2026-11-27"
+      },
+      "actionSheet": {
+        "value": 34,
+        "component": "Action-Sheet",
+        "date": "2026-11-27"
+      },
+      "sheetFloating": {
+        "value": 38,
+        "bottomFloating": 58,
+        "node": "I10525:1636;10411:18581",
+        "date": "2026-11-27"
+      },
+      "popover": {
+        "value": 38,
+        "node": "513:95247",
+        "component": "Popovers-(iPad-Only) Background",
+        "date": "2026-11-27"
+      },
+      "menu": {
+        "value": 34,
+        "node": "I5908:6372;10411:18670",
+        "component": "Menu Fill + Shadow",
+        "date": "2026-11-27"
+      },
+      "contextMenuPreview": {
+        "value": 30,
+        "nodes": [
+          "548:48135",
+          "548:50347",
+          "548:49985"
+        ],
+        "component": "Context-Menu Content Area",
+        "date": "2026-11-27"
+      },
+      "textFieldRounded": {
+        "value": "capsule",
+        "nodes": [
+          "5469:8386",
+          "5469:8387"
+        ],
+        "date": "2026-11-27"
+      }
+    },
+    "$verification": "needs-device-verification"
   },
   "radiusMacOS": {
-    "$source": "Apple Figma kit macOS 27 (window/sheet 16pt nodes 585:3372, 121:11423; alert 10pt 121:11254; popover 10pt 4336:13305; menuItemHighlight 8pt 685:23691, 2026-11-25) + estimated remaining subfields",
+    "$source": "Apple Figma kit macOS 27 visible surfaces (window/sheet 16, alert 34 [I494:3080;4311:12662], popover 20 [I4336:13195;110:856], menu 12 [4353:2522], menuItemHighlight 8 [685:23692], utilityPanel 15 [4374:54812], 2026-11-27) + estimated remaining subfields",
     "$verification": "needs-device-verification",
-    "$kitMeasurementNote": "These 5 values (window 16, sheet 16, alert 10, popover 10, menuItemHighlight 8) are Figma UI kit frame cornerRadius measurements from Apple Design Resources macOS 27 (file 5YNrD6VW0v0Meye5F2JIz0), NOT live macOS 27 OS hardware/AppKit measurements.",
+    "$kitMeasurementNote": "Measured from visible surfaces in Apple Design Resources macOS 27 Figma kit (ForgeKit audit 2026-11-27), NOT live macOS 27 OS hardware/AppKit windows. Phase 3c container-only alert=10 and popover=10 corrected to visible-surface 34 and 20.",
     "window": 16,
     "windowNote": "Measured 16pt (cornerSmoothing 0.6) across all Window BG and Windows - Composed variants in Apple Figma kit macOS 27 (nodes 585:3372, 4363:18479, 4365:31678).",
     "sheet": 16,
-    "alert": 10,
-    "popover": 10,
+    "alert": 34,
+    "popover": 20,
     "menu": 12,
     "menuItemHighlight": 8,
     "$previous": {
       "window": 12,
       "sheet": 12,
-      "alert": 16,
-      "popover": 16,
+      "alert": 10,
+      "alertPrePhase3c": 16,
+      "popover": 10,
+      "popoverPrePhase3c": 16,
       "menuItemHighlight": 6
     },
     "tooltip": 6,
@@ -123,7 +192,57 @@
     "dockGlass": 24,
     "$class": "estimated",
     "$url": "https://www.macrumors.com/",
-    "$platform": "macOS 27"
+    "$platform": "macOS 27",
+    "utilityPanel": 15,
+    "$measuredSubfields": {
+      "window": {
+        "value": 16,
+        "nodes": [
+          "585:3372",
+          "4363:18479",
+          "4365:31678"
+        ],
+        "date": "2026-11-27"
+      },
+      "sheet": {
+        "value": 16,
+        "nodes": [
+          "121:11423",
+          "4358:15436"
+        ],
+        "date": "2026-11-27"
+      },
+      "alert": {
+        "value": 34,
+        "node": "I494:3080;4311:12662",
+        "component": "Alert Fill + Shadow (corrected from Phase 3c container-only 10)",
+        "date": "2026-11-27"
+      },
+      "popover": {
+        "value": 20,
+        "node": "I4336:13195;110:856",
+        "component": "Popover Body (corrected from Phase 3c container-only 10)",
+        "date": "2026-11-27"
+      },
+      "menu": {
+        "value": 12,
+        "node": "4353:2522",
+        "component": "Menu-Background Fill + Shadow",
+        "date": "2026-11-27"
+      },
+      "menuItemHighlight": {
+        "value": 8,
+        "node": "685:23692",
+        "component": "Menu-Items BG (inside 685:23691)",
+        "date": "2026-11-27"
+      },
+      "utilityPanel": {
+        "value": 15,
+        "node": "4374:54812",
+        "component": "Utility-Panel",
+        "date": "2026-11-27"
+      }
+    }
   },
   "borders": {
     "hairline": {

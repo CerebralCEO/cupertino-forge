@@ -12,7 +12,7 @@ export interface AlertProps { open: boolean; onOpenChange: (o: boolean) => void;
 
 /**
  * iOS: large glass panel 300 wide, radius 34, capsule glass buttons (2 side by side, 3 stacked).
- * macOS: 16 radius, app icon on top, buttons stacked full width. Default action is tinted and answers Return.
+ * macOS: 34 radius (kit visible surface, device-unverified), app icon on top, buttons stacked full width. Default action is tinted and answers Return.
  * Never use for success messages. Button labels are verbs, never Yes or No.
  */
 export function Alert({ open, onOpenChange, title, message, actions, icon }: AlertProps) {

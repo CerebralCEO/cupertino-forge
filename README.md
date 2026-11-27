@@ -1,10 +1,10 @@
-# cupertino-forge (v2.1.1)
+# cupertino-forge (v2.2.0)
 
 **Apple iOS 27 & macOS 27 (Liquid Glass) Design System for Claude Code, Google Antigravity, and Cross-IDE Agentic Workflows.**
 
 `cupertino-forge` turns Apple's Human Interface Guidelines (HIG) and iOS 27 / macOS 27 Sketch & Figma UI kit measurements into an enforceable token pipeline, ready-made cross-platform primitives, a brownfield Redesign Engine, a canonical Master Use-Flow, and deterministic Playwright/CLI quality gates.
 
-> **Honest Parity Contract:** `cupertino-forge` encodes Apple's published HIG principles and Apple Design Resources kit measurements; closest parity on Apple platforms with native APIs; documented approximation elsewhere; 70 values remain estimates (see [`tokens/ESTIMATES.md`](tokens/ESTIMATES.md)).
+> **Honest Parity Contract:** `cupertino-forge` encodes Apple's published HIG principles and Apple Design Resources kit measurements; closest parity on Apple platforms with native APIs; documented approximation elsewhere; 67 values remain estimates (see [`tokens/ESTIMATES.md`](tokens/ESTIMATES.md)).
 
 ---
 
@@ -35,7 +35,7 @@
 
 ```text
 cupertino-forge/
-├── .claude-plugin/     Plugin manifest (plugin.json v2.1.1) & local marketplace.json
+├── .claude-plugin/     Plugin manifest (plugin.json v2.2.0) & local marketplace.json
 ├── commands/           7 slash commands (doctor, init, screen, component, redesign, audit, sync)
 ├── agents/             2 specialist agents (apple-design-reviewer [visual|behavior], apple-spec-researcher)
 ├── skills/
@@ -66,7 +66,7 @@ cupertino-forge/
 1. Build a clean release ZIP (optional if installing directly from clone):
    ```bash
    node scripts/package-plugin.mjs
-   # Output: _upgrade/scratch/cupertino-forge-v2.1.1.zip
+   # Output: _upgrade/scratch/cupertino-forge-v2.2.0.zip
    ```
 2. Unzip or keep the repository at a stable path (e.g., `D:\Claude-Plugins\cupertino-forge` or `~/cupertino-forge`).
 3. Inside Claude Code:
@@ -163,7 +163,7 @@ node qa/ux-keyboard.mjs --url <url-or-file> [--browser chromium|webkit|firefox|a
 # Screenshot capture (standard 4 images or --matrix 72-image accessibility/engine matrix)
 python scripts/capture.py --url <url> --out qa/out [--matrix] [--widths 390,1100] [--themes light,dark] [--dry-run]
 
-# Build clean v2.1.1 release ZIP (0 forbidden folders)
+# Build clean v2.2.0 release ZIP (0 forbidden folders)
 node scripts/package-plugin.mjs [--out <zipPath>]
 ```
 
@@ -174,7 +174,7 @@ node scripts/package-plugin.mjs [--out <zipPath>]
 - **Zero Apple assets redistributed:** `cupertino-forge` does **not** ship Apple `.sketch`/`.fig` kits, exported Apple PNGs, hardware bezels, SF font files, SF Symbols, or Apple system audio.
 - **System fonts & icons:** Apple devices legally invoke San Francisco via system stacks; non-Apple platforms use `Inter` (OFL) with automatic tracking compensation (disabled for Bangla/Arabic/Hebrew). Icons map to Lucide, Phosphor, or `CupertinoIcons`.
 - **Brand-constrained buttons:** Apple Pay, Tap to Pay on iPhone, Add to Apple Wallet, and Sign in with Apple must always use official Apple SDKs/APIs (`skills/apple-design-core/references/extras/brand-constrained.md`).
-- **Remaining estimates & physical device checks:** `70` token groups in [`tokens/ESTIMATES.md`](tokens/ESTIMATES.md) remain `$class: "estimated"` (runtime physics, blur sigmas, haptics/sounds, and multi-size ambiguous kit controls). Real iPhone/Mac hardware verification is still recommended for live `NSGlassEffectView` refraction, `UINotificationFeedbackGenerator` feel, and macOS font-weight conflicts (`$kitConflict`).
+- **Remaining estimates & physical device checks:** `67` token groups in [`tokens/ESTIMATES.md`](tokens/ESTIMATES.md) remain `$class: "estimated"` (runtime physics, blur sigmas, haptics/sounds, and multi-size ambiguous kit controls). Real iPhone/Mac hardware verification is still recommended for live `NSGlassEffectView` refraction, `UINotificationFeedbackGenerator` feel, kit visible-surface radii (`needs-device-verification`), and `$kitConflict` entries.
 - **Reference Fidelity:** `/apple-audit --reference <dir>` runs in AI visual-comparison mode when local PNGs exist; without references, it reports `Fidelity: N/A (no reference)`.
 
 ---
